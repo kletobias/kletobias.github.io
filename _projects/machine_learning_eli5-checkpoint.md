@@ -181,7 +181,7 @@ df[['kaltmiete']].boxplot()
 
 
 
-![png](/images/machine_learning_demo/output_9_2.png)
+![png](/images/output_9_2.png)
 
 
 
@@ -608,7 +608,7 @@ plot_elbow(kmean, X)
 ```
 
 
-![png](/images/machine_learning_demo/output_20_0.png)
+![png](/images/output_20_0.png)
 
 
 
@@ -695,7 +695,7 @@ for i in range(n):
 
 
 
-![png](/images/machine_learning_demo/output_22_1.png)
+![png](/images/output_22_1.png)
 
 
 
