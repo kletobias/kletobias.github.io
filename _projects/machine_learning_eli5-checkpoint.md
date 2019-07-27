@@ -3,6 +3,7 @@ title: Machine Learning Demo Post
 date: 2019-07-27 00:00:00
 description: This is a demo post that shows what you can do inside portfolio and blog posts. We’ve included everything you need to create engaging posts and case studies to show off your work in a beautiful way.
 featured_image: website_export_hamburg_alster20130608.jpg
+gallery_images: website_export_hamburg_alster20130608.jpg
 ---
 
 Testing how I can post a project.
