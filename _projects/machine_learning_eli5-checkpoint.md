@@ -5,7 +5,7 @@ description: This is a demo post that shows what you can do inside portfolio and
 featured_image: website_export_hamburg_alster20130608.jpg
 gallery_images: website_export_hamburg_alster20130608.jpg
 ---
-[^Image Credit]: Image is by xxx with additional post-processing by the author
+[^Image Credit]
 
 ```python
 from sklearn.linear_model import Lasso
@@ -286,7 +286,7 @@ eli5.show_weights(perm, feature_names = val_X.columns.tolist())
     
 
     
-        <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
+    <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
     <thead>
     <tr style="border: none;">
         <th style="padding: 0 1em 0 0.5em; text-align: right; border: none;">Weight</th>
@@ -546,27 +546,6 @@ eli5.show_weights(perm, feature_names = val_X.columns.tolist())
     
     </tbody>
 </table>
-    
-
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-
-
 
 
 
@@ -656,49 +635,6 @@ def plot_stations_map(ax, stns):
 ```
 
 
-```python
-k = [2, 3, 4]
-n = len(k)
-plt.subplots(nrows=1, ncols=3, figsize=(18,15))
-
-for i in range(n):
-    est = kmean[k[i]-1]
-    df['cluster'] = est.predict(X).tolist()
-    
-    ax = plt.subplot(1, 3, i+1)
-    ax.set_title("Spatial Clustering with KMeans (k={})".format(k[i]))
-
-    plot_stations_map(ax, df)
-
-```
-
-
-    ---------------------------------------------------------------------------
-
-    NameError                                 Traceback (most recent call last)
-
-    <ipython-input-35-b4bf478f1608> in <module>
-         10     ax.set_title("Spatial Clustering with KMeans (k={})".format(k[i]))
-         11 
-    ---> 12     plot_stations_map(ax, df)
-    
-
-    <ipython-input-34-e3e22946221d> in plot_stations_map(ax, stns)
-         10 
-         11     # create map using BASEMAP
-    ---> 12     m = Basemap(llcrnrlon=lon_min,
-         13                 llcrnrlat=lat_min,
-         14                 urcrnrlon=lon_max,
-
-
-    NameError: name 'Basemap' is not defined
-
-
-
 ![png](/images/output_22_1.png)
 
-
-
-```python
-
-```
+[^Image Credit]: Image is by xxx with additional post-processing by the author
