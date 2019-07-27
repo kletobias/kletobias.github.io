@@ -142,8 +142,8 @@ font_settings:
     line_height: 32
     line_height_small: 28
   p:
-    size: 14
-    size_small: 17
+    size: 16
+    size_small: 15
     weight: 400
     letter_spacing: 0.04
     letter_spacing_small: 0
