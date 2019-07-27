@@ -5,8 +5,7 @@ description: This is a demo post that shows what you can do inside portfolio and
 featured_image: website_export_hamburg_alster20130608.jpg
 gallery_images: website_export_hamburg_alster20130608.jpg
 ---
-
-Testing how I can post a project.
+[^Image Credit]: Image is by xxx with additional post-processing by the author
 
 ```python
 from sklearn.linear_model import Lasso
