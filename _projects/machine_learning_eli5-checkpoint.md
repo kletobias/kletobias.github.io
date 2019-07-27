@@ -1,4 +1,9 @@
-
+---
+title: Machine Learning Demo Post
+date: 2019-07-27 00:00:00
+description: This is a demo post that shows what you can do inside portfolio and blog posts. We’ve included everything you need to create engaging posts and case studies to show off your work in a beautiful way.
+featured_image: '/images/machine_learning_demo/output_9_2.png'
+---
 
 ```python
 from sklearn.linear_model import Lasso
@@ -174,7 +179,7 @@ df[['kaltmiete']].boxplot()
 
 
 
-![png](output_9_2.png)
+![png](/images/machine_learning_demo/output_9_2.png)
 
 
 
@@ -601,7 +606,7 @@ plot_elbow(kmean, X)
 ```
 
 
-![png](output_20_0.png)
+![png](/images/machine_learning_demo/output_20_0.png)
 
 
 
@@ -688,7 +693,7 @@ for i in range(n):
 
 
 
-![png](output_22_1.png)
+![png](/images/machine_learning_demo/output_22_1.png)
 
 
 
