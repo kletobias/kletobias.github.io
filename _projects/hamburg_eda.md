@@ -2,6 +2,7 @@
 title: EDA - Hamburg rental apartments
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
+accent_color: '#4C60E6'
 ---
 
 # EDA - Hamburg rental apartments
