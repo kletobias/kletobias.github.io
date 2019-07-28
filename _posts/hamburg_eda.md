@@ -79,6 +79,7 @@ df = pd.read_csv('/Users/tobiasklein 1/PycharmsProjects/so_deep/bachelor_thesis/
 ```python
 df
 ```
+
 **Table 1:**
 
 | variable           | count   | mean     | std    | min     | 10%     | 25%     | 50%     | 75%     | 90%      | max     |
