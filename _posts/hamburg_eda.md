@@ -3,6 +3,7 @@ title: EDA - Hamburg rental apartments
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 ---
+
 # EDA - Hamburg rental apartments
 This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 It begins with an explanation of the univariate distribution for each variable in the dataset in Section 1. 
