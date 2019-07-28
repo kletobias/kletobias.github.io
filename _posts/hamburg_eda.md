@@ -1,5 +1,5 @@
 ---
-title: EDA  Hamburg rental apartments
+title: EDA - Hamburg rental apartments
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 ---
@@ -431,7 +431,8 @@ df
 
 **Table 1:**
 
-|variable                   | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
+
+|variable           |count   |mean     |std    |min     |10%     |25%     |50%     |75%     |90%      |max     |
 |-------------------|--------|---------|-------|--------|--------|--------|--------|--------|---------|--------|
 | einbau_kue        | 9480.0 | 0.61    | 0.49  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
 | lift              | 9480.0 | 0.21    | 0.41  | 0.0    | 0.0    | 0.0    | 0.0    | 0.0    | 1.0     | 1.0    |
