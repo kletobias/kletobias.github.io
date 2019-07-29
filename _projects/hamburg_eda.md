@@ -51,13 +51,13 @@ In the case of the binary variables (`kitchen`, `elevator`, `balcony`,
 the feature within the dataset. What can be observed for these variables
 is:
 
--   `kitchen`: mean = 0.61 $\implies$ 61% of the listings have a fitted kitchen, 39% don't.
+- `kitchen`: mean = 0.61 $\implies$ 61% of the listings have a fitted kitchen, 39% don't.
 
--   `elevator`: mean = 0.21 $\implies$ 21% of the listings have access to an elevator, 79% don't.
+- `elevator`: mean = 0.21 $\implies$ 21% of the listings have access to an elevator, 79% don't.
 
--   `balcony`: mean = 0.68 $\implies$ 68% of the listings have a balcony, 32% don't.
+- `balcony`: mean = 0.68 $\implies$ 68% of the listings have a balcony, 32% don't.
 
--   `smaller_0.6`: mean = 0.48 $\implies$ 48% of the listings have access to either a subway or a suburban train station within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
+- `smaller_0.6`: mean = 0.48 $\implies$ 48% of the listings have access to either a subway or a suburban train station within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
 
 ### Continuous Categorical Variables
 Continuing with the other categorical variables shown in
