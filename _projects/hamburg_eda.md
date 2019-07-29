@@ -29,16 +29,16 @@ Please refer to Table 1 for the complete range of values.
 
 There are two different types of variables in this work. Namely discrete
 categorical variables with few possible values and continuous numerical
-variables. The categorical variables used here are `kitchen`,
-`elevator`, `balcony`, `status`, `dynamic`, `noise_day`, `noise_night`,
-`smaller_0.6`, `const`, `floor`. This kind of variable has categories as
+variables. The categorical variables used here are _kitchen_,
+_elevator_, _balcony_, _status_, _dynamic_, _noise_day_, _noise_night_,
+_smaller_0.6_, _const_, _floor_. This kind of variable has categories as
 values that have no natural order or scale [kuhnAppliedPredictiveModeling2013] and each listing can fall in
 exactly one of the categories for each variable. Since all, but
-`noise_day`, `noise_night` were converted to a numerical categorical
-variable type, only `noise_day`, `noise_night` are excluded from
+_noise_day_, _noise_night_ were converted to a numerical categorical
+variable type, only _noise_day_, _noise_night_ are excluded from
 Table 1. It is not possible to give the
 summaries found in Table 1 for string type variables. The remaining variables have
-a natural, numeric scale and are therefore continuous numerical variables [kuhnAppliedPredictiveModeling2013].
+a natural, numeric scale and are therefore continuous numerical variables[^1].
 
 ## Univariate Distributions
 The variables are shown in Table 1. Here is a description from left to right of what
@@ -46,36 +46,33 @@ Table 1 shows. Count is the same for all variables, since this is the final, cle
 of the values, given in the unit of the respective variable.
 
 ### Binary Categorical Variables
-In the case of the binary variables (`kitchen`, `elevator`, `balcony`,
-`smaller_0.6`) its value measures the percentage of listings that have
+In the case of the binary variables (_kitchen_, _elevator_, _balcony_,
+_smaller_0.6_) its value measures the percentage of listings that have
 the feature within the dataset. What can be observed for these variables
 is:
 
-* `kitchen`: mean = 0.61 $\implies$ 61% of the listings have a fitted kitchen, 39% don't.
-
-* `elevator`: mean = 0.21 $\implies$ 21% of the listings have access to an elevator, 79% don't.
-
-* `balcony`: mean = 0.68 $\implies$ 68% of the listings have a balcony, 32% don't.
-
-* `smaller_0.6`: mean = 0.48 $\implies$ 48% of the listings have access to either a subway or a suburban train station within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
+* _kitchen_: mean = 0.61 $$\implies$$ 61% of the listings have a fitted kitchen, 39% don't.
+* _elevator_: mean = 0.21 $$\implies$$ 21% of the listings have access to an elevator, 79% don't.
+* _balcony_: mean = 0.68 $$\implies$$ 68% of the listings have a balcony, 32% don't.
+* _smaller_0.6_: mean = 0.48 $$\implies$$ 48% of the listings have access to either a subway or a suburban train station    within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
 
 ### Continuous Categorical Variables
 Continuing with the other categorical variables shown in
-Figure 2, it is visible, that the distribution of `floor` has a mean of close to 2 and has a positive
-skew. `floor` is for the majority of observations 1 or 2. The `status`
+Figure 2, it is visible, that the distribution of _floor_ has a mean of close to 2 and has a positive
+skew. _floor_ is for the majority of observations 1 or 2. The _status_
 index is 3 for around 6000 listings and the majority of listings
 therefore and is close to the actual values of the "Sozialmonitoring
 Bericht 2018" [SozialmonitoringBericht2018]. The same goes for the
-`dynamic` index with almost all listing being in areas that have a
+_dynamic_ index with almost all listing being in areas that have a
 stable situation in terms of their status class, again these values are
 close to the ones found in the "Sozialmonitoring Bericht 2018".
-Looking at `const` the bulk of buildings was built in the period after
+Looking at _const_ the bulk of buildings was built in the period after
 World War II (WW II), between 1950 and 1975 roughly. During WW II
 (1939-1945) large parts of the city were completely destroyed and so
 during the post-war period many buildings had to be rebuilt or newly
 constructed [brakmanStrategicBombingGerman2004]. It might show that
-`base_rent` of apartments in buildings that were built during that time
-have a low `base_rent` value compared with apartments built in different
+_base_rent_ of apartments in buildings that were built during that time
+have a low _base_rent_ value compared with apartments built in different
 periods, with similar features. The consideration comes from a simple
 supply and demand logic.
 
@@ -117,53 +114,53 @@ German housing market 2018 (Deutscher Häuser- und Wohnungsmarkt 2018):
 For the prediction important is that there might be relevant rent
 increases for comparable apartments between the beginning of the
 timeframe in July 2016 and the end in November 2018, that might degrade
-prediction accuracy. `smaller_0.6`, the last variable in
+prediction accuracy. _smaller_0.6_, the last variable in
 Figure 2 is discussed at the beginning of this Section with the other binary variables. 
 Continuing with the numerical variables and their histograms in
-Figure 3, variable `base_rent` shows a pronounced positive skew in the data series. The mean
-($\bar{x}$) of 753 Euro for the series is low considering the value
+Figure 3, variable _base_rent_ shows a pronounced positive skew in the data series. The mean
+($$\bar{x}$$) of 753 Euro for the series is low considering the value
 range of 149-5600 Euro. However, extreme values above 1318.37 Euro only
 account for 10% of the data. The standard deviation of 447 Euro is a
 better metric to show the large spread of this variable. The one Sigma
-(${s}$) interval has limits (Eur.)
-$[306 = \bar{x}-{s},\bar{x}+{s} = 1200]$, with the lower limit
-$\approx 40\%$ of $\bar{x}$ and the upper limit $\approx 160\%$ of
-$\bar{x}$. A similar pattern is observed for ancillary costs
-(`ancil_costs`), with the distribution exhibiting a bit less skew and a
+($${s}$$) interval has limits (Eur.)
+$$[306 = \bar{x}-{s},\bar{x}+{s} = 1200]$$, with the lower limit
+$$\approx 40\%$$ of $$\bar{x}$$ and the upper limit $$\approx 160\%$$ of
+$$\bar{x}$$. A similar pattern is observed for ancillary costs
+(_ancil_costs_), with the distribution exhibiting a bit less skew and a
 more linear falloff past the 130 Euro mark. Since the determination of
 ancillary costs is not uniformly established regarding the costs
 contained within them, it is difficult to consider them as a consistent
-variable. Square meters (`sqm`) has a gaussian distribution like value
-distribution with a slight positive skew. The mean is $\bar{x} = 66$
-with the one Sigma interval, given in $m^2$, of $[39, 93]$. This echoes
+variable. Square meters (_sqm_) has a gaussian distribution like value
+distribution with a slight positive skew. The mean is $$\bar{x} = 66$$
+with the one Sigma interval, given in $$m^2$$, of $$[39, 93]$$. This echoes
 the slight skewness for the series. The number of images that are
 uploaded to describe the apartment seem to be important, since the
 highest frequency found around 5 to 10 images and not zero. There are
 less than 10% of observations with 0 images, as can be seen in
-Table 1. The download (`dl_speed`) and upload speed (`ul_speed`) variables show that for both variables,
+Table 1. The download (_dl_speed_) and upload speed (_ul_speed_) variables show that for both variables,
 observations gather around a few mbit/s values. With these findings they
 have to be considered categorical variables, as the value range is not
-continuous for the listings in the series. For `dl_speed` these are
+continuous for the listings in the series. For _dl_speed_ these are
 (mbit/s, count): (100, 6404), (50, 2105), (83, 484), (16, 453), (25,
-36), (200, 5), (6, 2). For `ul_speed`: (40, 6404), (10, 2105), (31,
+36), (200, 5), (6, 2). For _ul_speed_: (40, 6404), (10, 2105), (31,
 528), (2.4, 447), (100, 5). It is noticeable that for the majority of
 observations tuples can be formed from values of both variables that
 have near identical counts in the series. The variable measuring the
 days a listing was online on the platform shows that there was strong
 demand for the apartments in this series, since 25% of the data series
-was listed and delisted within two days, thus having the `time_gap` = 1
+was listed and delisted within two days, thus having the _time_gap_ = 1
 day value. 10% have a value of 0 days, meaning that they were online for
 less than 24 hours. The median is one week, see
-Table 1. There are values as high as 924 days in the series, however the portion of values 59 ≤ time_gap ≤ 924 makes up the highest 10% of all values for `time_gap`.
-Therefore, the impact is expected to be small on the prediction results, if there were outliers amongst these values. The minimum distance (`min_dist`) to either of subway or
+Table 1. There are values as high as 924 days in the series, however the portion of values 59 ≤ time_gap ≤ 924 makes up the highest 10% of all values for _time_gap_.
+Therefore, the impact is expected to be small on the prediction results, if there were outliers amongst these values. The minimum distance (_min_dist_) to either of subway or
 suburban train station shows that for 70.5% of observations the distance
-is $\leq 1$ km and the median (50% quantile) is 0.63 km. This is in
-accordance with the observations described for variable `smaller_0.6`,
+is $$\leq 1$$ km and the median (50% quantile) is 0.63 km. This is in
+accordance with the observations described for variable _smaller_0.6_,
 where 48% had a distance of less than 0.6 km. With the 50% quantile at
-0.63 km it shows, that the binary variable `smaller_0.6` splits the set
+0.63 km it shows, that the binary variable _smaller_0.6_ splits the set
 of observations into two almost equal parts. The distributions of the
-variables `min_train`, `min_subway` show a very similar picture. Since
-the variable `min_dist` is set to the smaller value of the two, its
+variables _min_train_, _min_subway_ show a very similar picture. Since
+the variable _min_dist_ is set to the smaller value of the two, its
 distribution is a concentration of the smallest values of the two. One
 can see that the distance to the nearest subway station has a high
 concentration of values close to zero and a sudden drop after
@@ -196,3 +193,8 @@ more slowly afterwards.
 | min_ubahn         | 9480.0 | 2.36    | 3.03  | 0.01   | 0.26   | 0.44   | 0.92   | 2.99   | 7.63    | 14.17  |
 | smaller_0.6       | 9480.0 | 0.48    | 0.5   | 0.0    | 0.0    | 0.0    | 0.0    | 1.0    | 1.0     | 1.0    |
 | baujahr_imp       | 9480.0 | 1966.56 | 31.95 | 1850.0 | 1920.0 | 1953.0 | 1964.0 | 1992.0 | 2013.0  | 2019.0 |
+
+After the table, we write more words.
+
+## References
+[^1]: kuhnAppliedPredictiveModeling2013
