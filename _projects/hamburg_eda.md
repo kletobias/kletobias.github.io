@@ -6,14 +6,17 @@ accent_color: '#4C60E6'
 ---
 
 # EDA - Hamburg rental apartments
+
 This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 It begins with an explanation of the univariate distribution for each variable in the dataset in Section 1. 
-The correlations found between the variables is discussed in Section 2. In the same section, the noise data is analysed
+The correlations found between the variables are discussed in Section 2. In the same section, the noise data is analysed
 for both day and night and its impact on base rent specifically. What follows in Section 3, is a detailed heat map
 of the distribution of variable base rent by statistical area, plotted onto a map of Hamburg.
 The last section is Section 4. The general preprocessing done for machine learning is explained and it discusses standardisation of the data,
 for the machine learning part that follows afterwards.
-***
+
+* * *
+
 In order to understand the final data better, either visualisations or summary statistics were created. 
 It is about describing the distribution of the variables and about revealing the correlation between them.
 Strong correlation between pairs of independent variables can be a sign of the existence of redundant variables. If the correlation is extreme, it may be a sign of collinearity. Both cases pose problems for the analysis of causal relationships between the affected variables and the dependent variable.
@@ -21,418 +24,157 @@ The figures showing histograms or bar chart type plots, often have a truncated x
 The scale of the plots would have to be bigger, for them to be visible, with the constraint from the screen size this was not possible. 
 Please refer to Table 1 for the complete range of values.
 
-### Categorical & Numerical Variables
+
+**Categorical & Numerical Variables**
+
 There are two different types of variables in this work. Namely discrete
 categorical variables with few possible values and continuous numerical
 variables. The categorical variables used here are `kitchen`,
 `elevator`, `balcony`, `status`, `dynamic`, `noise_day`, `noise_night`,
 `smaller_0.6`, `const`, `floor`. This kind of variable has categories as
-values that have no natural order or
-scale(^1) and each listing can fall in
+values that have no natural order or scale [kuhnAppliedPredictiveModeling2013] and each listing can fall in
 exactly one of the categories for each variable. Since all, but
 `noise_day`, `noise_night` were converted to a numerical categorical
 variable type, only `noise_day`, `noise_night` are excluded from
 Table 1. It is not possible to give the
 summaries found in Table 1 for string type variables. The remaining variables have
-a natural, numeric scale and are therefore continuous numerical variables [@kuhnAppliedPredictiveModeling2013].
+a natural, numeric scale and are therefore continuous numerical variables [kuhnAppliedPredictiveModeling2013].
 
-We begin by loading all the neccessary libraries for the analysis.
+## Univariate Distributions
+The variables are shown in Table 1. Here is a description from left to right of what
+Table 1 shows. Count is the same for all variables, since this is the final, clean dataset. The mean, is the mean
+of the values, given in the unit of the respective variable.
 
+### Binary Categorical Variables
+In the case of the binary variables (`kitchen`, `elevator`, `balcony`,
+`smaller_0.6`) its value measures the percentage of listings that have
+the feature within the dataset. What can be observed for these variables
+is:
 
-```python
-import os
-print(os.getcwd())
-```
+-   `kitchen`: mean = 0.61 $\implies$ 61% of the listings have a fitted kitchen, 39% don't.
 
-    /Users/tobiasklein 1/PycharmsProjects/so_deep/theme_for_github_pages/gitub_pages_sources
+-   `elevator`: mean = 0.21 $\implies$ 21% of the listings have access to an elevator, 79% don't.
 
+-   `balcony`: mean = 0.68 $\implies$ 68% of the listings have a balcony, 32% don't.
 
+-   `smaller_0.6`: mean = 0.48 $\implies$ 48% of the listings have access to either a subway or a suburban train station within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
 
-```python
-import geopandas
-# import geoplot as gplt
-import matplotlib
-import matplotlib.pyplot as plt
-import missingno as msno
-import numpy as np
-import pandas as pd
-import powerlaw
-import seaborn as sns
-from pandas import set_option
-from pandas.api.types import CategoricalDtype
-from scipy import stats
-from shapely.wkt import loads
+### Continuous Categorical Variables
+Continuing with the other categorical variables shown in
+Figure 2, it is visible, that the distribution of `floor` has a mean of close to 2 and has a positive
+skew. `floor` is for the majority of observations 1 or 2. The `status`
+index is 3 for around 6000 listings and the majority of listings
+therefore and is close to the actual values of the "Sozialmonitoring
+Bericht 2018" [SozialmonitoringBericht2018]. The same goes for the
+`dynamic` index with almost all listing being in areas that have a
+stable situation in terms of their status class, again these values are
+close to the ones found in the "Sozialmonitoring Bericht 2018".
+Looking at `const` the bulk of buildings was built in the period after
+World War II (WW II), between 1950 and 1975 roughly. During WW II
+(1939-1945) large parts of the city were completely destroyed and so
+during the post-war period many buildings had to be rebuilt or newly
+constructed [brakmanStrategicBombingGerman2004]. It might show that
+`base_rent` of apartments in buildings that were built during that time
+have a low `base_rent` value compared with apartments built in different
+periods, with similar features. The consideration comes from a simple
+supply and demand logic.
 
-pd.set_option('display.max_rows', 500)
-pd.set_option('display.max_columns', 500)
-pd.set_option('display.width', 1000)
-plt.style.use("science")
-```
+There is a sharp downward trend around 1975 to 1990 in the number of
+buildings built during that period with a pickup in the Late-1990s. For
+several years between 2000-2010 the number decreases once again, to
+reach levels as high as the ones seen around 1960 for the period
+2010-2018. Right now, there is indication that a relatively high number
+of residential buildings are constructed from this sample. This does not
+completely align with the data in
+Figure Statistikamt Nord [StatistikEinwohnerHaushalte] the maximum of
+apartments built between 1990-2017 was in 1995 and the pickup in
+construction after 2010 can not reach the levels of that period. The
+report of the Statistikamt Nord, however, includes non residential
+buildings and construction measures on existing buildings as
+well [StatistikEinwohnerHaushalte]. This may hinder a direct comparison
+between the here found data from the sample of all listings and their
+data. The overall trend however is similar across both data sources.
+There are reports that rent prices are rising at the moment in
+Hamburg [ndrAktionstagWirdWohnen]. However, not as much as in other
+major cities in Germany possibly. This is also due to the fact of a
+relatively high number of apartments being constructed at the moment and
+a stable population in Hamburg, at least according to the Deutsche Bank
+German housing market 2018 (Deutscher Häuser- und Wohnungsmarkt 2018):
 
-loading the cleaned dataset with only the final variables, that are going to be used during the machine learning process.
+> In Hamburg, housing prices in the portfolio have risen by more than
+> 70% since 2009. Rents are growing at a below-average rate compared
+> with other major cities. The relatively brisk construction activity
+> and the stable number of inhabitants are dampening rental dynamics.
+> Low interest rates could therefore be the main driver for Hamburg's
+> housing and house prices. Correspondingly, interest rate sensitivity
+> could be higher than in other metropolises. In our baseline scenario,
+> we expect mortgage rates to rise only slightly in 2018. House and
+> apartment prices in Hamburg should therefore continue to rise strongly
+> in the current year. [mobertDeutscherHauserUnd2018]
 
+*Original German version was translated to English by the Author*
 
-```python
-df = pd.read_csv('/Users/tobiasklein 1/PycharmsProjects/so_deep/bachelor_thesis/interim_data/EDA_df_describe.csv')
-```
-
-
-```python
-df
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Unnamed: 0</th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>10%</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>90%</th>
-      <th>max</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>einbau_kue</td>
-      <td>9480.0</td>
-      <td>0.61</td>
-      <td>0.49</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>lift</td>
-      <td>9480.0</td>
-      <td>0.21</td>
-      <td>0.41</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>nebenkosten</td>
-      <td>9480.0</td>
-      <td>159.08</td>
-      <td>83.13</td>
-      <td>0.00</td>
-      <td>73.00</td>
-      <td>100.00</td>
-      <td>144.96</td>
-      <td>200.00</td>
-      <td>265.00</td>
-      <td>950.00</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>lat</td>
-      <td>9480.0</td>
-      <td>53.57</td>
-      <td>0.05</td>
-      <td>53.40</td>
-      <td>53.49</td>
-      <td>53.55</td>
-      <td>53.58</td>
-      <td>53.60</td>
-      <td>53.62</td>
-      <td>53.71</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>lng</td>
-      <td>9480.0</td>
-      <td>10.01</td>
-      <td>0.09</td>
-      <td>9.74</td>
-      <td>9.90</td>
-      <td>9.96</td>
-      <td>10.01</td>
-      <td>10.07</td>
-      <td>10.13</td>
-      <td>10.30</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>kaltmiete</td>
-      <td>9480.0</td>
-      <td>752.89</td>
-      <td>446.90</td>
-      <td>148.97</td>
-      <td>363.23</td>
-      <td>451.00</td>
-      <td>633.00</td>
-      <td>906.00</td>
-      <td>1318.37</td>
-      <td>5600.00</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>quadratmeter</td>
-      <td>9480.0</td>
-      <td>66.20</td>
-      <td>26.71</td>
-      <td>15.00</td>
-      <td>37.21</td>
-      <td>49.00</td>
-      <td>62.00</td>
-      <td>77.93</td>
-      <td>97.01</td>
-      <td>350.00</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>anzahl_zimmer</td>
-      <td>9480.0</td>
-      <td>2.41</td>
-      <td>0.88</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>2.00</td>
-      <td>2.00</td>
-      <td>3.00</td>
-      <td>3.50</td>
-      <td>8.00</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>balkon/terasse</td>
-      <td>9480.0</td>
-      <td>0.68</td>
-      <td>0.47</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>etage</td>
-      <td>9480.0</td>
-      <td>1.98</td>
-      <td>1.79</td>
-      <td>-1.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>3.00</td>
-      <td>4.00</td>
-      <td>24.00</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>number_pics</td>
-      <td>9480.0</td>
-      <td>8.36</td>
-      <td>5.58</td>
-      <td>0.00</td>
-      <td>2.00</td>
-      <td>5.00</td>
-      <td>7.00</td>
-      <td>11.00</td>
-      <td>15.00</td>
-      <td>64.00</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>dl_speed</td>
-      <td>9480.0</td>
-      <td>83.81</td>
-      <td>25.92</td>
-      <td>6.00</td>
-      <td>50.00</td>
-      <td>50.00</td>
-      <td>100.00</td>
-      <td>100.00</td>
-      <td>100.00</td>
-      <td>200.00</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>ul_speed</td>
-      <td>9480.0</td>
-      <td>31.11</td>
-      <td>13.91</td>
-      <td>2.40</td>
-      <td>10.00</td>
-      <td>10.00</td>
-      <td>40.00</td>
-      <td>40.00</td>
-      <td>40.00</td>
-      <td>100.00</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>time_gap_uncapped</td>
-      <td>9480.0</td>
-      <td>12.71</td>
-      <td>15.62</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>5.00</td>
-      <td>21.00</td>
-      <td>38.00</td>
-      <td>63.00</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>status</td>
-      <td>9480.0</td>
-      <td>2.84</td>
-      <td>0.70</td>
-      <td>1.00</td>
-      <td>2.00</td>
-      <td>3.00</td>
-      <td>3.00</td>
-      <td>3.00</td>
-      <td>4.00</td>
-      <td>4.00</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>dynamic</td>
-      <td>9480.0</td>
-      <td>0.02</td>
-      <td>0.28</td>
-      <td>-1.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>min_dist</td>
-      <td>9480.0</td>
-      <td>0.92</td>
-      <td>0.84</td>
-      <td>0.01</td>
-      <td>0.23</td>
-      <td>0.37</td>
-      <td>0.63</td>
-      <td>1.16</td>
-      <td>2.06</td>
-      <td>9.44</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>min_sbahn</td>
-      <td>9480.0</td>
-      <td>1.79</td>
-      <td>1.54</td>
-      <td>0.03</td>
-      <td>0.40</td>
-      <td>0.67</td>
-      <td>1.27</td>
-      <td>2.46</td>
-      <td>3.94</td>
-      <td>9.44</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>min_ubahn</td>
-      <td>9480.0</td>
-      <td>2.36</td>
-      <td>3.03</td>
-      <td>0.01</td>
-      <td>0.26</td>
-      <td>0.44</td>
-      <td>0.92</td>
-      <td>2.99</td>
-      <td>7.63</td>
-      <td>14.17</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>smaller_0.6</td>
-      <td>9480.0</td>
-      <td>0.48</td>
-      <td>0.50</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>0.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-      <td>1.00</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>baujahr_imp</td>
-      <td>9480.0</td>
-      <td>1966.56</td>
-      <td>31.95</td>
-      <td>1850.00</td>
-      <td>1920.00</td>
-      <td>1953.00</td>
-      <td>1964.00</td>
-      <td>1992.00</td>
-      <td>2013.00</td>
-      <td>2019.00</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+For the prediction important is that there might be relevant rent
+increases for comparable apartments between the beginning of the
+timeframe in July 2016 and the end in November 2018, that might degrade
+prediction accuracy. `smaller_0.6`, the last variable in
+Figure 2 is discussed at the beginning of this Section with the other binary variables. 
+Continuing with the numerical variables and their histograms in
+Figure 3, variable `base_rent` shows a pronounced positive skew in the data series. The mean
+($\bar{x}$) of 753 Euro for the series is low considering the value
+range of 149-5600 Euro. However, extreme values above 1318.37 Euro only
+account for 10% of the data. The standard deviation of 447 Euro is a
+better metric to show the large spread of this variable. The one Sigma
+(${s}$) interval has limits (Eur.)
+$[306 = \bar{x}-{s},\bar{x}+{s} = 1200]$, with the lower limit
+$\approx 40\%$ of $\bar{x}$ and the upper limit $\approx 160\%$ of
+$\bar{x}$. A similar pattern is observed for ancillary costs
+(`ancil_costs`), with the distribution exhibiting a bit less skew and a
+more linear falloff past the 130 Euro mark. Since the determination of
+ancillary costs is not uniformly established regarding the costs
+contained within them, it is difficult to consider them as a consistent
+variable. Square meters (`sqm`) has a gaussian distribution like value
+distribution with a slight positive skew. The mean is $\bar{x} = 66$
+with the one Sigma interval, given in $m^2$, of $[39, 93]$. This echoes
+the slight skewness for the series. The number of images that are
+uploaded to describe the apartment seem to be important, since the
+highest frequency found around 5 to 10 images and not zero. There are
+less than 10% of observations with 0 images, as can be seen in
+Table 1. The download (`dl_speed`) and upload speed (`ul_speed`) variables show that for both variables,
+observations gather around a few mbit/s values. With these findings they
+have to be considered categorical variables, as the value range is not
+continuous for the listings in the series. For `dl_speed` these are
+(mbit/s, count): (100, 6404), (50, 2105), (83, 484), (16, 453), (25,
+36), (200, 5), (6, 2). For `ul_speed`: (40, 6404), (10, 2105), (31,
+528), (2.4, 447), (100, 5). It is noticeable that for the majority of
+observations tuples can be formed from values of both variables that
+have near identical counts in the series. The variable measuring the
+days a listing was online on the platform shows that there was strong
+demand for the apartments in this series, since 25% of the data series
+was listed and delisted within two days, thus having the `time_gap` = 1
+day value. 10% have a value of 0 days, meaning that they were online for
+less than 24 hours. The median is one week, see
+Table 1. There are values as high as 924 days in the series, however the portion of values 59 ≤ time_gap ≤ 924 makes up the highest 10% of all values for `time_gap`.
+Therefore, the impact is expected to be small on the prediction results, if there were outliers amongst these values. The minimum distance (`min_dist`) to either of subway or
+suburban train station shows that for 70.5% of observations the distance
+is $\leq 1$ km and the median (50% quantile) is 0.63 km. This is in
+accordance with the observations described for variable `smaller_0.6`,
+where 48% had a distance of less than 0.6 km. With the 50% quantile at
+0.63 km it shows, that the binary variable `smaller_0.6` splits the set
+of observations into two almost equal parts. The distributions of the
+variables `min_train`, `min_subway` show a very similar picture. Since
+the variable `min_dist` is set to the smaller value of the two, its
+distribution is a concentration of the smallest values of the two. One
+can see that the distance to the nearest subway station has a high
+concentration of values close to zero and a sudden drop after
+approximately 1 km. In the case of the nearest suburban train station
+the distribution is shifted towards the mean of 2.36 km and falls off
+more slowly afterwards.
 
 **Table 1:**
 
-| variable                   | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
-|-------------------|--------|---------|-------|--------|--------|--------|--------|--------|---------|--------|
+| variable          | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
+| ----------------- | ------ | ------- | ----- | ------ | ------ | ------ | ------ | ------ | ------- | ------ |
 | einbau_kue        | 9480.0 | 0.61    | 0.49  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
 | lift              | 9480.0 | 0.21    | 0.41  | 0.0    | 0.0    | 0.0    | 0.0    | 0.0    | 1.0     | 1.0    |
 | nebenkosten       | 9480.0 | 159.08  | 83.13 | 0.0    | 73.0   | 100.0  | 144.96 | 200.0  | 265.0   | 950.0  |
@@ -454,5 +196,3 @@ df
 | min_ubahn         | 9480.0 | 2.36    | 3.03  | 0.01   | 0.26   | 0.44   | 0.92   | 2.99   | 7.63    | 14.17  |
 | smaller_0.6       | 9480.0 | 0.48    | 0.5   | 0.0    | 0.0    | 0.0    | 0.0    | 1.0    | 1.0     | 1.0    |
 | baujahr_imp       | 9480.0 | 1966.56 | 31.95 | 1850.0 | 1920.0 | 1953.0 | 1964.0 | 1992.0 | 2013.0  | 2019.0 |
-
-(^1): kuhnAppliedPredictiveModeling2013
