@@ -32,13 +32,13 @@ categorical variables with few possible values and continuous numerical
 variables. The categorical variables used here are _kitchen_,
 _elevator_, _balcony_, _status_, _dynamic_, _noise_day_, _noise_night_,
 _smaller_0.6_, _const_, _floor_. This kind of variable has categories as
-values that have no natural order or scale [kuhnAppliedPredictiveModeling2013] and each listing can fall in
+values that have no natural order or scale [^1] and each listing can fall in
 exactly one of the categories for each variable. Since all, but
 _noise_day_, _noise_night_ were converted to a numerical categorical
 variable type, only _noise_day_, _noise_night_ are excluded from
 Table 1. It is not possible to give the
 summaries found in Table 1 for string type variables. The remaining variables have
-a natural, numeric scale and are therefore continuous numerical variables[^1].
+a natural, numeric scale and are therefore continuous numerical variables [^1].
 
 ## Univariate Distributions
 The variables are shown in Table 1. Here is a description from left to right of what
@@ -62,7 +62,7 @@ Figure 2, it is visible, that the distribution of _floor_ has a mean of close to
 skew. _floor_ is for the majority of observations 1 or 2. The _status_
 index is 3 for around 6000 listings and the majority of listings
 therefore and is close to the actual values of the "Sozialmonitoring
-Bericht 2018" [SozialmonitoringBericht2018]. The same goes for the
+Bericht 2018" [^2]. The same goes for the
 _dynamic_ index with almost all listing being in areas that have a
 stable situation in terms of their status class, again these values are
 close to the ones found in the "Sozialmonitoring Bericht 2018".
@@ -196,5 +196,6 @@ more slowly afterwards.
 
 After the table, we write more words.
 
-## References
-[^1]: kuhnAppliedPredictiveModeling2013
+#### References
+[^1]:Kuhn, M., Johnson, K., 2013. Applied Predictive Modeling. Springer New York, New York, NY. https://doi.org/10.1007/978-1-4614-6849-3
+[^2]:Sozialmonitoring Bericht 2018, n.d. , Sozialmonitoring Bericht. Behörde für Stadtentwicklung und Wohnen Amt für Wohnen, Stadterneuerung und Bodenordnung, Hamburg.
