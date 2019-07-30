@@ -2,6 +2,7 @@
 title: EDA - Hamburg rental apartments
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
+featured_image: website_export_hamburg_alster20130608.jpg
 accent_color: '#4C60E6'
 ---
 
@@ -40,6 +41,324 @@ Table 1. It is not possible to give the
 summaries found in Table 1 for string type variables. The remaining variables have
 a natural, numeric scale and are therefore continuous numerical variables [^1].
 
+<table>
+<caption><b>Table 1:</b> Gives information about the distributions of the numerical variables found in the dataset.</caption>
+  <thead>
+    <tr>
+      <th>variable</th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>10%</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>90%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tr>
+    <td>einbau_kue</td>
+    <td>9480.0</td>
+    <td>0.61</td>
+    <td>0.49</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+  </tr>
+  <tr>
+    <td>lift</td>
+    <td>9480.0</td>
+    <td>0.21</td>
+    <td>0.41</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+  </tr>
+  <tr>
+    <td>nebenkosten</td>
+    <td>9480.0</td>
+    <td>159.08</td>
+    <td>83.13</td>
+    <td>0.0</td>
+    <td>73.0</td>
+    <td>100.0</td>
+    <td>144.96</td>
+    <td>200.0</td>
+    <td>265.0</td>
+    <td>950.0</td>
+  </tr>
+  <tr>
+    <td>lat</td>
+    <td>9480.0</td>
+    <td>53.57</td>
+    <td>0.05</td>
+    <td>53.4</td>
+    <td>53.49</td>
+    <td>53.55</td>
+    <td>53.58</td>
+    <td>53.6</td>
+    <td>53.62</td>
+    <td>53.71</td>
+  </tr>
+  <tr>
+    <td>lng</td>
+    <td>9480.0</td>
+    <td>10.01</td>
+    <td>0.09</td>
+    <td>9.74</td>
+    <td>9.9</td>
+    <td>9.96</td>
+    <td>10.01</td>
+    <td>10.07</td>
+    <td>10.13</td>
+    <td>10.3</td>
+  </tr>
+  <tr>
+    <td>kaltmiete</td>
+    <td>9480.0</td>
+    <td>752.89</td>
+    <td>446.9</td>
+    <td>148.97</td>
+    <td>363.23</td>
+    <td>451.0</td>
+    <td>633.0</td>
+    <td>906.0</td>
+    <td>1318.37</td>
+    <td>5600.0</td>
+  </tr>
+  <tr>
+    <td>quadratmeter</td>
+    <td>9480.0</td>
+    <td>66.2</td>
+    <td>26.71</td>
+    <td>15.0</td>
+    <td>37.21</td>
+    <td>49.0</td>
+    <td>62.0</td>
+    <td>77.93</td>
+    <td>97.01</td>
+    <td>350.0</td>
+  </tr>
+  <tr>
+    <td>anzahl_zimmer</td>
+    <td>9480.0</td>
+    <td>2.41</td>
+    <td>0.88</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>2.0</td>
+    <td>2.0</td>
+    <td>3.0</td>
+    <td>3.5</td>
+    <td>8.0</td>
+  </tr>
+  <tr>
+    <td>balkon/terasse</td>
+    <td>9480.0</td>
+    <td>0.68</td>
+    <td>0.47</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+  </tr>
+  <tr>
+    <td>etage</td>
+    <td>9480.0</td>
+    <td>1.98</td>
+    <td>1.79</td>
+    <td>-1.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>3.0</td>
+    <td>4.0</td>
+    <td>24.0</td>
+  </tr>
+  <tr>
+    <td>number_pics</td>
+    <td>9480.0</td>
+    <td>8.36</td>
+    <td>5.58</td>
+    <td>0.0</td>
+    <td>2.0</td>
+    <td>5.0</td>
+    <td>7.0</td>
+    <td>11.0</td>
+    <td>15.0</td>
+    <td>64.0</td>
+  </tr>
+  <tr>
+    <td>dl_speed</td>
+    <td>9480.0</td>
+    <td>83.81</td>
+    <td>25.92</td>
+    <td>6.0</td>
+    <td>50.0</td>
+    <td>50.0</td>
+    <td>100.0</td>
+    <td>100.0</td>
+    <td>100.0</td>
+    <td>200.0</td>
+  </tr>
+  <tr>
+    <td>ul_speed</td>
+    <td>9480.0</td>
+    <td>31.11</td>
+    <td>13.91</td>
+    <td>2.4</td>
+    <td>10.0</td>
+    <td>10.0</td>
+    <td>40.0</td>
+    <td>40.0</td>
+    <td>40.0</td>
+    <td>100.0</td>
+  </tr>
+  <tr>
+    <td>time_gap_uncapped</td>
+    <td>9480.0</td>
+    <td>12.71</td>
+    <td>15.62</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>5.0</td>
+    <td>21.0</td>
+    <td>38.0</td>
+    <td>63.0</td>
+  </tr>
+  <tr>
+    <td>status</td>
+    <td>9480.0</td>
+    <td>2.84</td>
+    <td>0.7</td>
+    <td>1.0</td>
+    <td>2.0</td>
+    <td>3.0</td>
+    <td>3.0</td>
+    <td>3.0</td>
+    <td>4.0</td>
+    <td>4.0</td>
+  </tr>
+  <tr>
+    <td>dynamic</td>
+    <td>9480.0</td>
+    <td>0.02</td>
+    <td>0.28</td>
+    <td>-1.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+  </tr>
+  <tr>
+    <td>min_dist</td>
+    <td>9480.0</td>
+    <td>0.92</td>
+    <td>0.84</td>
+    <td>0.01</td>
+    <td>0.23</td>
+    <td>0.37</td>
+    <td>0.63</td>
+    <td>1.16</td>
+    <td>2.06</td>
+    <td>9.44</td>
+  </tr>
+  <tr>
+    <td>min_sbahn</td>
+    <td>9480.0</td>
+    <td>1.79</td>
+    <td>1.54</td>
+    <td>0.03</td>
+    <td>0.4</td>
+    <td>0.67</td>
+    <td>1.27</td>
+    <td>2.46</td>
+    <td>3.94</td>
+    <td>9.44</td>
+  </tr>
+  <tr>
+    <td>min_ubahn</td>
+    <td>9480.0</td>
+    <td>2.36</td>
+    <td>3.03</td>
+    <td>0.01</td>
+    <td>0.26</td>
+    <td>0.44</td>
+    <td>0.92</td>
+    <td>2.99</td>
+    <td>7.63</td>
+    <td>14.17</td>
+  </tr>
+  <tr>
+    <td>smaller_0.6</td>
+    <td>9480.0</td>
+    <td>0.48</td>
+    <td>0.5</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>0.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+    <td>1.0</td>
+  </tr>
+  <tr>
+    <td>baujahr_imp</td>
+    <td>9480.0</td>
+    <td>1966.56</td>
+    <td>31.95</td>
+    <td>1850.0</td>
+    <td>1920.0</td>
+    <td>1953.0</td>
+    <td>1964.0</td>
+    <td>1992.0</td>
+    <td>2013.0</td>
+    <td>2019.0</td>
+  </tr>
+</table>
+
+**Table 1:** Gives information about the distributions of the numerical variables found in the dataset.
+
+| variable          | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
+| ----------------- | ------ | ------- | ----- | ------ | ------ | ------ | ------ | ------ | ------- | ------ |
+| einbau_kue        | 9480.0 | 0.61    | 0.49  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
+| lift              | 9480.0 | 0.21    | 0.41  | 0.0    | 0.0    | 0.0    | 0.0    | 0.0    | 1.0     | 1.0    |
+| nebenkosten       | 9480.0 | 159.08  | 83.13 | 0.0    | 73.0   | 100.0  | 144.96 | 200.0  | 265.0   | 950.0  |
+| lat               | 9480.0 | 53.57   | 0.05  | 53.4   | 53.49  | 53.55  | 53.58  | 53.6   | 53.62   | 53.71  |
+| lng               | 9480.0 | 10.01   | 0.09  | 9.74   | 9.9    | 9.96   | 10.01  | 10.07  | 10.13   | 10.3   |
+| kaltmiete         | 9480.0 | 752.89  | 446.9 | 148.97 | 363.23 | 451.0  | 633.0  | 906.0  | 1318.37 | 5600.0 |
+| quadratmeter      | 9480.0 | 66.2    | 26.71 | 15.0   | 37.21  | 49.0   | 62.0   | 77.93  | 97.01   | 350.0  |
+| anzahl_zimmer     | 9480.0 | 2.41    | 0.88  | 1.0    | 1.0    | 2.0    | 2.0    | 3.0    | 3.5     | 8.0    |
+| balkon/terasse    | 9480.0 | 0.68    | 0.47  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
+| etage             | 9480.0 | 1.98    | 1.79  | -1.0   | 0.0    | 1.0    | 1.0    | 3.0    | 4.0     | 24.0   |
+| number_pics       | 9480.0 | 8.36    | 5.58  | 0.0    | 2.0    | 5.0    | 7.0    | 11.0   | 15.0    | 64.0   |
+| dl_speed          | 9480.0 | 83.81   | 25.92 | 6.0    | 50.0   | 50.0   | 100.0  | 100.0  | 100.0   | 200.0  |
+| ul_speed          | 9480.0 | 31.11   | 13.91 | 2.4    | 10.0   | 10.0   | 40.0   | 40.0   | 40.0    | 100.0  |
+| time_gap_uncapped | 9480.0 | 12.71   | 15.62 | 0.0    | 0.0    | 1.0    | 5.0    | 21.0   | 38.0    | 63.0   |
+| status            | 9480.0 | 2.84    | 0.7   | 1.0    | 2.0    | 3.0    | 3.0    | 3.0    | 4.0     | 4.0    |
+| dynamic           | 9480.0 | 0.02    | 0.28  | -1.0   | 0.0    | 0.0    | 0.0    | 0.0    | 0.0     | 1.0    |
+| min_dist          | 9480.0 | 0.92    | 0.84  | 0.01   | 0.23   | 0.37   | 0.63   | 1.16   | 2.06    | 9.44   |
+| min_sbahn         | 9480.0 | 1.79    | 1.54  | 0.03   | 0.4    | 0.67   | 1.27   | 2.46   | 3.94    | 9.44   |
+| min_ubahn         | 9480.0 | 2.36    | 3.03  | 0.01   | 0.26   | 0.44   | 0.92   | 2.99   | 7.63    | 14.17  |
+| smaller_0.6       | 9480.0 | 0.48    | 0.5   | 0.0    | 0.0    | 0.0    | 0.0    | 1.0    | 1.0     | 1.0    |
+| baujahr_imp       | 9480.0 | 1966.56 | 31.95 | 1850.0 | 1920.0 | 1953.0 | 1964.0 | 1992.0 | 2013.0  | 2019.0 |
+
 ## Univariate Distributions
 The variables are shown in Table 1. Here is a description from left to right of what
 Table 1 shows. Count is the same for all variables, since this is the final, clean dataset. The mean, is the mean
@@ -56,6 +375,11 @@ is:
 * _balcony_: mean = 0.68 $$\implies$$ 68% of the listings have a balcony, 32% don't.
 * _smaller_0.6_: mean = 0.48 $$\implies$$ 48% of the listings have access to either a subway or a suburban train station    within a radius smaller than 600m, for 52% the distance is equal or greater than 600m.
 
+<table class="image">
+<caption align="bottom">caption text</caption>
+<tr><td><img src='/images/kaltm_qdm_heatmap_geodata.png'></td></tr>
+</table>
+
 ### Continuous Categorical Variables
 Continuing with the other categorical variables shown in
 Figure 2, it is visible, that the distribution of _floor_ has a mean of close to 2 and has a positive
@@ -70,7 +394,7 @@ Looking at _const_ the bulk of buildings was built in the period after
 World War II (WW II), between 1950 and 1975 roughly. During WW II
 (1939-1945) large parts of the city were completely destroyed and so
 during the post-war period many buildings had to be rebuilt or newly
-constructed [brakmanStrategicBombingGerman2004]. It might show that
+constructed [^3]. It might show that
 _base_rent_ of apartments in buildings that were built during that time
 have a low _base_rent_ value compared with apartments built in different
 periods, with similar features. The consideration comes from a simple
@@ -83,16 +407,16 @@ reach levels as high as the ones seen around 1960 for the period
 2010-2018. Right now, there is indication that a relatively high number
 of residential buildings are constructed from this sample. This does not
 completely align with the data in
-Figure Statistikamt Nord [StatistikEinwohnerHaushalte] the maximum of
+Figure Statistikamt Nord [^4] the maximum of
 apartments built between 1990-2017 was in 1995 and the pickup in
 construction after 2010 can not reach the levels of that period. The
 report of the Statistikamt Nord, however, includes non residential
 buildings and construction measures on existing buildings as
-well [StatistikEinwohnerHaushalte]. This may hinder a direct comparison
+well [^4]. This may hinder a direct comparison
 between the here found data from the sample of all listings and their
 data. The overall trend however is similar across both data sources.
 There are reports that rent prices are rising at the moment in
-Hamburg [ndrAktionstagWirdWohnen]. However, not as much as in other
+Hamburg [^5]. However, not as much as in other
 major cities in Germany possibly. This is also due to the fact of a
 relatively high number of apartments being constructed at the moment and
 a stable population in Hamburg, at least according to the Deutsche Bank
@@ -107,7 +431,7 @@ German housing market 2018 (Deutscher Häuser- und Wohnungsmarkt 2018):
 > could be higher than in other metropolises. In our baseline scenario,
 > we expect mortgage rates to rise only slightly in 2018. House and
 > apartment prices in Hamburg should therefore continue to rise strongly
-> in the current year. [mobertDeutscherHauserUnd2018]
+> in the current year. [^6]
 
 *Original German version was translated to English by the Author*
 
@@ -168,34 +492,11 @@ approximately 1 km. In the case of the nearest suburban train station
 the distribution is shifted towards the mean of 2.36 km and falls off
 more slowly afterwards.
 
-**Table 1:**
-
-| variable          | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
-| ----------------- | ------ | ------- | ----- | ------ | ------ | ------ | ------ | ------ | ------- | ------ |
-| einbau_kue        | 9480.0 | 0.61    | 0.49  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
-| lift              | 9480.0 | 0.21    | 0.41  | 0.0    | 0.0    | 0.0    | 0.0    | 0.0    | 1.0     | 1.0    |
-| nebenkosten       | 9480.0 | 159.08  | 83.13 | 0.0    | 73.0   | 100.0  | 144.96 | 200.0  | 265.0   | 950.0  |
-| lat               | 9480.0 | 53.57   | 0.05  | 53.4   | 53.49  | 53.55  | 53.58  | 53.6   | 53.62   | 53.71  |
-| lng               | 9480.0 | 10.01   | 0.09  | 9.74   | 9.9    | 9.96   | 10.01  | 10.07  | 10.13   | 10.3   |
-| kaltmiete         | 9480.0 | 752.89  | 446.9 | 148.97 | 363.23 | 451.0  | 633.0  | 906.0  | 1318.37 | 5600.0 |
-| quadratmeter      | 9480.0 | 66.2    | 26.71 | 15.0   | 37.21  | 49.0   | 62.0   | 77.93  | 97.01   | 350.0  |
-| anzahl_zimmer     | 9480.0 | 2.41    | 0.88  | 1.0    | 1.0    | 2.0    | 2.0    | 3.0    | 3.5     | 8.0    |
-| balkon/terasse    | 9480.0 | 0.68    | 0.47  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
-| etage             | 9480.0 | 1.98    | 1.79  | -1.0   | 0.0    | 1.0    | 1.0    | 3.0    | 4.0     | 24.0   |
-| number_pics       | 9480.0 | 8.36    | 5.58  | 0.0    | 2.0    | 5.0    | 7.0    | 11.0   | 15.0    | 64.0   |
-| dl_speed          | 9480.0 | 83.81   | 25.92 | 6.0    | 50.0   | 50.0   | 100.0  | 100.0  | 100.0   | 200.0  |
-| ul_speed          | 9480.0 | 31.11   | 13.91 | 2.4    | 10.0   | 10.0   | 40.0   | 40.0   | 40.0    | 100.0  |
-| time_gap_uncapped | 9480.0 | 12.71   | 15.62 | 0.0    | 0.0    | 1.0    | 5.0    | 21.0   | 38.0    | 63.0   |
-| status            | 9480.0 | 2.84    | 0.7   | 1.0    | 2.0    | 3.0    | 3.0    | 3.0    | 4.0     | 4.0    |
-| dynamic           | 9480.0 | 0.02    | 0.28  | -1.0   | 0.0    | 0.0    | 0.0    | 0.0    | 0.0     | 1.0    |
-| min_dist          | 9480.0 | 0.92    | 0.84  | 0.01   | 0.23   | 0.37   | 0.63   | 1.16   | 2.06    | 9.44   |
-| min_sbahn         | 9480.0 | 1.79    | 1.54  | 0.03   | 0.4    | 0.67   | 1.27   | 2.46   | 3.94    | 9.44   |
-| min_ubahn         | 9480.0 | 2.36    | 3.03  | 0.01   | 0.26   | 0.44   | 0.92   | 2.99   | 7.63    | 14.17  |
-| smaller_0.6       | 9480.0 | 0.48    | 0.5   | 0.0    | 0.0    | 0.0    | 0.0    | 1.0    | 1.0     | 1.0    |
-| baujahr_imp       | 9480.0 | 1966.56 | 31.95 | 1850.0 | 1920.0 | 1953.0 | 1964.0 | 1992.0 | 2013.0  | 2019.0 |
-
-After the table, we write more words.
 
 #### References
 [^1]:Kuhn, M., Johnson, K., 2013. Applied Predictive Modeling. Springer New York, New York, NY. https://doi.org/10.1007/978-1-4614-6849-3
 [^2]:Sozialmonitoring Bericht 2018, n.d. , Sozialmonitoring Bericht. Behörde für Stadtentwicklung und Wohnen Amt für Wohnen, Stadterneuerung und Bodenordnung, Hamburg.
+[^3]:Brakman, S., Garretsen, H., Schramm, M., 2004. The strategic bombing of German cities during World War II and its impact on city growth. Journal of Economic Geography 4, 201–218. https://doi.org/10.1093/jeg/4.2.201
+[^4]:Statistik Einwohner Haushalte Wohnungen Wohnungsbau [WWW Document], n.d. URL https://www.mieterverein-hamburg.de/de/aktuelles/statistiken-wohnen-hamburg/ (accessed 3.9.19).
+[^5]:NDR, n.d. Aktionstag: Wird Wohnen in Hamburg unbezahlbar? [WWW Document]. URL /nachrichten/hamburg/Aktionstag-Wird-Wohnen-in-Hamburg-unbezahlbar-,wohneninhh102.html (accessed 3.9.19).
+[^6]:Möbert, J., 2018. Deutscher Häuser- und Wohnungsmarkt 2018. Deutsche Bank Research.
