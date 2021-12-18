@@ -27,7 +27,7 @@ accent_color: '#4C60E6'
 
 - `drwxrwxr-x. 2 tklein tklein    6 Dec 10 11:44 seinfeld` -> means one is allowed to cd into the directory for example.
 
-```bash
+```sh
 [tklein@linux seinfeld]$ chmod a-x seinfeld
 chmod: cannot access ‘seinfeld’: No such file or directory
 [tklein@linux seinfeld]$ cd
@@ -63,11 +63,12 @@ Equivalent values for the assignment of permissions using numerical values are:
 | lng         | 9480.0 | 10.01  | 0.09  | 9.74 | 9.9   | 9.96  | 10.01  | 10.07 | 10.13 | 10.3  |
 
 ## File Ownership Commands (`chown`, `chgrp`)
- [Video number 60](https://www.udemy.com/course/complete-linux-training-course-to-get-your-dream-it-job/learn/lecture/9165554#notes)
+[Video number 60](https://www.udemy.com/course/complete-linux-training-course-to-get-your-dream-it-job/learn/lecture/9165554#notes)
 
 - `chown` - stands for change ownership.
 - `chgrp` - stands for change group.
-```bash
+
+```sh
 [root@linux tklein]# ls -ltr
 total 9212
 drwxr-xr-x. 2 tklein tklein       6 Dec  3 17:56 Videos
@@ -101,7 +102,7 @@ drwxrwxr-x. 2 tklein tklein       6 Dec 10 15:14 seinfeld
 - The third column gives the name of the owner, it is a username. Here it is *tklein* or *root*.
 - The fourth column gives the name of the group, that is the owner. Here it is *tklein* or *root*.
 
-```bash
+```sh
 [root@linux tklein]# chown root susan
 [root@linux tklein]# ls -ltr susan
 -rw-rw-r--. 1 root tklein 0 Dec  4 06:42 susan
