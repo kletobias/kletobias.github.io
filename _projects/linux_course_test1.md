@@ -41,15 +41,15 @@ chmod: cannot access ‘seinfeld’: No such file or directory
 ## Assigning permissions using numerical values
 
 Equivalent values for the assignment of permissions using numerical values:
-
-Number  | Permission Type   | Symbol
---|---|--
+  
+Number  | Permission Type   | Symbol 
+--|---|-- 
 0  | No permission  | --- 
-1  | Execute  |  --x
-2  | Write  |  -w-
+1  | Execute  |  --x 
+2  | Write  |  -w- 
 3  | Execute + Write  | -wx 
 4  | Read  | r-- 
-5  | Read + Execute  | r-x  
+5  | Read + Execute  | r-x 
 6  | Read + Write  | rw- 
 7  | Read + Write + Execute  | rwx
  
