@@ -22,10 +22,6 @@ from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist, pdist
 import matplotlib.pyplot as plt
 import mpl_toolkits
-```
-
-
-```python
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 from geopy.distance import vincenty
 from sklearn.decomposition import PCA
@@ -48,26 +44,9 @@ from collections import OrderedDict
 import warnings
 warnings.filterwarnings('ignore')
 %matplotlib inline
-
-```
-
-
-```python
 import numpy
-```
-
-
-```python
 import geopandas
-```
-
-
-```python
 import sklearn
-```
-
-
-```python
 sklearn
 ```
 
