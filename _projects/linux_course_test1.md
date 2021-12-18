@@ -56,6 +56,14 @@ Equivalent values for the assignment of permissions using numerical values are:
 
 ~~**Note:** The order in which permissions `read`, `write` and `execute` are given in column **Symbol** are given is sorted ascending (rwx). It follows the equivalent numerical values of the respective commands. $rwx = 421$. It is also, $4$, $4+2=6$, $4+1=5$ and $4+2+1=7$, which is $0$, $2$ and $1$, modulo 3. So all combinations with `read` are simply $0, 1, 2$ mod 3. And any combination that has read permissions, is an integer, a fraction of $4/2$. So read, is double of write and write double of execute.~~
 
+| variable          | count  | mean    | std   | min    | 10%    | 25%    | 50%    | 75%    | 90%     | max    |
+| ----------------- | ------ | ------- | ----- | ------ | ------ | ------ | ------ | ------ | ------- | ------ |
+| einbau_kue        | 9480.0 | 0.61    | 0.49  | 0.0    | 0.0    | 0.0    | 1.0    | 1.0    | 1.0     | 1.0    |
+| lift              | 9480.0 | 0.21    | 0.41  | 0.0    | 0.0    | 0.0    | 0.0    | 0.0    | 1.0     | 1.0    |
+| nebenkosten       | 9480.0 | 159.08  | 83.13 | 0.0    | 73.0   | 100.0  | 144.96 | 200.0  | 265.0   | 950.0  |
+| lat               | 9480.0 | 53.57   | 0.05  | 53.4   | 53.49  | 53.55  | 53.58  | 53.6   | 53.62   | 53.71  |
+| lng               | 9480.0 | 10.01   | 0.09  | 9.74   | 9.9    | 9.96   | 10.01  | 10.07  | 10.13   | 10.3   |
+
 ## File Ownership Commands (`chown`, `chgrp`)
  [Video number 60](https://www.udemy.com/course/complete-linux-training-course-to-get-your-dream-it-job/learn/lecture/9165554#notes)
 
