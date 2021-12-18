@@ -1,7 +1,11 @@
 ---
 title: Linux Course: Module 4
+subtitle: High-fidelity mobile app designs for a super awesome social media company. BEST SUBTITLE
 date: 2021-12-18 00:00:00
 description: Notes from the Linux course I am taking currently.
+featured_image:
+accent_color: '#4C60E6'
+gallery_images:
 ---
 **Important to do: Change skinport to something neutral in all console outputs used in this article.**
 
