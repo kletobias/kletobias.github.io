@@ -36,7 +36,7 @@ chmod: cannot access ‘seinfeld’: No such file or directory
 [tklein@linux ~]$ cd seinfeld
 -bash: cd: seinfeld: Permission denied
 [tklein@linux ~]$
-``` 
+```
 
 ## Assigning permissions using numerical values
 
