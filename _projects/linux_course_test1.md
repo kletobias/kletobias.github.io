@@ -40,18 +40,19 @@ chmod: cannot access ‘seinfeld’: No such file or directory
 
 ## Assigning permissions using numerical values
 
-Equivalent values for the assignment of permissions using numerical values are\:
+Equivalent values for the assignment of permissions using numerical values are:
 
 | Number | Permission Type        | Symbol |
-| -------|------------------------|------- |
-| 0      | No permission          | --- |
-| 1      | Execute                | --x |
-| 2      | Write                  | -w- |
-| 3      | Execute + Write        | -wx |
-| 4      | Read                   | r-- |
-| 5      | Read + Execute         | r-x |
-| 6      | Read + Write           | rw- |
-| 7      | Read + Write + Execute | rwx |
+|--------|------------------------|--------|
+| 0      | No permission          | \-\-\- |
+| 1      | Execute                | --x    |
+| 2      | Write                  | -w-    |
+| 3      | Execute + Write        | -wx    |
+| 4      | Read                   | r--    |
+| 5      | Read + Execute         | r-x    |
+| 6      | Read + Write           | rw-    |
+| 7      | Read + Write + Execute | rwx    |
+
 
 ~~**Note:** The order in which permissions `read`, `write` and `execute` are given in column **Symbol** are given is sorted ascending (rwx). It follows the equivalent numerical values of the respective commands. $rwx = 421$. It is also, $4$, $4+2=6$, $4+1=5$ and $4+2+1=7$, which is $0$, $2$ and $1$, modulo 3. So all combinations with `read` are simply $0, 1, 2$ mod 3. And any combination that has read permissions, is an integer, a fraction of $4/2$. So read, is double of write and write double of execute.~~
 
