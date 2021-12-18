@@ -40,7 +40,7 @@ chmod: cannot access ‘seinfeld’: No such file or directory
 
 ## Assigning permissions using numerical values
 
-Equivalent values for the assignment of permissions using numerical values:
+Equivalent values for the assignment of permissions using numerical values are\:
 
 Number  | Permission Type   | Symbol
 --|---|--
