@@ -89,15 +89,6 @@ drwxrwxr-x. 2 tklein tklein      47 Dec  4 06:14 lecture_notes
 -rw-rw-r--. 1 tklein tklein       0 Dec  4 06:42 susan
 -rw-rw-r--. 1 tklein tklein       0 Dec 10 11:42 bart
 drwxrwxr-x. 2 tklein tklein       6 Dec 10 15:14 seinfeld
--rw-r--r--. 1 root   root       196 Dec 10 18:59 skinport_api_cred_url
--r-x--x--x. 1 root   root        86 Dec 10 19:03 v1
--rw-r--r--. 1 root   root       135 Dec 10 19:24 curl_skinport_header_file
--rw-r--r--. 1 root   root       135 Dec 10 19:31 curl_skinport_script_backup.sh
--rw-r--r--. 1 root   root       351 Dec 10 19:38 backup_complete_api_skinport_request
--rw-r--r--. 1 root   root       176 Dec 10 19:45 basic_auth
--rw-r--r--. 1 root   root        79 Dec 10 19:50 complete_api_skinport_request
--rw-r--r--. 1 root   root        86 Dec 10 19:52 complete_api_skinport_request_test_new-lines
--rw-r--r--. 1 root   root   9392679 Dec 10 20:40 api_output_skinport.json
 ```
 - The third column gives the name of the owner, it is a username. Here it is *tklein* or *root*.
 - The fourth column gives the name of the group, that is the owner. Here it is *tklein* or *root*.
@@ -120,3 +111,90 @@ Password:
 -rw-rw-r--. 1 root root 0 Dec  4 06:42 susan
 [root@linux tklein]#
 ```
+
+**Creating a test file to practice changing ownership of the file.**
+```sh
+# going into my home directory
+[tklein@linux /]$ cd /home/tklein
+# Creating an empty file 'permissiontestfile'
+[tklein@linux ~]$ touch permissiontestfile
+# Checking who owns the file and which group owns it.
+[tklein@linux ~]$ ls -ltr permissiontestfile
+# 'tklein', me is the owner and the group who owns it.
+-rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile 
+# I try to change the ownership to the user 'root', using my account 'tklein'
+[tklein@linux ~]$ chown root permissiontestfile
+# I do not have the permissions to change the ownership.
+chown: changing ownership of ‘permissiontestfile’: Operation not permitted
+# I need to become 'root' in order to change the ownership.
+[tklein@linux ~]$ su
+Password:
+# Now that I am 'root', I can change the ownership to 'root'.
+[root@linux tklein]# chown root permissiontestfile
+# Checking, if the changes were recorded and that now 'root' is the new owner.
+[root@linux tklein]# ls -ltr permissiontestfile
+# Indeed 'root' is the new owner of the file.
+-rw-rw-r--. 1 root tklein 0 Dec 18 21:17 permissiontestfile
+# Becoming my user account again.
+[root@linux tklein]# exit
+exit
+# Again, permission denied when I try to change ownership while not being 'root'.
+[tklein@linux ~]$ chown tklein permissiontestfile
+chown: changing ownership of ‘permissiontestfile’: Operation not permitted
+[tklein@linux ~]$ su
+Password:
+# Being root, I change the ownership back to my account.
+[root@linux tklein]# chown tklein permissiontestfile
+[root@linux tklein]# exit
+exit
+[tklein@linux ~]$ ls -ltr permissiontestfile
+-rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
+# I can change permissions using my account, who owns the file.
+[tklein@linux ~]$ chmod 751 permissiontestfile
+[tklein@linux ~]$ ls -ltr permissiontestfile
+-rwxr-x--x. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
+[tklein@linux ~]$
+```
+TODO remove the number of the videos for the website version!
+
+## 61 Access Control List (ACL)
+
+**Use Case for ACL**
+ACL = Access Control List
+
+A file created by root and a user needs to be able to read it. He is not part of the group either. Only this one user should be able to read it, no one else. It is a flexible permission setting mechanism.
+
+**The List of commands for setting up ACL**
+
+1. To add permission for user.
+	`setfacl -m u:user:rwx /path/to/file`
+	`setfacl` = Set file ACL
+	`-m` to modify the permissions
+	`-u:user` for the user permissions are altered for.
+2. To add permissions for a group.
+	`setfacl -m g:group:rw /path/to/file`
+3. To allow all files or directories to inherit ACL entries from the directory it is within.
+	`setfacl -Rm "entry" /path/to/dir`
+	`-R` For recursively applying the changes.
+4. To remove a specific entry.
+	`setfacl -x u:user /path/to/file` (For a specific user)
+	`-x` for removal
+
+**Note:**
+- As you assign the ACL permission to a file/directory it adds `+` sign at the end of the permission.
+
+### 62 Help Commands
+
+*Primer:*
+[unix - How to denote that a command line argument is optional when printing usage - Stack Overflow](https://stackoverflow.com/questions/21503865/how-to-denote-that-a-command-line-argument-is-optional-when-printing-usage/21504030)
+
+- square brackets `[optional option]`
+- angle brackets `<required argument>`
+- curly braces `{default values}`
+- parenthesis `(miscellaneous info)`
+
+#### Types of Help Commands
+*There are three types of help commands*
+- `whatis <command>`
+- `<command> --help`
+- `man <command>`
