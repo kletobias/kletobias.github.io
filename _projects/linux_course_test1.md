@@ -171,15 +171,17 @@ A file created by root and a user needs to be able to read it. He is not part of
 	- `setfacl` = Set file ACL
 	- `-m` to modify the permissions
 	- `-u:user` for the user permissions are altered for.
+
 2. To add permissions for a group.
 	- `setfacl -m g:group:rw /path/to/file`
+
 3. To allow all files or directories to inherit ACL entries from the directory it is within.
 	- `setfacl -Rm "entry" /path/to/dir`
 	- `-R` For recursively applying the changes.
+
 4. To remove a specific entry.
 	- `setfacl -x u:user /path/to/file` (For a specific user)
-	- `-x` for removal
-
+	- `-x` for removal.
 
 **Note:**
 - As you assign the ACL permission to a file/directory it adds `+` sign at the end of the permission.
