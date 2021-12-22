@@ -461,7 +461,7 @@ If however there is already text in the file, prior to one writing additional te
 	1. Standard input (**stdin**) and it has file descriptor number as 0
 	2. Standard output (**stdout**) and it has file descriptor number as 1
 	3. Standard error (**stderr**) and it has file descriptor number as 2
-</br>
+
 - Output (**stdout**) - 1
   - By default when running a command it's output goes to the terminal.
   - The output of a command can be routed to a file using `>` symbol.
@@ -471,7 +471,7 @@ If however there is already text in the file, prior to one writing additional te
     - E.g. `ls -la >> listings`
     - E.g. `echo 'Hello World' >> findpath`
 
-</br>
+
 
 **Terminal Example**
 ```bash
@@ -492,13 +492,13 @@ If however there is already text in the file, prior to one writing additional te
 Christmas is around the corner.
 [tklein@linux ~]$
 ```
-</br>
+
 
 - Input (**stdin**) - 0
   - Input is used when feeding file contents to a file.
     - E.g. `cat < listings` - cat takes listings as input.
     - E.g. `mail -s 'Office memo' allusers@bestmail.com < memoletter`
-</br>
+
 - Error (**stderr**) - 2
 	- When a command is executed we use a keyboard and that is also considered (**stdin - 0**)
 	- That command ouput goes on the monitor and that output is (**stdout -  1**)
@@ -507,7 +507,7 @@ Christmas is around the corner.
 			- E.g. `ls -l /root 2> errorfile`
 			- E.g. `telnet localhost 2> errorfile`
 
-</br>
+
 
 **Terminal Example**
 ```bash
@@ -558,7 +558,7 @@ Christmas only happens once a year.
 Christmas only happens once a year. We believe so.
 Christmas only happens once a year.
 ```
-</br>
+
 
 ```bash
 # text input can be redirected to multiple files at once.
@@ -566,7 +566,7 @@ Christmas only happens once a year.
 # command `tee`.
 [tklein@linux ~]$ ls -l | tee file1 file2 file3
 ```
-</br>
+
 
 **Misc.**
 
@@ -583,7 +583,7 @@ There is NO WARRANTY, to the extent permitted by law.
 Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 [tklein@linux ~]$
 ```
-</br>
+
 
 ```bash
 # The word count in a text file can be looked up by using command
@@ -593,7 +593,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 ```
 
 ### 67 Pipes (**|**)
-</br>
+
 
 - A pipe is used by the shell to connect the ouput of one command directly to the input of another command.
 - The symbol for a pipe is the vertical bar (**|**).
@@ -656,7 +656,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 		```
 			
 	
-</br>
+
 
   - `mv [OPTION]... SOURCE... DIRECTORY` 
   	- Like this, it moves `SOURCE` to `DIRECTORY`
