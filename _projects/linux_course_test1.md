@@ -552,7 +552,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 ### 67 Pipes `|`
 
 - A pipe is used by the shell to connect the ouput of one command directly to the input of another command.
-- The symbol for a pipe is the vertical bar (**|**).
+- The symbol for a pipe is the vertical bar `|`.
 - The structure of a pipe command looks like this:
   - `command1 [arguments] | command2 [arguments]`
   - E.g. `ls -l | <command2> [arguments]`
@@ -583,57 +583,59 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
   - `mv [OPTION]... [-T] SOURCE DEST`
     -  With `-T`, it treats the `DEST` as a regular file and not as a 	directory.
     - It renames `SOURCE` to `DEST`
-      - Example that also shows that it works without using `-T` as well.
-		   As illustrated below. One just can't specify a directory as `DEST` for it to work.
-			 It also shows that only the file name gets changed,
-       the content of the original file remains the same:
-	   	```sh
-		[tklein@linux ~]$ ls -ltr david*
-		-r--r--r--. 1 tklein tklein 0 Dec 20 06:21 david
-		[tklein@linux ~]$ echo "This file documents the endevour of finding david's last name" > david
-		-bash: david: Permission denied
-		[tklein@linux ~]$ su
-		Password:
-		[root@linux tklein]# chmod 771 david
-		[root@linux tklein]# ls -ltr david
-		-rwxrwx--x. 1 tklein tklein 0 Dec 20 06:21 david
-		[root@linux tklein]# exit
-		exit
-		[tklein@linux ~]$ whoami
-		tklein
-		[tklein@linux ~]$ echo "This file documents the endevour of finding david's last name" > david
-		[tklein@linux ~]$ cat david
-		This file documents the endevour of finding david's last name
-		[tklein@linux ~]$ cp david david_2
-		[tklein@linux ~]$ mv -T david david_hasselhof
-		[tklein@linux ~]$ cat david_hasselhof
-		This file documents the endevour of finding david's last name
-		[tklein@linux ~]$ mv david_2 david
-		[tklein@linux ~]$ rm david_hasselhof
-		[tklein@linux ~]$ mv david david_hasselhoff
-		[tklein@linux ~]$ cat david_hasselhoff
-		This file documents the endevour of finding david's last name
-		[tklein@linux ~]$
-		```
+##### `mv -T`
+An Example that also shows that it works without using `-T` as well.
+As illustrated below. One just can't specify a directory as `DEST` for it to work.
+It also shows that only the file name gets changed, the content of the original file remains the same:
 
+```sh
+[tklein@linux ~]$ ls -ltr david*
+-r--r--r--. 1 tklein tklein 0 De20 06:21 david
+[tklein@linux ~]$ echo "This fildocuments the endevour of findindavid's last name" > david
+-bash: david: Permission denied
+[tklein@linux ~]$ su
+Password:
+[root@linux tklein]# chmod 771 david
+[root@linux tklein]# ls -ltr david
+-rwxrwx--x. 1 tklein tklein 0 De20 06:21 david
+[root@linux tklein]# exit
+exit
+[tklein@linux ~]$ whoami
+tklein
+[tklein@linux ~]$ echo "This fildocuments the endevour of findindavid's last name" > david
+[tklein@linux ~]$ cat david
+This file documents the endevour ofinding david's last name
+[tklein@linux ~]$ cp david david_2
+[tklein@linux ~]$ mv -T davidavid_hasselhof
+[tklein@linux ~]$ cadavid_hasselhof
+This file documents the endevour ofinding david's last name
+[tklein@linux ~]$ mv david_2 david
+[tklein@linux ~]$ rm david_hasselhof
+[tklein@linux ~]$ mv davidavid_hasselhoff
+[tklein@linux ~]$ cadavid_hasselhoff
+This file documents the endevour ofinding david's last name
+[tklein@linux ~]$
+```
+##### `mv <OPTION> <SOURCE> <DIRECTORY>`
 - `mv [OPTION]... SOURCE... DIRECTORY`
-    - Like this, it moves `SOURCE` to `DIRECTORY`
-    - Example:
-	    ```sh
-		[tklein@linux ~]$ ls -ltr
-		total 9284
-		...
-		drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:00 seinfeld
-		drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:02 seinfelds_backup_plan
-		-rw-rw-r--. 1 tklein tklein       0 Dec 20 22:25 seinfelds_secret_plan
-		[tklein@linux ~]$ mv seinfelds_secret_plan seinfeld
-		[tklein@linux ~]$ ls -ltr seinfeld
-		total 0
-		-rw-rw-r--. 1 tklein tklein 0 Dec 20 12:58 seinfelds_fave_file
-		-rw-rw-r--. 1 tklein tklein 0 Dec 20 12:59 seinfelds_second_fave_file
-		-rw-rw-r--. 1 tklein tklein 0 Dec 20 22:25 seinfelds_secret_plan
-		[tklein@linux ~]$
-		```
+- Like this, it moves `SOURCE` to `DIRECTORY`
+
+Example:
+```sh
+[tklein@linux ~]$ ls -ltr
+total 9284
+...
+drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:00 seinfeld
+drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:02 seinfelds_backup_plan
+-rw-rw-r--. 1 tklein tklein       0 Dec 20 22:25 seinfelds_secret_plan
+[tklein@linux ~]$ mv seinfelds_secret_plan seinfeld
+[tklein@linux ~]$ ls -ltr seinfeld
+total 0
+-rw-rw-r--. 1 tklein tklein 0 Dec 20 12:58 seinfelds_fave_file
+-rw-rw-r--. 1 tklein tklein 0 Dec 20 12:59 seinfelds_second_fave_file
+-rw-rw-r--. 1 tklein tklein 0 Dec 20 22:25 seinfelds_secret_plan
+[tklein@linux ~]$
+```
 
 #### mkdir
 - `mkdir [OPTION]... DIRECTORY...`
@@ -642,7 +644,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
   - OPTION `-p` gives no error, if existing, make parent directories as needed.
 
 To understand better what the difference between using `mkdir` without the `-p` option and using it with the `-p` option, here is an example:
-##### Using `mkdir seinfeld`
+##### Using `mkdir <DIRECTORY>`
 In the current directory there is a directory called 'seinfeld' at the bottom of the `ls -ltr` command\:
 ```bash
 [tklein@localhost ~]$ ls -ltr
@@ -668,7 +670,7 @@ total 4
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 ```
 The time of creation is exactly the same as before and so the old file was not overwritten.
-##### Using `mkdir -p seinfeld`
+##### Using `mkdir -p <DIRECTORY>`
 ```bash
 [tklein@localhost ~]$ mkdir -p seinfeld
 [tklein@localhost ~]$ ls -ltr
