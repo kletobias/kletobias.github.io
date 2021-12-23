@@ -7,57 +7,15 @@ accent_color: '#4C60E6'
 ---
 
 **Important to do: Change skinport to something neutral in all console outputs used in this article.**
-
-**Important to do: Change skinport to something neutral in all console outputs used in this article.**
 # Prior to Module 4
 You can do this with these commands:
 
-```bash
+```sh
 mkdir learning_c
 cd learning_c
 touch bspl{0001..0003}.c
 ```
 
-### Explanation:
----
-*   `mkdir learning_c`
-
-    *   This will create a folder called `learning_c` in the current folder
-    *   The current folder usually is your home folder also called `~`
-    *   You can change the current directory using the `cd` command (i.e. `cd Desktop`)
-*   `cd learning_c`
-
-    *   Yes, you can guess it, you're entering on the newly created folder
-*   `touch bspl{0001..0003}.c`
-
-    *   `touch` is a tool to create empty files and modify timestamps; we're creating empty files.
-    *   `touch myfile` will create an empty file called `myfile`.
-    *   The ugly code that follows (`bspl{0001..0003}.c`) is called a **brace expansion**. This is a great feature of the `bash` shell that allows you to create long lists of arbitrary string combinations. You can learn more about this in the [Bash Hackers Wiki](http://wiki.bash-hackers.org/syntax/expansion/brace). In this case you will be making a long list of parameters that will be passed to `touch`. You can also use its long equivalent:
-
-        ```bash
-        touch bspl0001.c bspl0002.c bspl0003.c
-        ```
-
-    *   You can change the number of files: if you want 12 files, you can run `bspl{0001..0012}.c`.
-
-    *   The leading zeros (`0012` instead of `12`) make sure that the output uses zero\-padded 4 digits.
-
-**Terminal Example**
-```bash
-[tklein@linux ~]$ touch randomfile{001..010}
-[tklein@linux ~]$ ls -ltr
-...
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile010
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile009
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile008
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile007
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile006
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile005
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile004
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile003
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile002
--rw-rw-r--. 1 tklein tklein       0 Dec 20 00:40 randomfile001
-```
 # Module 4
 
 ## `chmod`
@@ -85,22 +43,22 @@ chmod: cannot access ‘seinfeld’: No such file or directory
 [tklein@linux ~]$ cd seinfeld
 -bash: cd: seinfeld: Permission denied
 [tklein@linux ~]$
-``` 
+```
 
 ## Assigning permissions using numerical values
 
 Equivalent values for the assignment of permissions using numerical values:
 
-| Number | Permission Type        | Symbol |
-|--------|------------------------|--------|
-| 0      | No permission          | \-\-\- | 
-| 1      | Execute                | \-\-x  |
-| 2      | Write                  | -w-    |
-| 3      | Execute + Write        | -wx    | 
-| 4      | Read                   | r\-\-  | 
-| 5      | Read + Execute         | r-x    |  
-| 6      | Read + Write           | rw-    | 
-| 7      | Read + Write + Execute | rwx    |   
+| Number | Permission Type | Symbol |
+| --- | --- | --- |
+| 0  | No permission  | \-\-\- |
+| 1  | Execute  |  \-\-x |
+| 2  | Write  |  \-w\- |
+| 3  | Execute + Write  | \-wx |
+| 4  | Read  | r\-\- |
+| 5  | Read + Execute  | r\-x |
+| 6  | Read + Write  | rw\- |
+| 7  | Read + Write + Execute  | rwx |
 
 ~~**Note:** The order in which permissions `read`, `write` and `execute` are given in column **Symbol** are given is sorted ascending (rwx). It follows the equivalent numerical values of the respective commands. $rwx = 421$. It is also, $4$, $4+2=6$, $4+1=5$ and $4+2+1=7$, which is $0$, $2$ and $1$, modulo 3. So all combinations with `read` are simply $0, 1, 2$ mod 3. And any combination that has read permissions, is an integer, a fraction of $4/2$. So read, is double of write and write double of execute.~~
 
@@ -110,7 +68,7 @@ Equivalent values for the assignment of permissions using numerical values:
 - `chown` - stands for change ownership.
 - `chgrp` - stands for change group.
 - `-R` option - will recursively change the ownership in all the subdirectories as well.
- 
+
 ```sh
 [root@linux tklein]# ls -ltr
 total 9212
@@ -172,7 +130,7 @@ Password:
 # Checking who owns the file and which group owns it.
 [tklein@linux ~]$ ls -ltr permissiontestfile
 # 'tklein', me is the owner and the group who owns it.
--rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile 
+-rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
 # I try to change the ownership to the user 'root', using my account 'tklein'
 [tklein@linux ~]$ chown root permissiontestfile
 # I do not have the permissions to change the ownership.
@@ -232,7 +190,7 @@ A file created by root and a user needs to be able to read it. He is not part of
 	`-x` for removal
 
 **Note:**
-- As you assign the ACL permission to a file/directory it adds `+` sign at the end of the permission.
+-  As you assign the ACL permission to a file/directory it adds `+` sign at the end of the permission.
 
 **Raw Output:**
 
@@ -361,7 +319,6 @@ other::r--
 
 [root@linux tmp]# setfacl -m g:tklein:rw /tmp/tx
 [root@linux tmp]#
-
 ```
 
 From my user account perspective:
@@ -424,7 +381,7 @@ rm: cannot remove â€˜txâ€™: Operation not permitted
 Examples for each of the two methods mentioned above:
 
 **vi:**
-```bash
+```sh
 touch cramer
 vi cramer
 ---
@@ -435,13 +392,13 @@ write: `This is Cramer`
 `hit colon button and type wq, hit ENTER`
 ---
 # Back in the shell where one left off, one can type the
-# following to verify that the text was written to the 
+# following to verify that the text was written to the
 # file 'cramer'
 [tklein@linux ~]$ cat cramer
 This is Cramer
 ```
 **Redirecting:**
-```bash
+```sh
 [tklein@linux ~]$ echo 'All I want for Christmas is you, is the chorus of a popular Christmas song.' >> Christmasfile
 [tklein@linux ~]$ cat Christmasfile
 All I want for Christmas is you, is the chorus of a popular Christmas song.
@@ -462,12 +419,12 @@ If however there is already text in the file, prior to one writing additional te
 	1. Standard input (**stdin**) and it has file descriptor number as 0
 	2. Standard output (**stdout**) and it has file descriptor number as 1
 	3. Standard error (**stderr**) and it has file descriptor number as 2
-
+##### Output
 - Output (**stdout**) - 1
   - By default when running a command it's output goes to the terminal.
   - The output of a command can be routed to a file using `>` symbol.
     - E.g. `ls -l > listings`
-    - E.g. `pwd \> findpath` 
+    - E.g. `pwd \> findpath`
   - If using the same file for additional output or to append to the same file then use `>>`
     - E.g. `ls -la >> listings`
     - E.g. `echo 'Hello World' >> findpath`
@@ -475,11 +432,11 @@ If however there is already text in the file, prior to one writing additional te
 
 
 **Terminal Example**
-```bash
+```sh
 [tklein@linux ~]$ pwd
 /home/tklein
 [tklein@linux ~]$ ls -la > homedirlisting
-# Shows the listing of the home directory 
+# Shows the listing of the home directory
 # and overwrites any existing content of the file.
 [tklein@linux ~]$ cat homedirlisting
 # Append to the previous input
@@ -494,12 +451,12 @@ Christmas is around the corner.
 [tklein@linux ~]$
 ```
 
-
+##### Input
 - Input (**stdin**) - 0
-  - Input is used when feeding file contents to a file.
+    - Input is used when feeding file contents to a file.
     - E.g. `cat < listings` - cat takes listings as input.
     - E.g. `mail -s 'Office memo' allusers@bestmail.com < memoletter`
-
+##### Error
 - Error (**stderr**) - 2
 	- When a command is executed we use a keyboard and that is also considered (**stdin - 0**)
 	- That command ouput goes on the monitor and that output is (**stdout -  1**)
@@ -508,10 +465,8 @@ Christmas is around the corner.
 			- E.g. `ls -l /root 2> errorfile`
 			- E.g. `telnet localhost 2> errorfile`
 
-
-
 **Terminal Example**
-```bash
+```sh
 # The following command gives errors as output.
 [tklein@linux ~]$ telnet localhost
 Trying ::1...
@@ -530,13 +485,14 @@ telnet: connect to address 127.0.0.1: Connection refused
 [tklein@linux ~]$
 ```
 
+
 ### 66 Standard Output to a File (`tee`)
 
 - `tee` command is used to store and view (both at the same time) the output of any command.
-- The command is named after the T-splitter used in plumbing. It basically breaks the output of a program so that it can be both displayed on screen and saved in a file. It does both simultaneously. It copies the result into the specified files or variabless and also display the result. 
+- The command is named after the T-splitter used in plumbing. It basically breaks the output of a program so that it can be both displayed on screen and saved in a file. It does both simultaneously. It copies the result into the specified files or variabless and also display the result.
 
 **Terminal Example**
-```bash
+```sh
 [tklein@linux ~]$ echo 'Christmas only happens once a year.' | tee christmas_truths
 Christmas only happens once a year.
 [tklein@linux ~]$ cat christmas_truths
@@ -561,7 +517,7 @@ Christmas only happens once a year.
 ```
 
 
-```bash
+```sh
 # text input can be redirected to multiple files at once.
 # These files do not have to exist prior to running the
 # command `tee`.
@@ -571,7 +527,7 @@ Christmas only happens once a year.
 
 **Misc.**
 
-```bash
+```sh
 # The version of a command can be looked up by entering the command:
 # `<command> --version`
 [tklein@linux ~]$ tee --version
@@ -586,15 +542,14 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 ```
 
 
-```bash
+```sh
 # The word count in a text file can be looked up by using command
 # `wc -c <file>``
 [tklein@linux ~]$ wc -c christmas_truths
 87 christmas_truths
 ```
 
-### 67 Pipes (**|**)
-
+### 67 Pipes `|`
 
 - A pipe is used by the shell to connect the ouput of one command directly to the input of another command.
 - The symbol for a pipe is the vertical bar (**|**).
@@ -607,11 +562,14 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 
 **Overview of the commands, that are part of this chapter:**
 
+#### cp
 - `cp`
   - Copies files and directories.
   - Basic structure of the command is among others:
-      `cp [OPTION] SOURCE DEST`
+    `cp [OPTION] SOURCE DEST`
   - If one wants to copy an entire directory to another one, the `-R` or `-r` option has to be included in the command for it to copy the source directory recursively to the destination directory.
+
+#### rm
 - `rm`
   - Lets the user remove (delete) files or directories.
   - The command is destructive and must be used with great care, especially when using the following options:
@@ -619,15 +577,17 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
     - `-r`, `-R` or `--recursive` removes directories and their contents recursively.
     - Any combination of the above commands, including none of them together with wildcards.
   - The command has several options that can act as a safety net, so the user gets prompts, warnings or more control over how verbose the command is once executed. This can reduce the danger of involuntarily removing essential files and directories of the system. See `man rm` for details.
-- `mv`
+#### mv
+  - `mv`
   - moves or renames files.
-  - `mv [OPTION]... [-T] SOURCE DEST` 
-    - With `-T`, it treats the `DEST` as a regular file and not as a 	directory.
+  - `mv [OPTION]... [-T] SOURCE DEST`
+    -  With `-T`, it treats the `DEST` as a regular file and not as a 	directory.
     - It renames `SOURCE` to `DEST`
-        - Example that also shows that it works without using `-T` as well.
-		          As illustrated below. One just can't specify a directory as `DEST` for it to work.
-				  It also shows that only the file name gets changed, the content of the original file remains the same:
-	    ```bash
+      - Example that also shows that it works without using `-T` as well.
+		   As illustrated below. One just can't specify a directory as `DEST` for it to work.
+			 It also shows that only the file name gets changed,
+       the content of the original file remains the same:
+	   	```sh
 		[tklein@linux ~]$ ls -ltr david*
 		-r--r--r--. 1 tklein tklein 0 Dec 20 06:21 david
 		[tklein@linux ~]$ echo "This file documents the endevour of finding david's last name" > david
@@ -655,14 +615,11 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 		This file documents the endevour of finding david's last name
 		[tklein@linux ~]$
 		```
-			
-	
 
-
-  - `mv [OPTION]... SOURCE... DIRECTORY` 
-  	- Like this, it moves `SOURCE` to `DIRECTORY`
-	- Example:
-	    ```bash
+- `mv [OPTION]... SOURCE... DIRECTORY`
+    - Like this, it moves `SOURCE` to `DIRECTORY`
+    - Example:
+	    ```sh
 		[tklein@linux ~]$ ls -ltr
 		total 9284
 		...
@@ -677,3 +634,71 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 		-rw-rw-r--. 1 tklein tklein 0 Dec 20 22:25 seinfelds_secret_plan
 		[tklein@linux ~]$
 		```
+
+#### mkdir
+- `mkdir [OPTION]... DIRECTORY...`
+  -	Creates the  DIRECTORY(ies), if they do not
+      already exist.
+  - OPTION `-p` gives no error, if existing, make parent directories as needed.
+
+To understand better what the difference between using `mkdir` without the `-p` option and using it with the `-p` option, here is an example:
+##### Using `mkdir seinfeld`
+In the current directory there is a directory called 'seinfeld' at the bottom of the `ls -ltr` command\:
+```bash
+[tklein@localhost ~]$ ls -ltr
+total 4
+-rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 special_reward
+-rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 pamela-anderson
+-rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 david-hasselhoff
+-rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 check
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 morganas_secrets
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 donald_duck
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:28 david-hasselhoffs-mansion
+drwxrwxr-x. 2 tklein tklein 4096 Dec 23 13:32 cars
+-rw-rw-r--. 1 tklein tklein    0 Dec 23 13:47 david
+drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
+```
+If one tries to create a directory called 'seinfeld' in the current directory using `mkdir seinfeld`, one gets an error that it already exists and it was not created\:
+```bash
+[tklein@localhost ~]$ mkdir seinfeld
+mkdir: cannot create directory 'seinfeld': File exists
+[tklein@localhost ~]$ ls -ltr
+total 4
+...
+drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
+```
+The time of creation is exactly the same as before and so the old file was not overwritten.
+##### Using `mkdir -p seinfeld`
+```bash
+[tklein@localhost ~]$ mkdir -p seinfeld
+[tklein@localhost ~]$ ls -ltr
+total 4
+...
+drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
+```
+No error message and the original file was not overwritten.
+In both cases `mkdir` only creates a new directory, if no existing one would be overwritten by executing the command.
+
+There is another use case for the `-p` option. One reads in `mkdir --help`\:
+> -p, --parents     no error if existing, make parent directories as needed
+
+So, if one wanted to create a nested folder in a folder that does not yet exist, without the `-p` option one would have to type something like the following to make that happen. Here the aim is to create a folder called 'introduction' inside a non-existing folder called 'the_great_adventure'.
+Example\:
+```bash
+[tklein@localhost ~]$ mkdir the_great_adventure/introduction
+mkdir: cannot create directory 'the_great_adventure/introduction': No such file or directory
+```
+Using the `-p` option, one can create all necessary parent directories and the final directory in the new hierarchy like so\:
+```bash
+[tklein@localhost ~]$ mkdir the_great_adventure/introduction
+mkdir: cannot create directory 'the_great_adventure/introduction': No such file or directory
+
+[tklein@localhost ~]$ mkdir -p the_great_adventure/introduction
+[tklein@localhost ~]$ ls -ltr
+total 4
+...
+[tklein@localhost ~]$ ls -ltr the_great_adventure/
+total 0
+drwxrwxr-x. 2 tklein tklein 6 Dec 23 14:52 introduction
+[tklein@localhost ~]$
+```
