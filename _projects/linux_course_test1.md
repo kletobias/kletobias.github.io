@@ -413,13 +413,19 @@ If however there is already text in the file, prior to one writing additional te
 - `>` can be used, if one is fine with the newly added text replacing the already existing text in the file that is written to.
 - It does not matter which option is used, in the case of a newly created and empty file. See above for details.
 
+
 ### 65 Input and Output Redirects
+
 
 - There are 3 redirects in Linux
 	1. Standard input (**stdin**) and it has file descriptor number as 0
 	2. Standard output (**stdout**) and it has file descriptor number as 1
 	3. Standard error (**stderr**) and it has file descriptor number as 2
+
+
 ##### Output
+
+
 - Output (**stdout**) - 1
   - By default when running a command it's output goes to the terminal.
   - The output of a command can be routed to a file using `>` symbol.
@@ -432,6 +438,7 @@ If however there is already text in the file, prior to one writing additional te
 
 
 **Terminal Example**
+
 ```sh
 [tklein@linux ~]$ pwd
 /home/tklein
@@ -452,11 +459,17 @@ Christmas is around the corner.
 ```
 
 ##### Input
+
+
 - Input (**stdin**) - 0
     - Input is used when feeding file contents to a file.
     - E.g. `cat < listings` - cat takes listings as input.
     - E.g. `mail -s 'Office memo' allusers@bestmail.com < memoletter`
+
+
 ##### Error
+
+
 - Error (**stderr**) - 2
 	- When a command is executed we use a keyboard and that is also considered (**stdin - 0**)
 	- That command ouput goes on the monitor and that output is (**stdout -  1**)
@@ -549,7 +562,9 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 87 christmas_truths
 ```
 
+
 ### 67 Pipes `|`
+
 
 - A pipe is used by the shell to connect the ouput of one command directly to the input of another command.
 - The symbol for a pipe is the vertical bar `|`.
@@ -562,14 +577,20 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 
 **Overview of the commands, that are part of this chapter:**
 
+
 #### cp
+
+
 - `cp`
   - Copies files and directories.
   - Basic structure of the command is among others:
-    `cp [OPTION] SOURCE DEST`
+    `cp [OPTION] <SOURCE> <DEST>`
   - If one wants to copy an entire directory to another one, the `-R` or `-r` option has to be included in the command for it to copy the source directory recursively to the destination directory.
 
+
 #### rm
+
+
 - `rm`
   - Lets the user remove (delete) files or directories.
   - The command is destructive and must be used with great care, especially when using the following options:
@@ -580,7 +601,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 #### mv
   - `mv`
   - moves or renames files.
-  - `mv [OPTION]... [-T] SOURCE DEST`
+  - `mv [OPTION]... [-T] <SOURCE> <DEST>`
     -  With `-T`, it treats the `DEST` as a regular file and not as a 	directory.
     - It renames `SOURCE` to `DEST`
 ##### `mv -T`
@@ -616,8 +637,12 @@ This file documents the endevour ofinding david's last name
 This file documents the endevour ofinding david's last name
 [tklein@linux ~]$
 ```
-##### `mv <OPTION> <SOURCE> <DIRECTORY>`
-- `mv [OPTION]... SOURCE... DIRECTORY`
+
+
+##### `mv [OPTION] <SOURCE> <DIRECTORY>`
+
+
+- `mv [OPTION]... <SOURCE...> <DIRECTORY>`
 - Like this, it moves `SOURCE` to `DIRECTORY`
 
 Example:
@@ -638,7 +663,7 @@ total 0
 ```
 
 #### mkdir
-- `mkdir [OPTION]... DIRECTORY...`
+- `mkdir [OPTION]... <DIRECTORY>...`
   -	Creates the  DIRECTORY(ies), if they do not
       already exist.
   - OPTION `-p` gives no error, if existing, make parent directories as needed.
