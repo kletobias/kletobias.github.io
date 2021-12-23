@@ -646,6 +646,7 @@ This file documents the endevour ofinding david's last name
 - Like this, it moves `SOURCE` to `DIRECTORY`
 
 Example:
+
 ```sh
 [tklein@linux ~]$ ls -ltr
 total 9284
@@ -663,14 +664,21 @@ total 0
 ```
 
 #### mkdir
+
 - `mkdir [OPTION]... <DIRECTORY>...`
   -	Creates the  DIRECTORY(ies), if they do not
       already exist.
   - OPTION `-p` gives no error, if existing, make parent directories as needed.
 
-To understand better what the difference between using `mkdir` without the `-p` option and using it with the `-p` option, here is an example:
+To understand better what the difference between using `mkdir` without the `-p` option and using it with the `-p` option, here is an example\:
+
+
 ##### Using `mkdir <DIRECTORY>`
+
+
 In the current directory there is a directory called 'seinfeld' at the bottom of the `ls -ltr` command\:
+
+
 ```bash
 [tklein@localhost ~]$ ls -ltr
 total 4
@@ -685,6 +693,8 @@ drwxrwxr-x. 2 tklein tklein 4096 Dec 23 13:32 cars
 -rw-rw-r--. 1 tklein tklein    0 Dec 23 13:47 david
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 ```
+
+
 If one tries to create a directory called 'seinfeld' in the current directory using `mkdir seinfeld`, one gets an error that it already exists and it was not created\:
 ```bash
 [tklein@localhost ~]$ mkdir seinfeld
@@ -694,8 +704,14 @@ total 4
 ...
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 ```
+
+
 The time of creation is exactly the same as before and so the old file was not overwritten.
+
+
 ##### Using `mkdir -p <DIRECTORY>`
+
+
 ```bash
 [tklein@localhost ~]$ mkdir -p seinfeld
 [tklein@localhost ~]$ ls -ltr
@@ -703,11 +719,13 @@ total 4
 ...
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 ```
+
 No error message and the original file was not overwritten.
 In both cases `mkdir` only creates a new directory, if no existing one would be overwritten by executing the command.
 
 There is another use case for the `-p` option. One reads in `mkdir --help`\:
-> -p, --parents     no error if existing, make parent directories as needed
+
+> -p, \-\-parents     no error if existing, make parent directories as needed
 
 So, if one wanted to create a nested folder in a folder that does not yet exist, without the `-p` option one would have to type something like the following to make that happen. Here the aim is to create a folder called 'introduction' inside a non-existing folder called 'the_great_adventure'.
 Example\:
