@@ -8,6 +8,7 @@ accent_color: '#4C60E6'
 ---
 
 
+
 <!-- TOC -->
 
 - [Prior to Module 4](#prior-to-module-4)
@@ -55,13 +56,13 @@ touch bspl{0001..0003}.c
 - `drwxrwxr-x. 2 tklein tklein    6 Dec 10 11:44 seinfeld` -> means one is allowed to cd into the directory for example.
 
 ```bash
-[tklein@linux seinfeld]$ chmod a-x seinfeld
+~ $ chmod a-x seinfeld
 chmod: cannot access ‘seinfeld’: No such file or directory
-[tklein@linux seinfeld]$ cd
-[tklein@linux ~]$ chmod a-x seinfeld
-[tklein@linux ~]$ cd seinfeld
+~ $ cd
+~ $ chmod a-x seinfeld
+~ $ cd seinfeld
 -bash: cd: seinfeld: Permission denied
-[tklein@linux ~]$
+~ $
 ```
 
 ## Assigning permissions using numerical values
@@ -129,11 +130,11 @@ drwxrwxr-x. 2 tklein tklein       6 Dec 10 15:14 seinfeld
 
 [root@linux tklein]# exit
 
-[tklein@linux ~]$ ls -l susan
+~ $ ls -l susan
 -rw-rw-r--. 1 root tklein 0 Dec  4 06:42 susan
-[tklein@linux ~]$ chgrp root susan
+~ $ chgrp root susan
 chgrp: changing group of ‘susan’: Operation not permitted
-[tklein@linux ~]$ su
+~ $ su
 Password:
 [root@linux tklein]# chgrp root susan
 [root@linux tklein]# ls -ltr susan
@@ -149,17 +150,17 @@ Password:
 # going into my home directory
 [tklein@linux /]$ cd /home/tklein
 # Creating an empty file 'permissiontestfile'
-[tklein@linux ~]$ touch permissiontestfile
+~ $ touch permissiontestfile
 # Checking who owns the file and which group owns it.
-[tklein@linux ~]$ ls -ltr permissiontestfile
+~ $ ls -ltr permissiontestfile
 # 'tklein', me is the owner and the group who owns it.
 -rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
 # I try to change the ownership to the user 'root', using my account 'tklein'
-[tklein@linux ~]$ chown root permissiontestfile
+~ $ chown root permissiontestfile
 # I do not have the permissions to change the ownership.
 chown: changing ownership of ‘permissiontestfile’: Operation not permitted
 # I need to become 'root' in order to change the ownership.
-[tklein@linux ~]$ su
+~ $ su
 Password:
 # Now that I am 'root', I can change the ownership to 'root'.
 [root@linux tklein]# chown root permissiontestfile
@@ -171,21 +172,21 @@ Password:
 [root@linux tklein]# exit
 exit
 # Again, permission denied when I try to change ownership while not being 'root'.
-[tklein@linux ~]$ chown tklein permissiontestfile
+~ $ chown tklein permissiontestfile
 chown: changing ownership of ‘permissiontestfile’: Operation not permitted
-[tklein@linux ~]$ su
+~ $ su
 Password:
 # Being root, I change the ownership back to my account.
 [root@linux tklein]# chown tklein permissiontestfile
 [root@linux tklein]# exit
 exit
-[tklein@linux ~]$ ls -ltr permissiontestfile
+~ $ ls -ltr permissiontestfile
 -rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
 # I can change permissions using my account, who owns the file.
-[tklein@linux ~]$ chmod 751 permissiontestfile
-[tklein@linux ~]$ ls -ltr permissiontestfile
+~ $ chmod 751 permissiontestfile
+~ $ ls -ltr permissiontestfile
 -rwxr-x--x. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
-[tklein@linux ~]$
+~ $
 ```
 TODO remove the number of the videos for the website version!
 
@@ -218,7 +219,7 @@ A file created by root and a user needs to be able to read it. He is not part of
 **Raw Output:**
 
 ```bash
-[tklein@linux tmp]$ su
+~ $ su
 Password:
 [root@linux tmp]# hostname
 linux.fritz.box
@@ -349,23 +350,23 @@ From my user account perspective:
 
 ```bash
 Last login: Sat Dec 18 21:03:02 2021 from desktop-2gc6eav.fritz.box
-[tklein@linux ~]$ cd tmp
+~ $ cd tmp
 -bash: cd: tmp: No such file or directory
-[tklein@linux ~]$ cd /tmp
-[tklein@linux tmp]$ cat tx
-[tklein@linux tmp]$ vi tx
-[tklein@linux tmp]$ vi tx
-[tklein@linux tmp]$ vi tx
-[tklein@linux tmp]$ cat tx
+~ $ cd /tmp
+~ $ cat tx
+~ $ vi tx
+~ $ vi tx
+~ $ vi tx
+~ $ cat tx
 iiiijf fijwef iofjofj iojf owiefjeiwfojeiofjweifjijeiwfj
-[tklein@linux tmp]$ vi tx
-[tklein@linux tmp]$ vi tx
-[tklein@linux tmp]$ cat tx
+~ $ vi tx
+~ $ vi tx
+~ $ cat tx
 After I changed the user permissions for user tklein via `setfacl -m u:tklein:rw /tmp/tx`, I have the necessary permissions to edit the content of the file.
 iiiijf fijwef iofjofj iojf owiefjeiwfojeiofjweifjijeiwfj
-[tklein@linux tmp]$ rm tx
+~ $ rm tx
 rm: cannot remove â€˜txâ€™: Operation not permitted
-[tklein@linux tmp]$
+~ $
 ```
 
 
@@ -417,15 +418,15 @@ write: `This is Cramer`
 # Back in the shell where one left off, one can type the
 # following to verify that the text was written to the
 # file 'cramer'
-[tklein@linux ~]$ cat cramer
+~ $ cat cramer
 This is Cramer
 ```
 **Redirecting:**
 ```bash
-[tklein@linux ~]$ echo 'All I want for Christmas is you, is the chorus of a popular Christmas song.' >> Christmasfile
-[tklein@linux ~]$ cat Christmasfile
+~ $ echo 'All I want for Christmas is you, is the chorus of a popular Christmas song.' >> Christmasfile
+~ $ cat Christmasfile
 All I want for Christmas is you, is the chorus of a popular Christmas song.
-[tklein@linux ~]$
+~ $
 
 ```
 If nothing is yet written to the file that one writes the
@@ -463,22 +464,22 @@ If however there is already text in the file, prior to one writing additional te
 **Terminal Example**
 
 ```bash
-[tklein@linux ~]$ pwd
+~ $ pwd
 /home/tklein
-[tklein@linux ~]$ ls -la > homedirlisting
+~ $ ls -la > homedirlisting
 # Shows the listing of the home directory
 # and overwrites any existing content of the file.
-[tklein@linux ~]$ cat homedirlisting
+~ $ cat homedirlisting
 # Append to the previous input
-[tklein@linux ~]$ ls -ltr >> homedirlisting
+~ $ ls -ltr >> homedirlisting
 # cat 'homedirlisting' again to verify it was appended.
-[tklein@linux ~]$ cat homedirlisting
+~ $ cat homedirlisting
 # Overwriting what was previously written
 # to the file 'homedirlisting'
-[tklein@linux ~]$ echo 'Christmas is around the corner.' > homedirlisting
-[tklein@linux ~]$ cat homedirlisting
+~ $ echo 'Christmas is around the corner.' > homedirlisting
+~ $ cat homedirlisting
 Christmas is around the corner.
-[tklein@linux ~]$
+~ $
 ```
 
 #### Input
@@ -505,7 +506,7 @@ Christmas is around the corner.
 
 ```bash
 # The following command gives errors as output.
-[tklein@linux ~]$ telnet localhost
+~ $ telnet localhost
 Trying ::1...
 telnet: connect to address ::1: Connection refused
 Trying 127.0.0.1...
@@ -513,13 +514,13 @@ telnet: connect to address 127.0.0.1: Connection refused
 # These two errors qualify as 'stderr - 2' and so can be
 # redirected to any textfile and will not appear on screen,
 # if redirected.
-[tklein@linux ~]$ telnet localhost 2> errorfile
+~ $ telnet localhost 2> errorfile
 Trying ::1...
 Trying 127.0.0.1...
-[tklein@linux ~]$ cat errorfile
+~ $ cat errorfile
 telnet: connect to address ::1: Connection refused
 telnet: connect to address 127.0.0.1: Connection refused
-[tklein@linux ~]$
+~ $
 ```
 
 
@@ -531,25 +532,25 @@ telnet: connect to address 127.0.0.1: Connection refused
 **Terminal Example**
 
 ```bash
-[tklein@linux ~]$ echo 'Christmas only happens once a year.' | tee christmas_truths
+~ $ echo 'Christmas only happens once a year.' | tee christmas_truths
 Christmas only happens once a year.
-[tklein@linux ~]$ cat christmas_truths
+~ $ cat christmas_truths
 Christmas only happens once a year.
-[tklein@linux ~]$ rm christmas_truths
-[tklein@linux ~]$ echo 'Christmas only happens once a year.' | tee christmas_truths
+~ $ rm christmas_truths
+~ $ echo 'Christmas only happens once a year.' | tee christmas_truths
 Christmas only happens once a year.
-[tklein@linux ~]$ cat christmas_truths
+~ $ cat christmas_truths
 Christmas only happens once a year.
 # The tee command replaces existing text already present in the file,
 # if used without an option.
-[tklein@linux ~]$ echo 'Christmas only happens once a year. We believe so.' | tee christmas_truths
+~ $ echo 'Christmas only happens once a year. We believe so.' | tee christmas_truths
 Christmas only happens once a year. We believe so.
-[tklein@linux ~]$ cat christmas_truths
+~ $ cat christmas_truths
 Christmas only happens once a year. We believe so.
 # Using option `-a` the text gets appended instead.
-[tklein@linux ~]$ echo 'Christmas only happens once a year.' | tee -a christmas_truths
+~ $ echo 'Christmas only happens once a year.' | tee -a christmas_truths
 Christmas only happens once a year.
-[tklein@linux ~]$ cat christmas_truths
+~ $ cat christmas_truths
 Christmas only happens once a year. We believe so.
 Christmas only happens once a year.
 ```
@@ -559,7 +560,7 @@ Christmas only happens once a year.
 # text input can be redirected to multiple files at once.
 # These files do not have to exist prior to running the
 # command `tee`.
-[tklein@linux ~]$ ls -l | tee file1 file2 file3
+~ $ ls -l | tee file1 file2 file3
 ```
 
 
@@ -568,7 +569,7 @@ Christmas only happens once a year.
 ```bash
 # The version of a command can be looked up by entering the command:
 # `<command> --version`
-[tklein@linux ~]$ tee --version
+~ $ tee --version
 tee (GNU coreutils) 8.22
 Copyright (C) 2013 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -576,14 +577,14 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 
 Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
-[tklein@linux ~]$
+~ $
 ```
 
 
 ```bash
 # The word count in a text file can be looked up by using command
 # `wc -c [file]``
-[tklein@linux ~]$ wc -c christmas_truths
+~ $ wc -c christmas_truths
 87 christmas_truths
 ```
 
@@ -635,11 +636,11 @@ As illustrated below. One just can't specify a directory as `DEST` for it to wor
 It also shows that only the file name gets changed, the content of the original file remains the same:
 
 ```bash
-[tklein@linux ~]$ ls -ltr david*
+~ $ ls -ltr david*
 -r--r--r--. 1 tklein tklein 0 De20 06:21 david
-[tklein@linux ~]$ echo "This fildocuments the endevour of findindavid's last name" > david
+~ $ echo "This fildocuments the endevour of findindavid's last name" > david
 -bash: david: Permission denied
-[tklein@linux ~]$ su
+~ $ su
 Password:
 [root@linux tklein]# chmod 771 david
 [root@linux tklein]# ls -ltr david
@@ -649,21 +650,21 @@ exit
 ```
 
 ```bash
-[tklein@linux ~]$ whoami
+~ $ whoami
 tklein
-[tklein@linux ~]$ echo "This fildocuments the endevour of findindavid's last name" > david
-[tklein@linux ~]$ cat david
+~ $ echo "This fildocuments the endevour of findindavid's last name" > david
+~ $ cat david
 This file documents the endevour ofinding david's last name
-[tklein@linux ~]$ cp david david_2
-[tklein@linux ~]$ mv -T davidavid_hasselhof
-[tklein@linux ~]$ cadavid_hasselhof
+~ $ cp david david_2
+~ $ mv -T davidavid_hasselhof
+~ $ cadavid_hasselhof
 This file documents the endevour ofinding david's last name
-[tklein@linux ~]$ mv david_2 david
-[tklein@linux ~]$ rm david_hasselhof
-[tklein@linux ~]$ mv davidavid_hasselhoff
-[tklein@linux ~]$ cadavid_hasselhoff
+~ $ mv david_2 david
+~ $ rm david_hasselhof
+~ $ mv davidavid_hasselhoff
+~ $ cadavid_hasselhoff
 This file documents the endevour ofinding david's last name
-[tklein@linux ~]$
+~ $
 ```
 
 ##### mv
@@ -674,19 +675,19 @@ This file documents the endevour ofinding david's last name
 ###### Example
 
 ```bash
-[tklein@linux ~]$ ls -ltr
+~ $ ls -ltr
 total 9284
 ...
 drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:00 seinfeld
 drwxrwxr-x. 2 tklein tklein      67 Dec 20 13:02 seinfelds_backup_plan
 -rw-rw-r--. 1 tklein tklein       0 Dec 20 22:25 seinfelds_secret_plan
-[tklein@linux ~]$ mv seinfelds_secret_plan seinfeld
-[tklein@linux ~]$ ls -ltr seinfeld
+~ $ mv seinfelds_secret_plan seinfeld
+~ $ ls -ltr seinfeld
 total 0
 -rw-rw-r--. 1 tklein tklein 0 Dec 20 12:58 seinfelds_fave_file
 -rw-rw-r--. 1 tklein tklein 0 Dec 20 12:59 seinfelds_second_fave_file
 -rw-rw-r--. 1 tklein tklein 0 Dec 20 22:25 seinfelds_secret_plan
-[tklein@linux ~]$
+~ $
 ```
 
 #### mkdir
@@ -704,7 +705,7 @@ In the current directory there is a directory called 'seinfeld' at the bottom of
 
 
 ```bash
-[tklein@localhost ~]$ ls -ltr
+~ $ ls -ltr
 total 4
 -rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 special_reward
 -rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 pamela-anderson
@@ -721,9 +722,9 @@ drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 If one tries to create a directory called 'seinfeld' in the current directory using `mkdir seinfeld`, one gets an error that it already exists and it was not created\:
 
 ```bash
-[tklein@localhost ~]$ mkdir seinfeld
+~ $ mkdir seinfeld
 mkdir: cannot create directory 'seinfeld': File exists
-[tklein@localhost ~]$ ls -ltr
+~ $ ls -ltr
 total 4
 ...
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
@@ -735,8 +736,8 @@ The time of creation is exactly the same as before and so the old file was not o
 ##### Using `mkdir -p <DIRECTORY>`
 
 ```bash
-[tklein@localhost ~]$ mkdir -p seinfeld
-[tklein@localhost ~]$ ls -ltr
+~ $ mkdir -p seinfeld
+~ $ ls -ltr
 total 4
 ...
 drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
@@ -754,7 +755,7 @@ So, if one wanted to create a nested folder in a folder that does not yet exist,
 ###### Example\:
 
 ```bash
-[tklein@localhost ~]$ mkdir the_great_adventure/introduction
+~ $ mkdir the_great_adventure/introduction
 mkdir: cannot create directory 'the_great_adventure/introduction': No such file or directory
 ```
 
@@ -762,17 +763,17 @@ Using the `-p` option, one can create all necessary parent directories and the f
 
 
 ```bash
-[tklein@localhost ~]$ mkdir the_great_adventure/introduction
+~ $ mkdir the_great_adventure/introduction
 mkdir: cannot create directory 'the_great_adventure/introduction': No such file or directory
 
-[tklein@localhost ~]$ mkdir -p the_great_adventure/introduction
-[tklein@localhost ~]$ ls -ltr
+~ $ mkdir -p the_great_adventure/introduction
+~ $ ls -ltr
 total 4
 ...
-[tklein@localhost ~]$ ls -ltr the_great_adventure/
+~ $ ls -ltr the_great_adventure/
 total 0
 drwxrwxr-x. 2 tklein tklein 6 Dec 23 14:52 introduction
-[tklein@localhost ~]$
+~ $
 ```
 
 #### rmdir
@@ -794,11 +795,11 @@ Looking into `rmdir --help` one gets the following information about what the co
 - With this option directories can be removed recursively. See example.
 
 ```bash
-[tklein@localhost ~]$ mkdir -p first_dir/second_dir/third_dir
-[tklein@localhost ~]$ rmdir first_dir/
+~ $ mkdir -p first_dir/second_dir/third_dir
+~ $ rmdir first_dir/
 rmdir: failed to remove 'first_dir/': Directory not empty
-[tklein@localhost ~]$ rmdir -p first_dir/second_dir/third_dir
-[tklein@localhost ~]$ ls -ltr
+~ $ rmdir -p first_dir/second_dir/third_dir
+~ $ ls -ltr
 total 4
 -rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 special_reward
 -rw-rw-r--. 1 tklein tklein    0 Dec 23 13:26 pamela-anderson
@@ -1189,7 +1190,7 @@ rw-
 `awk` is a utility \/ language designed for data extraction. Most of the time it is used to extract fields from a file or from an output.
 
 ```bash
-[tklein@localhost ~]$ awk --version
+~ $ awk --version
 GNU Awk 4.0.2
 Copyright (C) 1989, 1991-2012 Free Software Foundation.
 
@@ -1205,7 +1206,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see http://www.gnu.org/licenses/.
-[tklein@localhost ~]$
+~ $
 ```
 
 Here a pipe was used to limit the lines, that the output generates for readability. Without the pipe, using the command on the entire file, it would look like this\:
