@@ -3,27 +3,9 @@ title: 'Linux Course: Module 4 Notes'
 subtitle: 'Notes and Examples.'
 date: 2021-12-26 00:00:00
 description: 'This article covers some of the most essential commands used in any Linux distribution. CentOS 7 was the OS used in the following, it was a virtual machine and accessed through ssh.'
-featured_image: linux_project_image.png
+featured_image: 80sterminal.png
 accent_color: '#4C60E6'
 ---
-
-
-
-<!-- TOC -->
-
-- [Prior to Module 4](#prior-to-module-4)
-- [Module 4](#module-4)
-	- [`chmod`](#chmod)
-		- [About 'x' permission on directories](#about-x-permission-on-directories)
-	- [Assigning permissions using numerical values](#assigning-permissions-using-numerical-values)
-	- [File Ownership Commands (`chown`, `chgrp`)](#file-ownership-commands-chown-chgrp)
-	- [61 Access Control List (ACL)](#61-access-control-list-acl)
-
-<!-- /TOC -->
-
-
-
-
 
 
 **Important to do: Change skinport to something neutral in all console outputs used in this article.**
@@ -90,7 +72,7 @@ Equivalent values for the assignment of permissions using numerical values:
 - `-R` option - will recursively change the ownership in all the subdirectories as well.
 
 ```bash
-[root@linux tklein]# ls -ltr
+root $ ls -ltr
 total 9212
 drwxr-xr-x. 2 tklein tklein       6 Dec  3 17:56 Videos
 drwxr-xr-x. 2 tklein tklein       6 Dec  3 17:56 Templates
@@ -124,11 +106,11 @@ drwxrwxr-x. 2 tklein tklein       6 Dec 10 15:14 seinfeld
 - The fourth column gives the name of the group, that is the owner. Here it is *tklein* or *root*.
 
 ```bash
-[root@linux tklein]# chown root susan
-[root@linux tklein]# ls -ltr susan
+root $ chown root susan
+root $ ls -ltr susan
 -rw-rw-r--. 1 root tklein 0 Dec  4 06:42 susan
 
-[root@linux tklein]# exit
+root $ exit
 
 ~ $ ls -l susan
 -rw-rw-r--. 1 root tklein 0 Dec  4 06:42 susan
@@ -136,10 +118,10 @@ drwxrwxr-x. 2 tklein tklein       6 Dec 10 15:14 seinfeld
 chgrp: changing group of ‘susan’: Operation not permitted
 ~ $ su
 Password:
-[root@linux tklein]# chgrp root susan
-[root@linux tklein]# ls -ltr susan
+root $ chgrp root susan
+root $ ls -ltr susan
 -rw-rw-r--. 1 root root 0 Dec  4 06:42 susan
-[root@linux tklein]#
+root $
 ```
 
 
@@ -148,7 +130,7 @@ Password:
 
 ```bash
 # going into my home directory
-[tklein@linux /]$ cd /home/tklein
+~ $ cd /home/tklein
 # Creating an empty file 'permissiontestfile'
 ~ $ touch permissiontestfile
 # Checking who owns the file and which group owns it.
@@ -163,13 +145,13 @@ chown: changing ownership of ‘permissiontestfile’: Operation not permitted
 ~ $ su
 Password:
 # Now that I am 'root', I can change the ownership to 'root'.
-[root@linux tklein]# chown root permissiontestfile
+root $ chown root permissiontestfile
 # Checking, if the changes were recorded and that now 'root' is the new owner.
-[root@linux tklein]# ls -ltr permissiontestfile
+root $ ls -ltr permissiontestfile
 # Indeed 'root' is the new owner of the file.
 -rw-rw-r--. 1 root tklein 0 Dec 18 21:17 permissiontestfile
 # Becoming my user account again.
-[root@linux tklein]# exit
+root $ exit
 exit
 # Again, permission denied when I try to change ownership while not being 'root'.
 ~ $ chown tklein permissiontestfile
@@ -177,8 +159,8 @@ chown: changing ownership of ‘permissiontestfile’: Operation not permitted
 ~ $ su
 Password:
 # Being root, I change the ownership back to my account.
-[root@linux tklein]# chown tklein permissiontestfile
-[root@linux tklein]# exit
+root $ chown tklein permissiontestfile
+root $ exit
 exit
 ~ $ ls -ltr permissiontestfile
 -rw-rw-r--. 1 tklein tklein 0 Dec 18 21:17 permissiontestfile
@@ -221,12 +203,12 @@ A file created by root and a user needs to be able to read it. He is not part of
 ```bash
 ~ $ su
 Password:
-[root@linux tmp]# hostname
+root $ hostname
 linux.fritz.box
-[root@linux tmp]# touch tx
-[root@linux tmp]# ls -l tx
+root $ touch tx
+root $ ls -l tx
 -rw-r--r--. 1 root root 0 Dec 19 12:47 tx
-[root@linux tmp]# getfacl tx
+root $ getfacl tx
 # file: tx
 # owner: root
 # group: root
@@ -234,9 +216,9 @@ user::rw-
 group::r--
 other::r--
 
-[root@linux tmp]# setfacl -m u:tklein:rw /tmp/tx
-[root@linux tmp]# setfacl -m u:tklein:r /tmp/tx
-[root@linux tmp]# getfacl tx
+root $ setfacl -m u:tklein:rw /tmp/tx
+root $ setfacl -m u:tklein:r /tmp/tx
+root $ getfacl tx
 # file: tx
 # owner: root
 # group: root
@@ -246,13 +228,13 @@ group::r--
 mask::r--
 other::r--
 
-[root@linux tmp]# setfacl -m u:tklein:rw /tmp/tx
-[root@linux tmp]# echo "Changing the acl for the group in the following"
+root $ setfacl -m u:tklein:rw /tmp/tx
+root $ echo "Changing the acl for the group in the following"
 Changing the acl for the group in the following
-[root@linux tmp]# setfacl -m g:tklein:rw /tmp/tx
-[root@linux tmp]# ls -l tx
+root $ setfacl -m g:tklein:rw /tmp/tx
+root $ ls -l tx
 -rw-rw-r--+ 1 root root 214 Dec 19 13:31 tx
-[root@linux tmp]# getfacl tx
+root $ getfacl tx
 # file: tx
 # owner: root
 # group: root
@@ -263,12 +245,12 @@ group:tklein:rw-
 mask::rw-
 other::r--
 
-[root@linux tmp]# echo "Number 3"
+root $ echo "Number 3"
 Number 3
-[root@linux tmp]# mkdir -p acl_practice_dir
-[root@linux tmp]# mkdir -p acl_practice_dir/nested_dir
-[root@linux tmp]# touch acl_practice_dir/nested_dir/new_file
-[root@linux tmp]# getfacl acl_practice_dir/
+root $ mkdir -p acl_practice_dir
+root $ mkdir -p acl_practice_dir/nested_dir
+root $ touch acl_practice_dir/nested_dir/new_file
+root $ getfacl acl_practice_dir/
 # file: acl_practice_dir/
 # owner: root
 # group: root
@@ -276,7 +258,7 @@ user::rwx
 group::r-x
 other::r-x
 
-[root@linux tmp]# getfacl acl_practice_dir/nested_dir/
+root $ getfacl acl_practice_dir/nested_dir/
 # file: acl_practice_dir/nested_dir/
 # owner: root
 # group: root
@@ -284,7 +266,7 @@ user::rwx
 group::r-x
 other::r-x
 
-[root@linux tmp]# getfacl acl_practice_dir/nested_dir/new_file
+root $ getfacl acl_practice_dir/nested_dir/new_file
 # file: acl_practice_dir/nested_dir/new_file
 # owner: root
 # group: root
@@ -292,14 +274,14 @@ user::rw-
 group::r--
 other::r--
 
-[root@linux tmp]# setfacl -Rm u:user /tmp/acl_practice_dir
+root $ setfacl -Rm u:user /tmp/acl_practice_dir
 setfacl: Option -m: Invalid argument near character 3
-[root@linux tmp]# man setfacl
-[root@linux tmp]# setfacl -Rm u:tklein:rw /tmp/acl_practice_dir
-[root@linux tmp]# ls -l acl_practice_dir/nested_dir/
+root $ man setfacl
+root $ setfacl -Rm u:tklein:rw /tmp/acl_practice_dir
+root $ ls -l acl_practice_dir/nested_dir/
 total 0
 -rw-rw-r--+ 1 root root 0 Dec 19 13:36 new_file
-[root@linux tmp]# getfacl acl_practice_dir/nested_dir/
+root $ getfacl acl_practice_dir/nested_dir/
 # file: acl_practice_dir/nested_dir/
 # owner: root
 # group: root
@@ -309,7 +291,7 @@ group::r-x
 mask::rwx
 other::r-x
 
-[root@linux tmp]# getfacl acl_practice_dir/nested_dir/new_file
+root $ getfacl acl_practice_dir/nested_dir/new_file
 # file: acl_practice_dir/nested_dir/new_file
 # owner: root
 # group: root
@@ -319,8 +301,8 @@ group::r--
 mask::rw-
 other::r--
 
-[root@linux tmp]# setfacl -x u:tklein tx
-[root@linux tmp]# getfacl tx
+root $ setfacl -x u:tklein tx
+root $ getfacl tx
 # file: tx
 # owner: root
 # group: root
@@ -330,10 +312,10 @@ group:tklein:rw-
 mask::rw-
 other::r--
 
-[root@linux tmp]# echo "Set permissions back to default"
+root $ echo "Set permissions back to default"
 Set permissions back to default
-[root@linux tmp]# setfacl -b tx
-[root@linux tmp]# getfacl tx
+root $ setfacl -b tx
+root $ getfacl tx
 # file: tx
 # owner: root
 # group: root
@@ -341,8 +323,8 @@ user::rw-
 group::r--
 other::r--
 
-[root@linux tmp]# setfacl -m g:tklein:rw /tmp/tx
-[root@linux tmp]#
+root $ setfacl -m g:tklein:rw /tmp/tx
+root $
 ```
 
 From my user account perspective:
@@ -642,10 +624,10 @@ It also shows that only the file name gets changed, the content of the original 
 -bash: david: Permission denied
 ~ $ su
 Password:
-[root@linux tklein]# chmod 771 david
-[root@linux tklein]# ls -ltr david
+root $ chmod 771 david
+root $ ls -ltr david
 -rwxrwx--x. 1 tklein tklein 0 De20 06:21 david
-[root@linux tklein]# exit
+root $ exit
 exit
 ```
 
@@ -837,7 +819,7 @@ An example of this behavior:
 A file is owned by user root and belongs to group root.
 
 ```bash
-[root@localhost display_chown]# ls -ltr
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 root root 0 Dec 23 19:43 bruce_lee_knows
 ```
@@ -847,16 +829,16 @@ Being root, one can change owner and group together like so\:
 *One can change owner or group alone, by only entering what is written directly before the colon **\:** and what is right after the **\:** to change the group. Without the colon.*
 
 ```bash
-[root@localhost display_chown]# chown tklein:tklein bruce_lee_knows
+root $ chown tklein:tklein bruce_lee_knows
 ```
 
 Checking owner and group after using the command, verifies that both changed to 'tklein'
 
 ```bash
-[root@localhost display_chown]# ls -ltr
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:43 bruce_lee_knows
-[root@localhost display_chown]#
+root $
 ```
 ###### chown \[-R]
 
@@ -869,16 +851,16 @@ This is case 2. from above. Here one can use another file's owner and or group a
 <h6>Example</h6>
 
 ```bash
-[root@localhost display_chown]# ls -ltr
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:43 bruce_lee_knows
 -rw-r--r--. 1 root   root   0 Dec 23 19:57 bruce_lee_chronicles
-[root@localhost display_chown]# chown --reference=bruce_lee_knows bruce_lee_chronicles
-[root@localhost display_chown]# ls -ltr
+root $ chown --reference=bruce_lee_knows bruce_lee_chronicles
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:43 bruce_lee_knows
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:57 bruce_lee_chronicles
-[root@localhost display_chown]#
+root $
 ```
 
 <h5>chgrp</h5>
@@ -894,12 +876,12 @@ With \-\-reference, change the group of each FILE to that of RFILE.
 
 
 ```bash
-[root@localhost display_chown]# ls -ltr
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:43 bruce_lee_knows
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:57 bruce_lee_chronicles
-[root@localhost display_chown]# chgrp root bruce_lee_knows
-[root@localhost display_chown]# ls -ltr
+root $ chgrp root bruce_lee_knows
+root $ ls -ltr
 total 0
 -rw-r--r--. 1 tklein root   0 Dec 23 19:43 bruce_lee_knows
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:57 bruce_lee_chronicles
@@ -917,7 +899,7 @@ gives you the entire file in the output. One needs to scroll, if the file has mo
 
 There is a large text file 'messages' in this example that has 2118 lines. Using `cat messages` will output all lines at once into the terminal window, which is often unpractical.
 ```bash
-[root@localhost tklein]# wc -l messages
+root $ wc -l messages
 2118 messages
 ```
 
@@ -946,7 +928,7 @@ Using the keyboard, one can move down (line for line), by pressing `k` once per 
 ###### Example
 
 ```bash
-[root@localhost tklein]# head -4 messages_head50 messages_tail30
+root $ head -4 messages_head50 messages_tail30
 ==> messages_head50 <==
 Dec 23 13:16:58 localhost journal: Runtime journal is using 6.1M (max allowed 48.9M, trying to leave 73.3M free of 483.1M available → current limit 48.9M).
 Dec 23 13:16:58 localhost kernel: Initializing cgroup subsys cpuset
@@ -960,7 +942,7 @@ Dec 23 20:39:46 localhost systemd: Starting Network Manager Script Dispatcher Se
 Dec 23 20:39:46 localhost dhclient[31642]: bound to 192.168.178.101 -- renewal in 351362 seconds.
 Dec 23 20:39:46 localhost dbus[688]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
 Dec 23 20:39:46 localhost systemd: Started Network Manager Script Dispatcher Service.
-[root@localhost tklein]#
+root $
 ```
 
 TODO Check if your usage of <...> and [...] in the command blue prints is correct for each command.
@@ -1675,11 +1657,306 @@ vintage-category
 ~ $
 ```
 
+Using `-c` option, the output tells the user how often each line is repeated in the file. Here, only 'coupe-category' has to entries and so is the only line to have a '2' associated with it.
+
+```bash
+~ $ sort cars/overview | uniq -c
+      1 compact-category
+      1 convertible-category
+      2 coupe-category
+      1 cross-over-category
+      1 electrical-category
+      1 muscle-category
+      1 offroad-category
+      1 sedan-category
+      1 shooting_break-category
+      1 sports-category
+      1 station_wagon-category
+      1 super-category
+      1 suv-category
+      1 van-category
+      1 vintage-category
+~ $
+```
+
+Only lines with duplicates as displayed.
+
+```bash
+~ $ sort cars/overview | uniq -d
+coupe-category
+~ $
+```
+
+
 ### wc - Text Processor Commands
+
+- `wc` stands for 'word count'.
+- It can read from the following\:
+  - standard input
+  - list of files
+- It can generate\:
+  - new line count
+  - word count
+  - byte count
+
+#### Informational Commands
+
+- `wc --version`
+- `wc --help`
+- `man wc`
+
+#### wc file
+
+- The output reads from left to right, as follows with the number from the example in braces:
+  - Number of lines in the file \(16).
+  - Number of words in the file \(16).
+  - Number of bytes in the file \(277).
+
+```bash
+~ $ wc cars/overview
+ 16  16 277 cars/overview
+~ $
+```
+
+
+If one only wants to have the number of lines printed\:
+
+
+```bash
+~ $ wc -l cars/overview
+16 cars/overview
+~ $
+```
+
+
+If one only wants to have the number of words printed\:
+
+
+```bash
+~ $ wc -w cars/overview
+16 cars/overview
+~ $
+```
+
+
+If one only wants to have the number of bytes printed\:
+
+
+```bash
+~ $ wc -c cars/overview
+277 cars/overview
+~ $
+```
+
+The number of the following command includes the first line of the `ls -ltr` output, which is neither a directory, nor is it a file. The actual number of objects in the current directory, in the example is\: $19-1=18$
+
+```bash
+~ $ ls -ltr | wc -l
+19
+~ $
+```
+
+#### ls \-d \*\/
+
+##### Directories located in the current directory
+
+If one only wants the directories printed, that are in the current directory using `ls`, there is a way to do so.
+If one wants the directories in the current directory listed, the following will do so\:
+
+It uses `ls -d`, with `-d` printing not the contents of any directory, but printing the name of the directory instead. the wildcard `*` plus `/` tells `ls` to only print such objects in the current directory, that are directories themselves. Any directory ends with a `/` sign at the end of it\'s `ls -ld` output.
+
+```bash
+~ $ ls -ld */
+drwxrwxr-x. 2 tklein tklein 4096 Dec 24 07:41 cars/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:28 david-hasselhoffs-mansion/
+drwxr-xr-x. 2 root   root     57 Dec 23 19:57 display_chown/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 donald_duck/
+drwxrwxr-x. 2 tklein tklein   22 Dec 24 06:06 film/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 morganas_secrets/
+drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld/
+drwxrwxr-x. 3 tklein tklein   26 Dec 23 14:52 the_great_adventure/
+~ $
+```
+
+##### Any directory using the absolute path
+
+To print the sub\-directories of any directory using it\'s absolute path in combination with `ls -ld`, one can do so in a similiar fashion, as for the 'current directory' example\:
+
+```bash
+~ $ ls -ld /home/tklein/*/
+drwxrwxr-x. 2 tklein tklein 4096 Dec 24 07:41 /home/tklein/cars/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:28 /home/tklein/david-hasselhoffs-mansion/
+drwxr-xr-x. 2 root   root     57 Dec 23 19:57 /home/tklein/display_chown/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 /home/tklein/donald_duck/
+drwxrwxr-x. 2 tklein tklein   22 Dec 24 06:06 /home/tklein/film/
+drwxrwxr-x. 2 tklein tklein    6 Dec 23 13:27 /home/tklein/morganas_secrets/
+drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 /home/tklein/seinfeld/
+drwxrwxr-x. 3 tklein tklein   26 Dec 23 14:52 /home/tklein/the_great_adventure/
+~ $
+```
+
+In both cases, the number of directories found can be printed instead of the output from `ls -ld */` by adding a pipe and running `wc -l` on the piped output from the `ls -ld */` command.
+
+```bash
+~ $ ls -ld /home/tklein/*/ | wc -l
+8
+~ $
+```
+
+#### Printing the number of grep matches in a file
+
+This file is used in the following example\:
+
+```bash
+~ $ cat cars/overview
+compact-category
+convertible-category
+coupe-category
+cross-over-category
+muscle-category
+offroad-category
+sedan-category
+shooting_break-category
+sports-category
+station_wagon-category
+super-category
+suv-category
+van-category
+vintage-category
+electrical-category
+coupe-category
+~ $
+```
+
+Every line has '\-category' and therefore 16 lines match the search pattern.
+
+```bash
+~ $ grep category cars/overview | wc -l
+16
+~ $
+```
+
 
 ### Compare Files (diff and cmp)
 
+There are two main commands used to compare files (**diff files**)
+-	`diff` (line by line)
+- `cmp` (byte by byte)
+
+#### diff files
+
+```bash
+~ $ diff cars/overview cars/overview2
+16a17,19
+> bicycle-category
+> helicopter-category
+> airplane-category
+~ $
+```
+
 ### Compress and Uncompress (tar, gzip, gunzip)
+
+Main commands used\:
+
+- `tar`
+  - Idea\: Puts several files together into a container, compression is not highest.
+- `gzip`
+- `gzip -d` or `gunzip`
+  - Unarchive\/Uncompress  the files again
+
+
+#### tar
+
+##### tar cvf
+
+- Description of the effect of the options used\:
+  - Contents will be compressed slightly.
+  - Everything will be put into a file.
+
+```bash
+~ $ tar cvf tklein.tar .
+./
+./.bash_logout
+./.bash_profile
+./.cache/
+./.cache/abrt/
+./.cache/abrt/lastnotification
+./.config/
+./.config/abrt/
+./.bash_history
+./check
+./david-hasselhoff
+./pamela-anderson
+./special_reward
+./seinfeld/
+./seinfeld/seinfeld_sings/
+./seinfeld/seinfeld_sings/to_piano/
+./donald_duck/
+./morganas_secrets/
+./david-hasselhoffs-mansion/
+./cars/
+./cars/sports-category
+./cars/muscle-category
+./cars/convertible-category
+./cars/compact-category
+./cars/super-category
+./cars/vintage-category
+./cars/sedan-category
+./cars/station_wagon-category
+./cars/offroad-category
+./cars/coupe-category
+./cars/shooting_break-category
+./cars/van-category
+./cars/cross-over-category
+./cars/overview_backup
+./cars/cars.csv
+./cars/cars_backup.csv
+./cars/suv-category
+./cars/overview
+./cars/etc-messages-output
+./cars/overview2
+./david
+./the_great_adventure/
+./the_great_adventure/introduction/
+./display_chown/
+./display_chown/bruce_lee_knows
+./display_chown/bruce_lee_chronicles
+tar: ./messages: Cannot open: Permission denied
+./messages_head50
+./messages_tail30
+./.bashrc.bak
+./]
+./.lesshst
+./Film.csv
+./film/
+./film/Film.csv
+./.bashrc
+./.viminfo
+tar: ./tklein.tar: file is the archive; not dumped
+tar: Exiting with failure status due to previous errors
+~ $ ls -ltr
+total 280
+-rw-rw-r--. 1 tklein tklein      0 Dec 23 13:26 special_reward
+-rw-rw-r--. 1 tklein tklein      0 Dec 23 13:26 pamela-anderson
+-rw-rw-r--. 1 tklein tklein      0 Dec 23 13:26 david-hasselhoff
+-rw-rw-r--. 1 tklein tklein      0 Dec 23 13:26 check
+drwxrwxr-x. 2 tklein tklein      6 Dec 23 13:27 morganas_secrets
+drwxrwxr-x. 2 tklein tklein      6 Dec 23 13:27 donald_duck
+drwxrwxr-x. 2 tklein tklein      6 Dec 23 13:28 david-hasselhoffs-mansion
+-rw-rw-r--. 1 tklein tklein      0 Dec 23 13:47 david
+drwxrwxr-x. 3 tklein tklein     28 Dec 23 14:03 seinfeld
+drwxrwxr-x. 3 tklein tklein     26 Dec 23 14:52 the_great_adventure
+drwxr-xr-x. 2 root   root       57 Dec 23 19:57 display_chown
+-rw-------. 1 root   root   183192 Dec 23 21:46 messages
+-rw-r--r--. 1 root   root     5565 Dec 23 21:53 messages_head50
+-rw-r--r--. 1 root   root     2233 Dec 23 23:00 messages_tail30
+-rw-rw-r--. 1 tklein tklein   1144 Dec 24 03:23 ]
+-rwxr-xr-x. 1 tklein tklein   5137 Dec 24 06:05 Film.csv
+drwxrwxr-x. 2 tklein tklein     22 Dec 24 06:06 film
+drwxrwxr-x. 2 tklein tklein   4096 Dec 24 11:29 cars
+-rw-rw-r--. 1 tklein tklein  71680 Dec 24 11:46 tklein.tar
+~ $
+```
 
 ### Truncate File Size (truncate)
 
