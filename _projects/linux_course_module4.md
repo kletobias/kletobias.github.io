@@ -6,6 +6,8 @@ description: 'This article covers some of the most essential commands used in an
 featured_image: linux_project_image.png
 accent_color: '#4C60E6'
 ---
+
+
 <!-- TOC -->
 
 - [Prior to Module 4](#prior-to-module-4)
@@ -878,10 +880,10 @@ total 0
 
 Using the help function, one gets the information\:
 
-> Usage: chgrp [OPTION]... GROUP FILE...
-  or:  chgrp [OPTION]... --reference=RFILE FILE...
-Change the group of each FILE to GROUP.
-With \-\-reference, change the group of each FILE to that of RFILE.
+> Usage: chgrp \[OPTION]... GROUP FILE...
+  or:  chgrp \[OPTION]... --reference=RFILE FILE...
+	Change the group of each FILE to GROUP.
+	With \-\-reference, change the group of each FILE to that of RFILE.
 
 ###### Example
 
@@ -909,7 +911,7 @@ gives you the entire file in the output. One needs to scroll, if the file has mo
 ###### Example
 
 There is a large text file 'messages' in this example that has 2118 lines. Using `cat messages` will output all lines at once into the terminal window, which is often unpractical.
-```Bash
+```bash
 [root@localhost tklein]# wc -l messages
 2118 messages
 ```
@@ -938,7 +940,7 @@ Using the keyboard, one can move down (line for line), by pressing `k` once per 
 
 ###### Example
 
-```Bash
+```bash
 [root@localhost tklein]# head -4 messages_head50 messages_tail30
 ==> messages_head50 <==
 Dec 23 13:16:58 localhost journal: Runtime journal is using 6.1M (max allowed 48.9M, trying to leave 73.3M free of 483.1M available → current limit 48.9M).
@@ -1033,7 +1035,7 @@ vint
 [tklein@localhost cars]$
 ```
 
-```Bash
+```bash
 [tklein@localhost cars]$ cut -c1-3,6-8 overview
 comct-
 conrti
@@ -1054,7 +1056,7 @@ vinge-
 
 Bytes can give different results compared to lines.
 
-```Bash
+```bash
 [tklein@localhost cars]$ cut -b1-3 overview
 com
 con
@@ -1077,7 +1079,7 @@ vin
 - List the first 6 columns separated by ':'
 - The fiile `/etc/passwd` has user information stored in it.
 
-```Bash
+```bash
 [tklein@localhost cars]$ cut -d: -f 6 /etc/passwd
 /root
 /bin
@@ -1113,7 +1115,7 @@ vin
 [tklein@localhost cars]$
 ```
 
-```Bash
+```bash
 [tklein@localhost cars]$ cut -d: -f 6-7 /etc/passwd
 /root:/bin/bash
 /bin:/sbin/nologin
@@ -1149,7 +1151,7 @@ vin
 [tklein@localhost cars]$
 ```
 
-```Bash
+```bash
 [tklein@localhost cars]$ ls -l | cut -c2-4
 ota
 rw-
@@ -1175,7 +1177,7 @@ rw-
 
 `awk` is a utility \/ language designed for data extraction. Most of the time it is used to extract fields from a file or from an output.
 
-```Bash
+```bash
 [tklein@localhost ~]$ awk --version
 GNU Awk 4.0.2
 Copyright (C) 1989, 1991-2012 Free Software Foundation.
@@ -1201,7 +1203,7 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 
 - `-F` option tells it, that the delimiter in this file is comma. For 'space' nothing has to be specified as an option.
 
-```Bash
+```bash
 [tklein@localhost cars]$ head -5 cars.csv | awk -F , '{print $1}' -
 ""
 "1"
@@ -1213,7 +1215,7 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 
 - Specifying `$NF` in the print statement, prints the last column in the data set.
 
-```Bash
+```bash
 [tklein@localhost cars]$ head -5 cars.csv | awk -F , '{print $NF}' -
 "dist"
 2
@@ -1222,7 +1224,7 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 22
 ```
 - In the example below, only the row is printed from the data set, where the word 'dist' is matched. It is part of the header, so row / line No. 1 gets printed.
-```Bash
+```bash
 [tklein@localhost cars]$ awk '/dist/ {print}' cars.csv
 "","speed","dist"
 [tklein@localhost cars]$
@@ -1236,7 +1238,7 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 | `print $1`  | Print column 1  |
 | `print $2`  | Print column 2  |
 
-```Bash
+```bash
 [tklein@localhost cars]$ echo "Hello Jess" | awk '{$2="Adam" ; print $0}'
 Hello Adam
 [tklein@localhost cars]$ echo "Hello Jess" | awk '{$2="Adam" ; print $1}'
@@ -1248,7 +1250,7 @@ Adam
 
 Replacing the entries in the third column 'dist' with 'NAN'. This could be necessary, if the values in the 'dist' column were not valid and one had to clean the 'dist' column.
 
-```Bash
+```bash
 [tklein@localhost cars]$ head -5 cars.csv | awk -F , '{$3="NAN" ; print $0}'
 "" "speed" NAN
 "1" 4 NAN
@@ -1258,7 +1260,7 @@ Replacing the entries in the third column 'dist' with 'NAN'. This could be neces
 [tklein@localhost cars]$
 ```
 
-```Bash
+```bash
 [tklein@localhost cars]$ awk 'length($0) > 15' cars.csv
 "","speed","dist"
 [tklein@localhost cars]$
@@ -1266,7 +1268,7 @@ Replacing the entries in the third column 'dist' with 'NAN'. This could be neces
 
 Print the line, where the entry in column 9 is "overview"
 
-```Bash
+```bash
 [tklein@localhost cars]$ ls -l | awk '{if($9 == "overview") print $0;}'
 -rw-rw-r--. 1 tklein tklein 242 Dec 24 00:26 overview
 [tklein@localhost cars]$ ls -l
@@ -1294,7 +1296,7 @@ total 20
 
 Number of fields
 
-```Bash
+```bash
 [tklein@localhost cars]$ ls -l | awk '{print NF}'
 2
 9
@@ -1335,8 +1337,8 @@ Get detailed information about the command. Similiar to `grep --help`, but with 
 
 ##### grep keyword file
 
-```Bash
-~ $grep "Sport" cars/suv-category
+```bash
+~ $ grep "Sport" cars/suv-category
 SUV = Sport Utility Vehicle
 ~ $
 ```
@@ -1345,8 +1347,8 @@ SUV = Sport Utility Vehicle
 
 Counts the matches in the file.
 
-```Bash
-~ $grep -c "Sport" cars/suv-category
+```bash
+~ $ grep -c "Sport" cars/suv-category
 1
 ~ $
 ```
@@ -1356,14 +1358,14 @@ Counts the matches in the file.
 Without the `-i` option, it is case-sensitive and with it, it is not. See example below.
 
 ```bash
-~ $echo -e '"SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.' > cars/suv-category
-~ $cat cars/suv-category
+~ $ echo -e '"SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.' > cars/suv-category
+~ $ cat cars/suv-category
 "SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.
-~ $grep 'Sport' cars/suv-category
+~ $ grep 'Sport' cars/suv-category
 "SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.
-~ $grep 'sport' cars/suv-category
+~ $ grep 'sport' cars/suv-category
 "SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.
-~ $grep -i 'Sport' cars/suv-category
+~ $ grep -i 'Sport' cars/suv-category
 "SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.
 ~ $
 ```
@@ -1372,8 +1374,8 @@ Without the `-i` option, it is case-sensitive and with it, it is not. See exampl
 
 Prints the line number for each match, as well.
 
-```Bash
-~ $grep -n sport cars/suv-category
+```bash
+~ $ grep -n sport cars/suv-category
 1:"SUV = Sport Utility Vehicle" A vehicle in this class ususally is not sporty on average.
 ```
 
@@ -1384,30 +1386,30 @@ grep will match anything in the file, except the keyword that is entered.
 ###### Example
 
 A file with 6 lines is used.
-```Bash
-~ $wc -l cars/suv-category
+```bash
+~ $ wc -l cars/suv-category
 6 cars/suv-category
 ~ $
 ```
 
 the term 'sport' is **not** found on lines 1,3,4. There are only matches on line 2 and 6, that are not printed in the output.
 
-```Bash
-~ $grep -vn sport cars/suv-category
+```bash
+~ $ grep -vn sport cars/suv-category
 1:
 3:
 4:There is no commonly agreed-upon definition of an SUV, and usage of the term varies between countries.
 ~ $
 ```
 
-##### grep keyword file | awk '{print $1}'
+##### grep keyword file | awk '\{print $1\}'
 
 Search for a keyword and then only give the 1st. field.
 Here, entry '"41"' is found in the first column on line 6 of the last 15 lines of file 'cars.csv' and the line is omitted in the output, as shown by the line numbers on the very left of the output, E.g. '1:'.
 Only the first column, that gives the row index for each entry in the dataset is returned where '"41"' is not an entry.
 
-```Bash
-~ $tail -15 cars/cars.csv | grep -vn "\"41\"" - | awk -F , '{print $1}'
+```bash
+~ $ tail -15 cars/cars.csv | grep -vn "\"41\"" - | awk -F , '{print $1}'
 1:"36"
 2:"37"
 3:"38"
@@ -1426,7 +1428,7 @@ Only the first column, that gives the row index for each entry in the dataset is
 ```
 A sample line in file 'overview', that is used in the following:
 ```bash
-~ $head -1 overview
+~ $ head -1 overview
 compact-category
 ~ $
 ```
@@ -1435,8 +1437,8 @@ compact-category
 - `cut` prints characters 1 to 3 of what was is the output of
   `awk -F - '{print $1}'`
 
-```Bash
-~ $grep -vi sedan overview | awk -F - '{print $1}' | cut -c1-3
+```bash
+~ $ grep -vi sedan overview | awk -F - '{print $1}' | cut -c1-3
 com
 con
 cou
@@ -1455,8 +1457,8 @@ vin
 
 Below is the output of command `ls -l`, as ran in my user accounts home directory. Notice, that any file that contains 'messages*' is written in lowercase.
 
-```Bash
-~ $ls -l
+```bash
+~ $ ls -l
 total 208
 -rwxr-xr-x. 1 tklein tklein   5137 Dec 24 06:05 Film.csv
 -rw-rw-r--. 1 tklein tklein   1144 Dec 24 03:23 ]
@@ -1480,8 +1482,8 @@ drwxrwxr-x. 3 tklein tklein     26 Dec 23 14:52 the_great_adventure
 
 Specifying the `-i` option in the `grep` command, it matches non case sensitively and one gets all the 'message*' entries in the directory.
 
-```Bash
-~ $ls -l | grep -i Message
+```bash
+~ $ ls -l | grep -i Message
 -rw-------. 1 root   root   183192 Dec 23 21:46 messages
 -rw-r--r--. 1 root   root     5565 Dec 23 21:53 messages_head50
 -rw-r--r--. 1 root   root     2233 Dec 23 23:00 messages_tail30
@@ -1496,8 +1498,8 @@ Specifying the `-i` option in the `grep` command, it matches non case sensitivel
 
 The command matches all occurences of 'compact' and 'super' in the specified file 'overview'.
 
-```Bash
-~ $egrep -i "compact|super" cars/overview
+```bash
+~ $ egrep -i "compact|super" cars/overview
 compact-category
 super-category
 ~ $
@@ -1518,10 +1520,10 @@ super-category
 
 Running `sort` with no options on a file, gives the following output\:
 
-```Bash
+```bash
 # The lines are sorted alphabetically,
 # in ascending order.
-~ $sort cars/overview
+~ $ sort cars/overview
 compact-category
 convertible-category
 coupe-category
@@ -1541,8 +1543,8 @@ vintage-category
 
 Sorting alphabetically, in descending order can be done like so\:
 
-```Bash
-~ $sort -r cars/overview
+```bash
+~ $ sort -r cars/overview
 vintage-category
 van-category
 suv-category
@@ -1562,8 +1564,8 @@ compact-category
 
 By default, `sort` starts sorting from the beginning of the first row. One can change this behavior, by specifying the column, that should be used by `sort` to create a sorted output. That includes the option to give `sort` a separator, that is other than whitespace. See example, below, where the file was sorted by whatever comes after the '-' sign\:
 
-```Bash
-~ $sort -k2 -t- cars/overview
+```bash
+~ $ sort -k2 -t- cars/overview
 compact-category
 convertible-category
 coupe-category
@@ -1584,8 +1586,8 @@ cross-over-category
 
 Sorting by the $last == 9th$ column of the command `ls -l`\:
 
-```Bash
-~ $ls -l | sort -k9
+```bash
+~ $ ls -l | sort -k9
 total 208
 -rwxr-xr-x. 1 tklein tklein   5137 Dec 24 06:05 Film.csv
 -rw-rw-r--. 1 tklein tklein   1144 Dec 24 03:23 ]
@@ -1611,8 +1613,8 @@ drwxrwxr-x. 3 tklein tklein     26 Dec 23 14:52 the_great_adventure
 
 One duplicate line, 'coupe-category' in the text file.
 
-```Bash
-~ $sort cars/overview
+```bash
+~ $ sort cars/overview
 compact-category
 convertible-category
 coupe-category
@@ -1635,8 +1637,8 @@ vintage-category
 
 One should always run `uniq` with the piped output of sort, like in the example below\:
 
-```Bash
-~ $sort cars/overview | uniq
+```bash
+~ $ sort cars/overview | uniq
 compact-category
 convertible-category
 coupe-category
@@ -1682,5 +1684,4 @@ vintage-category
 ## Module 8 - Disk Management and Run Levels
 
 ### 'video'
-
 
