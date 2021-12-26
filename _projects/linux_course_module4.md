@@ -140,7 +140,11 @@ Password:
 -rw-rw-r--. 1 root root 0 Dec  4 06:42 susan
 [root@linux tklein]#
 ```
+
+
 **Creating a test file to practice changing ownership of the file.**
+
+
 ```bash
 # going into my home directory
 [tklein@linux /]$ cd /home/tklein
@@ -853,11 +857,11 @@ total 0
 -rw-r--r--. 1 tklein tklein 0 Dec 23 19:43 bruce_lee_knows
 [root@localhost display_chown]#
 ```
-###### chown [-R]
+###### chown \[-R]
 
 With the `-R` option one can change ownership and or group recursively for several nested directories.
 
-###### chown [OP] --reference=RFILE FILE...
+###### chown \[OP] \-\-reference=RFILE FILE...
 
 This is case 2. from above. Here one can use another file's owner and or group as a reference and apply it to the file or directory. Options like `-R` can still be used.
 
@@ -880,10 +884,10 @@ total 0
 
 Using the help function, one gets the information\:
 
-> Usage: chgrp \[OPTION]... GROUP FILE...
-  or:  chgrp \[OPTION]... --reference=RFILE FILE...
-	Change the group of each FILE to GROUP.
-	With \-\-reference, change the group of each FILE to that of RFILE.
+> Usage: chgrp [OPTION]... GROUP FILE...
+  or:  chgrp [OPTION]... --reference=RFILE FILE...
+Change the group of each FILE to GROUP.
+With \-\-reference, change the group of each FILE to that of RFILE.
 
 ###### Example
 
@@ -998,7 +1002,7 @@ Does not work! See `man cut` or `cut --help`
 	- cut -c1,2,4
 
 ```bash
-[tklein@localhost cars]$ cut -c1,2,4 overview
+~ $ cut -c1,2,4 overview
 cop
 cov
 cop
@@ -1013,11 +1017,12 @@ sue
 su-
 va-
 vit
-[tklein@localhost cars]$
+~ $
 ```
 
+
 ```bash
-[tklein@localhost cars]$ cut -c1-4 overview
+~ $ cut -c1-4 overview
 comp
 conv
 coup
@@ -1032,11 +1037,12 @@ supe
 suv-
 van-
 vint
-[tklein@localhost cars]$
+~ $
 ```
 
+
 ```bash
-[tklein@localhost cars]$ cut -c1-3,6-8 overview
+~ $ cut -c1-3,6-8 overview
 comct-
 conrti
 cou-ca
@@ -1051,13 +1057,15 @@ sup-ca
 suvate
 vanate
 vinge-
-[tklein@localhost cars]$
+~ $
 ```
+
 
 Bytes can give different results compared to lines.
 
+
 ```bash
-[tklein@localhost cars]$ cut -b1-3 overview
+~ $ cut -b1-3 overview
 com
 con
 cou
@@ -1072,15 +1080,18 @@ sup
 suv
 van
 vin
-[tklein@localhost cars]$
+~ $
 ```
+
+
 ##### For csv like files
+
 
 - List the first 6 columns separated by ':'
 - The fiile `/etc/passwd` has user information stored in it.
 
 ```bash
-[tklein@localhost cars]$ cut -d: -f 6 /etc/passwd
+~ $ cut -d: -f 6 /etc/passwd
 /root
 /bin
 /sbin
@@ -1112,11 +1123,11 @@ vin
 /var/lib/oprofile
 /
 /home/tklein
-[tklein@localhost cars]$
+~ $
 ```
 
 ```bash
-[tklein@localhost cars]$ cut -d: -f 6-7 /etc/passwd
+~ $ cut -d: -f 6-7 /etc/passwd
 /root:/bin/bash
 /bin:/sbin/nologin
 /sbin:/sbin/nologin
@@ -1148,11 +1159,11 @@ vin
 /var/lib/oprofile:/sbin/nologin
 /:/sbin/nologin
 /home/tklein:/bin/bash
-[tklein@localhost cars]$
+~ $
 ```
 
 ```bash
-[tklein@localhost cars]$ ls -l | cut -c2-4
+~ $ ls -l | cut -c2-4
 ota
 rw-
 rw-
@@ -1170,7 +1181,7 @@ rw-
 rw-
 rw-
 rw-
-[tklein@localhost cars]$
+~ $
 ```
 
 ### awk - Text Processors Commands
@@ -1204,19 +1215,19 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 - `-F` option tells it, that the delimiter in this file is comma. For 'space' nothing has to be specified as an option.
 
 ```bash
-[tklein@localhost cars]$ head -5 cars.csv | awk -F , '{print $1}' -
+~ $ head -5 cars.csv | awk -F , '{print $1}' -
 ""
 "1"
 "2"
 "3"
 "4"
-[tklein@localhost cars]$
+~ $
 ```
 
 - Specifying `$NF` in the print statement, prints the last column in the data set.
 
 ```bash
-[tklein@localhost cars]$ head -5 cars.csv | awk -F , '{print $NF}' -
+~ $ head -5 cars.csv | awk -F , '{print $NF}' -
 "dist"
 2
 10
@@ -1225,9 +1236,9 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 ```
 - In the example below, only the row is printed from the data set, where the word 'dist' is matched. It is part of the header, so row / line No. 1 gets printed.
 ```bash
-[tklein@localhost cars]$ awk '/dist/ {print}' cars.csv
+~ $ awk '/dist/ {print}' cars.csv
 "","speed","dist"
-[tklein@localhost cars]$
+~ $
 ```
 
 - Using a pipe, below the example changes the second column (`$2`) from 'Jess' to 'Adam' and afterwards prints, according to the following table\:
@@ -1239,39 +1250,39 @@ Here a pipe was used to limit the lines, that the output generates for readabili
 | `print $2`  | Print column 2  |
 
 ```bash
-[tklein@localhost cars]$ echo "Hello Jess" | awk '{$2="Adam" ; print $0}'
+~ $ echo "Hello Jess" | awk '{$2="Adam" ; print $0}'
 Hello Adam
-[tklein@localhost cars]$ echo "Hello Jess" | awk '{$2="Adam" ; print $1}'
+~ $ echo "Hello Jess" | awk '{$2="Adam" ; print $1}'
 Hello
-[tklein@localhost cars]$ echo "Hello Jess" | awk '{$2="Adam" ; print $2}'
+~ $ echo "Hello Jess" | awk '{$2="Adam" ; print $2}'
 Adam
-[tklein@localhost cars]$
+~ $
 ```
 
 Replacing the entries in the third column 'dist' with 'NAN'. This could be necessary, if the values in the 'dist' column were not valid and one had to clean the 'dist' column.
 
 ```bash
-[tklein@localhost cars]$ head -5 cars.csv | awk -F , '{$3="NAN" ; print $0}'
+~ $ head -5 cars.csv | awk -F , '{$3="NAN" ; print $0}'
 "" "speed" NAN
 "1" 4 NAN
 "2" 4 NAN
 "3" 7 NAN
 "4" 7 NAN
-[tklein@localhost cars]$
+~ $
 ```
 
 ```bash
-[tklein@localhost cars]$ awk 'length($0) > 15' cars.csv
+~ $ awk 'length($0) > 15' cars.csv
 "","speed","dist"
-[tklein@localhost cars]$
+~ $
 ```
 
 Print the line, where the entry in column 9 is "overview"
 
 ```bash
-[tklein@localhost cars]$ ls -l | awk '{if($9 == "overview") print $0;}'
+~ $ ls -l | awk '{if($9 == "overview") print $0;}'
 -rw-rw-r--. 1 tklein tklein 242 Dec 24 00:26 overview
-[tklein@localhost cars]$ ls -l
+~ $ ls -l
 total 20
 -rw-rw-r--. 1 tklein tklein 298 Dec 24 01:13 ,
 -rw-rw-r--. 1 tklein tklein 552 Dec 24 01:50 cars.csv
@@ -1297,7 +1308,7 @@ total 20
 Number of fields
 
 ```bash
-[tklein@localhost cars]$ ls -l | awk '{print NF}'
+~ $ ls -l | awk '{print NF}'
 2
 9
 9
@@ -1318,24 +1329,29 @@ Number of fields
 9
 9
 9
-[tklein@localhost cars]$
+~ $
 ```
 
-### grep/egrep - Text Processor Commands
+### grep/egrep \- Text Processor Commands
 
 - What is grep?
   - The grep command which stands for "global regular expressions print", processes text line by line and prints any lines which match a specified pattern.
 
 #### Specific grep / egrep commands
 
-##### grep --version
+##### grep \-\-version
+
 Check version of grep
-##### grep --help
-Get a shorter summary of what the command does with it's  options and basic structure.
+
+##### grep \-\-help
+Get a shorter summary of what the command does with it\'s  options and basic structure.
+
+
 ##### man grep
 Get detailed information about the command. Similiar to `grep --help`, but with more details often. The difference between `man <command>` and `<command> --help` varies by command.
 
 ##### grep keyword file
+
 
 ```bash
 ~ $ grep "Sport" cars/suv-category
@@ -1343,7 +1359,8 @@ SUV = Sport Utility Vehicle
 ~ $
 ```
 
-##### grep -c keyword file
+##### grep \-c keyword file
+
 
 Counts the matches in the file.
 
@@ -1370,7 +1387,7 @@ Without the `-i` option, it is case-sensitive and with it, it is not. See exampl
 ~ $
 ```
 
-##### grep -n keyword file
+##### grep \-n keyword file
 
 Prints the line number for each match, as well.
 
@@ -1684,4 +1701,5 @@ vintage-category
 ## Module 8 - Disk Management and Run Levels
 
 ### 'video'
+
 
