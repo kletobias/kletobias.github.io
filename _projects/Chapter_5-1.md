@@ -56,9 +56,9 @@ Moving the cursor inside of a text file in vi\:
 - Moving down one line at a time\: `j`
 - Moving to the left, one character at a time\: `h`
 - Using `a` while in normal mod advances the cursor onecharacter and switches to `-- INSERT --` mode.
-- A variation of pressing `a` is pressing `SHIFT + a`.This will advance the cursor to the end of the currentline and change to `-- INSERT --` mode.
+- A variation of pressing `a` is pressing `SHIFT + a`.This will advance the cursor to the end of the current line and change to `-- INSERT --` mode.
 - `SHIFT + h` will move the cursor to the beginning of thefile, if pressed in normal mode.
-- Using `o` lets the user create a new line just below thecursor and automatically changes the mode to `-- INSERT -`. The cursor is placed on the newly created line and onecan start writing on the new line.
+- Using `o` lets the user create a new line just below thecursor and automatically changes the mode to `-- INSERT -`. The cursor is placed on the newly created line and one can start writing on the new line.
 
 ##### Deleting and restoring deleted text
 
@@ -83,19 +83,19 @@ Moving the cursor inside of a text file in vi\:
 
 There is a typo in the last word and 'h' should be replaced by 's'
 
-```vi
+```vim
 No CAPS, REALLY: This is good htuff
 ```
 
-The cursor position is marked by '|'.
+The cursor position is marked by '\|'.
 
-```vi
+```vim
 No CAPS, REALLY: This is good |htuff
 ```
 
 Hitting 'r', followed by 's', replaces 'h' with 's'.
 
-```vi
+```vim
 No CAPS, REALLY: This is good stuff.
 ```
 
