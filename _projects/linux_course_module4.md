@@ -2103,8 +2103,8 @@ Combining and Splitting is a lot of fun Yey
 |      Clearing the command line window       |     cls      |    clear    |
 |               Deleting a file               |     del      |     rm      |
 |         Comparing contents of files         |      fc      |    diff     |
-|   Searching for a word\/string in a file    |     find     |    grep     |
-|          Displaying a command help          | command \/\? | man command |
+|   Searching for a word/string in a file    |     find     |    grep     |
+|          Displaying a command help          | command /? | man command |
 | Displaying your location in the file system |    chdir     |     pwd     |
 |             Displaying the time             |     time     |    date     |
 
