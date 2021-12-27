@@ -35,9 +35,9 @@ accent_color: '#4C60E6'
   - `i` \- insertion mode
   - `Esc` \- Get out of insert or visual mode
   - `r` \- replace
-  - `d` \- delete
-  - `:q!` \- quit vi without saving recent changes
-  - `:wq` \- quit and save
+  - `d` \- delete \(line)
+  - `:q!` \- quit vi without writing recent changes
+  - `:wq` \- write file and quit
 
 ##### Writing and exiting a file
 
@@ -47,3 +47,62 @@ There are several options for how to accomplish this\:
 1. While in insert mode\:
    1. Hit `Esc` \> `:` \> type\: `wq` on the command line.
    2. Hit `Esc` \> Hit (capital) `Z` `Z` and the file will be saved and vi quits.
+
+
+##### Moving around a text file
+
+Moving the cursor inside of a text file in vi\:
+- Moving up one line at a time\: `k`
+- Moving down one line at a time\: `j`
+- Moving to the left, one character at a time\: `h`
+- Using `a` while in normal mod advances the cursor onecharacter and switches to `-- INSERT --` mode.
+- A variation of pressing `a` is pressing `SHIFT + a`.This will advance the cursor to the end of the currentline and change to `-- INSERT --` mode.
+- `SHIFT + h` will move the cursor to the beginning of thefile, if pressed in normal mode.
+- Using `o` lets the user create a new line just below thecursor and automatically changes the mode to `-- INSERT -`. The cursor is placed on the newly created line and onecan start writing on the new line.
+
+##### Deleting and restoring deleted text
+
+###### Deletion
+
+- Keys used to delete text inside vi\:
+  - 2 x `d` deletes the entire line, where the cursor is.
+  - 1 x `x` deletes the closest character on the right of the cursor position. Using `SHIFT + x` removes the closest character on the left of the cursor.
+
+###### Restoration
+
+- Key used to restore deleted lines or characters\:
+  - 1 x `u` is used to restore deleted text.
+  - It restores one line per key press, if `d` was used to delete it.
+  - If `x` was used, it restores one deleted character per key press.
+
+##### Replacing Text
+
+- Using the key `r` while in normal mode allows one to replace the character immediately right of the current cursor position by pressing the key, that is to replace that current character next to the cursor on it\'s right side.
+
+###### Example
+
+There is a typo in the last word and 'h' should be replaced by 's'
+
+```vi
+No CAPS, REALLY: This is good htuff
+```
+
+The cursor position is marked by '|'.
+
+```vi
+No CAPS, REALLY: This is good |htuff
+```
+
+Hitting 'r', followed by 's', replaces 'h' with 's'.
+
+```vi
+No CAPS, REALLY: This is good stuff.
+```
+
+##### Moving around the file and manipulating text
+
+- Using `o` lets the user create a new line just below the cursor and automatically changes the mode to `-- INSERT --`. The cursor is placed on the newly created line and one can start writing on the new line.
+
+##### Searching inside a text file
+
+
