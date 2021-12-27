@@ -1,5 +1,5 @@
 ---
-title: EDA - Hamburg rental apartments
+title: 'EDA - Hamburg rental apartments'
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 featured_image: website_export_hamburg_alster20130608.jpg
@@ -9,7 +9,7 @@ accent_color: '#4C60E6'
 # EDA - Hamburg rental apartments
 
 This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
-It begins with an explanation of the univariate distribution for each variable in the dataset in Section 1. 
+It begins with an explanation of the univariate distribution for each variable in the dataset in Section 1.
 The correlations found between the variables are discussed in Section 2. In the same section, the noise data is analysed
 for both day and night and its impact on base rent specifically. What follows in Section 3, is a detailed heat map
 of the distribution of variable base rent by statistical area, plotted onto a map of Hamburg.
@@ -18,11 +18,11 @@ for the machine learning part that follows afterwards.
 
 * * *
 
-In order to understand the final data better, either visualisations or summary statistics were created. 
+In order to understand the final data better, either visualisations or summary statistics were created.
 It is about describing the distribution of the variables and about revealing the correlation between them.
 Strong correlation between pairs of independent variables can be a sign of the existence of redundant variables. If the correlation is extreme, it may be a sign of collinearity. Both cases pose problems for the analysis of causal relationships between the affected variables and the dependent variable.
-The figures showing histograms or bar chart type plots, often have a truncated x-axis range. This range is narrower than the true range of values between the respective minimum and maximum of the variable. This was done, since the omitted values were not visible in the original plots. 
-The scale of the plots would have to be bigger, for them to be visible, with the constraint from the screen size this was not possible. 
+The figures showing histograms or bar chart type plots, often have a truncated x-axis range. This range is narrower than the true range of values between the respective minimum and maximum of the variable. This was done, since the omitted values were not visible in the original plots.
+The scale of the plots would have to be bigger, for them to be visible, with the constraint from the screen size this was not possible.
 Please refer to Table 1 for the complete range of values.
 
 
@@ -439,7 +439,7 @@ For the prediction important is that there might be relevant rent
 increases for comparable apartments between the beginning of the
 timeframe in July 2016 and the end in November 2018, that might degrade
 prediction accuracy. _smaller_0.6_, the last variable in
-Figure 2 is discussed at the beginning of this Section with the other binary variables. 
+Figure 2 is discussed at the beginning of this Section with the other binary variables.
 Continuing with the numerical variables and their histograms in
 Figure 3, variable _base_rent_ shows a pronounced positive skew in the data series. The mean
 ($$\bar{x}$$) of 753 Euro for the series is low considering the value
