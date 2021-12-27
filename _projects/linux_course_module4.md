@@ -1960,10 +1960,153 @@ drwxrwxr-x. 2 tklein tklein   4096 Dec 24 11:29 cars
 
 ### Truncate File Size (truncate)
 
+- The Linux command `truncate` is often used to shrink or extend the size of a file to a specified size.
+- The command is destructive, if used to shrink a file.
+- Command\: `truncate \[OPTION]... \[FILE]...`
+  - With the `-s n` option, `n` being the desired final file size after running the command.`n` without any following unit specification defaults to bytes
+
+A file named 'cars_are_best' is used in the following. It has a size of 288 bytes.
+
+```bash
+~ $ ls -l cars_are_best
+-rw-rw-r--. 1 tklein tklein 288 Dec 24 13:18 cars_are_best
+~ $
+```
+
+Running `truncate -s 100 cars_are_best` truncates the file to the specified 100 bytes and erases text conent inside the file, until it is 100 bytes in size.
+
+```bash
+~ $ truncate -s 100 cars_are_best
+~ $ ls -l cars_are_best
+-rw-rw-r--. 1 tklein tklein 100 Dec 24 13:25 cars_are_best
+~ $ cat cars_are_best
+The faster the car, the quicker it covers distance.
+A V12 engine is a twelve-cylinder piston engine ~ $
+```
+
+The command can also be used to extend the size of a file, like in the following example. The command can not restore or add valid data to a file, in order to increase it\'s size.
+Instead, it adds a line of text, of sufficient length to the file until the desired size has been reached.
+
+```bash
+The faster the car, the quicker it covers distance.
+A V12 engine is a twelve-cylinder piston engine ^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@^@
+~
+```
+
 ### Combining and Splitting Files
+
+Combining and splitting files can become relevant, if one has to transfer large files. It can become highly relevant in the case of one only having limited storage space, think USB-sticks or CD-Roms \/ DVDs for example.
+
+- Cases\:
+	- Multiple files are combined into one file.
+	- A single file is split into multiple files.
+
+#### Combining files using cat
+
+5 files are created and populated in one line. All files have the line of text "Combining and Splitting is a lot of fun Yey" as content, see 2. for details.
+
+**1.**
+
+```bash
+~ $ echo "Combining and Splitting is a lot of fun Yey" | tee combine_split_file-{0,3,4} > combine_split_file-2
+~ $ ls -ltr
+total 236
+-rw-rw-r--.  1 tklein tklein      0 Dec 23 13:26 special_reward
+-rw-rw-r--.  1 tklein tklein      0 Dec 23 13:26 pamela-anderson
+-rw-rw-r--.  1 tklein tklein      0 Dec 23 13:26 david-hasselhoff
+-rw-rw-r--.  1 tklein tklein      0 Dec 23 13:26 check
+drwxrwxr-x.  2 tklein tklein      6 Dec 23 13:27 morganas_secrets
+drwxrwxr-x.  2 tklein tklein      6 Dec 23 13:27 donald_duck
+drwxrwxr-x.  2 tklein tklein      6 Dec 23 13:28 david-hasselhoffs-mansion
+-rw-rw-r--.  1 tklein tklein      0 Dec 23 13:47 david
+drwxrwxr-x.  3 tklein tklein     28 Dec 23 14:03 seinfeld
+drwxrwxr-x.  3 tklein tklein     26 Dec 23 14:52 the_great_adventure
+drwxr-xr-x.  2 root   root       57 Dec 23 19:57 display_chown
+-rw-------.  1 root   root   183192 Dec 23 21:46 messages
+-rw-r--r--.  1 root   root     5565 Dec 23 21:53 messages_head50
+-rw-r--r--.  1 root   root     2233 Dec 23 23:00 messages_tail30
+-rw-rw-r--.  1 tklein tklein   1144 Dec 24 03:23 ]
+-rwxr-xr-x.  1 tklein tklein   5137 Dec 24 06:05 Film.csv
+drwxrwxr-x.  2 tklein tklein     22 Dec 24 06:06 film
+drwxrwxr-x.  2 tklein tklein   4096 Dec 24 11:29 cars
+drwx------. 12 tklein tklein   4096 Dec 24 11:52 fun_with_files
+-rw-rw-r--.  1 tklein tklein    288 Dec 24 13:50 cars_are_best
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:12 combine_split_file-1
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:15 combine_split_file-4
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:15 combine_split_file-3
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:15 combine_split_file-2
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:15 combine_split_file-0
+~ $
+```
+
+**2.**
+
+```bash
+~ $ cat combine_split_file-*
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+~ $
+```
+
+The 5 files can be combined into another file. The contents of each file are concatenated in the destination file, by appending each file's line(s) of content in the order the input files have been given to the command by the user.
+
+```bash
+~ $ cat combine_split_file-* > the_reunion
+~ $ cat the_reunion
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+~ $
+```
+
+#### Split files using split
+
+```bash
+~ $ split -l 2 the_reunion reunited
+~ $ ls -ltr
+...
+-rw-rw-r--.  1 tklein tklein     44 Dec 24 14:35 reunitedac
+-rw-rw-r--.  1 tklein tklein     88 Dec 24 14:35 reunitedab
+-rw-rw-r--.  1 tklein tklein     88 Dec 24 14:35 reunitedaa
+~ $
+```
+
+After having split the file 'the_reunion' into files that all have 2 lines each, one can see that 'the reunion' was split into 3 files, that were automatically created, after the declaration of the parent file was done.
+
+```bash
+~ $ cat reunitedaa
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+~ $ cat reunitedab
+Combining and Splitting is a lot of fun Yey
+Combining and Splitting is a lot of fun Yey
+~ $ cat reunitedac
+Combining and Splitting is a lot of fun Yey
+~ $
+```
+
 
 ### Linux vs. Windows Commands
 
+
+|             Command Description             |   Windows    |    Linux    |
+|:-------------------------------------------:|:------------:|:-----------:|
+|           Listing of a directory            |     dir      |    ls -l    |
+|               Renaming a file               |     ren      |     mv      |
+|               Copying a file                |     copy     |     cp      |
+|                Moving a file                |     move     |     mv      |
+|      Clearing the command line window       |     cls      |    clear    |
+|               Deleting a file               |     del      |     rm      |
+|         Comparing contents of files         |      fc      |    diff     |
+|   Searching for a word\/string in a file    |     find     |    grep     |
+|          Displaying a command help          | command \/\? | man command |
+| Displaying your location in the file system |    chdir     |     pwd     |
+|             Displaying the time             |     time     |    date     |
 
 ## Module 5 - System Administration
 ### 'video'
