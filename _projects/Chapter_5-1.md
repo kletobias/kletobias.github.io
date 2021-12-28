@@ -22,7 +22,7 @@ accent_color: '#4C60E6'
 |    pico     |   Beginner\'s Editor   |
 |     vim     | Improved Version of vi |
 
-#### Introduction to vi editor
+#### Introduction to the vi editor
 
 - vi supplies commands for\:
   - Inserting and deleting text
@@ -105,4 +105,19 @@ No CAPS, REALLY: This is good stuff.
 
 ##### Searching inside a text file
 
+While there are several ways to search for text inside a file, here are two ways of how it can be done\:
 
+1. Using the `grep` command, like so\:
+   - `grep 'text file' cars_are_best`
+
+```bash
+~ $ grep 'text file' cars_are_best
+Not just any text file.
+~ $
+```
+
+2. Inside vi\:
+   - `/` followed by typing right after the `/` like\:
+   - `/text file`
+
+![searching-for-text-inside-vi](https://i.imgur.com/cRr5Mpd.png)
