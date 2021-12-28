@@ -121,3 +121,4 @@ Not just any text file.
    - `/text file`
 
 ![searching-for-text-inside-vi](https://i.imgur.com/cRr5Mpd.png)
+
