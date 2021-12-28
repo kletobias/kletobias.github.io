@@ -2,15 +2,18 @@
 title: 'sed command'
 subtitle: 'Learning Linux - Section 5.3'
 date: 2021-12-28 00:00:00
-description: 'This article covers some of the essential commands and / or concepts used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
+description: 'This article covers some of the essential commands or concepts used in any Linux distribution.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#4C60E6'
 ---
 
+### Introduction
+
+The Vim text editor was used and CentOS 7.4 was the distribution installed on the virtual machine in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.
+
 <!---Gallery is used, when listing the articles, featured is the image placed at the top of the article.
 -->
-TODO insert correct title of this chapter and also the correct 5.x number.
 
 ### `sed` command
 
@@ -23,13 +26,14 @@ TODO insert correct title of this chapter and also the correct 5.x number.
   - Substitute \(replace) within vi editor.
   - And much more...
 
-#### `sed 's/DDR/DNS/g FILE`
+#### `sed 's/DDR/DNS/g' FILE`
 
 - Like this, the command does\:
   - `s` substitute
   - `DDR` with `DNS`
 	- `g` - do this for all matches in the `FILE`.
 	- It will not write the above changes to the file by default and will only show them on screen.
+
 
 ##### Example
 
