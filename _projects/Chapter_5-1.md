@@ -3,7 +3,10 @@ title: 'Linux Text Editors'
 subtitle: 'Learning Linux - Section 5.1'
 date: 2021-12-27 00:00:00
 description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
-gallery_images: Bash_GNOME_Terminal_screenshot.png
+gallery_images:
+  - Bash_GNOME_Terminal_screenshot.png
+  - bash-ga254901e3_1280.png
+  - vim_editor_skin.png
 accent_color: '#4C60E6'
 ---
 

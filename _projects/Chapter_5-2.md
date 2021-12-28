@@ -2,7 +2,10 @@
 title: 'Differences between vi and vim Editor'
 subtitle: 'Learning Linux - Chapter 5.2'
 date: 2021-12-27 00:00:00
-gallery_images: Bash_GNOME_Terminal_screenshot.png
+gallery_images:
+  - Bash_GNOME_Terminal_screenshot.png
+  - bash-ga254901e3_1280.png
+  - vim_editor_skin.png
 accent_color: '#4C60E6'
 ---
 
