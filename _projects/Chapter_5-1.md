@@ -1,9 +1,8 @@
 ---
-title: 'Learning Linux - Section 5.1'
-subtitle: 'Linux Text Editors'
+title: 'Linux Text Editors'
+subtitle: 'Learning Linux - Section 5.1'
 date: 2021-12-27 00:00:00
-description: 'This article covers some of the essential commands used in any Linux distribution. CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh.'
-featured_image: 80sterminal.png
+description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
 gallery_images: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#4C60E6'
 ---

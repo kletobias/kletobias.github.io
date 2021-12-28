@@ -2,7 +2,7 @@
 title: 'Differences between vi and vim Editor'
 subtitle: 'Learning Linux - Chapter 5.2'
 date: 2021-12-27 00:00:00
-featured_image: 80sterminal.png
+gallery_images: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#4C60E6'
 ---
 
@@ -34,6 +34,6 @@ accent_color: '#4C60E6'
 #### vim interactive learning Tools
 
 - There are many websites that offer free vim interactive training
-  - <https://www.openvim.com/> (first choice)
+  - <https://www.openvim.com/>
   - <http://www.vimgenius.com>
   - <https://www.vim-adventures.com> (games)
