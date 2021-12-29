@@ -94,8 +94,6 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
----
-
 > Move homer, bart, marge, lisa to the simpsons directory.
 
 - There is no 'simpsons' folder in the home directory and so the folder is being created first using `mkdir simpsons`
@@ -133,8 +131,6 @@ total 0
 ~ $
 ```
 
----
-
 > List the contents of the seinfeld directory by the last time they were modified
 
 ```bash
@@ -147,8 +143,6 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 -rw-rw-r--. 1 tklein tklein  0 Dec 25 00:24 george
 ~ $
 ```
-
----
 
 > Create 2 new files in the seinfeld directory, eliane and newman.
 
@@ -166,8 +160,6 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 -rw-rw-r--. 1 tklein tklein  0 Dec 25 00:41 eliane
 ~ $
 ```
-
----
 
 > Change the file permissions for 'eliane', so that read access is revoked for 'everyone'.
 
@@ -210,8 +202,6 @@ Another option is the following one. Here it is used to restore the permissions 
 ~ $
 ```
 
----
-
 > Change the permissions of file newman to remove write permissions only from group.
 
 Using the methods from the exercise prior to this one\:
@@ -231,8 +221,6 @@ Using the methods from the exercise prior to this one\:
 ~ $
 ```
 
----
-
 > Become root and cd into your home directory (e.g. /home/iafzal). Then create 2 new files superman and zad in superman directory
 
 ```bash
@@ -247,8 +235,6 @@ total 0
 root *
 ```
 
----
-
 > Change ownership of zad file from root to your username
 
 
@@ -258,8 +244,6 @@ root * ls -l superman/zad
 -rw-r--r--. 1 tklein root 0 Dec 25 07:46 superman/zad
 root *
 ```
-
----
 
 > Change group ownership of zad from root to your username
 
@@ -273,8 +257,6 @@ root * ls -l superman/zad
 -rw-r--r--. 1 tklein tklein 0 Dec 25 07:46 superman/zad
 root *
 ```
-
----
 
 All in one\:
 
@@ -291,8 +273,6 @@ exit
 ~ $
 ```
 
----
-
 > Go back to superman directory in your home directory and add this line to the 'zad' file\: \"zad is a bad character in the superman movie.\"
 
 ```bash
@@ -302,8 +282,6 @@ exit
 zad is a bad character in the superman movie.
 ~ $
 ```
-
----
 
 > Go to the seinfeld directory and create a new file named \'seinfeld\'.
 
@@ -325,9 +303,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
----
-
-> Add 5 seinfeld character\'s names in seinfeld file. Jerry Seinfeld, George Costanza, Eliane Benis, Cosmo Kramer, and David Puddy
+> Add 5 seinfeld characters\' names in seinfeld file. Jerry Seinfeld, George Costanza, Eliane Benis, Cosmo Kramer, and David Puddy
 
 ```bash
 ~ $ pwd
@@ -350,8 +326,6 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
----
-
 > Do cat /var/log/messages and output to a file called mesg-new in your home directory.
 
 Becoming root again for the following.
@@ -373,6 +347,4 @@ Dec 23 13:16:58 localhost kernel: Linux version 3.10.0-1160.el7.x86_64 (mockbuil
 Dec 23 13:16:58 localhost kernel: Command line: BOOT_IMAGE=/vmlinuz-3.10.0-1160.el7.x86_64 root=/dev/mapper/centos-root ro crashkernel=auto spectre_v2=retpoline rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8
 root *
 ```
-
----
 
