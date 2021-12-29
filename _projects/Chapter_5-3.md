@@ -5,7 +5,7 @@ date: 2021-12-28 00:00:00
 description: 'This article covers some of the essential commands or concepts used in any Linux distribution.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#4C60E6'
+accent_color: '#4ce6b8'
 ---
 
 ### Introduction
