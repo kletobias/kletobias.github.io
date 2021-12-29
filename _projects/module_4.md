@@ -1737,7 +1737,7 @@ If one only wants to have the number of bytes printed\:
 ~ $
 ```
 
-The number of the following command includes the first line of the `ls -ltr` output, which is neither a directory, nor is it a file. The actual number of objects in the current directory, in the example is\: $19-1=18$
+The number of the following command includes the first line of the `ls -ltr` output, which is neither a directory, nor is it a file. The actual number of objects in the current directory, in the example is $19-1=18$.
 
 ```bash
 ~ $ ls -ltr | wc -l
@@ -1745,7 +1745,7 @@ The number of the following command includes the first line of the `ls -ltr` out
 ~ $
 ```
 
-#### ls -d \*\\/
+#### ls -d \*\/
 
 ##### Directories located in the current directory
 
