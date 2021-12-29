@@ -1163,7 +1163,7 @@ rw-
 
 ### awk - Text Processors Commands
 
-`awk` is a utility \\/ language designed for data extraction. Most of the time it is used to extract fields from a file or from an output.
+`awk` is a utility \/ language designed for data extraction. Most of the time it is used to extract fields from a file or from an output.
 
 ```bash
 ~ $ awk --version

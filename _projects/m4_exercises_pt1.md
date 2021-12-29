@@ -348,3 +348,328 @@ Dec 23 13:16:58 localhost kernel: Command line: BOOT_IMAGE=/vmlinuz-3.10.0-1160.
 root *
 ```
 
+> Read the mesg-new file with cat, more and less commands and practice.
+
+Since cat would print the entire file, which has 3606 lines, the output was not included in here.
+
+```bash
+~ $ wc -l mesg-new
+3606 mesg-new
+~ $
+```
+
+`more` and `less` also print large chunks of text overall in this example and so only a description of both commands is done in the following.
+
+##### `more`
+
+`~ $ more mesg-new` will print the lines from file `mesg-new` one screen at a time and by pressing the 'space bar' once, it will advance one screen further down. `more` can only move downwards and never upwards in the file.
+
+##### `less`
+
+`~ $ less mesg-new` will have all the functionality of `more` with the addition of more commands for the user to navigate the output it generates.
+
+The printing of the output can be stopped for both commands, by hitting the 'q' key on the keyboard.
+
+> View the first 10 lines of mesg-new file and output to a file name mesg-h10
+
+Only 2 lines are printed to keep the ouput from taking to much space to be printed in this article. The lines are counted to verify that the newly created file has indeed 10 lines.
+
+```bash
+~ $ head -2 mesg-h10 && wc -l mesg-h10
+Dec 23 13:16:58 localhost journal: Runtime journal is using 6.1M (max allowed 48.9M, trying to leave 73.3M free of 483.1M available → current limit 48.9M).
+Dec 23 13:16:58 localhost kernel: Initializing cgroup subsys cpuset
+10 mesg-h10
+```
+
+> View the last 20 lines of mesg-new file and output to a file name mesg-t20
+
+Running all commands after one another, using the notation `&&` to seperate them from one another. They are being executed in the order they are specified. It goes from left to right. Like this, in the example below, the user can use a not yet created file named 'mesg-t20' for the second and third chained command, that is created after execution of the most left command in the chain.
+
+```bash
+~ $ tail -20 mesg-new > mesg-t20 && head -2 mesg-t20 && wc -l mesg-t20
+Dec 25 07:50:01 localhost systemd: Started Session 313 of user root.
+Dec 25 07:50:01 localhost systemd: Removed slice User Slice of root.
+20 mesg-t20
+~ $
+```
+
+> Go to seinfeld directory in your home directory and create a new file "seinfeld-characters"
+
+```bash
+~ $ touch seinfeld-characters
+~ $ ls -l seinfeld-characters
+-rw-rw-r--. 1 tklein tklein 0 Dec 25 11:14 seinfeld-characters
+~ $
+```
+
+> Add text to seinfeld-character file using echo command. Each character  should be in one line, "Jerry Seinfeld, Cosmo Kramer, Eliane Benes,  George Costanza, Newman Mailman, Frank Costanza, Estelle Costanza,  Morty Seinfeld, Helen Seinfeld, Babes Kramer, Alton Benes, J Peterman,  George Steinbrenner, Uncle Leo, David Puddy, Justin Pit and Kenny Bania"
+
+Using option `-e` from the `echo` command, new lines can be entered using `\n`. One has to make sure, that what comes on the next line is written immediately after `\n` with no space in between.
+
+```bash
+~ $ echo -e "Jerry Seinfeld,\nCosmo Kramer,\nEliane Benes,\nGeorge Costanza,\nNewman Mailman,\nFrank Costanza,\nEstelle Costanza,\nMorty Seinfeld,\nHelen Seinfeld,\nBabes Kramer,\nAlton Benes,\nJ Peterman,\nGeorge Steinbrenner,\nUncle Leo,\nDavid Puddy,\nJustin Pit,\nKenny Bania" > seinfeld-characters
+~ $ cat seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+~ $
+```
+
+> Use cut command to cut the first 4 letters of each line from seinfeld-characters file and output to a different file.
+
+`cut` is used with option `-c`, so that it only cuts the selected characters on each line. Here, the range is from character `1` to `4`. This can be achieved by writing the following command\:
+
+`cut -c1-4 seinfeld-characters`
+
+ Again, a second command is chained after the first one is executed to print the lines of the new file, that the output was redirected to.
+
+```bash
+~ $ cut -c1-4 seinfeld-characters  > seinfeld-characters_first4 && cat seinfeld-characters_first4
+Jerr
+Cosm
+Elia
+Geor
+Newm
+Fran
+Este
+Mort
+Hele
+Babe
+Alto
+J Pe
+Geor
+Uncl
+Davi
+Just
+Kenn
+~ $
+```
+
+> Use awk command to get only the 2nd column of seinfeld-characters and output to the seinfeld-characters_first4 without removing any other text from it
+
+```bash
+~ $ awk '{print $2}' seinfeld-characters >> seinfeld-characters_first4
+~ $ cat seinfeld-characters_first4
+Jerr
+Cosm
+Elia
+Geor
+Newm
+Fran
+Este
+Mort
+Hele
+Babe
+Alto
+J Pe
+Geor
+Uncl
+Davi
+Just
+Kenn
+Seinfeld,
+Kramer,
+Benes,
+Costanza,
+Mailman,
+Costanza,
+Costanza,
+Seinfeld,
+Seinfeld,
+Kramer,
+Benes,
+Peterman,
+Steinbrenner,
+Leo,
+Puddy,
+Pit,
+Bania
+~ $
+```
+
+> Use grep command to only grep seinfeld and output to a new file call it only_seinfelds
+
+Using grep with option `-i`, one can match the specified pattern non case-sensitive.
+
+```bash
+~ $ grep -i "seinfeld" seinfeld-characters > only_seinfelds
+~ $ cat only_seinfelds
+Jerry Seinfeld,
+Morty Seinfeld,
+Helen Seinfeld,
+~ $
+```
+
+> Use sort command, uniq and wc command to practice whichever way you like by creating new files or working with existing files
+
+```bash
+~ $ sort seinfeld-characters
+Alton Benes,
+Babes Kramer,
+Cosmo Kramer,
+David Puddy,
+Eliane Benes,
+Estelle Costanza,
+Frank Costanza,
+George Costanza,
+George Steinbrenner,
+Helen Seinfeld,
+J Peterman,
+Jerry Seinfeld,
+Justin Pit,
+Kenny Bania
+Morty Seinfeld,
+Newman Mailman,
+Uncle Leo,
+```
+
+```bash
+~ $ sort -r seinfeld-characters
+Uncle Leo,
+Newman Mailman,
+Morty Seinfeld,
+Kenny Bania
+Justin Pit,
+Jerry Seinfeld,
+J Peterman,
+Helen Seinfeld,
+George Steinbrenner,
+George Costanza,
+Frank Costanza,
+Estelle Costanza,
+Eliane Benes,
+David Puddy,
+Cosmo Kramer,
+Babes Kramer,
+Alton Benes,
+```
+
+```bash
+~ $ sort -k2 seinfeld-characters
+Kenny Bania
+Alton Benes,
+Eliane Benes,
+Estelle Costanza,
+Frank Costanza,
+George Costanza,
+Babes Kramer,
+Cosmo Kramer,
+Uncle Leo,
+Newman Mailman,
+J Peterman,
+Justin Pit,
+David Puddy,
+Helen Seinfeld,
+Jerry Seinfeld,
+Morty Seinfeld,
+George Steinbrenner,
+```
+
+```bash
+~ $ sort -r -k2 seinfeld-characters
+George Steinbrenner,
+Morty Seinfeld,
+Jerry Seinfeld,
+Helen Seinfeld,
+David Puddy,
+Justin Pit,
+J Peterman,
+Newman Mailman,
+Uncle Leo,
+Cosmo Kramer,
+Babes Kramer,
+George Costanza,
+Frank Costanza,
+Estelle Costanza,
+Eliane Benes,
+Alton Benes,
+Kenny Bania
+~ $
+```
+
+##### `uniq`
+
+```bash
+~ $ uniq seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+```
+
+```bash
+~ $ cat seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+##### `wc`
+
+Counting lines.
+
+```bash
+~ $ wc -l seinfeld-characters
+18 seinfeld-characters
+```
+
+Counting bytes.
+
+```bash
+~ $ wc -c seinfeld-characters
+262 seinfeld-characters
+```
+
+Counting characters.
+
+```bash
+~ $ wc -m seinfeld-characters
+262 seinfeld-characters
+~ $
+```
+
+That is it for Section 4.
