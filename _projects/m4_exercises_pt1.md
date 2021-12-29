@@ -5,7 +5,7 @@ date: 2021-12-29 00:00:00
 description: 'This post covers solving exercises, to help foster longterm retention of the content in Module4'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#4C60E6'
+accent_color: '#4ce6b8'
 ---
 
 ### Module 4 - Exercises
@@ -260,7 +260,7 @@ root *
 
 All in one\:
 
-> Then move superman file to \/tmp directory
+> Then move the superman file to /tmp directory
 > Remove superman file from /tmp directory
 > Exit out of root account
 
