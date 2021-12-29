@@ -10,7 +10,7 @@ accent_color: '#4C60E6'
 
 ### Introduction
 
-The Vim text editor was used and CentOS 7.4 was the distribution installed on the virtual machine in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.
+The Vim text editor was used and CentOS 7.4 was the distribution installed on the virtual machine in this series. It was setup as a command line only virtual machine and accessed through ssh. There are 8 Sections in total.
 
 <!---Gallery is used, when listing the articles, featured is the image placed at the top of the article.
 -->
@@ -117,4 +117,6 @@ To delete every line, where a pattern is matched on, the user can use\:
 
 It left an empty file after running the above command. There was an occurrence of `DDR` on every line and every line was deleted.
 
-{>>Start where the deleting empty lines happens in the video.<<}
+<!---
+Start where the deleting empty lines happens in the video.
+-->
