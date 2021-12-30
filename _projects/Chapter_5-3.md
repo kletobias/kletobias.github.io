@@ -31,8 +31,9 @@ The Vim text editor was used and CentOS 7.4 was the distribution installed on th
 - Like this, the command does\:
   - `s` substitute
   - `DDR` with `DNS`
-	- `g` - do this for all matches in the `FILE`.
+	- `g` - do this for all matches in the `FILE` /(`g` == global).
 	- It will not write the above changes to the file by default and will only show them on screen.
+	- Changes are written, if `-i` is added.
 
 
 ##### Example
@@ -117,6 +118,220 @@ To delete every line, where a pattern is matched on, the user can use\:
 
 It left an empty file after running the above command. There was an occurrence of `DDR` on every line and every line was deleted.
 
-<!---
-Start where the deleting empty lines happens in the video.
--->
+---
+
+#### Deleting empty lines using `sed`
+
+Using a different file 'seinfeld-characters', which has some empy lines, the task is to delete all empty files from the file. The file at the start\:
+
+```bash
+~ $ cat seinfeld-characters
+Jerry Seinfeld,
+
+Cosmo Kramer,
+
+Eliane Benes,
+George Costanza,
+
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+```
+
+Command and file after running sed\:
+
+- `-i` option to write changes to file.
+- `^` and `$` are regex symbols in this case.
+  - `^` matches the beginning of a line.
+  - `$` matches the end of a line.
+- `^$` matches start and end of a line, where nothing is between beginning and end of that line == it matches empty lines only.
+
+```bash
+~ $ sed -i '/^$/d' seinfeld-characters
+~ $ cat seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+#### Removing the first line of a file using `sed`
+
+```bash
+~ $ cat seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+```
+
+- `sed '1d' FILE` delets the first line.
+  - '2d', '3d' delets the second and third line respectively.
+    - \'$n_{i}d$\' will remove line number $n_{i}$.
+    - \'$n_{i},n_{j}d$\' will remove line number $n_{i} \text{ and } n_{j}$. ${i}, {j} \in L \text{ } \text { } {i} \ne {j} \text{ }  \forall i,j \in L$. ${L}$being the set of all line index values in the file.
+  - No `-i` was added, so changes only get output to **stdout (1)**
+
+```bash
+~ $ sed '1d' seinfeld-characters
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+#### Removing lines 1 and of a file using `sed`
+
+Removing lines '1' and '2' can be done like illustrated above.
+
+```bash
+~ $ sed 1,2d seinfeld-characters
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+```bash
+~ $ cat seinfeld-characters
+Jerry Seinfeld, # This line is omitted in the above output.
+Cosmo Kramer, # This line is omitted in the above output.
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+```
+
+#### Replacing TAB with SPACE
+
+The file uses tabs insted of spaces on the first three lines.
+
+```bash
+~ $ cat seinfeld-characters
+Jerry	Seinfeld,
+Cosmo	Kramer,
+Eliane	Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+Using `sed` with\:
+	- `s/` tells it to substitute what comes after the forward slash.
+	- `\t/` tells it, that it has to look for usually invisible TAB occurences. The 't' has to be escaped for it be recognised as a TAB by the command.
+	- ` ` Means  that it should replace TAB with SPACE.
+	- `/g` tells it to do the above for every occurences in the file, not just the first one it matches.
+
+```bash
+~ $ sed 's/\t/ /g' seinfeld-characters # Replacing TAB with SPACE
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
