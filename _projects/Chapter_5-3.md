@@ -208,7 +208,7 @@ Uncle Leo,
 - `sed '1d' FILE` delets the first line.
   - '2d', '3d' delets the second and third line respectively.
     - \'$n_{i}d$\' will remove line number $n_{i}$.
-    - \'$n_{i},n_{j}d$\' will remove line number $n_{i} \text{ and } n_{j}$. ${i}, {j} \in L \text{ } \text { } {i} \ne {j} \text{ }  \forall i,j \in L$. ${L}$being the set of all line index values in the file.
+    - \'$n_{i},n_{j}d$\' will remove line number $n_{i} \text{ and } n_{j}$. ${i}, {j} \in L \text{ } \text { } {i} \ne {j} \text{ }  \forall i,j \in L$.  ${L}$being the set of all line index values in the file.
   - No `-i` was added, so changes only get output to **stdout (1)**
 
 ```bash
@@ -233,7 +233,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Removing lines 1 and of a file using `sed`
+#### Removing lines 1 and 2 of a file using `sed`
 
 Removing lines '1' and '2' can be done like illustrated above.
 
@@ -308,10 +308,10 @@ Uncle Leo,
 ```
 
 Using `sed` with\:
-	- `s/` tells it to substitute what comes after the forward slash.
-	- `\t/` tells it, that it has to look for usually invisible TAB occurences. The 't' has to be escaped for it be recognised as a TAB by the command.
-	- ` ` Means  that it should replace TAB with SPACE.
-	- `/g` tells it to do the above for every occurences in the file, not just the first one it matches.
+- `s/` tells it to substitute what comes after theforward slash.
+- `\t/` tells it, that it has to look for usuallyinvisible TAB occurences. The 't' has to be escaped forit be recognised as a TAB by the command.
+- ` ` (one space) means that it should replace TAB with SPACE.
+- `/g` tells it to do the above for every occurences inthe file, not just the first one it matches.
 
 ```bash
 ~ $ sed 's/\t/ /g' seinfeld-characters # Replacing TAB with SPACE
@@ -335,3 +335,128 @@ Kenny Bania
 Uncle Leo,
 ~ $
 ```
+
+#### Having a range of lines in a file printed to stdout
+
+
+The following prints lines 12 to 18 from the 'seinfeld-characters' file. Options specified are\:
+- `-n`
+- `p`
+
+```bash
+~ $ sed -n 12,18p seinfeld-characters
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+```
+
+#### Print all lines, except 12-18 from the file.
+
+Using `d`
+
+```bash
+~ $ sed 12,18d seinfeld-characters
+Jerry Seinfeld,
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld,
+Helen Seinfeld,
+Babes Kramer,
+Alton Benes,
+~ $
+```
+
+#### Putting an empty line after each character\'s name
+
+Again, changes will not be written to the file without the `-i` options.
+
+```bash
+~ $ sed G seinfeld-characters
+Jerry Seinfeld,
+
+Cosmo Kramer,
+
+Eliane Benes,
+
+George Costanza,
+
+Newman Mailman,
+
+Frank Costanza,
+
+Estelle Costanza,
+
+Morty Seinfeld,
+
+Helen Seinfeld,
+
+Babes Kramer,
+
+Alton Benes,
+
+J Peterman,
+
+George Steinbrenner,
+
+Uncle Leo,
+
+David Puddy,
+
+Justin Pit,
+
+Kenny Bania
+
+Uncle Leo,
+
+~ $
+```
+
+#### Limiting the lines `sed` will process.
+
+One can limit the lines, which are processed by the `sed` command in a file. The excluded line or lines will not be processed by the `sed` command, like so\:
+
+*All occurences of 'Seinfeld', except for any on line number 8 are changed to 'GigaChad'. `nl` command is used before `sed`, to identify lines where 'Seinfeld ' occurs, so one line can be used as an exception for the `sed` command.*
+
+```bash
+~ $ nl seinfeld-characters | grep "Seinfeld"
+     1	Jerry Seinfeld,
+     8	Morty Seinfeld,
+     9	Helen Seinfeld,
+```
+
+```bash
+~ $  sed '8!s/Seinfeld/GigaChad/g' seinfeld-characters
+Jerry GigaChad, # Line was changed.
+Cosmo Kramer,
+Eliane Benes,
+George Costanza,
+Newman Mailman,
+Frank Costanza,
+Estelle Costanza,
+Morty Seinfeld, # Line was not changed (Index 8).
+Helen GigaChad, # Line was changed.
+Babes Kramer,
+Alton Benes,
+J Peterman,
+George Steinbrenner,
+Uncle Leo,
+David Puddy,
+Justin Pit,
+Kenny Bania
+Uncle Leo,
+~ $
+```
+
+<!---
+Vim substitute  see screenshots.
+-->
+
+
