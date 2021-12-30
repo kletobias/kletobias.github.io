@@ -112,7 +112,6 @@ total 0
 -rw-rw-r--. 1 tklein tklein 0 Dec 25 00:30 bart
 ~ $
 ```
----
 
   > Move clark, luther and lois files to the superman directory
 
@@ -221,7 +220,7 @@ Using the methods from the exercise prior to this one\:
 ~ $
 ```
 
-> Become root and cd into your home directory (e.g. /home/iafzal). Then create 2 new files superman and zad in superman directory
+> Become root and cd into your home directory. Then create 2 new files superman and zad in superman directory
 
 ```bash
 root * touch superman/superman superman/zad
@@ -257,8 +256,6 @@ root * ls -l superman/zad
 -rw-r--r--. 1 tklein tklein 0 Dec 25 07:46 superman/zad
 root *
 ```
-
-All in one\:
 
 > Then move the superman file to /tmp directory
 > Remove superman file from /tmp directory

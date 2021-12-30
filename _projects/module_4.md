@@ -436,17 +436,17 @@ If however there is already text in the file, prior to one writing additional te
 ### 65 Input and Output Redirects
 
 -   There are 3 redirects in Linux
-    		1\. Standard input (**stdin**) and it has file descriptor number as 0
-    		2\. Standard output (**stdout**) and it has file descriptor number as 1
-    		3\. Standard error (**stderr**) and it has file descriptor number as 2
+    		1. Standard input (**stdin**) and it has file descriptor number **0**
+    		2. Standard output (**stdout**) and it has file descriptor number **1**
+    		3. Standard error (**stderr**) and it has file descriptor number **2**
 
 #### Output
 
--   Output (**stdout**) - 1
-    -   By default when running a command it's output goes to the terminal.
+-   Output (**stdout**) \- 1
+    -   By default when running a command it\'s output goes to the terminal.
     -   The output of a command can be routed to a file using `>` symbol.
         -   E.g. `ls -l > listings`
-        -   E.g. `pwd \> findpath`
+        -   E.g. `pwd > findpath`
     -   If using the same file for additional output or to append to the same file then use `>>`
         -   E.g. `ls -la >> listings`
         -   E.g. `echo 'Hello World' >> findpath`
@@ -474,17 +474,17 @@ Christmas is around the corner.
 
 #### Input
 
--   Input (**stdin**) - 0
-    -   Input is used when feeding file contents to a file.
+-   Input (**stdin == 0**)
+    -   Input is used when feeding file contents to a file for example.
     -   E.g. `cat < listings` - cat takes listings as input.
     -   E.g. `mail -s 'Office memo' allusers@bestmail.com < memoletter`
 
 #### Error
 
--   Error (**stderr**) - 2
-    		\- When a command is executed we use a keyboard and that is also considered (**stdin - 0**)
-    		\- That command ouput goes on the monitor and that output is (**stdout -  1**)
-    		\- If the command produced any error on the screen then it is considered (**stderr - 2**)
+-   Error (**stderr == 2**)
+    		\- When a command is executed using a keyboard and that is also considered (**stdin == 0**)
+    		\- That command ouput goes on the monitor and that output is (**stdout == 1**)
+    		\- If the command produced any error on the screen then it is considered (**stderr == 2**)
     			\- We can use redirects to route errors from the screen.
     				\- E.g. `ls -l /root 2> errorfile`
     				\- E.g. `telnet localhost 2> errorfile`
@@ -498,7 +498,7 @@ Trying ::1...
 telnet: connect to address ::1: Connection refused
 Trying 127.0.0.1...
 telnet: connect to address 127.0.0.1: Connection refused
-# These two errors qualify as 'stderr - 2' and so can be
+# These two errors qualify as 'stderr' (2) and so can be
 # redirected to any textfile and will not appear on screen,
 # if redirected.
 ~ $ telnet localhost 2> errorfile
