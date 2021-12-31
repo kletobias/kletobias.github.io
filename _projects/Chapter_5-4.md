@@ -18,7 +18,8 @@ accent_color: '#4ce6b8'
 - `groupadd`
 - `userdel`
 - `groupdel`
-- `usermod`
+- `usermod [-G]`
+-
 
 #### Important files where user data is stored
 
@@ -196,3 +197,83 @@ golfers:x:1005:brianna
 root *
 ```
 
+#### Adding a user to another group in the `/home` directory
+
+- Using `usermod -G` to change the group memberships of a user does not change the group that is displayed in the `/home` directory.
+- Example of this behavior can be seen in the following example for the user *veronica*. She was added to group *golfers*, but still her group *veronica* is shown below.
+
+```bash
+root * ls -ltr
+total 4
+drwx------. 16 tklein   tklein   4096 Dec 25 19:48 tklein
+drwx------.  2 tyler    tyler      62 Dec 26 02:30 tyler
+drwx------.  2 brianna  brianna    62 Dec 26 02:31 brianna
+# Still group veronica is shown below
+drwx------.  2 veronica veronica   62 Dec 26 02:44 veronica
+root *
+```
+
+
+```bash
+root * chgrp -R golfers veronica
+root * ls -ltr
+total 4
+drwx------. 16 tklein   tklein  4096 Dec 25 19:48 tklein
+drwx------.  2 tyler    tyler     62 Dec 26 02:30 tyler
+drwx------.  2 brianna  brianna   62 Dec 26 02:31 brianna
+# Now group has changed to golfers for veronica
+drwx------.  2 veronica golfers   62 Dec 26 02:44 veronica
+root *
+```
+
+#### making sense of the structure of file `/etc/passwd`
+
+- The *Password* column only tells, if a password is set for the user.
+  - It will display an 'x', if one is stored in the `/etc/shadow` file.
+-  *uid* is the user id.
+-  *gid* is the group id.
+- *Description* can be added as an option when using the `useradd` command, it is option `useradd ... -c 'description of this user.' ...`
+- *Home Directory* gives the path equivalent to `echo $HOME` for the user.
+- *Shell of User* gives the name of the user\'s shell environment, as well as the path to the executable of that shell.
+  - For CentOS 7, available shells are\:
+
+```bash
+root * cat /etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+/bin/tcsh
+/bin/csh
+root *
+```
+
+| Column 1 | Column 2 | Column 3 | Column 4 |  Column 5   |    Column 6    |   Column 7    |
+|:--------:|:--------:|:--------:|:--------:|:-----------:|:--------------:|:-------------:|
+| Username | Password |   uid    |   gid    | Description | Home Directory | Shell of user |
+
+
+##### Sample output of `/etc/passwd`
+
+```bash
+brianna:x:1003:1003::/home/brianna:/bin/bash
+veronica:x:1004:1006::/home/veronica:/bin/bash
+root *
+```
+
+#### making sense of the structure of file `/etc/group`
+
+- *Group Password* is the same for every member in the group.
+- *Members of the group* lists all members of the group, separated by ','
+
+| Column 1 | Column 2 | Column 3 | Column 4 |
+|:-:|:-:|:-:|:-:|
+| Group Name | Group Password | gid | Members of the group |
+
+
+#### making sense of the structure of file `/etc/shadow`
+
+
+| Column 1  |  Column 2 |  Column 3 |  Column 4 |  Column 5 | Column 6  | Column 7  | Column 8 |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|   |   |   |   |   |   |   |   |
