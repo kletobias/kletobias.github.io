@@ -458,5 +458,3 @@ Uncle Leo,
 <!---
 Vim substitute  see screenshots.
 -->
-
-
