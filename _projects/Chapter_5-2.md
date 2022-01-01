@@ -1,13 +1,10 @@
 ---
-title: 'Linux Text Editors'
-subtitle: 'Learning Linux - Section 5.1'
+title: 'Differences between vi and vim Editor'
+subtitle: 'Learning Linux - Section 5.2'
 date: 2021-12-27 00:00:00
 description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
 featured_image: vim_bw_logo.png
-gallery_images:
-  - Bash_GNOME_Terminal_screenshot.png
-  - bash-ga254901e3_1280.png
-  - vim_editor_skin.png
+gallery_image: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#08877d'
 ---
 
