@@ -1,13 +1,11 @@
 ---
-title: 'The /etc/login.def File'
-subtitle: 'Learning Linux - Section 5-5'
+title: '`chage` command in depth'
+subtitle: 'Learning Linux - Section 5.5'
 date: 2021-12-27 00:00:00
-description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
-gallery_images:
-  - Bash_GNOME_Terminal_screenshot.png
-  - bash-ga254901e3_1280.png
-  - vim_editor_skin.png
-accent_color: '#4ce6b8'
+description: 'The /etc/login.def File is described and the use of the variables that are defined inside this file in terms of their role during the usage of `useradd` command.'
+featured_image: bash-ga254901e3_1280.png
+gallery_images: Bash_GNOME_Terminal_screenshot.png
+accent_color: '#08877d'
 ---
 
 ### 'chage' command in depth
