@@ -5,9 +5,11 @@ date: 2021-12-29 20:00:00
 description: 'This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#4ce6b8'
+accent_color: '#1a7868'
 ---
-
+<!---
+Accent color changed to #1a7868 was #4ce6b8
+-->
 ### User Account Management
 
 > This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.
@@ -19,7 +21,6 @@ accent_color: '#4ce6b8'
 - `userdel`
 - `groupdel`
 - `usermod [-G]`
--
 
 #### Important files where user data is stored
 
@@ -54,7 +55,7 @@ From left to right of the command written in the above terminal window\:
 - One has to have *root* priviledges in order to do any of the following!
 - The user is added by running `useradd <username>`
 - To verify, that the user was created, the command `id <username>` is used.
-- This command gives additional information, if the username was created correctly /(from left to right in the following)\:
+- This command gives additional information, if the username was created correctly (from left to right in the following)\:
   - `uid=1003(ashley)` **uid** gives the userid and the name of the user the id represents.
   - `gid=1003(ashley)` **gid** gives the group id and name of the group similiar to **uid**. This group will always default to the username. Each user has it\'s own group with the same name, as the user\'s username.
   - `groups=1003(ashley)` **groups** gives the group memberships that the user has. These can but are not limited to other local user groups, like *staff, administrators, it-department* for example.
@@ -85,7 +86,7 @@ tcpdump:x:72:
 tklein:x:1000:tklein
 irina:x:1001:
 ashley:x:1003:
-superheroes:x:1004:
+superheroes:x:1004: # The group 'superheroes' was created
 root *
 ```
 
@@ -109,7 +110,7 @@ drwx------.  2   1002   1002   62 Dec 25 19:53 trish
 root *
 ```
 
-#### Adding \& deleting a group
+#### Adding & deleting a group
 
 - The `groupadd <group>` command is used to add a group
 - To check whether the group was created, the bottom of */etc/group* can be looked at. The new group has to found at the bottom of the file, assuming it was the most recent addition to the file.
@@ -226,7 +227,7 @@ drwx------.  2 veronica golfers   62 Dec 26 02:44 veronica
 root *
 ```
 
-#### making sense of the structure of file `/etc/passwd`
+#### Making sense of the structure of file `/etc/passwd`
 
 - The *Password* column only tells, if a password is set for the user.
   - It will display an 'x', if one is stored in the `/etc/shadow` file.
@@ -261,7 +262,7 @@ veronica:x:1004:1006::/home/veronica:/bin/bash
 root *
 ```
 
-#### making sense of the structure of file `/etc/group`
+#### Making sense of the structure of file `/etc/group`
 
 - *Group Password* is the same for every member in the group.
 - *Members of the group* lists all members of the group, separated by ','
@@ -271,7 +272,7 @@ root *
 | Group Name | Group Password | gid | Members of the group |
 
 
-#### making sense of the structure of file `/etc/shadow`
+#### Making sense of the structure of file `/etc/shadow`
 
 
 | Column 1  |  Column 2 |  Column 3 |  Column 4 |  Column 5 | Column 6  | Column 7  | Column 8 |
