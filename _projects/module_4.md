@@ -1,7 +1,7 @@
 ---
 title: 'Linux Course: Module 4 Notes'
 subtitle: 'Notes and Examples.'
-date: 2021-12-26 00:00:00
+date: 2021-11-24 00:00:00
 description: 'This article covers some of the most essential commands used in any Linux distribution. CentOS 7 was the OS used in the following, it was a virtual machine and accessed through ssh.'
 featured_image: 80sterminal.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png

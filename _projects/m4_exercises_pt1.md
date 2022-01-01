@@ -1,7 +1,7 @@
 ---
 title: 'Recap: Exercises - Module 4'
 subtitle: 'Learning Linux - Section 4 Exercises'
-date: 2021-12-29 00:00:00
+date: 2021-11-25 00:00:00
 description: 'This post covers solving exercises, to help foster longterm retention of the content in Module4'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
