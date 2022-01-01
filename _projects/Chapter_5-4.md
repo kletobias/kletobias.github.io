@@ -1,7 +1,7 @@
 ---
 title: 'User Account Management'
 subtitle: 'Learning Linux - Section 5.4'
-date: 2021-12-29 20:00:00
+date: 2021-11-29 20:00:00
 description: 'This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png

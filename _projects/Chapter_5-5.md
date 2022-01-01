@@ -1,7 +1,7 @@
 ---
 title: chage command in depth
 subtitle: 'Learning Linux - Section 5.5'
-date: 2021-12-29 05:05:00
+date: 2021-11-30 05:05:00
 description: 'The /etc/login.def File is described and the use of the variables that are defined inside this file in terms of their role during the usage of useradd command.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png

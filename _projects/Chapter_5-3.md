@@ -1,7 +1,7 @@
 ---
 title: 'sed command'
 subtitle: 'Learning Linux - Section 5.3'
-date: 2021-12-28 00:00:00
+date: 2021-11-28 00:00:00
 description: 'This article covers some of the essential commands or concepts used in any Linux distribution.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
