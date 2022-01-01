@@ -17,7 +17,7 @@ Practice Linux command syntax with\:
 
 #### Listing files
 
-> List files in your home directory by the last time they were modified.
+##### *List files in your home directory by the last time they were modified.*
 
 Using `ls` to print the contents of my home directory with options `-ltcr` gives the desired output. The options do\:
 - `l` Print contents using the long format, so 'last time modified' is printed.
@@ -78,7 +78,7 @@ drwx------. 12 tklein tklein   4096 Dec 24 11:52 fun_with_files
 
 #### Moving files into directories
 
-> Move files jerry, george, kramer, puddy to the seinfeld directory.
+##### *Move files jerry, george, kramer, puddy to the seinfeld directory.*
 
 Using `mv`, all the input files are listed first separated by ' ' and the destination directory is put last.
 
@@ -94,7 +94,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
-> Move homer, bart, marge, lisa to the simpsons directory.
+##### *Move homer, bart, marge, lisa to the simpsons directory.*
 
 - There is no 'simpsons' folder in the home directory and so the folder is being created first using `mkdir simpsons`
 - The same command and structure is used as in the example above to move the files into the destination folder.
@@ -113,7 +113,7 @@ total 0
 ~ $
 ```
 
-  > Move clark, luther and lois files to the superman directory
+##### *Move clark, luther and lois files to the superman directory.*
 
 Again, the directory 'superman' and 'Superman' are not existent yet and so are created and finally the files are being moved into the new directory 'superman'.
 
@@ -130,7 +130,7 @@ total 0
 ~ $
 ```
 
-> List the contents of the seinfeld directory by the last time they were modified
+##### *List the contents of the seinfeld directory by the last time they were modified*
 
 ```bash
 ~ $ ls -ltcr seinfeld
@@ -143,7 +143,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
-> Create 2 new files in the seinfeld directory, eliane and newman.
+##### *Create 2 new files in the seinfeld directory, eliane and newman.*
 
 
 ```bash
@@ -160,7 +160,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
-> Change the file permissions for 'eliane', so that read access is revoked for 'everyone'.
+##### *Change the file permissions for 'eliane', so that read access is revoked for 'everyone'.*
 
 - There is no file named 'eliane' in the current directory and so it is created using `touch eliane` as an empty text file.
 - Next, the current permissions are checked for the file. This change can be omitted when not using the `chmod` together with the octal representation for `user`, `group` and `other`.
@@ -201,7 +201,7 @@ Another option is the following one. Here it is used to restore the permissions 
 ~ $
 ```
 
-> Change the permissions of file newman to remove write permissions only from group.
+##### *Change the permissions of file newman to remove write permissions only from group.*
 
 Using the methods from the exercise prior to this one\:
 
@@ -220,7 +220,7 @@ Using the methods from the exercise prior to this one\:
 ~ $
 ```
 
-> Become root and cd into your home directory. Then create 2 new files superman and zad in superman directory
+##### *Become root and cd into your home directory. Then create 2 new files superman and zad in superman directory*
 
 ```bash
 root * touch superman/superman superman/zad
@@ -234,7 +234,7 @@ total 0
 root *
 ```
 
-> Change ownership of zad file from root to your username
+##### *Change ownership of zad file from root to your username*
 
 
 ```bash
@@ -244,7 +244,7 @@ root * ls -l superman/zad
 root *
 ```
 
-> Change group ownership of zad from root to your username
+##### *Change group ownership of zad from root to your username*
 
 ```bash
 root * chown tklein:root superman/zad
@@ -257,9 +257,9 @@ root * ls -l superman/zad
 root *
 ```
 
-> Then move the superman file to /tmp directory
-> Remove superman file from /tmp directory
-> Exit out of root account
+##### *Then move the superman file to /tmp directory*
+##### *Remove superman file from /tmp directory*
+##### *Exit out of root account*
 
 ```bash
 root * mv superman/superman /tmp/
@@ -270,7 +270,7 @@ exit
 ~ $
 ```
 
-> Go back to superman directory in your home directory and add this line to the 'zad' file\: \"zad is a bad character in the superman movie.\"
+##### *Go back to superman directory in your home directory and add this line to the 'zad' file\: \"zad is a bad character in the superman movie.\"*
 
 ```bash
 ~ $ cd superman/
@@ -280,7 +280,7 @@ zad is a bad character in the superman movie.
 ~ $
 ```
 
-> Go to the seinfeld directory and create a new file named \'seinfeld\'.
+##### *Go to the seinfeld directory and create a new file named \'seinfeld\'.*
 
 ```bash
 ~ $ pwd
@@ -300,7 +300,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
-> Add 5 seinfeld characters\' names in seinfeld file. Jerry Seinfeld, George Costanza, Eliane Benis, Cosmo Kramer, and David Puddy
+##### *Add 5 seinfeld characters\' names in seinfeld file. Jerry Seinfeld, George Costanza, Eliane Benis, Cosmo Kramer, and David Puddy*
 
 ```bash
 ~ $ pwd
@@ -323,7 +323,7 @@ drwxrwxr-x. 3 tklein tklein 22 Dec 23 14:03 seinfeld_sings
 ~ $
 ```
 
-> Do cat /var/log/messages and output to a file called mesg-new in your home directory.
+##### *Do cat /var/log/messages and output to a file called mesg-new in your home directory.*
 
 Becoming root again for the following.
 
@@ -345,7 +345,7 @@ Dec 23 13:16:58 localhost kernel: Command line: BOOT_IMAGE=/vmlinuz-3.10.0-1160.
 root *
 ```
 
-> Read the mesg-new file with cat, more and less commands and practice.
+##### *Read the mesg-new file with cat, more and less commands and practice.*
 
 Since cat would print the entire file, which has 3606 lines, the output was not included in here.
 
@@ -357,17 +357,17 @@ Since cat would print the entire file, which has 3606 lines, the output was not 
 
 `more` and `less` also print large chunks of text overall in this example and so only a description of both commands is done in the following.
 
-##### **more**
+##### 'more'
 
 `~ $ more mesg-new` will print the lines from file `mesg-new` one screen at a time and by pressing the 'space bar' once, it will advance one screen further down. `more` can only move downwards and never upwards in the file.
 
-##### **less**
+##### 'less'
 
 `~ $ less mesg-new` will have all the functionality of `more` with the addition of more commands for the user to navigate the output it generates.
 
 The printing of the output can be stopped for both commands, by hitting the 'q' key on the keyboard.
 
-> View the first 10 lines of mesg-new file and output to a file name mesg-h10
+##### *View the first 10 lines of mesg-new file and output to a file name mesg-h10*
 
 Only 2 lines are printed to keep the ouput from taking to much space to be printed in this article. The lines are counted to verify that the newly created file has indeed 10 lines.
 
@@ -378,7 +378,7 @@ Dec 23 13:16:58 localhost kernel: Initializing cgroup subsys cpuset
 10 mesg-h10
 ```
 
-> View the last 20 lines of mesg-new file and output to a file name mesg-t20
+##### *View the last 20 lines of mesg-new file and output to a file name mesg-t20*
 
 Running all commands after one another, using the notation `&&` to seperate them from one another. They are being executed in the order they are specified. It goes from left to right. Like this, in the example below, the user can use a not yet created file named 'mesg-t20' for the second and third chained command, that is created after execution of the most left command in the chain.
 
@@ -390,7 +390,7 @@ Dec 25 07:50:01 localhost systemd: Removed slice User Slice of root.
 ~ $
 ```
 
-> Go to seinfeld directory in your home directory and create a new file "seinfeld-characters"
+##### *Go to seinfeld directory in your home directory and create a new file "seinfeld-characters"*
 
 ```bash
 ~ $ touch seinfeld-characters
@@ -399,7 +399,7 @@ Dec 25 07:50:01 localhost systemd: Removed slice User Slice of root.
 ~ $
 ```
 
-> Add text to seinfeld-character file using echo command. Each character  should be in one line, "Jerry Seinfeld, Cosmo Kramer, Eliane Benes,  George Costanza, Newman Mailman, Frank Costanza, Estelle Costanza,  Morty Seinfeld, Helen Seinfeld, Babes Kramer, Alton Benes, J Peterman,  George Steinbrenner, Uncle Leo, David Puddy, Justin Pit and Kenny Bania"
+##### *Add text to seinfeld-character file using echo command. Each character  should be in one line, "Jerry Seinfeld, Cosmo Kramer, Eliane Benes,  George Costanza, Newman Mailman, Frank Costanza, Estelle Costanza,  Morty Seinfeld, Helen Seinfeld, Babes Kramer, Alton Benes, J Peterman,  George Steinbrenner, Uncle Leo, David Puddy, Justin Pit and Kenny Bania"*
 
 Using option `-e` from the `echo` command, new lines can be entered using `\n`. One has to make sure, that what comes on the next line is written immediately after `\n` with no space in between.
 
@@ -426,7 +426,7 @@ Kenny Bania
 ~ $
 ```
 
-> Use cut command to cut the first 4 letters of each line from seinfeld-characters file and output to a different file.
+##### *Use cut command to cut the first 4 letters of each line from seinfeld-characters file and output to a different file.*
 
 `cut` is used with option `-c`, so that it only cuts the selected characters on each line. Here, the range is from character `1` to `4`. This can be achieved by writing the following command\:
 
@@ -456,7 +456,7 @@ Kenn
 ~ $
 ```
 
-> Use awk command to get only the 2nd column of seinfeld-characters and output to the seinfeld-characters_first4 without removing any other text from it
+##### *Use awk command to get only the 2nd column of seinfeld-characters and output to the seinfeld-characters_first4 without removing any other text from it*
 
 ```bash
 ~ $ awk '{print $2}' seinfeld-characters >> seinfeld-characters_first4
@@ -498,7 +498,7 @@ Bania
 ~ $
 ```
 
-> Use grep command to only grep seinfeld and output to a new file call it only_seinfelds
+##### *Use grep command to only grep seinfeld and output to a new file call it only_seinfelds*
 
 Using grep with option `-i`, one can match the specified pattern non case-sensitive.
 
@@ -511,7 +511,7 @@ Helen Seinfeld,
 ~ $
 ```
 
-> Use sort command, uniq and wc command to practice whichever way you like by creating new files or working with existing files
+##### *Use sort command, uniq and wc command to practice whichever way you like by creating new files or working with existing files*
 
 ```bash
 ~ $ sort seinfeld-characters
@@ -598,7 +598,7 @@ Kenny Bania
 ~ $
 ```
 
-##### **uniq**
+##### 'uniq'
 
 ```bash
 ~ $ uniq seinfeld-characters
@@ -645,7 +645,7 @@ Uncle Leo,
 ~ $
 ```
 
-##### **wc**
+##### 'wc'
 
 Counting lines.
 
