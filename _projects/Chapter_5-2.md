@@ -8,7 +8,7 @@ gallery_images:
   - Bash_GNOME_Terminal_screenshot.png
   - bash-ga254901e3_1280.png
   - vim_editor_skin.png
-accent_color: '#4ce6b8'
+accent_color: '#08877d'
 ---
 
 ### Differences between vi and vim Editor
