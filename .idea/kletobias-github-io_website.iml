@@ -11,4 +11,14 @@
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
   </component>
+  <component name="TemplatesService">
+    <option name="templateFileTypes">
+      <list>
+        <option value="HTML" />
+        <option value="Markdown" />
+        <option value="XHTML" />
+        <option value="XML" />
+      </list>
+    </option>
+  </component>
 </module>
