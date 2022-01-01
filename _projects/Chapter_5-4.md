@@ -5,10 +5,10 @@ date: 2021-12-29 20:00:00
 description: 'This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#1a7868'
+accent_color: '#000080'
 ---
 <!---
-Accent color changed to #1a7868 was #4ce6b8
+Accent color changed to#000080 after it was #1a7868 originally #4ce6b8
 -->
 ### User Account Management
 
