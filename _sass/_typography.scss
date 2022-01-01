@@ -229,6 +229,10 @@ time {
 
 code {
   font-family: $body-font;
+  background-color: rgb(230, 230, 230);
+  border: 1px solid #0c7068;
+  border-radius: 3px;
+  padding: 2px;
 }
 
 ::selection {
