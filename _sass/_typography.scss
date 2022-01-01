@@ -228,13 +228,17 @@ time {
 }
 
 code {
-  background-color: #edfffe;
-  border: 0.5px solid #0c7068;
+  background-color: #c6eae9;
+  border: 0.5px hidden #0c7068;
   border-radius: 1px;
 }
 
 code {
   font-family: $inline_code_font;
+  font-weight: $p-weight;
+  font-size: $p-size-small;
+  line-height: $p-lineheight;
+  letter-spacing: $p-spacing;
 }
 
 ::selection {
