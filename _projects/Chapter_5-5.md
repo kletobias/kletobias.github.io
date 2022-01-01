@@ -1,0 +1,53 @@
+---
+title: 'The /etc/login.def File'
+subtitle: 'Learning Linux - Section 5-5'
+date: 2021-12-27 00:00:00
+description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
+gallery_images:
+  - Bash_GNOME_Terminal_screenshot.png
+  - bash-ga254901e3_1280.png
+  - vim_editor_skin.png
+accent_color: '#4ce6b8'
+---
+
+### 'chage' command in depth
+
+The command has the following important options. It is a command that is designed to be used for an individual user,
+in the way it is shown here. In a corporate environment much this is automated, so one does not have to define values for each user that has to be created. Default values are used instead.
+
+| Label      | -m      | -M      | -d      | -I       | -E              | -W       | User     | -   |
+|:----------:|---------|---------|---------|----------|-----------------|----------|----------|-----|
+| Description | mindays | maxdays | lastday | inactive | expiration date | warndays | username |     |
+| Example    |         |         |         |          |                 |          |          |     |
+
+#### Source of the default values
+
+- The file used to save the default values is **/etc/login.defs**.
+  - The terms defined in the file are the following (running a quick `egrep` search, as shown below).
+  - The values for the terms in this file are the ones used, when one creates a user by running the command `useradd`.
+
+
+```bash
+root * egrep "^[A-Z\_]+" /etc/login.defs 
+MAIL_DIR        /var/spool/mail
+PASS_MAX_DAYS   99999
+PASS_MIN_DAYS   0
+PASS_MIN_LEN    5
+PASS_WARN_AGE   7
+UID_MIN                  1000 # This is the lower limit for variable 'UID_MIN'
+UID_MAX                 60000 # Similarly, this is the upper limit for 'UID_MAX'
+SYS_UID_MIN               201 # This variable is used for any user that is a 'system process user'
+SYS_UID_MAX               999
+GID_MIN                  1000
+GID_MAX                 60000
+SYS_GID_MIN               201
+SYS_GID_MAX               999
+CREATE_HOME     yes
+UMASK           077
+USERGROUPS_ENAB yes
+ENCRYPT_METHOD SHA512
+root * 
+```
+
+- The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
+

@@ -289,22 +289,24 @@ root *
      3. `$2y$` is Blowfish
      4. `$5$` is SHA-256
      5. `$6$` is SHA-512
-3. *Last password change\:* Days since a date (E.g. '10/16/2018') that password was last changed.
+3. *Last password change\:* Days since the date 01/01/1970 that password was last changed.
 4. *Minimum\:* The minimum number of days required between password changes.
 		  - E.g. The number of days left before the user is allowed to change his password.
 5. *Maximum\:* The maximum number of days, that the password is still valid. The user will have to change their password after that period is over.
 6. *Warn\:* Threshold for the number of days in column 5, when a warning is sent to the user that they must change their password soon.
 7. *Inactive\:* The number of days, that an account is still active after the *Maximum* has reached 0. It will become inactive after that period has passed without a password change.
-8. *Expire\:* Days counting down from a specific date (E.g. '10/16/2019'), where the account can no longer be used anymore.
+8. *Expire\:* Days increase from the specific date 01/01/1970, where the account can no longer be used anymore. It depends on the value set for *Expire*.
+
 
 
 | Column 1  |  Column 2 |  Column 3 |  Column 4 |  Column 5 | Column 6  | Column 7  | Column 8 |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | Username | Password | 'lastchanged' | Minimum  | Maximum | Warn | Inactive | Expire |
 
+
 ##### Looking up information for a specific user
 
-Information about a user can be gained by running `grep "<username>" /etc/group|/etc/passwd|/etc/shadow` or all three at once\:
+Information about a user can be gained by running `grep "<username>" /etc/group|/etc/passwd|/etc/shadow` or all three at once:
 
 ###### Bash Example
 
