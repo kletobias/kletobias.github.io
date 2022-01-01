@@ -3,7 +3,7 @@ basic_settings:
   favicon_image: /images/favicon.png
 
 header_settings:
-  logo_image: 
+  logo_image:
   logo_width: 100
 
 menu_settings:
@@ -14,7 +14,7 @@ menu_settings:
       url: '/blog/'
 
 footer_settings:
-  logo_image: 
+  logo_image:
   logo_width: 100
   tagline: Portfolio Website of Tobias Klein
 
@@ -70,9 +70,10 @@ color_settings:
   error_color: '#D64541'
 
 font_settings:
-  font_embed: '<link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700|Ubuntu+Mono:400,700" rel="stylesheet">'
+  font_embed: '<link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700|Ubuntu+Mono:400,700|Red+Hat+Mono:400" rel="stylesheet">'
   title_font: 'Rubik, sans-serif'
   body_font: '"Ubuntu Mono", sans-serif'
+  inline_code_font: '"Red Hat Mono", monospace'
   regular_weight: 400
   bold_weight: 700
   site_title:
