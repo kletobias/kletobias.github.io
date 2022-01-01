@@ -7,9 +7,11 @@ featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#08877d'
 ---
+
 <!---
 Accent color changed to #08877d after #000080 after it was #1a7868 originally #4ce6b8
 -->
+
 ### User Account Management
 
 > This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.
@@ -24,9 +26,9 @@ Accent color changed to #08877d after #000080 after it was #1a7868 originally #4
 
 #### Important files where user data is stored
 
-- `/etc/passwd`
-- `/etc/group`
-- `/etc/shadow`
+- **/etc/passwd**
+- **/etc/group**
+- **/etc/shadow**
 
 #### Adding a user
 
@@ -45,9 +47,9 @@ From left to right of the command written in the above terminal window\:
 
 - `useradd` is the core command to add an user. The following are all options or arguments of this command. *See `useradd --help` for more details*
   - `-g` defines the group the new user should belong to. Here 'superheroes' is chosen.
-  - `-s` defines the shell environment the new user will be using. Shell 'bash' with the executable found in `/bin/bash`
+  - `-s` defines the shell environment the new user will be using. Shell 'bash' with the executable found in **/bin/bash**
   - `-c` Let\'s one add a user description for the new user in plain text.
-  - `-m` defines the user\'s home directory. Here, `/home/spiderman` was chosen.
+  - `-m` defines the user\'s home directory. Here, **/home/spiderman** was chosen.
   - `-d` specifies the name of the user. 'spiderman' in this example.
 
 #### Adding a user in the terminal
@@ -144,7 +146,7 @@ root *
 - Modifying a user account is done with `usermod [options] <login>`
 
 
-##### `usermod -G  <group name> <username>`
+##### 'usermod -G  \<group name> \<username>'
 
 - Adding *username* to another group in addition to their default group.
 - In the example below, *brianna* is added to group *golfers*.
@@ -198,9 +200,9 @@ golfers:x:1005:brianna
 root *
 ```
 
-#### Adding a user to another group in the `/home` directory
+#### Adding a user to another group in the '/home' directory
 
-- Using `usermod -G` to change the group memberships of a user does not change the group that is displayed in the `/home` directory.
+- Using `usermod -G` to change the group memberships of a user does not change the group that is displayed in the **/home** directory.
 - Example of this behavior can be seen in the following example for the user *veronica*. She was added to group *golfers*, but still her group *veronica* is shown below.
 
 ```bash
@@ -227,7 +229,7 @@ drwx------.  2 veronica golfers   62 Dec 26 02:44 veronica
 root *
 ```
 
-#### Making sense of the structure of file `/etc/passwd`
+#### Making sense of the structure of file '/etc/passwd'
 
 - The *Password* column only tells, if a password is set for the user.
   - It will display an 'x', if one is stored in the `/etc/shadow` file.
@@ -249,12 +251,14 @@ root * cat /etc/shells
 root *
 ```
 
+**Table 1\:** The 7 columns found in the '.csv' like structure inside the */etc/passwd* file are described and assigned to the columns.
+
 | Column 1 | Column 2 | Column 3 | Column 4 |  Column 5   |    Column 6    |   Column 7    |
 |:--------:|:--------:|:--------:|:--------:|:-----------:|:--------------:|:-------------:|
 | Username | Password |   uid    |   gid    | Description | Home Directory | Shell of user |
 
 
-##### Sample output of `/etc/passwd`
+##### Sample output of '/etc/passwd'
 
 ```bash
 brianna:x:1003:1003::/home/brianna:/bin/bash
@@ -262,7 +266,7 @@ veronica:x:1004:1006::/home/veronica:/bin/bash
 root *
 ```
 
-#### Making sense of the structure of file `/etc/group`
+#### Making sense of the structure of file '/etc/group'
 
 - *Group Password* is the same for every member in the group.
 - *Members of the group* lists all members of the group, separated by ','
@@ -272,9 +276,72 @@ root *
 | Group Name | Group Password | gid | Members of the group |
 
 
-#### Making sense of the structure of file `/etc/shadow`
+#### Making sense of the structure of file '/etc/shadow'
+
+1. *Username* is the login name of the user.
+2. *Password* is the user\'s encrypted password.
+   - It should contain a minimum of 8-12 characters.
+   - Include special characters, like digits, lower and upper case alphabetic characters and other ones as well.
+   - Usually the password format is set to `$id$salt$hashed`.
+   - The `$id` is the algorithm used on GNU/Linux as follows\:
+     1. `$1$` is MD5
+     2. `$2a$` is Blowfish
+     3. `$2y$` is Blowfish
+     4. `$5$` is SHA-256
+     5. `$6$` is SHA-512
+3. *Last password change\:* Days since a date (E.g. '10/16/2018') that password was last changed.
+4. *Minimum\:* The minimum number of days required between password changes.
+		  - E.g. The number of days left before the user is allowed to change his password.
+5. *Maximum\:* The maximum number of days, that the password is still valid. The user will have to change their password after that period is over.
+6. *Warn\:* Threshold for the number of days in column 5, when a warning is sent to the user that they must change their password soon.
+7. *Inactive\:* The number of days, that an account is still active after the *Maximum* has reached 0. It will become inactive after that period has passed without a password change.
+8. *Expire\:* Days counting down from a specific date (E.g. '10/16/2019'), where the account can no longer be used anymore.
 
 
 | Column 1  |  Column 2 |  Column 3 |  Column 4 |  Column 5 | Column 6  | Column 7  | Column 8 |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|   |   |   |   |   |   |   |   |
+| Username | Password | 'lastchanged' | Minimum  | Maximum | Warn | Inactive | Expire |
+
+##### Looking up information for a specific user
+
+Information about a user can be gained by running `grep "<username>" /etc/group|/etc/passwd|/etc/shadow` or all three at once\:
+
+###### Bash Example
+
+```bash
+root * grep "veronica"  /etc/group /etc/passwd /etc/shadow
+/etc/group:golfers:x:1005:brianna,veronica
+/etc/group:veronica:x:1006:
+/etc/passwd:veronica:x:1004:1006::/home/veronica:/bin/bash
+/etc/shadow:veronica:!!:18987:0:99999:7:::
+root *
+```
+
+#### Final Example
+
+Creating a new user and adding them to a group, specifying their shell environment, adding a description, setting their home directory and their username can all be done in one long command like so\:
+
+```bash
+root * useradd -g golfers -s /bin/bash -c "His wife says, that his handicap is rubbish." -m -d /home/will will
+root * ls -ltr /home/
+total 4
+drwx------. 16 tklein   tklein  4096 Dec 25 19:48 tklein
+drwx------.  2 tyler    tyler     62 Dec 26 02:30 tyler
+drwx------.  2 brianna  brianna   62 Dec 26 02:31 brianna
+drwx------.  2 veronica golfers   62 Dec 26 02:44 veronica
+drwx------.  2 will     golfers   62 Dec 26 08:34 will # will is a member of group golfers.
+root * grep "will" /etc/group /etc/passwd /etc/shadow
+/etc/passwd:will:x:1005:1005:His wife says, that his handicap is rubbish.:/home/will:/bin/bash
+/etc/shadow:will:!!:18987:0:99999:7:::
+```
+
+##### Creating the password for user 'will'
+
+```bash
+root * passwd will
+Changing password for user will.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+root *
+```

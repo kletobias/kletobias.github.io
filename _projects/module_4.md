@@ -510,7 +510,7 @@ telnet: connect to address 127.0.0.1: Connection refused
 ~ $
 ```
 
-### 66 Standard Output to a File (`tee`)
+### 66 Standard Output to a File (**tee**)
 
 -   `tee` command is used to store and view (both at the same time) the output of any command.
 -   The command is named after the T-splitter used in plumbing. It basically breaks the output of a program so that it can be both displayed on screen and saved in a file. It does both simultaneously. It copies the result into the specified files or variabless and also display the result.
@@ -574,7 +574,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
 87 christmas_truths
 ```
 
-### 67 Pipes `|`
+### 67 Pipes **|**
 
 -   A pipe is used by the shell to connect the ouput of one command directly to the input of another command.
 -   The symbol for a pipe is the vertical bar `|`.
@@ -612,7 +612,7 @@ Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
     -   With `-T`, it treats the `DEST` as a regular file and not as a 	directory.
     -   It renames `SOURCE` to `DEST`
 
-##### `mv -T`
+##### **mv -T**
 
 An Example that also shows that it works without using `-T` as well.
 As illustrated below. One just can't specify a directory as `DEST` for it to work.
@@ -683,7 +683,7 @@ total 0
 
 To understand better what the difference between using `mkdir` without the `-p` option and using it with the `-p` option, here is an example\:
 
-##### Using `mkdir <DIRECTORY>`
+##### Using **mkdir <DIRECTORY>**
 
 In the current directory there is a directory called 'seinfeld' at the bottom of the `ls -ltr` command\:
 
@@ -715,7 +715,7 @@ drwxrwxr-x. 3 tklein tklein   28 Dec 23 14:03 seinfeld
 
 The time of creation is exactly the same as before and so the old file was not overwritten.
 
-##### Using `mkdir -p <DIRECTORY>`
+##### Using **mkdir -p <DIRECTORY>**
 
 ```bash
 ~ $ mkdir -p seinfeld
@@ -767,11 +767,11 @@ Looking into `rmdir --help` one gets the following information about what the co
 
 -    The command will fail, if a directory is not empty. There can be hidden files in the directory for example that can only be seen using `ls -a /path/to/dir/` the `-a` option shows all files in a directory.
 
-##### `rmdir --ignore-fail-on-non-empty <DIRECTORY>`
+##### **rmdir --ignore-fail-on-non-empty <DIRECTORY>**
 
 -   With the option `--ignore-fail-on-non-empty` non empty directories can be deleted.
 
-##### `rmdir -p <DIRECTORY1/2/3`
+##### **rmdir -p <DIRECTORY1/2/3**
 
 -   With this option directories can be removed recursively. See example.
 

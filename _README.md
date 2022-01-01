@@ -25,7 +25,7 @@ Made comes packed with lots of options to let you customize the theme.
 
 ---
 
-### The `_config.yml` file
+### The **_config.yml** file
 
 The main things you might need to change here are:
 
@@ -37,7 +37,7 @@ You can also change more advanced things here like the path names, collections e
 
 ---
 
-### The `settings.yml` file
+### The **settings.yml** file
 
 You'll find this inside the `_data` folder – this is where you can set all of the theme options.
 
@@ -129,7 +129,7 @@ The images in the `/demo/` subfolder are used in the demo project, post and page
 
 The theme comes with some pages set up ready for your content.
 
-### The home page – `/index.html`
+### The home page – **/index.html**
 
 This is your website home page. You can edit some details in the Front Matter at the top of the page:
 `overtitle` – this sets the small intro text above the main page title.
@@ -139,7 +139,7 @@ This is your website home page. You can edit some details in the Front Matter at
 
 Below the Front Matter is the code for the page. You should edit this to set your title and intro text. Hint - the main <h1> tag respects line breaks on tablet size screens and larger. This is useful if you want to prevent typographic widows.
 
-### The blog page – `/blog/index.html`
+### The blog page – **/blog/index.html**
 
 This is the blog listing page, which shows all your blog posts. You can edit the same things as on the home page to customise it for your website.
 

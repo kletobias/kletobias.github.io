@@ -357,11 +357,11 @@ Since cat would print the entire file, which has 3606 lines, the output was not 
 
 `more` and `less` also print large chunks of text overall in this example and so only a description of both commands is done in the following.
 
-##### `more`
+##### **more**
 
 `~ $ more mesg-new` will print the lines from file `mesg-new` one screen at a time and by pressing the 'space bar' once, it will advance one screen further down. `more` can only move downwards and never upwards in the file.
 
-##### `less`
+##### **less**
 
 `~ $ less mesg-new` will have all the functionality of `more` with the addition of more commands for the user to navigate the output it generates.
 
@@ -598,7 +598,7 @@ Kenny Bania
 ~ $
 ```
 
-##### `uniq`
+##### **uniq**
 
 ```bash
 ~ $ uniq seinfeld-characters
@@ -645,7 +645,7 @@ Uncle Leo,
 ~ $
 ```
 
-##### `wc`
+##### **wc**
 
 Counting lines.
 
