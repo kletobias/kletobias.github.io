@@ -63,16 +63,16 @@ root *
 | PASS_WARN_AGE   | 7               	 |                                                                                               |
 | UID_MIN         | 1000            	 |                                    The lower limit for uid                                    |
 | UID_MAX         | 60000           	 |                                    The upper limit for uid                                    |
-| SYS_UID_MIN     | 201             	 |                              UID_MIX for 'system process users'                               |
+| SYS_UID_MIN     | 201             	 |                              UID_MIN for 'system process users'                               |
 | SYS_UID_MAX     | 999             	 |                              UID_MAX for 'system process users'                               |
 | GID_MIN         | 1000            	 |                                    The lower limit for gid                                    |
 | GID_MAX         | 60000           	 |                                    The upper limit for gid                                    |
-| SYS_GID_MIN     | 201             	 |                       The lower limit for gid of 'system process users'                       |
-| SYS_GID_MAX     | 999             	 |                       The upper limit for gid of 'system process users'                       |
-| CREATE_HOME     | yes             	 |                                                                                               |
+| SYS_GID_MIN     | 201             	 |                              GID_MIN for 'system process users'                               |
+| SYS_GID_MAX     | 999             	 |                              GID_MAX for 'system process users'                               |
+| CREATE_HOME     | yes             	 |         Whether a user home directory is created as part of the user account creation         |
 | UMASK           | 077             	 |                                                                                               |
-| USERGROUPS_ENAB | yes             	 |                                                                                               |
-| ENCRYPT_METHOD  | SHA512          	 |                                                                                               |
+| USERGROUPS_ENAB | yes             	 |     Whether a group with the same name as the username is created during account creation     |
+| ENCRYPT_METHOD  | SHA512          	 |                                  The encryption method used                                   |
 
 - The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
 
