@@ -14,15 +14,15 @@ The command has the following important options. It is a command that is designe
 in the way it is shown here. In a corporate environment much this is automated, so one does not have to define values for each user that has to be created. Default values are used instead.
 
 
-| Label | Description     | Example |
-|-------|-----------------|---------|
-| -m    | MIN DAYS        |         |
-| -M    | MAX DAYS        |         |
-| -d    | LAST DAY        |         |
-| -I    | INACTIVE        |         |
-| -E    | EXPIRATION DATE |         |
-| -W    | PASS_WARN_AGE   |         |
-| User  | USERNAME        |         |
+| Label  | Description     | Example |
+|--------|-----------------|---------|
+| `-m`   | MIN DAYS        |         |
+| `-M`   | MAX DAYS        |         |
+| `-d`   | LAST DAY        |         |
+| `-I`   | INACTIVE        |         |
+| `-E`   | EXPIRATION DATE |         |
+| `-W`   | PASS_WARN_AGE   |         |
+| `User` | USERNAME        |         |
 
 
 #### Source of the default values
