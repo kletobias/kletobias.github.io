@@ -224,7 +224,6 @@ root $ getfacl tx
 user::rw-
 group::r--
 other::r--
-
 root $ setfacl -m u:tklein:rw /tmp/tx
 root $ setfacl -m u:tklein:r /tmp/tx
 root $ getfacl tx
@@ -236,7 +235,6 @@ user:tklein:r--
 group::r--
 mask::r--
 other::r--
-
 root $ setfacl -m u:tklein:rw /tmp/tx
 root $ echo "Changing the acl for the group in the following"
 Changing the acl for the group in the following
@@ -253,7 +251,6 @@ group::r--
 group:tklein:rw-
 mask::rw-
 other::r--
-
 root $ echo "Number 3"
 Number 3
 root $ mkdir -p acl_practice_dir
@@ -274,7 +271,6 @@ root $ getfacl acl_practice_dir/nested_dir/
 user::rwx
 group::r-x
 other::r-x
-
 root $ getfacl acl_practice_dir/nested_dir/new_file
 # file: acl_practice_dir/nested_dir/new_file
 # owner: root
@@ -282,7 +278,6 @@ root $ getfacl acl_practice_dir/nested_dir/new_file
 user::rw-
 group::r--
 other::r--
-
 root $ setfacl -Rm u:user /tmp/acl_practice_dir
 setfacl: Option -m: Invalid argument near character 3
 root $ man setfacl
@@ -299,7 +294,6 @@ user:tklein:rw-
 group::r-x
 mask::rwx
 other::r-x
-
 root $ getfacl acl_practice_dir/nested_dir/new_file
 # file: acl_practice_dir/nested_dir/new_file
 # owner: root
@@ -309,7 +303,6 @@ user:tklein:rw-
 group::r--
 mask::rw-
 other::r--
-
 root $ setfacl -x u:tklein tx
 root $ getfacl tx
 # file: tx
@@ -320,7 +313,6 @@ group::r--
 group:tklein:rw-
 mask::rw-
 other::r--
-
 root $ echo "Set permissions back to default"
 Set permissions back to default
 root $ setfacl -b tx
@@ -331,7 +323,6 @@ root $ getfacl tx
 user::rw-
 group::r--
 other::r--
-
 root $ setfacl -m g:tklein:rw /tmp/tx
 root $
 ```
@@ -635,13 +626,13 @@ exit
 ```bash
 ~ $ whoami
 tklein
-~ $ echo "This fildocuments the endevour of findindavid's last name" > david
+~ $ echo "This fildocuments the endevour of finding david's last name" > david
 ~ $ cat david
 This file documents the endevour ofinding david's last name
 ~ $ cp david david_2
 ~ $ mv -T davidavid_hasselhof
-~ $ cadavid_hasselhof
-This file documents the endevour ofinding david's last name
+~ $ cat david_hasselhof
+This file documents the endevour of finding david's last name
 ~ $ mv david_2 david
 ~ $ rm david_hasselhof
 ~ $ mv davidavid_hasselhoff
@@ -1609,6 +1600,7 @@ drwxrwxr-x. 3 tklein tklein     26 Dec 23 14:52 the_great_adventure
 #### Uniq file
 
 One duplicate line, 'coupe-category' in the text file.
+
 
 ```bash
 ~ $ sort cars/overview
