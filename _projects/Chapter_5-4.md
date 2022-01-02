@@ -276,9 +276,11 @@ root *
 - *Group Password* is the same for every member in the group.
 - *Members of the group* lists all members of the group, separated by ','
 
-| Column 1 | Column 2 | Column 3 | Column 4 |
-|:-:|:-:|:-:|:-:|
-| Group Name | Group Password | gid | Members of the group |
+| Column 1  |      Group Name      |
+|-----------|:--------------------:|
+ | Column 2  |    Group Password    |
+ | Column 3  |         gid          |
+ | Column 4  | Members of the group |
 
 
 #### Making sense of the structure of file '/etc/shadow'
@@ -303,11 +305,15 @@ root *
 8. *Expire\:* Days increase from the specific date 01/01/1970, where the account can no longer be used anymore. It depends on the value set for *Expire*.
 
 
-
-| Column 1  |  Column 2 |  Column 3 |  Column 4 |  Column 5 | Column 6  | Column 7  | Column 8 |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| Username | Password | 'lastchanged' | Minimum  | Maximum | Warn | Inactive | Expire |
-
+| Column 1 | Username      |
+|----------|---------------|
+| Column 2 | Password      |
+| Column 3 | 'lastchanged' |
+| Column 4 | Minimum       |
+| Column 5 | Maximum       |
+| Column 6 | Warn          |
+| Column 7 | Inactive      |
+| Column 8 | Expire        |
 
 ##### Looking up information for a specific user
 

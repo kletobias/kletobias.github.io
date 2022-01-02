@@ -13,11 +13,6 @@ accent_color: '#08877d'
 The command has the following important options. It is a command that is designed to be used for an individual user,
 in the way it is shown here. In a corporate environment much this is automated, so one does not have to define values for each user that has to be created. Default values are used instead.
 
-|    Label    | -m      | -M      | -d      | -I       | -E              | -W       | User     |
-|:-----------:|---------|---------|---------|----------|-----------------|----------|----------|
-| Description | mindays | maxdays | lastday | inactive | expiration date | warndays | username |
-|   Example   |         |         |         |          |                 |          |          |
-
 
 | Label | Description     | Example |
 |-------|-----------------|---------|
