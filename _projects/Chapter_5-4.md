@@ -45,7 +45,7 @@ Accent color changed to #08877d after #000080 after it was #1a7868 originally #4
 
 From left to right of the command written in the above terminal window\:
 
-- `useradd` is the core command to add an user. The following are all options or arguments of this command. *See `useradd --help` for more details*
+- `useradd` is the core command to add a user. The following are all options or arguments of this command. *See `useradd --help` for more details*
   - `-g` defines the group the new user should belong to. Here 'superheroes' is chosen.
   - `-s` defines the shell environment the new user will be using. Shell 'bash' with the executable found in **/bin/bash**
   - `-c` Let\'s one add a user description for the new user in plain text.
@@ -54,12 +54,12 @@ From left to right of the command written in the above terminal window\:
 
 #### Adding a user in the terminal
 
-- One has to have *root* priviledges in order to do any of the following!
+- One has to have *root* privileges in order to do any of the following!
 - The user is added by running `useradd <username>`
 - To verify, that the user was created, the command `id <username>` is used.
 - This command gives additional information, if the username was created correctly (from left to right in the following)\:
   - `uid=1003(ashley)` **uid** gives the userid and the name of the user the id represents.
-  - `gid=1003(ashley)` **gid** gives the group id and name of the group similiar to **uid**. This group will always default to the username. Each user has it\'s own group with the same name, as the user\'s username.
+  - `gid=1003(ashley)` **gid** gives the group id and name of the group similar to **uid**. This group will always default to the username. Each user has it\'s own group with the same name, as the user\'s username.
   - `groups=1003(ashley)` **groups** gives the group memberships that the user has. These can but are not limited to other local user groups, like *staff, administrators, it-department* for example.
 ```bash
 ~ $ su -
@@ -131,7 +131,7 @@ golfers:x:1005:
 - Verification that the group was deleted is done like in the above example.
 
 ```bash
-root * groupdel golfers # Delting group golfers
+root * groupdel golfers # Deleting group golfers
 root * tail -5 /etc/group
 stapsys:x:157:
 stapdev:x:158:
@@ -231,10 +231,9 @@ root *
 
 #### Making sense of the structure of file '/etc/passwd'
 
-- The *Password* column only tells, if a password is set for the user.
-  - It will display an 'x', if one is stored in the `/etc/shadow` file.
--  *uid* is the user id.
--  *gid* is the group id.
+- The *Password* column only tells, if a password is set for the user. It will display an 'x', if one is stored in the `/etc/shadow` file.
+- *uid* is the user id.
+- *gid* is the group id.
 - *Description* can be added as an option when using the `useradd` command, it is option `useradd ... -c 'description of this user.' ...`
 - *Home Directory* gives the path equivalent to `echo $HOME` for the user.
 - *Shell of User* gives the name of the user\'s shell environment, as well as the path to the executable of that shell.
@@ -253,9 +252,15 @@ root *
 
 **Table 1\:** The 7 columns found in the '.csv' like structure inside the */etc/passwd* file are described and assigned to the columns.
 
-| Column 1 | Column 2 | Column 3 | Column 4 |  Column 5   |    Column 6    |   Column 7    |
-|:--------:|:--------:|:--------:|:--------:|:-----------:|:--------------:|:-------------:|
-| Username | Password |   uid    |   gid    | Description | Home Directory | Shell of user |
+| Column No. |         Variable          |
+|:----------:|:-------------------------:|
+|  Column 1  |         Username          |
+|  Column 2  |         Password          |
+|  Column 3  |            uid            |
+|  Column 4  |            gid            |
+|  Column 5  |        Description        |
+|  Column 6  |      Home Directory       |
+|  Column 7  | Shell Environment of User |
 
 
 ##### Sample output of '/etc/passwd'
