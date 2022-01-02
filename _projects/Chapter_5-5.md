@@ -39,9 +39,9 @@ PASS_MAX_DAYS   99999
 PASS_MIN_DAYS   0
 PASS_MIN_LEN    5
 PASS_WARN_AGE   7
-UID_MIN         1000 # This is the lower limit for uid
-UID_MAX         60000 # Similarly, this is the upper limit for uid
-SYS_UID_MIN     201 # This variable is used for any user that is a 'system process user'
+UID_MIN         1000
+UID_MAX         60000
+SYS_UID_MIN     201
 SYS_UID_MAX     999
 GID_MIN         1000
 GID_MAX         60000
@@ -54,25 +54,25 @@ ENCRYPT_METHOD  SHA512
 root * 
 ```
 
-| Variable        |       Example	        |Description |
-|-----------------|:---------------------:|:---: |
-| MAIL_DIR        |   /var/spool/mail 	   |  |
-| PASS_MAX_DAYS   |   99999           	   |  |
-| PASS_MIN_DAYS   |   0               	   |  |
-| PASS_MIN_LEN    |   5               	   |  |
-| PASS_WARN_AGE   |   7               	   |  |
-| UID_MIN         |   1000            	   |  |
-| UID_MAX         |   60000           	   |  |
-| SYS_UID_MIN     |   201             	   |  |
-| SYS_UID_MAX     |   999             	   |  |
-| GID_MIN         |   1000            	   |  |
-| GID_MAX         |   60000           	   |  |
-| SYS_GID_MIN     |   201             	   |  |
-| SYS_GID_MAX     |   999             	   |  |
-| CREATE_HOME     |   yes             	   |  |
-| UMASK           |   077             	   |  |
-| USERGROUPS_ENAB |   yes             	   |  |
-| ENCRYPT_METHOD  |   SHA512          	   |  |
+| Variable        |     Example	      |                            Description                             |
+|-----------------|:-----------------:|:------------------------------------------------------------------:|
+| MAIL_DIR        | /var/spool/mail 	 |                  This is the lower limit for uid                   |
+| PASS_MAX_DAYS   | 99999           	 |             Similarly, this is the upper limit for uid             |
+| PASS_MIN_DAYS   | 0               	 | This variable is used for any user that is a 'system process user' |
+| PASS_MIN_LEN    | 5               	 |                                                                    |
+| PASS_WARN_AGE   | 7               	 |                                                                    |
+| UID_MIN         | 1000            	 |                                                                    |
+| UID_MAX         | 60000           	 |                                                                    |
+| SYS_UID_MIN     | 201             	 |                                                                    |
+| SYS_UID_MAX     | 999             	 |                                                                    |
+| GID_MIN         | 1000            	 |                                                                    |
+| GID_MAX         | 60000           	 |                                                                    |
+| SYS_GID_MIN     | 201             	 |                                                                    |
+| SYS_GID_MAX     | 999             	 |                                                                    |
+| CREATE_HOME     | yes             	 |                                                                    |
+| UMASK           | 077             	 |                                                                    |
+| USERGROUPS_ENAB | yes             	 |                                                                    |
+| ENCRYPT_METHOD  | SHA512          	 |                                                                    |
 
 - The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
 
