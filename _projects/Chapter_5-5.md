@@ -18,13 +18,23 @@ in the way it is shown here. In a corporate environment much this is automated, 
 
 | Option | Description     | Example                                                                                      |
 |:------:|-----------------|----------------------------------------------------------------------------------------------|
-| `-m`   | MIN DAYS        | Minimum days between password changes                                                        |
+|  `-m`  | MIN DAYS        | Minimum days between password changes                                                        |
 | `-M`   | MAX DAYS        | Maximum period, before user is forced to change his/her password                             |
-| `-d`   | LAST DAY        | The number of days, counting from 01/01/1970, where the most recent password change happened |
-| `-I`   | INACTIVE        | The number of days, after the password expires, that a account gets disabled                 |
+|  `-d`  | LAST DAY        | The number of days, counting from 01/01/1970, where the most recent password change happened |
+|  `-I`  | INACTIVE        | The number of days, after the password expires, that a account gets disabled                 |
 | `-E`   | EXPIRATION DATE | Number of days starting from 01/01/1970, where the account will be disabled                  |
 | `-W`   | PASS_WARN_AGE   | The number of days before a user's password expires, that a warning is given to him          |
 | `User` | USERNAME        | The username                                                                                 |
+
+| Option | Description     | Example                                                                                      | Column No. in '/etc/shadow' |
+|:------:|-----------------|----------------------------------------------------------------------------------------------|:---------------------------:|
+|  `-m`  | MIN DAYS        | Minimum days between password changes                                                        |              4              |
+|  `-M`  | MAX DAYS        | Maximum period, before user is forced to change his/her password                             |              5              |
+|  `-d`  | LAST DAY        | The number of days, counting from 01/01/1970, where the most recent password change happened |              3              |
+|  `-I`  | INACTIVE        | The number of days, after the password expires, that a account gets disabled                 |              7              |
+|  `-E`  | EXPIRATION DATE | Number of days starting from 01/01/1970, where the account will be disabled                  |              8              |
+|  `-W`  | PASS_WARN_AGE   | The number of days before a user's password expires, that a warning is given to him          |              6              |
+| `User` | USERNAME        | The username                                                                                 |              1              |
 
 
 #### Source of the default values
@@ -62,7 +72,7 @@ root *
 | PASS_MAX_DAYS   | 99999           	 |             Sets the maximum number of days the user has to change their password             |
 | PASS_MIN_DAYS   | 0               	 | The user has to wait the here defined number of days, before he/she can change their password |
 | PASS_MIN_LEN    | 5               	 |                      The minimum length, that a user password must have.                      |
-| PASS_WARN_AGE   | 7               	 |    The number of days before a users's password expires, that a warning is given to him.     |
+| PASS_WARN_AGE   | 7               	 |     The number of days before a user's password expires, that a warning is given to him.     |
 | UID_MIN         | 1000            	 |                                    The lower limit for uid                                    |
 | UID_MAX         | 60000           	 |                                    The upper limit for uid                                    |
 | SYS_UID_MIN     | 201             	 |                              UID_MIN for 'system process users'                               |
@@ -77,10 +87,17 @@ root *
 | ENCRYPT_METHOD  | SHA512          	 |                                  The encryption method used                                   |
 
 - In order for the uid variable to be more safe, one could increase the range for it\'s values by increasing the range of possible values for it.
-- Another option to make it more secure would be to make the valus for uid harder to guess, using an algorithm to create pseudo random uid values for uid.
+- Another option to make it more secure would be to make the values for uid harder to guess, using an algorithm to create pseudo random uid values for uid.
 - The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
 
 ##### Creating a new user 'kate'
+
+- First, a new group called *cyclists* is created by use of `groupadd`.
+- Then, the user *kate* is created with command `useradd`, specifying several options.
+  - `-g` makes her a member of group *cyclists*.
+  - `-d` sets her shell environment to **bin/bash**.
+  - `-c` Adds a description.
+  - `-m -d` Sets her *'home directory'* *username*, separated by space.
 
 ```bash
 root * groupadd cyclists
@@ -110,7 +127,8 @@ root *
 
 #### Changing the initiation values for 'kate'
 
-Below are the values for user *kate* after initialisation.
+Below are the values from **/etc/shadow** for user *kate* after initialisation 
+and changes to the default values using `chage` with various options.
 
 - The third column (`chage -d`) has a value of **18987**. It marks the date, the account password was created, counting the days since 01/01/1970 in this case till creation.
 - 
