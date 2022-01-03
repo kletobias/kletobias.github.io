@@ -16,16 +16,6 @@ The command has the following important options. It is a command that is designe
 in the way it is shown here. In a corporate environment much this is automated, so one does not have to define values for each user that has to be created. Default values are used instead.
 
 
-| Option | Description     | Example                                                                                      |
-|:------:|-----------------|----------------------------------------------------------------------------------------------|
-|  `-m`  | MIN DAYS        | Minimum days between password changes                                                        |
-| `-M`   | MAX DAYS        | Maximum period, before user is forced to change his/her password                             |
-|  `-d`  | LAST DAY        | The number of days, counting from 01/01/1970, where the most recent password change happened |
-|  `-I`  | INACTIVE        | The number of days, after the password expires, that a account gets disabled                 |
-| `-E`   | EXPIRATION DATE | Number of days starting from 01/01/1970, where the account will be disabled                  |
-| `-W`   | PASS_WARN_AGE   | The number of days before a user's password expires, that a warning is given to him          |
-| `User` | USERNAME        | The username                                                                                 |
-
 | Option | Description     | Example                                                                                      | Column No. in '/etc/shadow' |
 |:------:|-----------------|----------------------------------------------------------------------------------------------|:---------------------------:|
 |  `-m`  | MIN DAYS        | Minimum days between password changes                                                        |              4              |
@@ -90,6 +80,22 @@ root *
 - Another option to make it more secure would be to make the values for uid harder to guess, using an algorithm to create pseudo random uid values for uid.
 - The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
 
+### Recap - Structure of */etc/shadow*
+```
+will:$6$.n.:17736:0:99999:7:::
+[--] [----] [---] - [---] ----
+|      |      |   |   |   |||+-----------> 9. Unused
+|      |      |   |   |   ||+------------> 8. Expiration date
+|      |      |   |   |   |+-------------> 7. Inactivity period
+|      |      |   |   |   +--------------> 6. Warning period
+|      |      |   |   +------------------> 5. Maximum password age
+|      |      |   +----------------------> 4. Minimum password age
+|      |      +--------------------------> 3. Last password change
+|      +---------------------------------> 2. Encrypted Password
++----------------------------------------> 1. Username
+```
+**Graphic\:** [From linuxize](https://linuxize.com/post/etc-shadow-file/)
+
 ##### Creating a new user 'kate'
 
 - First, a new group called *cyclists* is created by use of `groupadd`.
@@ -125,18 +131,29 @@ kate:!!:18987:0:99999:7:::
 root * 
 ```
 
-#### Changing the initiation values for 'kate'
+#### Updating some initial values for 'kate'
+
+##### Reading the default values in '/etc/shadow' for 'kate'
 
 Below are the values from **/etc/shadow** for user *kate* after initialisation 
-and changes to the default values using `chage` with various options.
+and changes to the default values using `chage` with various options. The ordered list shows the corresponding column number in the **/etc/shadow** file. 
 
-- The third column (`chage -d`) has a value of **18987**. It marks the date, the account password was created, counting the days since 01/01/1970 in this case till creation.
-- 
-
+3. Set by using\: `chage -d <username>` has a value of **18987**. It marks the date, the account password was created, counting the days since 01/01/1970 in this case till creation.
+4. `chage -m <username>` alters this value. Here, there is no minimum amount the user has to wait until they can change their password.
+5. The default value for `chage -M <username>` during account creation is **99999** days. That means, that the user never has to change their password.
+6. The warning period `chage -W <username>` defaults to **7** days.
+7. Is the option `chage -I <username>` that sets for how long the user account will still be active, after the password has not been updated within the time limit found in the value for **column 5.**.
 ```vim
 kate:!!:18987:0:99999:7:::
 ```
 
+##### Altering values for 'kate' in '/etc/shadow'
+
+Values, that are changed for *kate*, are\:
+
+4. The time span the user has to wait, until they can change their password went from **0** days to **5** days.
+5. *Kate* now has to change her password at least every **90** days, prior she did not have to change it ever. The value was **99999** by default.
+6. A warning was sent to kate, **7** days before the time period defined by `chage -M <username>` was over. Now she gets a warning, 10 days before that time period is over. Since `chage -M <username>` was set to **99999** `chage -W 7` would have never been triggered.
 ```bash
 root * chage -m 5 -M 90 -W 10 -I 3 kate
 root * grep "kate" /etc/shadow
