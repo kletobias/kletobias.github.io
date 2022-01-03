@@ -136,13 +136,13 @@ root *
 ##### Reading the default values in '/etc/shadow' for 'kate'
 
 Below are the values from **/etc/shadow** for user *kate* after initialisation 
-and changes to the default values using `chage` with various options. The ordered list shows the corresponding column number in the **/etc/shadow** file. 
+and changes to the default values using `chage` with various options. The ordered list shows the corresponding column numbers in the **/etc/shadow** file. 
 
-3. Set by using\: `chage -d <username>` has a value of **18987**. It marks the date, the account password was created, counting the days since 01/01/1970 in this case till creation.
-4. `chage -m <username>` alters this value. Here, there is no minimum amount the user has to wait until they can change their password.
-5. The default value for `chage -M <username>` during account creation is **99999** days. That means, that the user never has to change their password.
-6. The warning period `chage -W <username>` defaults to **7** days.
-7. Is the option `chage -I <username>` that sets for how long the user account will still be active, after the password has not been updated within the time limit found in the value for **column 5.**.
+3. Set by using\: `chage -d <username>` has a value of **18987**. It marks the date, the account password was created, counting the days since 01/01/1970 in this case till creation of the account.
+4. `chage -m <username>` alters the value for minimum time period between password changes. Here, there is no minimum amount the user has to wait until they can change their password.
+5. The default value for `chage -M <username>` during account creation is **99999** days. That means that the user never has to change their password.
+6. The warning period `chage -W <username>` defaults to **7** days and is changed to **10**.
+7. Is the option `chage -I <username>` that sets for how long the user account will still be active, after the password has not been updated within the time limit found in the value for **column 5.** and `chage -W <username>` as well.
 ```vim
 kate:!!:18987:0:99999:7:::
 ```
