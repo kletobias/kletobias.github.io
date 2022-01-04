@@ -1,6 +1,6 @@
 ---
-title: 'EDA - Hamburg rental apartments'
-date: 2019-07-28 00:00:00
+title: 'EDA Hamburg rental apartments'
+date: 2022-01-03 01:00:00
 description: 'This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.'
 featured_image: '/images/putty_ssh.png'
 ---
@@ -34,23 +34,19 @@ exactly one of the categories for each variable. Since all, but
 variable type, only `noise_day`, `noise_night` are excluded from
 Table 1. It is not possible to give the
 summaries found in Table 1 for string type variables. The remaining variables have
-a natural, numeric scale and are therefore continuous numerical variables [@kuhnAppliedPredictiveModeling2013].
+a natural, numeric scale and are therefore continuous numerical variables.
 
-We begin by loading all the neccessary libraries for the analysis.
-
+We begin by loading all the necessary libraries for the analysis.
 
 ```python
 import os
 print(os.getcwd())
 ```
 
-    /Users/tobiasklein 1/PycharmsProjects/so_deep/theme_for_github_pages/gitub_pages_sources
-
-
+'/Users/tobiasklein 1/PycharmsProjects/so_deep/theme_for_github_pages/gitub_pages_sources'
 
 ```py
 import geopandas
-# import geoplot as gplt
 import matplotlib
 import matplotlib.pyplot as plt
 import missingno as msno
@@ -73,7 +69,7 @@ loading the cleaned dataset with only the final variables, that are going to be 
 
 
 ```python
-df = pd.read_csv('/Users/tobiasklein 1/PycharmsProjects/so_deep/bachelor_thesis/interim_data/EDA_df_describe.csv')
+df = pd.read_csv(.csv')
 ```
 
 
@@ -107,5 +103,3 @@ df
 | smaller_0.6       | 9480.0 | 0.48    | 0.5   | 0.0    | 0.0    | 0.0    | 0.0    | 1.0    | 1.0     | 1.0    |
 | baujahr_imp       | 9480.0 | 1966.56 | 31.95 | 1850.0 | 1920.0 | 1953.0 | 1964.0 | 1992.0 | 2013.0  | 2019.0 |
 
-
-(^1): kuhnAppliedPredictiveModeling2013
