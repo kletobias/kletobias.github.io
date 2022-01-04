@@ -1,7 +1,8 @@
 ---
 title: 'EDA - Hamburg rental apartments'
 date: 2019-07-28 00:00:00
-description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
+description: 'This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.'
+featured_image: '/images/putty_ssh.png'
 ---
 
 # EDA - Hamburg rental apartments
