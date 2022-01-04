@@ -1,6 +1,6 @@
 ---
 title: 'SHORT AND EZ EDA Hamburg rental apartments'
-date: 2022-01-03 02:00:00
+date: 2022-01-04 02:00:00
 description: 'This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.'
 featured_image: '/images/putty_ssh.png'
 ---
