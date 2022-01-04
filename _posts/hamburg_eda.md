@@ -1,5 +1,5 @@
 ---
-title: EDA - Hamburg rental apartments
+title: 'EDA - Hamburg rental apartments'
 date: 2019-07-28 00:00:00
 description: This part of the Hamburg rental apartments, is about the visualisation of the variables in the dataset.
 ---
@@ -47,7 +47,7 @@ print(os.getcwd())
 
 
 
-```python
+```py
 import geopandas
 # import geoplot as gplt
 import matplotlib
