@@ -15,7 +15,7 @@ The Vim text editor was used and CentOS 7.4 was the distribution installed on th
 <!---Gallery is used, when listing the articles, featured is the image placed at the top of the article.
 -->
 
-### `sed` command
+### *sed* command
 
 - `sed` replaces a string in a file with a new string.
 - It can be used to find and delete a line of a file. Use cases are\:
@@ -120,7 +120,7 @@ It left an empty file after running the above command. There was an occurrence o
 
 ---
 
-#### Deleting empty lines using `sed`
+#### Deleting empty lines using *sed*
 
 Using a different file 'seinfeld-characters', which has some empy lines, the task is to delete all empty files from the file. The file at the start\:
 
@@ -181,7 +181,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Removing the first line of a file using `sed`
+#### Removing the first line of a file using *sed*
 
 ```bash
 ~ $ cat seinfeld-characters
@@ -233,7 +233,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Removing lines 1 and 2 of a file using `sed`
+#### Removing lines 1 and 2 of a file using *sed*
 
 Removing lines '1' and '2' can be done like illustrated above.
 
@@ -419,7 +419,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Limiting the lines `sed` will process.
+#### Limiting the lines *sed* will process.
 
 One can limit the lines, which are processed by the `sed` command in a file. The excluded line or lines will not be processed by the `sed` command, like so\:
 
