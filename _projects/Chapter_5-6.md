@@ -111,7 +111,7 @@ group is by default listed in the file `visudo`.
 
 ##### Example
 
-The example comes from a file that can be accessed by running `visudo` with *root* priviledges.
+The example comes from a file that can be accessed by running `visudo` with *root* privileges.
 
 ```bash
 ## Allow root to run any commands anywhere
@@ -133,7 +133,7 @@ root *
 ###### Verification
 
 - Using `id <username>` one gets all the groups the user is a member of.
-- `grep "wheel" /etc/group` will print a line from the */etc/group* file, to verify the changes.
+- `grep "wheel" /etc/group` will print a line from the **/etc/group** file, to verify the changes.
 
 ```bash
 root * id tklein
@@ -146,7 +146,7 @@ root *
 ##### Retrying dmidecode and fdisk commands
 
 After it was not able to run either `dmidecode` or `fdisk -l` using my user account *tklein*,
-now it is possible to run `dmidecode` being part of group wheel\:
+now it is possible to run `dmidecode` being part of group wheel:
 
 
 ```bash
@@ -228,5 +228,4 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 ~ $
 ```
-
 
