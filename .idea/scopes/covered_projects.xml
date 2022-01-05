@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="covered_projects" pattern="file[linux-course-notes]:module4/covered_projects/*||file[linux-course-notes]:module5/covered_projects/*" />
+</component>

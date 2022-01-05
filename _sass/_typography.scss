@@ -238,6 +238,7 @@ code {
   font-size: $p-size;
   line-height: $p-lineheight;
   letter-spacing: $p-spacing;
+  white-space: nowrap;
 }
 
 ::selection {
