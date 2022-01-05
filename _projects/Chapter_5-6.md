@@ -196,7 +196,7 @@ Handle 0x0008, DMI type 2, 15 bytes
 ...
 ```
 
-The `fdisk -l` command\:
+The `fdisk -l` command:
 
 ```bash
 ~ $ sudo fdisk -l
