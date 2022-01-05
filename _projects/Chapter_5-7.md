@@ -40,10 +40,10 @@ localhost.localdomain
 
 | Column | Example          |  
 |--|-------------------------|  
-| uid | kate                 |  
-| terminal id for uid |  :0      |  
-| time logged in for uid |   2019-03-10 14:33 (:0)     |
-| hostname				|	*win11.fritz.box*	|
+| **Username** | kate                 |  
+| **Terminal id for uid** |  :0      |  
+| **Time logged in for uid** |   2019-03-10 14:33 (:0)     |
+| **Hostname**				|	*win11.fritz.box*	|
 
 ```bash
 ~ $ who
@@ -105,14 +105,14 @@ wtmp begins Thu Dec 23 13:17:01 2021
 ~ $ 
 ```
 
-| Column No. 	| Description                                	 |             Example            	|
-|:----------:	|---------------------------------------------|:------------------------------:	|
-|      1     	| Username                                   	 |              will              	|
-|      2     	| Terminal id                                	 |              PTS/1             	|
-|      3     	| User's IP Address / Hostname               	 |     169.254.245.11 / myvm1     	|
-|      4     	| Most Recent Login                          	 |        Mon Dec 27 17:16        	|
-|      5     	| Most Recent Logout                         	 | - 16:53 or '*still logged in*' 	|
-|      6     	| Timespan user was online most recently 	    |         (07:59) (hh:mm)        	|
+| Column No. 	| Description                                	     |             Example            	|
+|:----------:	|--------------------------------------------------|:------------------------------:	|
+|      1     	| **Username**                                   	 |              will              	|
+|      2     	| **Terminal id**                                	 |              PTS/1             	|
+|      3     	| **User's IP Address / Hostname**               	 |     169.254.245.11 / myvm1     	|
+|      4     	| **Most Recent Login**                          	 |        Mon Dec 27 17:16        	|
+|      5     	| **Most Recent Logout**                         	 | - 16:53 or '*still logged in*' 	|
+|      6     	| **Timespan user was online most recently** 	     |         (07:59) (hh:mm)        	|
 
 The following example shows how one can get column 1 alone printed in the console, have its values sorted and filter 
 the unique values of column 1. The final pipe of the output will have the output printed with the line numbers for each unique 
@@ -120,7 +120,7 @@ entry of column 1.
 
 *Note: awk only works in column 1 here. It separates columns by whitespace by default and the output of `last` is inconsistent 
 in its column separation. Whitespace can be found in most of the values in its columns and so, one might have to add a different 
-separator with the help of regular expressions to make this a *CSV* like table. It even prints *wtmp* at the bottom, because 
+separator with the help of regular expressions to make this a CSV like table. It even prints wtmp at the bottom, because 
 it aligns with the first column of the output.*
 
 ```bash
@@ -147,16 +147,16 @@ more detail compared to the latter.
 
 The fields found in the output of `w` are listed and described. An example for the values one can find in the output is given as well.
 
-| Column | Description                                                                                | Example         |
-|--------|--------------------------------------------------------------------------------------------|-----------------|
-| *USER* | Prints the username                                                                        | *kate*          |
-| TTY    | Name of the terminal used by the user                                                      | tty1            |
-| FROM   | The hostname or IP from where the user is logged in                                        | 169.117.128.105 |
-| LOGIN@ | The time when the user logged in                                                           | 8:30            |
-| IDLE   | The time since the user last interacted with the terminal,<br /> idle time                 | 7:19m           |
-| JCPU   | The time used by all the processes attached to the tty                                     | 0.04s           |
-| PCPU   | The time used by the user's current process.<br /> The one displayed in the **WHAT** field | 0.04s           |
-| WHAT   | The user's current process and options/arguments                                           | w               |
+| Column     | Description                                                                                | Example         |
+|------------|--------------------------------------------------------------------------------------------|-----------------|
+| **USER**  | Prints the username                                                                        | *kate*          |
+| **TTY**    | Name of the terminal used by the user                                                      | tty1            |
+| **FROM**   | The hostname or IP from where the user is logged in                                        | 169.117.128.105 |
+| **LOGIN@** | The time when the user logged in                                                           | 8:30            |
+| **IDLE**   | The time since the user last interacted with the terminal,<br /> idle time                 | 7:19m           |
+| **JCPU**   | The time used by all the processes attached to the tty                                     | 0.04s           |
+| **PCPU**   | The time used by the user's current process.<br /> The one displayed in the **WHAT** field | 0.04s           |
+| **WHAT**   | The user's current process and options/arguments                                           | w               |
 
 
 ##### *w* with no options or arguments
@@ -192,7 +192,52 @@ tklein   pts/1    imac2017.fritz.b 15:20    8:16m  0.08s  0.02s -bash
 #### *finger* command
 
 `finger` is not part of the packages that come with a default **CentOS 7.9** installation.<br />
-However it is a very powerful tool to have in one's arsenal for it comes to user monitoring. 
+However it is a very powerful tool to have in one's arsenal when it comes to user monitoring. 
 It can be installed easily, if one has *root privileges*.<br />
 It can be installed using package manager **yum** like so:<br />
 `yum install finger -y`
+
+Somehow `finger` took the descriptions I added for users *kate* and *will* and just split them<br />
+over the columns **Name** and **Office**. I added the descriptions to the `useradd` command. <br />
+`useradd ... -c "User is a real cyclist, no ebike.`<br />
+Looking up `man useradd` the answer is quickly found. `-c` is *currently* used as the field for the user's full name.<br />
+That is what it says.
+
+>        -c, --comment COMMENT
+>           Any text string. It is generally a short description of the login,
+>			and is currently used as the field for the user's full name.
+
+
+```bash
+~ $ finger
+Login    Name                    Tty      Idle  Login Time   Office     Office Phone   Host
+kate     User is a real cyclist  pts/2    6:38  Dec 27 18:16  no ebike.                (imac2017.fritz.box)
+tklein   tklein                  tty1       2d  Dec 23 13:19           
+tklein   tklein                  pts/0          Dec 27 17:16                           (imac2017.fritz.box)
+tklein   tklein                  pts/1    9:12  Dec 27 15:20                           (imac2017.fritz.box)
+will     His wife says           pts/3    6:37  Dec 27 18:17  that his                 (imac2017.fritz.box)
+~ $ 
+```
+
+#### *id* command
+
+##### Syntax of the command
+
+`id [username]`
+
+The `id` command can be entered without any further arguments. Like that it will print information  
+of the user that runs the command in the shell. See first line of the example for that.  
+It will always display:
+-The *uid*, the numerical, unique key that every user has. It is between **UID_MIN** and **UID_MAX**, as covered in 5.5.
+- The *gid* is the numerical, unique representation of the **group**, that a user is a member of. Something like a user group.
+- *groups* lists further groups and group ids of groups that the user is a member of.
+
+```bash
+~ $ id
+uid=1000(tklein) gid=1000(tklein) groups=1000(tklein),10(wheel) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+~ $ id will
+uid=1005(will) gid=1005(golfers) groups=1005(golfers)
+~ $ id kate
+uid=1006(kate) gid=1007(cyclists) groups=1007(cyclists)
+~ $ 
+```
