@@ -229,13 +229,11 @@ time {
 
 code {
   background-color: #c6eae9;
-  border: 0.5px none #0c7068;
-}
-
-code {
+  border: 0.5px none #369176;
   font-family: $inline_code_font;
   font-weight: 400;
-  font-size: $p-size;
+//  font-size: $p-size;
+  font-size: 15pt;
   line-height: $p-lineheight;
   letter-spacing: $p-spacing;
   white-space: nowrap;
