@@ -43,6 +43,7 @@ Tue Dec 28 11:38:47 CET 2021
 
 #### *uptime*
 
+The `uptime` command gives information about the system. Namely about for how long it has been running in total, the number of currently online users and the **CPU** load. The **CPU** load is measured by looking at the average number of jobs in the system's *run queue* for 3 different time periods. The periods are 1, 5 and 15 minutes.
 
 | Column No. | Output<br /> Type                                       | Exemplary<br /> Output         |
 |------------|---------------------------------------------------------|--------------------------------|
