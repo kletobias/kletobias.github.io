@@ -2,7 +2,7 @@
 title: 'Overview and Comparison of Popular Directory Services'
 subtitle: 'Learning Linux - Section 5.10'
 date: 2022-01-06 00:00:00
-description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. *Active Directory*, *LDAP*, *IDM*, *WinBIND*, *OpenLDAP*.'
+description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. Active Directory, LDAP, IDM, WinBIND, OpenLDAP.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
 accent_color: '#08877d'
@@ -28,3 +28,5 @@ accent_color: '#08877d'
   - Another directory service option.
 - *LDAP* = Lightweight Directory Access Protocol
   - *LDAP* is a protocol and not a service.
+  - It is needed to communicate to any *Directory Service* 
+

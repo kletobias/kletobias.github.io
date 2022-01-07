@@ -1,5 +1,6 @@
 ---
 title: 'Linux Course: Module 4 Notes'
+:set expandtab
 subtitle: 'Notes and Examples.'
 date: 2021-11-24 00:00:00
 description: 'This article covers some of the most essential commands used in any Linux distribution. CentOS 7 was the OS used in the following, it was a virtual machine and accessed through ssh.'
@@ -26,7 +27,7 @@ touch bspl{0001..0003}.c
 
 TODO Change inline math that is not rendered correctly on the website to something else.
 
-## `chmod`
+## *chmod*
 
 -   To give user who is owner of the file write permissions for file 'jerry', type `chmod u+w jerry`
 -   To revoke write permissions, type `chmod u-w jerry`
