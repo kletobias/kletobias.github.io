@@ -1,7 +1,7 @@
 ---
 title: 'Processes, Jobs and Scheduling'
 subtitle: 'Learning Linux - Section 5.12'
-date: 2021-12-07 20:00:00
+date: 2022-01-07 20:00:00
 description: 'This section introduces the terms Application, Script, Process, Daemon, Thread and job. These will be described in more detail in the following sections.
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
