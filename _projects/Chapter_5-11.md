@@ -25,15 +25,18 @@ accent_color: '#08877d'
 The `date` command returns information about the current date of the system. 
 It returns the following information from left to right:
 
-| date          |
-|---------------|
-| Day of the week |
-| Month         |
+
+| date             |
+|------------------|
+| Day of the week  |
+| Month            |
 | Day of the month |
-| Time          |
-| Time zone     |
- | Year				      |
+| Time             |
+| Time zone        |
+ | Year             |
 [Date Command Table]
+
+
 ```bash
 ~ $ date
 Tue Dec 28 11:38:47 CET 2021
