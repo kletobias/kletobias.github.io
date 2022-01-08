@@ -44,7 +44,6 @@ An simple example for such a script is the following:
 #!/bin/bash
 echo -e " the command 'whoami' returns:\n"
 whoami
-echo "${PS1}"
 mkdir -p /home/tklein/script-execution
 exedir='/home/tklein/script-execution'
 cd ${exedir}
@@ -65,7 +64,6 @@ Which returns the following output on the command line:
  the command 'whoami' returns:
 
 tklein
-
 
 The file 'cars_are_still_best' has that many lines:
 5 /home/tklein/script-execution/cars_are_still_best
