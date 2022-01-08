@@ -3,8 +3,8 @@ title: 'Overview and Comparison of Popular Directory Services'
 subtitle: 'Learning Linux - Section 5.10'
 date: 2022-01-06 00:00:00
 description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. Active Directory, LDAP, IDM, WinBIND, OpenLDAP.'
-featured_image: bash-ga254901e3_1280.png
-gallery_images: Bash_GNOME_Terminal_screenshot.png
+featured_image: 'enegative-space-abstract-grunge-swirl-texture.jpeg'
+gallery_images: 'enegative-space-rusty-metals-paint-flakes.jpeg'
 accent_color: '#08877d'
 ---
 
