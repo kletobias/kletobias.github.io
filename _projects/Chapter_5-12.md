@@ -4,7 +4,7 @@ subtitle: 'Learning Linux - Section 5.12'
 date: 2022-01-07 20:00:00
 description: 'This section introduces the terms Application, Script, Process, Daemon, Thread and Job. These will be described in more detail in the following sections.'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'jtlkr89487--kbcdtTGWDD-_%$_t.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 

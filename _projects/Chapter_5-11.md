@@ -4,7 +4,7 @@ subtitle: 'Learning Linux - Section 5.11'
 date: 2022-01-07 07:00:00
 description: 'In this Section we look at the differences between some of the more popular Directory Services. <br />In detail, these are: Active Directory, LDAP, IDM, WinBIND and OpenLDAP.'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'jtlkr89487--kbcdtTGWDD-_%$_t.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
