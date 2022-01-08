@@ -3,8 +3,8 @@ title: 'sed command'
 subtitle: 'Learning Linux - Section 5.3'
 date: 2021-11-28 00:00:00
 description: 'This article covers some of the essential commands or concepts used in any Linux distribution.'
-featured_image: 'enegative-space-abstract-grunge-swirl-texture.jpeg'
-gallery_images: 'enegative-space-rusty-metals-paint-flakes.jpeg'
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'jtlkr89487--kbcdtTGWDD-_%$_t.jpeg'
 accent_color: '#08877d'
 ---
 

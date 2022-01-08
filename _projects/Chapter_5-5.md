@@ -3,8 +3,8 @@ title: chage command in depth
 subtitle: 'Learning Linux - Section 5.5'
 date: 2021-11-30 05:05:00
 description: 'The /etc/login.defs File is described and the use of the variables that are defined inside this file in terms of their role during the usage of useradd command.'
-featured_image: 'enegative-space-abstract-grunge-swirl-texture.jpeg'
-gallery_images: 'enegative-space-rusty-metals-paint-flakes.jpeg'
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'jtlkr89487--kbcdtTGWDD-_%$_t.jpeg'
 accent_color: '#08877d'
 ---
 
