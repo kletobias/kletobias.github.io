@@ -5,7 +5,7 @@ date: 2022-01-06 07:00:00
 description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. Active Directory, LDAP, IDM, WinBIND, OpenLDAP.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#08877d'
+accent_color: '#66cc99'
 ---
 
 ### System Utility Commands
