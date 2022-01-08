@@ -33,13 +33,13 @@ localhost.localdomain
 ~ $ 
 ```
 
-#### *who* command
+#### *who*
 
 - Tells one how many people are logged in at the time of running the command.
 
 
 | Column | Example          |  
-|--|-------------------------|  
+|--------|-------------------|  
 | **Username** | kate                 |  
 | **Terminal id for uid** |  :0      |  
 | **Time logged in for uid** |   2019-03-10 14:33 (:0)     |
@@ -58,7 +58,7 @@ will     pts/3        2021-12-27 18:17 (win11.fritz.box)
 `who` is oftentimes used, if the system is running slow and the system administrator wants to check who is logged in and how many are 
 logged in.
 
-#### *last* command
+#### *last*
 
 `last` tells one everything about any user that has logged into the system, ever since the file **/var/log/wtmp** was 
 created, by default.
@@ -134,7 +134,7 @@ it aligns with the first column of the output.*
 ~ $ 
 ```
 
-#### The *w* command
+#### The *w*
 
 The `w` command gives a similar output to the one `less` generates, but it gives more information, 
 more detail compared to the latter.
@@ -174,7 +174,7 @@ kate     pts/2    imac2017.fritz.b 18:16    4:45m  0.03s  0.03s -bash
 will     pts/3    imac2017.fritz.b 18:17    4:44m  0.03s  0.03s -bash
 ~ $ 
 ```
-###### *w* with the [USER] argument
+###### *w* with the \[USER\] argument
 
 `w tklein`
 
@@ -189,7 +189,7 @@ tklein   pts/1    imac2017.fritz.b 15:20    8:16m  0.08s  0.02s -bash
 ```
 
 
-#### *finger* command
+#### *finger*
 
 `finger` is not part of the packages that come with a default **CentOS 7.9** installation.<br />
 However it is a very powerful tool to have in one's arsenal when it comes to user monitoring. 
@@ -219,7 +219,7 @@ will     His wife says           pts/3    6:37  Dec 27 18:17  that his          
 ~ $ 
 ```
 
-#### *id* command
+#### *id*
 
 ##### Syntax of the command
 

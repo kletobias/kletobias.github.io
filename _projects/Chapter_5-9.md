@@ -29,7 +29,7 @@ For the `local account` a new user is added by running the commands covered in t
 sections. Commands like `useradd`, `groupadd`, `usermod -G`, `id [username]`, `grep <username> /etc/passwd`, `grep <username> /etc/shadow` 
 `grep <username> /etc/group`, `chage`, `userdel` and `groupdel` to create a new user account, to assign the correct permissions to it, to create new a new group for example and to verify that everything was created correctly as well. This is on a per-user basis and offers very limited scaling!
 
-##### Domain\/Directory Accounts
+##### Domain/Directory Accounts
 
 The authentication works like this for domain and directory accounts:
 
