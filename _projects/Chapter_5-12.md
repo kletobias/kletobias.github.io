@@ -42,35 +42,41 @@ An simple example for such a script is the following:
 
 ```shell
 #!/bin/bash
-
+echo -e " the command 'whoami' returns:\n"
 whoami
 echo "${PS1}"
 mkdir -p /home/tklein/script-execution
 exedir='/home/tklein/script-execution'
 cd ${exedir}
 cat /home/tklein/cars_are_best > ${exedir}/cars_are_still_best
+echo -e "\nThe file 'cars_are_still_best' has that many lines:"
 wc -l ${exedir}/cars_are_still_best
 echo -e "^@\nFancy new Line, just sayin'^@\n"
-cat ${exedir}/cars_are_still_best
+cat ${exedir}/cars_are_still_best | nl
 echo -e "^@\nFancy new Line, just sayin'^@\n"
 echo 'Script executed successfully, bash out!'
+
 ```
 
 Which returns the following output on the command line:
 
 ```bash
-~ $ bash scripts/real_script.sh # Execution.
+~ $ bash scripts/real_script.sh
+ the command 'whoami' returns:
+
 tklein
 
+
+The file 'cars_are_still_best' has that many lines:
 5 /home/tklein/script-execution/cars_are_still_best
 
 Fancy new Line, just sayin'
 
-Not just any text file.
-The secret car file.
-No CAPS, REALLY: This is good stuff.
-The faster the car, the quicker it covers distance.
-A V12 engine is a twelve-cylinder piston engine. 
+     1  Not just any text file.
+     2  The secret car file.
+     3  No CAPS, REALLY: This is good stuff.
+     4  The faster the car, the quicker it covers distance.
+     5  A V12 engine is a twelve-cylinder piston engine. 
 
 Fancy new Line, just sayin'
 
