@@ -34,7 +34,6 @@ It returns the following information from left to right:
 | Time             |
 | Time zone        |
  | Year             |
-[Date Command Table]
 
 
 ```bash
