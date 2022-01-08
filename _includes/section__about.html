@@ -1,25 +1,36 @@
 <section class="about">
-  {% if include.divider == true %}
-    <div class="wrap"><hr/></div>
+    {% if include.divider == true %}
+    <div class="wrap">
+        <hr/>
+    </div>
     {% endif %}
-  <div class="wrap grid">
+    <div class="wrap grid">
 
-    <div class="about__image">
-      <img src="/images/profile.jpg" alt="">
+        <div class="about__image">
+            <img src="/images/profile.jpg" alt="">
 
-      {% include component-socials.html %}
+            {% include component-socials.html %}
+        </div>
+
+        <div class="about__content">
+            <h2 class="title">You are welcome to take a look and browse some of my posts.</h2>
+            <p class="subtitle subtitle--light">I adhere to two principals, in that order. </p>
+
+            <p>I follow two principles, in this order. A methodically clean and conscientious approach
+               followed by the clear and aesthetically pleasing communication of information.
+               In addition, I do my best to use the available tools efficiently and flexibly.
+               Be it the commands provided by the CentOS (~Red Hat Linux) distribution for
+               system administration, the workflow in Python for reading raw data from .csv files,
+               custom web scraping algorithms or from a database directly, to a production-ready
+               predictive machine learning model that can be deployed via Docker or AWS and serve
+               the client's purposes.
+            <p/>
+            <p>A balance between low deployment costs through virtualization and the use of
+               scalable, on-demand cloud services that keep costs in check, and a
+               competitive advantage for the customer through the use of the finished product.</p>
+
+
+            <a href="#" class="cta button--fill contact-trigger js-contact">Get in Touch</a>
+        </div>
     </div>
-
-    <div class="about__content">
-      <h2 class="title">Hello, this is my personal portfolio website.</h2>
-      <p class="subtitle subtitle--light">Here I post about projects I did and courses I took.</p>
-
-      <p>My skills include product design, interactive design, aesthetic art direction, prototyping, mobile design,
-        branding, front-end development and team leadership. I’m interested in clean aesthetics, minimalism, unusual
-        typography, photography and simplistic UX solutions.</p>
-      <p>I’d love to learn about your company and see how I can help, feel free to send me an email!</p>
-
-      <a href="#" class="cta button--fill contact-trigger js-contact">Get in Touch</a>
-    </div>
-  </div>
 </section>
