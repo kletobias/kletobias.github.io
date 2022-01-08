@@ -3,8 +3,8 @@ title: 'Recap: Exercises - Module 4'
 subtitle: 'Learning Linux - Section 4 Exercises'
 date: 2021-11-25 00:00:00
 description: 'This post covers solving exercises, to help foster longterm retention of the content in Module4'
-featured_image: bash-ga254901e3_1280.png
-gallery_images: Bash_GNOME_Terminal_screenshot.png
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
