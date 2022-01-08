@@ -1,12 +1,13 @@
 ---
 title: 'System Utility Commands'
 subtitle: 'Learning Linux - Section 5.11'
-date: 2022-01-06 07:00:00
-description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. Active Directory, LDAP, IDM, WinBIND, OpenLDAP.'
-featured_image: enegative-space-abstract-grunge-swirl-texture.jpeg
-gallery_images: Bash_GNOME_Terminal_screenshot.png
+date: 2022-01-07 07:00:00
+description: 'In this Section we look at the differences between some of the more popular Directory Services. Active Directory, LDAP, IDM, WinBIND and OpenLDAP.'
+featured_image: 'enegative-space-abstract-grunge-swirl-texture.jpeg'
+gallery_images: 'enegative-space-rusty-metals-paint-flakes.jpeg'
 accent_color: '#08877d'
 ---
+
 
 ### System Utility Commands
 
