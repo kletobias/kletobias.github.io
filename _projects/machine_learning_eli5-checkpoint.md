@@ -5,7 +5,7 @@ description: This is a demo post that shows what you can do inside portfolio and
 featured_image: website_export_hamburg_alster20130608.jpg
 gallery_images: website_export_hamburg_alster20130608.jpg
 ---
-[^Image Credit]
+
 
 ```python
 from sklearn.linear_model import Lasso
@@ -48,33 +48,14 @@ import numpy
 import geopandas
 import sklearn
 sklearn
-```
-
-
-
-
-    <module 'sklearn' from '/Users/tobiasklein 1/PycharmsProjects/so_deep/env/lib/python3.7/site-packages/sklearn/__init__.py'>
-
-
-
-
-```python
 from sklearn import linear_model
-```
-
-
-```python
 import os
 import sys
 sys.executable
 ```
 
 
-
-
     '/Users/tobiasklein 1/PycharmsProjects/so_deep/env/bin/python3'
-
-
 
 
 ```python
@@ -173,9 +154,9 @@ df_learn = pd.get_dummies(df[["parking","baujahr","objekt_zustand","heizungsart"
 df_learn.info()
 ```
 
-dfn = df[["nebenkosten", "kaltmiete", "json_picturecount", "plz", "etage", "balkon/terasse", "lift", "quadratmeter",
+    dfn = df[["nebenkosten", "kaltmiete", "json_picturecount", "plz", "etage", "balkon/terasse", "lift", "quadratmeter",
           "anzahl_zimmer", "json_telekomDownloadSpeed", "json_telekomUploadSpeed", "lng","lat","time_gap"]]
-dfn = dfn.dropna()
+    dfn = dfn.dropna()
 
 
 ```python
@@ -222,49 +203,13 @@ eli5.show_weights(perm, feature_names = val_X.columns.tolist())
 
 
 
-    <style>
+<style>
     table.eli5-weights tr:hover {
         filter: brightness(85%);
     }
 </style>
 
 
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-
-    
-
-    
-
-    
-
-    
-
-    
     <table class="eli5-weights eli5-feature-importances" style="border-collapse: collapse; border: none; margin-top: 0em; table-layout: auto;">
     <thead>
     <tr style="border: none;">
