@@ -25,7 +25,7 @@ accent_color: '#08877d'
 The `date` command returns information about the current date of the system. 
 It returns the following information from left to right:
 
-| Date Command    ||
+|| Date Command    ||
 | date             |
 |------------------|
 | Day of the week  |
