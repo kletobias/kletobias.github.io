@@ -5,7 +5,7 @@ date: 2022-01-07 20:00:00
 description: 'This section introduces the terms Application, Script, Process, Daemon, Thread and Job. These will be described in more detail in the following sections.'
 featured_image: bash-ga254901e3_1280.png
 gallery_images: Bash_GNOME_Terminal_screenshot.png
-accent_color: '#66cc99'
+accent_color: '#08877d'
 ---
 
 
