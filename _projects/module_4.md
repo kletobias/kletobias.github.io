@@ -27,7 +27,25 @@ touch bspl{0001..0003}.c
 
 TODO Change inline math that is not rendered correctly on the website to something else.
 
+<!---
+chmod was a section change `` to ** and ## to ###
+-->
+
 ## `chmod`
+
+The command has 3 different options for the user to specify his intended alterations. They all result in the same changes to the file mode bits of each given file according to *mode*. They are simply different optinos for the user to write the command. The 3 syntax options are described in the following.
+
+1. `chmod [OPTION]... MODE[,MODE]... FILE... `
+
+
+
+|     |     |     |
+|-----|-----|-----|
+|     |     |     |
+|     |     |     |
+|     |     |     |
+|     |     |     |
+
 
 -   To give user who is owner of the file write permissions for file 'jerry', type `chmod u+w jerry`
 -   To revoke write permissions, type `chmod u-w jerry`
