@@ -24,7 +24,7 @@ accent_color: '#08877d'
 Since a virtual machine is used for all the sections and exercises, 
 one should make sure that the following values are what they should be.
 
-##### Which user am I?
+##### *whoami*: Which user am I?
 
 ```bash
 ~ $ whoami
@@ -32,7 +32,7 @@ tklein
 ~ $ 
 ```
 
-##### What is my current absolute *path*?
+##### *pwd*: What is my current absolute *path*?
 
 ```bash
 ~ $ pwd
@@ -40,7 +40,7 @@ tklein
 ~ $ 
 ```
 
-##### On which *host* am I currently?
+##### *hostname*: On which *host* am I currently?
 
 ```bash
 ~ $ hostname
@@ -123,7 +123,9 @@ will    ALL=(ALL)       ALL # Only an example
 # %wheel        ALL=(ALL)       NOPASSWD: ALL
 ```
 
-###### Adding account 'tklein' to group *wheel*
+###### *usermod \-aG* 
+
+Adding account 'tklein' to group *wheel*
 
 ```bash
 root * usermod -aG wheel tklein
@@ -147,6 +149,8 @@ root *
 
 After it was not able to run either `dmidecode` or `fdisk -l` using my user account *tklein*,
 now it is possible to run `dmidecode` being part of group wheel:
+
+###### *dmidecode*
 
 
 ```bash
@@ -196,7 +200,7 @@ Handle 0x0008, DMI type 2, 15 bytes
 ...
 ```
 
-The `fdisk -l` command:
+###### The *fdisk \-l* command:
 
 ```bash
 ~ $ sudo fdisk -l
