@@ -33,7 +33,7 @@ It returns the following information from left to right:
 | Time          |
 | Time zone     |
  | Year				      |
-
+[Date Command Table]
 ```bash
 ~ $ date
 Tue Dec 28 11:38:47 CET 2021
