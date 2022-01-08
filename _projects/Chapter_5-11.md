@@ -25,16 +25,15 @@ accent_color: '#08877d'
 The `date` command returns information about the current date of the system. 
 It returns the following information from left to right:
 
-|| Date Command    ||
-|------------------|
-| date             |
-|------------------|
-| Day of the week  |
-| Month            |
-| Day of the month |
-| Time             |
-| Time zone        |
- | Year             |
+
+| Column No. | date             |
+|:----------:|------------------|
+| 1          | Day of the week  |
+| 2          | Month            |
+| 3          | Day of the month |
+| 4          | Time             |
+| 5          | Time zone        |
+ | 6          | Year             |
 
 
 ```bash
@@ -48,8 +47,9 @@ Tue Dec 28 11:38:47 CET 2021
 
 The `uptime` command gives information about the system. Namely about for how long it has been running in total, the number of currently online users and the **CPU** load. The **CPU** load is measured by looking at the average number of jobs in the system's *run queue* for 3 different time periods. The periods are 1, 5 and 15 minutes.
 
+
 | Column No. | Data                                                    | Example                        |
-|------------|---------------------------------------------------------|--------------------------------|
+|:----------:|---------------------------------------------------------|--------------------------------|
 | 1          | Current System Time                                     | 11:37:00                       |
 | 2          | Shows for how long the system has been running in total | up 4 days 22:33                |
 | 3          | Number of Users currently logged into the Linux system  | 3 users                        |
