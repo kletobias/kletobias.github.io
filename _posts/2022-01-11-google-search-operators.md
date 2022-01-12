@@ -32,12 +32,25 @@ Here are the google **search operators** that can be used in the search field of
 any country specific extension of google search as well. The **search operators** always have to be written in English in order to be invoked. One can specify their value in another language though.
 
 
+**Disclaimer:** In some examples the timeframe for how old results are allowed to be is set to 1 year. This can be seen in the examples with images showing the result list. This is chosen, as oftentimes results older than one year are irrelevant by now. The exception to this are queries that specify something that is not of a timely manner. This can be for example *stack overflow* questions and answers or topics that have relevant matches further back in the past, newspaper articles for example. This is relevant for reproducibility of results.
+
+
+
 ## Google Search Operators List
 
 
 ### Exact Match \" \"
 
-**"\<search term>"** Forces google to only return hits, that contain the exact match \<search term>.
+**"\<search term>"** Forces google to only return hits, that contain the exact match \<search term>. The syntax is:
+
+`"<search_term>"` or equivalent `'<search_term>'`
+
+The quotation marks have to be immediately before and after the end of the search term or immediately before the first word and immediately after the last word in a multi word search term.
+Spaces between words are allowed, as long as they are supposed to be matched exactly as well. The following examples show the effect that various uses of  the quotation marks have on how restrictive the query is for the web search algorithm:
+
+```text
+
+```
 
 This is probably the single most powerful operator. Takes some practice to find the line between narrowing down the hits google returns too much and the returned hits not being specific enough.
 
@@ -228,33 +241,33 @@ Below is a, as of today, [complete list of supported file types, directly from g
 
 
 
-|                        File types indexable by Google - Search Console Help                       	|
-|:-------------------------------------------------------------------------------------------------:	|
-| Adobe Portable Document Format (.pdf)                                                             	|
-| Adobe PostScript (.ps)                                                                            	|
-| Autodesk Design Web Format (.dwf)                                                                 	|
-| Google Earth (.kml, .kmz)                                                                         	|
-| GPS eXchange Format (.gpx)                                                                        	|
-| Hancom Hanword (.hwp)                                                                             	|
-| HTML (.htm, .html, other file extensions)                                                         	|
-| Microsoft Excel (.xls, .xlsx)                                                                     	|
-| Microsoft PowerPoint (.ppt, .pptx)                                                                	|
-| Microsoft Word (.doc, .docx)                                                                      	|
-| OpenOffice presentation (.odp)                                                                    	|
-| OpenOffice spreadsheet (.ods)                                                                     	|
-| OpenOffice text (.odt)                                                                            	|
-| Rich Text Format (.rtf)                                                                           	|
-| Scalable Vector Graphics (.svg)                                                                   	|
-| TeX/LaTeX (.tex)                                                                                  	|
-| Text (.txt, .text, other file extensions), including source code in common programming languages: 	|
-| Basic source code (.bas)                                                                          	|
-| C/C++ source code (.c, .cc, .cpp, .cxx, .h, .hpp)                                                 	|
-| C# source code (.cs)                                                                              	|
-| Java source code (.java)                                                                          	|
-| Perl source code (.pl)                                                                            	|
-| Python source code (.py)                                                                          	|
-| Wireless Markup Language (.wml, .wap)                                                             	|
-| XML (.xml)                                                                                        	|
+|                       File types indexable by Google - Search Console Help                        |
+|:-------------------------------------------------------------------------------------------------:|
+|                               Adobe Portable Document Format (.pdf)                               |
+|                                      Adobe PostScript (.ps)                                       |
+|                                 Autodesk Design Web Format (.dwf)                                 |
+|                                     Google Earth (.kml, .kmz)                                     |
+|                                    GPS eXchange Format (.gpx)                                     |
+|                                       Hancom Hanword (.hwp)                                       |
+|                             HTML (.htm, .html, other file extensions)                             |
+|                                   Microsoft Excel (.xls, .xlsx)                                   |
+|                                Microsoft PowerPoint (.ppt, .pptx)                                 |
+|                                   Microsoft Word (.doc, .docx)                                    |
+|                                  OpenOffice presentation (.odp)                                   |
+|                                   OpenOffice spreadsheet (.ods)                                   |
+|                                      OpenOffice text (.odt)                                       |
+|                                      Rich Text Format (.rtf)                                      |
+|                                  Scalable Vector Graphics (.svg)                                  |
+|                                         TeX/LaTeX (.tex)                                          |
+| Text (.txt, .text, other file extensions), including source code in common programming languages: |
+|                                     Basic source code (.bas)                                      |
+|                         C/C++ source code (.c, .cc, .cpp, .cxx, .h, .hpp)                         |
+|                                       C# source code (.cs)                                        |
+|                                     Java source code (.java)                                      |
+|                                      Perl source code (.pl)                                       |
+|                                     Python source code (.py)                                      |
+|                               Wireless Markup Language (.wml, .wap)                               |
+|                                            XML (.xml)                                             |
 
 
 The syntax of **filetype** with pdf as example, is:
@@ -288,11 +301,73 @@ One can basically to an in-site search for 'someurl' using the powerful google w
 
 ### *related*
 
+The **related** operator has the syntax:
+
+`related:<keyword> ...` or `related:"<search term>" ...`
+
+The latter in the case of a \<search term> with spaces in between.
+
+It is a proprietary google operator in the sense, that it is unknown what is related in the eyes of the algorithm.
+Use it, if the results are good is what I would suggest.
 
 
 ### *intitle*
+
+**intitle** will look for matches in titles of articles, blog posts and basically anything that has a title for that matter.
+
+#### Example *intitle*
+
+```text
+intitle:Häkkinen
+intitle:Häkkinen schumacher
+```
+
+The first one returns the [*Mikka Häkkinen* Wikipedia article](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi86oPuiq31AhVtkIsKHY3UAIoQFnoECAgQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMika_H%25C3%25A4kkinen&usg=AOvVaw3NAWR8N-4LVieJGGz9YQUT) as the first result.
+
+
+![haekkinen wikipedia article first result](/blog/images/haekkinen-wikipedia-article-first-result.png)
+
+
+The second line gives this as the top result, which shows nicely what the operator does:
+
+![haekkinen schumacher in title](/blog/images/haekkinen-schumacher-in-title.png)
+
+
 ### *allintitle*
+
+This operator is simply the **intitle** operator where quotation marks are used on every instance, where it is called. Syntax is:
+
+`allintitle:<search term 1> <search term 2> ...`
+
+One does not need to add quotation marks around any of the search terms following the **allintitle** operator. The algorithm will assume, that they all have to be part of the title.
+
+#### Example *allintitle*
+
+Running the following query only resulted in one result. This goes to show, that the operator only accepts exact matches.
+
+
+```text
+allintitle:formula 1 cornering
+```
+
+
+![allintitle formula 1 cornering](/blog/images/allintitle-formula-1-cornering.png)
+
+
 ### *inurl*
+
+The **inurl** operator has the syntax:
+
+`inurl:<some URL or fragment of a URL> ...`
+
+This operator will search for matching substrings in indexed URL strings.
+
+It could come in handy, if one is looking for a sub part of a URL, that describes something like a forum or support site.
+
+#### Example *inurl*
+
+
+
 ### *allinurl*
 ### *intext*
 ### *allintext*
@@ -303,8 +378,3 @@ One can basically to an in-site search for 'someurl' using the powerful google w
 ### *movie*
 ### *in*
 ### *source*
-### **
-### **
-### **
-### **
-### **

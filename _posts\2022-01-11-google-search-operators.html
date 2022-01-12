@@ -45,10 +45,15 @@ There have been quite big changes to the names of a number of operators in this 
 That is part of why I decided to write this post.</p>
 <p>Here are the google <strong>search operators</strong> that can be used in the search field of <a href="http://google.com">google.com</a> and
 any country specific extension of google search as well. The <strong>search operators</strong> always have to be written in English in order to be invoked. One can specify their value in another language though.</p>
+<p><strong>Disclaimer:</strong> In some examples the timeframe for how old results are allowed to be is set to 1 year. This can be seen in the examples with images showing the result list. This is chosen, as oftentimes results older than one year are irrelevant by now. The exception to this are queries that specify something that is not of a timely manner. This can be for example <em>stack overflow</em> questions and answers or topics that have relevant matches further back in the past, newspaper articles for example. This is relevant for reproducibility of results.</p>
 <h2 id="google-search-operators-list">Google Search Operators List</h2>
 <h3 id="exact-match-">Exact Match " "</h3>
-<p><strong>"<search term&gt;&quot;<="" strong=""> Forces google to only return hits, that contain the exact match <search term&gt;.<="" p="">
-</search></search></strong></p><p><strong>This is probably the single most powerful operator. Takes some practice to find the line between narrowing down the hits google returns too much and the returned hits not being specific enough.</strong></p><strong>
+<p><strong>"<search term&gt;&quot;<="" strong=""> Forces google to only return hits, that contain the exact match <search term&gt;.="" the="" syntax="" is:<="" p="">
+</search></search></strong></p><p><strong><code>"&lt;search_term&gt;"</code> or equivalent <code>'&lt;search_term&gt;'</code></strong></p><strong>
+<p>The quotation marks have to be immediately before and after the end of the search term or immediately before the first word and immediately after the last word in a multi word search term.
+Spaces between words are allowed, as long as they are supposed to be matched exactly as well. The following examples show the effect that various uses of  the quotation marks have on how restrictive the query is for the web search algorithm:</p>
+<pre><code class="language-text"></code></pre>
+<p>This is probably the single most powerful operator. Takes some practice to find the line between narrowing down the hits google returns too much and the returned hits not being specific enough.</p>
 <p>There is no difference between single and double quotes for anything one writes in the search bar or in an <strong>HTML</strong> environment for that matter, as quoted from <em>Stack Overflow</em>:</p>
 <p><img src="/blog/images/single-vs-double-quotes.png" alt="Single vs Double Quotes"></p>
 <h3 id="logical-or">Logical <em>OR</em></h3>
@@ -237,9 +242,34 @@ Below is a, as of today, <a href="https://support.google.com/webmasters/answer/3
 <p>The syntax is <code>site:'someurl' &lt;search term&gt; ...</code></p>
 <p>One can basically to an in-site search for 'someurl' using the powerful google web search algorithm and all the operators available.</p>
 <h3 id="related"><em>related</em></h3>
+<p>The <strong>related</strong> operator has the syntax:</p>
+<p><code>related:&lt;keyword&gt; ...</code> or <code>related:"&lt;search term&gt;" ...</code></p>
+<p>The latter in the case of a <search term&gt;="" with="" spaces="" in="" between.<="" p="">
+</search></p><p>It is a proprietary google operator in the sense, that it is unknown what is related in the eyes of the algorithm.
+Use it, if the results are good is what I would suggest.</p>
 <h3 id="intitle"><em>intitle</em></h3>
+<p><strong>intitle</strong> will look for matches in titles of articles, blog posts and basically anything that has a title for that matter.</p>
+<h4 id="example-intitle">Example <em>intitle</em></h4>
+<pre><code class="language-text">intitle:Häkkinen
+intitle:Häkkinen schumacher</code></pre>
+<p>The first one returns the <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwi86oPuiq31AhVtkIsKHY3UAIoQFnoECAgQAQ&amp;url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMika_H%25C3%25A4kkinen&amp;usg=AOvVaw3NAWR8N-4LVieJGGz9YQUT"><em>Mikka Häkkinen</em> Wikipedia article</a> as the first result.</p>
+<p><img src="/blog/images/haekkinen-wikipedia-article-first-result.png" alt="haekkinen wikipedia article first result"></p>
+<p>The second line gives this as the top result, which shows nicely what the operator does:</p>
+<p><img src="/blog/images/haekkinen-schumacher-in-title.png" alt="haekkinen schumacher in title"></p>
 <h3 id="allintitle"><em>allintitle</em></h3>
+<p>This operator is simply the <strong>intitle</strong> operator where quotation marks are used on every instance, where it is called. Syntax is:</p>
+<p><code>allintitle:&lt;search term 1&gt; &lt;search term 2&gt; ...</code></p>
+<p>One does not need to add quotation marks around any of the search terms following the <strong>allintitle</strong> operator. The algorithm will assume, that they all have to be part of the title.</p>
+<h4 id="example-allintitle">Example <em>allintitle</em></h4>
+<p>Running the following query only resulted in one result. This goes to show, that the operator only accepts exact matches.</p>
+<pre><code class="language-text">allintitle:formula 1 cornering</code></pre>
+<p><img src="/blog/images/allintitle-formula-1-cornering.png" alt="allintitle formula 1 cornering"></p>
 <h3 id="inurl"><em>inurl</em></h3>
+<p>The <strong>inurl</strong> operator has the syntax:</p>
+<p><code>inurl:&lt;some URL or fragment of a URL&gt; ...</code></p>
+<p>This operator will search for matching substrings in indexed URL strings.</p>
+<p>It could come in handy, if one is looking for a sub part of a URL, that describes something like a forum or support site.</p>
+<h4 id="example-inurl">Example <em>inurl</em></h4>
 <h3 id="allinurl"><em>allinurl</em></h3>
 <h3 id="intext"><em>intext</em></h3>
 <h3 id="allintext"><em>allintext</em></h3>
@@ -250,11 +280,6 @@ Below is a, as of today, <a href="https://support.google.com/webmasters/answer/3
 <h3 id="movie"><em>movie</em></h3>
 <h3 id="in"><em>in</em></h3>
 <h3 id="source"><em>source</em></h3>
-<h3 id="-">**</h3>
-<h3 id="-">**</h3>
-<h3 id="-">**</h3>
-<h3 id="-">**</h3>
-<h3 id="-">**</h3>
 </article></div><div style="background-color: #b4b2b2;width: 50px;height:50px;line-height: 50px;text-align: center;position: fixed;bottom: 10px;right: 10px;padding-top:5px;" onclick="document.documentElement.scrollTop = document.body.scrollTop =0;">
   <svg t="1533629773982" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1035" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css">@font-face { font-family: uc-nexus-iconfont; src: url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff") format("woff"), url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf") format("truetype"); }
   </style></defs><path d="M536.255427 195.182354c-7.804756-7.804756-17.966187-11.615549-28.311813-11.615549-9.43693 0-18.874883 3.449565-26.496467 10.163477-2.360767 1.452071-4.356214 3.267417-6.352685 5.262864L218.47792 455.611735c-15.607466 15.60542-15.607466 40.834011 0 56.43943 15.607466 15.607466 41.558511 15.607466 57.167001 0l193.46013-192.733583 0 600.526219c0 22.1423 17.787108 39.927361 39.927361 39.927361 22.140253 0 39.927361-17.785062 39.927361-39.927361L548.959773 319.317583 737.15704 508.422522c15.607466 15.607466 40.469714 15.607466 56.078203 0 15.607466-15.607466 15.425318-40.834011-0.182149-56.441477L536.255427 195.182354 536.255427 195.182354z" p-id="1036" fill="#333"></path><path d="M101.784174 143.097092l816.674071 0c22.140253 0 39.925315-17.785062 39.925315-39.927361 0-22.140253-17.784038-39.925315-39.925315-39.925315L101.784174 63.244416c-22.140253 0-39.927361 17.785062-39.927361 39.925315C61.856813 125.31203 79.643921 143.097092 101.784174 143.097092L101.784174 143.097092z" p-id="1037" fill="#333"></path></svg>
