@@ -1,8 +1,10 @@
 ---
-title: 'The systemctl command' subtitle: 'Learning Linux - Section 5.13' date:
-2022-01-08 00:00:00 description: 'This section is about the systemctl command,
-as found in CentOS 7. It describes and gives examples of its usage.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg' gallery_images: '
+title: 'The systemctl command' subtitle: 'Learning Linux - Section 5.13'
+date:
+2022-01-08 00:00:00 description: 'This section is about the systemctl
+command, as found in CentOS 7. It describes and gives examples of its
+usage.' featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: '
 YtOk89__87-kbtTGW$DD-L.jpeg' accent_color: '#08877d'
 ---
 
@@ -21,8 +23,8 @@ YtOk89__87-kbtTGW$DD-L.jpeg' accent_color: '#08877d'
 #### Name, Syntax and Description
 
 
-From the top of the man page (`man systemctl`), one gets an overview of the name
-and syntax (*synopsis*) of the `systemctl` command, along with a short
+From the top of the man page (`man systemctl`), one gets an overview of the
+name and syntax (*synopsis*) of the `systemctl` command, along with a short
 description of it.
 
 
@@ -42,9 +44,9 @@ the basic concepts and functionality this tool manages.
 #### Usage examples
 
 
-In this section several of the `systemctl` commands are run inside the shell and
-further explained. The basic syntax used in the examples, referring to the
-information from the `man systemctl` output from above,
+In this section several of the `systemctl` commands are run inside the
+shell and further explained. The basic syntax used in the examples,
+referring to the information from the `man systemctl` output from above,
 is: `systemctl COMMAND [NAME...]`.
 
 
