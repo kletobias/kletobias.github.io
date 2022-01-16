@@ -76,7 +76,7 @@ table lists the columns found in the output and describes the values for each co
 
 
 | Column                                                                                         | Description                                                                                                           |
-|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+|:----------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
 | **UNIT**                                                                                       | The `systemd` unit name.                                                                                              |
 | **LOAD**                                                                                       | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory. |                                                                                            |                                                                                                                          |
 | **ACTIVE**                                                                                     | A brief summary of whether the unit is active.                                                                        |
