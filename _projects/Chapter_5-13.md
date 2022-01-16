@@ -9,7 +9,7 @@ accent_color: '#08877d'
 ---
 
 
-### The *systemctl* command
+### The *systemctl* Command
 
 
 #### Overview
@@ -41,7 +41,7 @@ this tool manages.
 ```
 
 
-#### *systemctl* output
+#### *systemctl* Output
 
 
 The output, that the `systemctl` command generates is in column form. Each column shows the values of the variable designated to it. The following
@@ -57,7 +57,7 @@ table lists the columns found in the output and describes the values for each co
 | **DESCRIPTION**                                                                                | A short text description about a unit, mentioning purpose and way of operation of it.                                 |
 
 
-#### Usage examples
+#### Usage Examples
 
 
 In this section several of the `systemctl` commands are run inside the shell and further explained. The basic syntax used in the examples, referring
