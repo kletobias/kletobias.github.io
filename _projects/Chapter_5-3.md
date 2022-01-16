@@ -40,7 +40,7 @@ The Vim text editor was used and CentOS 7.4 was the distribution installed on th
 
 The this text file is used in the following examples.
 
-```shell
+```text
 ~ $ cat ddr4_vs_5
 DDR5 is improvement to existing DDR4 and is similar to LPDDR4.
 While DDR4 DIMMs (memory stick) are 64 bits (72 bits with
