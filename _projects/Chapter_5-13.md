@@ -26,7 +26,7 @@ and syntax (*synopsis*) of the `systemctl` command, along with a short
 description of it.
 
 
-```log
+```
 systemctl - Control the systemd system and service manager
 
 SYNOPSIS
