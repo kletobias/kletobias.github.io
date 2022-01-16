@@ -21,17 +21,16 @@ accent_color: '#08877d'
 
 From the top of the man page (`man systemctl`), one gets an overview of the name and syntax (*synopsis*) of the `systemctl` command, along with a short description of it.
 
-```man
-NAME
-       systemctl - Control the systemd system and service manager
+```text
+systemctl - Control the systemd system and service manager
 
 SYNOPSIS
-       systemctl [OPTIONS...] COMMAND [NAME...]
+systemctl [OPTIONS...] COMMAND [NAME...]
 
 DESCRIPTION
-       systemctl may be used to introspect and control the state of the "systemd" system and service
-       manager. Please refer to systemd(1) for an introduction into the basic concepts and
-       functionality this tool manages.
+systemctl may be used to introspect and control the state of the "systemd" 
+system and service manager. Please refer to systemd(1) for an introduction into
+the basic concepts and functionality this tool manages.
 ```
 
 #### Usage examples
