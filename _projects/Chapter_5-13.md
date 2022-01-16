@@ -41,6 +41,22 @@ this tool manages.
 ```
 
 
+#### *systemctl* output
+
+
+The output, that the `systemctl` command generates is in column form. Each column shows the values of the variable designated to it. The following
+table lists the columns found in the output and describes the values for each column.
+
+
+| Column                                                                                         | Description                                                                                                           |
+|:----------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
+| **UNIT**                                                                                       | The `systemd` unit name.                                                                                              |
+| **LOAD**                                                                                       | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory. |                                                                                            |                                                                                                                          |
+| **ACTIVE**                                                                                     | A brief summary of whether the unit is active.                                                                        |
+| **SUB**                                                                                        | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs.                                 |
+| **DESCRIPTION**                                                                                | A short text description about a unit, mentioning purpose and way of operation of it.                                 |
+
+
 #### Usage examples
 
 
@@ -54,6 +70,26 @@ systemctl stop servicename.service (firewalld)
 systemctl status servicename.service (firewalld)
 ```
 
+```bash
+~ $ su -
+Password: 
+systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2022-01-16 16:38:24 CET; 5h 54min ago
+     Docs: man:firewalld(1)
+ Main PID: 796 (firewalld)
+   CGroup: /system.slice/firewalld.service
+           └─796 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid
+
+Jan 16 16:38:23 192.168.178.196 systemd[1]: Starting firewalld - dynamic firewall daemon...
+Jan 16 16:38:24 192.168.178.196 systemd[1]: Started firewalld - dynamic firewall daemon.
+Jan 16 16:38:25 192.168.178.196 firewalld[796]: WARNING: AllowZoneDrifting is enabled. This is considered an insecur... now.
+Hint: Some lines were ellipsized, use -l to show in full.
+root * 
+```
+
+The output tells one the following about the status of the service `firewalld.service` 
 
 ```bash
 systemctl enable servicename.service
@@ -69,19 +105,3 @@ systemctl reload servicename.service
 ```bash
 systemctl list-units --all
 ```
-
-
-#### *systemctl* output
-
-
-The output, that the `systemctl` command generates is in column form. Each column shows the values of the variable designated to it. The following
-table lists the columns found in the output and describes the values for each column.
-
-
-| Column                                                                                         | Description                                                                                                           |
-|:----------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
-| **UNIT**                                                                                       | The `systemd` unit name.                                                                                              |
-| **LOAD**                                                                                       | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory. |                                                                                            |                                                                                                                          |
-| **ACTIVE**                                                                                     | A brief summary of whether the unit is active.                                                                        |
-| **SUB**                                                                                        | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs.                                 |
-| **DESCRIPTION**                                                                                | A short text description about a unit, mentioning purpose and way of operation of it.                                 |
