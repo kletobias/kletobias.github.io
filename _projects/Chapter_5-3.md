@@ -26,7 +26,7 @@ The Vim text editor was used and CentOS 7.4 was the distribution installed on th
   - Substitute \(replace) within vi editor.
   - And much more...
 
-#### \`sed 's/DDR/DNS/g' FILE`
+#### \`sed \'s/DDR/DNS/g' FILE`
 
 - Like this, the command does:
   - `s` substitute
