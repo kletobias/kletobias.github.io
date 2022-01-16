@@ -35,9 +35,10 @@ SYNOPSIS
 systemctl [OPTIONS...] COMMAND [NAME...]
 
 DESCRIPTION
-systemctl may be used to introspect and control the state of the "systemd" 
-system and service manager. Please refer to systemd(1) for an introduction into
-the basic concepts and functionality this tool manages.
+systemctl may be used to introspect and control the state of the
+"systemd" system and service manager. Please refer to systemd(1)
+for an introduction into the basic concepts and functionality
+this tool manages.
 ```
 
 
