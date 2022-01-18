@@ -62,6 +62,7 @@ table lists the columns found in the output and describes the values for each co
 
 In this section several of the `systemctl` commands are run inside the shell and further explained. The basic syntax used in the examples, referring
 to the information from the `man systemctl` output from above, is: `systemctl COMMAND [NAME...]`.
+The commands covered, using the `firewalld.service` service are the following:
 
 
 ```bash
