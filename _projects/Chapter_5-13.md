@@ -45,9 +45,9 @@ this tool manages.
 
 
 The output, that the `systemctl` command generates is in row form.
-Each row shows the values of the variable designated to it.
-The following table lists the fields found in the output and
-describes the values for each field.
+Each row shows the values of the variable designated to it. The following
+table lists the fields found in the output and describes the values for
+each field. The table below was reproduced from the [Red Hat System Administrator's Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/system_administrators_guide/index).
 
 
 <div class="table" id="tabl-Managing_Services_with_systemd-Services-Status">
