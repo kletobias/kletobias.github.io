@@ -134,7 +134,7 @@ each field. The table below was reproduced from the [Red Hat System Administrato
 
 In this section several of the `systemctl` commands are run inside the shell and further explained. The basic syntax used in the examples, referring
 to the information from the `man systemctl` output from above, is: `systemctl COMMAND [NAME...]`.
-The commands covered, using the `firewalld.service` service are the following:
+The commands covered, using the `firewalld` service are the following:
 
 ##### start, stop and status
 
@@ -169,27 +169,27 @@ Hint: Some lines were ellipsized, use -l to show in full.
 root * 
 ```
 
-The output tells one the following about the status of the service `firewalld.service`:
+The output tells one the following about the status of the service `firewalld`:
 
 - The service is loaded (**LOAD**).
-  - That tells one, that the configuration file of the `firewall.service` service is loaded.
+  - That tells one, that the configuration file of the `firewall` service is loaded.
   - From the line above it can be concluded, that `systemctl` can reach and read that configuration file.
   - The configuration file is located at: '/usr/lib/systemd/system/firewalld.service'
-- `firewalld.service` is loaded.
+- `firewalld` is loaded.
   - A loaded service will start automatically upon any kind of system startup.
 - The service is **ACTIVE**.
   - It is currently running.
   - It has been running since *Sun 2022-01-16 16:38:24 CET*
   - Time since start is 5h 54min.
-- The manual for `firewalld.service` can be opened with the command `man firewalld(1)`.
+- The manual for `firewalld` can be opened with the command `man firewalld(1)`.
 - It has the **PID** 796 (*processid*).
 - The control groups (**CGroup**), showing higher level unit hierarchy. This is part of resource management, see [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/resource_management_guide/chap-introduction_to_control_groups) for detailed information.
 - The last 3 lines give a brief history of the command. It is a log.
 
 ###### Example: systemctl stop servicename.service
 
-In this example, the `firewalld.service` is stopped and its status
-afterwards is checked, by running `systemctl status firewalld.service`
+In this example, the `firewalld` unit is stopped and its status
+is checked afterwards, by running `systemctl status firewalld.service`
 
 ```bash
 ~ $ su -
@@ -216,7 +216,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 ###### Example: systemctl start servicename.service
 
 
-In this example, the `firewalld.service` is started again and its status
+In this example, the `firewalld` unit is started again and its status
 afterwards is checked, by running `systemctl status firewalld.service`
 ```bash
 root * systemctl start firewalld.service
@@ -264,8 +264,8 @@ systemctl enable servicename.service
 
 ###### systemctl disable servicename.service
 
-One can see, that the `firewalld` service is still active, after it was
-disabled. It is still loaded, however it is mentioned, that it is disabled!
+One can see, that the `firewalld` service is still active, after it has
+been disabled. It is still loaded, however it is mentioned in the output, that it is disabled!
 
 ```bash
 root * systemctl disable firewalld.service
@@ -315,15 +315,90 @@ Hint: Some lines were ellipsized, use -l to show in full.
 root * 
 ```
 
+##### restart & reload
 
+`systemctl restart` and `systemctl reload` are two important commands to
+understand.
 
+`systemctl restart` will shut down the specified unit and then immediately
+start it back up again. The downtime is minimized. It will also restart a
+currently powered off unit, unless the restart statement is replaced by
+`try-restart`. This option will only restart a running unit and not a powered
+off one.
+
+`systemctl reload` is only supported by some system services and will be ignored
+all together by ones that don't support it.
+It lets the user change its configuration files and reload the unit to use the
+updated configuration files without stopping its service at all. This can be a
+great feature for *always online services*, such as web servers.
 
 ```bash
 systemctl restart servicename.service
 systemctl reload servicename.service
 ```
 
+###### systemctl --all
+
+The `systemctl --all` will list all units in the system's registry.
+Here it was used to list all units, so that the one called `mariadb`
+would be found using the `grep "maria"` with piped input from
+`systemctl --all`.
 
 ```bash
-systemctl list-units --all
+root * systemctl --all | grep "maria"
+  mariadb.service 
+                  active   running   MariaDB database server
+root * 
+```
+
+
+###### systemctl restart servicename.service
+
+Restarting the `mariadb` unit like so:
+
+```bash
+root * systemctl restart mariadb.service
+root * systemctl status mariadb.service
+● mariadb.service - MariaDB database server
+   Loaded: loaded (/usr/lib/systemd/system/mariadb.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2022-01-18 12:10:45 CET; 18s ago
+  Process: 24184 ExecStartPost=/usr/libexec/mariadb-wait-ready $MAINPID (code=exited, status=0/SUCCESS)
+  Process: 24147 ExecStartPre=/usr/libexec/mariadb-prepare-db-dir %n (code=exited, status=0/SUCCESS)
+ Main PID: 24182 (mysqld_safe)
+   CGroup: /system.slice/mariadb.service
+           ├─24182 /bin/sh /usr/bin/mysqld_safe --basedir=/usr
+           └─24347 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=...
+
+Jan 18 12:10:43 vm8 systemd[1]: Starting MariaDB database server...
+Jan 18 12:10:43 vm8 mariadb-prepare-db-dir[24147]: Database MariaDB is probably initialize...e.
+Jan 18 12:10:43 vm8 mariadb-prepare-db-dir[24147]: If this is not the case, make sure the ...r.
+Jan 18 12:10:43 vm8 mysqld_safe[24182]: 220118 12:10:43 mysqld_safe Logging to '/var/log/...g'.
+Jan 18 12:10:43 vm8 mysqld_safe[24182]: 220118 12:10:43 mysqld_safe Starting mysqld daemo...sql
+Jan 18 12:10:45 vm8 systemd[1]: Started MariaDB database server.
+Hint: Some lines were ellipsized, use -l to show in full.
+root * 
+```
+
+In the output one can see, that the unit has been running for **18s** only and thus
+the restart was successful, since it is up and active again.
+
+
+###### systemctl reload servicename.service
+
+As mentioned earlier, not all units support the `systemctl reload servicename.service`
+command and so is the case for the `mariadb` service, as seen in the following
+output:
+
+```bash
+root * systemctl reload mariadb.service
+Failed to reload mariadb.service: Job type reload is not applicable for unit mariadb.service.
+See system logs and 'systemctl status mariadb.service' for details.
+root * 
+```
+
+A service which supports the `reload` command is the `httpd`
+service. One can reload it like so:
+
+```bash
+root * systemctl reload httpd.service
 ```
