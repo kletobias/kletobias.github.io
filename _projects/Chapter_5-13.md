@@ -44,18 +44,11 @@ this tool manages.
 #### *systemctl* Output
 
 
-The output, that the `systemctl` command generates is in column form. Each column shows the values of the variable designated to it. The following
-table lists the columns found in the output and describes the values for each column.
+The output, that the `systemctl` command generates is in row form.
+Each row shows the values of the variable designated to it.
+The following table lists the fields found in the output and
+describes the values for each field.
 
-<!---
-|     Column      | Description                                                                                                                                                                          |
-|:---------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|    **UNIT**     | The `systemd` unit name.                                                                                                                                                             |
-|    **LOAD**     | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory.                                                             |
-|   **ACTIVE**    | A brief summary of whether the unit is active.                                                                                                                                       |
-|     **SUB**     | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs. |
-| **DESCRIPTION** | A short text description about a unit, mentioning purpose and way of operation of it.                                                                                                |
--->
 
 <div class="table" id="tabl-Managing_Services_with_systemd-Services-Status">
     <div class="table-contents">
@@ -135,31 +128,6 @@ table lists the columns found in the output and describes the values for each co
     </div>
 </div>
 
-FieldDescription
-
-`Loaded`
-
-Information whether the service unit has been loaded, the absolute path to the unit file, and a note whether the unit is enabled.
-
-`Active`
-
-Information whether the service unit is running followed by a time stamp.
-
-`Main PID`
-
-The PID of the corresponding system service followed by its name.
-
-`Status`
-
-Additional information about the corresponding system service.
-
-`Process`
-
-Additional information about related processes.
-
-`CGroup`
-
-Additional information about related Control Groups (cgroups).
 
 #### Usage Examples
 
