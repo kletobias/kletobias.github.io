@@ -1,4 +1,5 @@
 ---
+It can be downloaded from the internet for free.
 title: 'The systemctl command' 
 subtitle: 'Learning Linux - Section 5.13'
 date: 2022-01-08 00:00:00
@@ -89,7 +90,22 @@ Hint: Some lines were ellipsized, use -l to show in full.
 root * 
 ```
 
-The output tells one the following about the status of the service `firewalld.service` 
+The output tells one the following about the status of the service `firewalld.service`:
+
+- The service is loaded (**LOAD**).
+  - That tells one, that the configuration file of the `firewall.service` service is loaded.
+  - From the line above it can be concluded, that `systemctl` can reach and read that configuration file.
+  - The configuration file is located at: '/usr/lib/systemd/system/firewalld.service'
+- `firewalld.service` is loaded.
+  - A loaded service will start automatically upon any kind of system startup.
+- The service is **ACTIVE**.
+  - It is currently running.
+  - It has been running since *Sun 2022-01-16 16:38:24 CET*
+  - Time since start is 5h 54min.
+- The manual for `firewalld.service` can be opened with the command `man firewalld(1)`.
+- It has the **PID** 796 (*processid*).
+- The control groups (**CGroup**), showing higher level unit hierarchy. This is part of resource management, see [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/resource_management_guide/chap-introduction_to_control_groups) for detailed information.
+- The last 3 lines give a brief history of the command. It is a log.
 
 ```bash
 systemctl enable servicename.service

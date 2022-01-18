@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="raider8-mv-db" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="raider8-mv-db">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/tk/projects" local="$PROJECT_DIR$/../../execute_save_on_vm" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

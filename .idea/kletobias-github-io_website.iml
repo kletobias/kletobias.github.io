@@ -4,9 +4,10 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv_kletobias-github-io_website" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (kletobias-github-io_website)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.6.8 (sftp://tk@192.168.0.63:22/home/tk/projects/venv/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="linux-course-notes" />
+    <orderEntry type="module" module-name="execute_save_on_vm" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="renderExternalDocumentation" value="true" />
