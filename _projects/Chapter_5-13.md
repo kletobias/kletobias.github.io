@@ -57,6 +57,88 @@ table lists the columns found in the output and describes the values for each co
 | **DESCRIPTION** | A short text description about a unit, mentioning purpose and way of operation of it.                                                                                                |
 
 
+<thead>
+    <tr>
+        <th id="idm140499344203312" scope="col" valign="top" align="left">Field</th>
+        <th id="idm140499344202224" scope="col" valign="top" align="left">Description</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">Loaded</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                Information whether the service unit has been loaded, the absolute path to the unit file, and a note whether the unit is enabled.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">Active</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                Information whether the service unit is running followed by a time stamp.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">Main PID</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                The PID of the corresponding system service followed by its name.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">Status</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                Additional information about the corresponding system service.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">Process</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                Additional information about related processes.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td headers="idm140499344203312" valign="top" align="left">
+            <p>
+                <code class="literal">CGroup</code>
+            </p>
+        </td>
+        <td headers="idm140499344202224" valign="top" align="left">
+            <p>
+                Additional information about related Control Groups (cgroups).
+            </p>
+        </td>
+    </tr>
+</tbody>
+
+
 #### Usage Examples
 
 
