@@ -1,5 +1,4 @@
 ---
-It can be downloaded from the internet for free.
 title: 'The systemctl command' 
 subtitle: 'Learning Linux - Section 5.13'
 date: 2022-01-08 00:00:00
@@ -49,13 +48,13 @@ The output, that the `systemctl` command generates is in column form. Each colum
 table lists the columns found in the output and describes the values for each column.
 
 
-| Column                                                                                         | Description                                                                                                           |
-|:----------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------|
-| **UNIT**                                                                                       | The `systemd` unit name.                                                                                              |
-| **LOAD**                                                                                       | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory. |                                                                                            |                                                                                                                          |
-| **ACTIVE**                                                                                     | A brief summary of whether the unit is active.                                                                        |
-| **SUB**                                                                                        | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs.                                 |
-| **DESCRIPTION**                                                                                | A short text description about a unit, mentioning purpose and way of operation of it.                                 |
+|     Column      | Description                                                                                                                                                                          |
+|:---------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    **UNIT**     | The `systemd` unit name.                                                                                                                                                             |
+|    **LOAD**     | Whether the unit's configuration has been parsed by `systemd`.<br />The configuration of loaded units is kept in memory.                                                             |
+|   **ACTIVE**    | A brief summary of whether the unit is active.                                                                                                                                       |
+|     **SUB**     | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs. |
+| **DESCRIPTION** | A short text description about a unit, mentioning purpose and way of operation of it.                                                                                                |
 
 
 #### Usage Examples
