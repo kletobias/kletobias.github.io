@@ -136,6 +136,7 @@ In this section several of the `systemctl` commands are run inside the shell and
 to the information from the `man systemctl` output from above, is: `systemctl COMMAND [NAME...]`.
 The commands covered, using the `firewalld.service` service are the following:
 
+##### start, stop and status
 
 ```bash
 systemctl start servicename.service (firewalld)
@@ -144,7 +145,7 @@ systemctl status servicename.service (firewalld)
 ```
 
 
-##### Example: systemctl status servicename.service
+###### Example: systemctl status servicename.service
 
 The output of the `systemctl status servicename.service`
 is explained in detail. The explanation follows the row-wise structure of the output of the command.
@@ -185,7 +186,7 @@ The output tells one the following about the status of the service `firewalld.se
 - The control groups (**CGroup**), showing higher level unit hierarchy. This is part of resource management, see [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/resource_management_guide/chap-introduction_to_control_groups) for detailed information.
 - The last 3 lines give a brief history of the command. It is a log.
 
-##### Example: systemctl stop servicename.service
+###### Example: systemctl stop servicename.service
 
 In this example, the `firewalld.service` is stopped and its status
 afterwards is checked, by running `systemctl status firewalld.service`
@@ -210,7 +211,10 @@ Jan 18 05:10:25 vm8 systemd[1]: Stopping firewalld - dynamic firewall daemon...
 Jan 18 05:10:26 vm8 systemd[1]: Stopped firewalld - dynamic firewall daemon.
 Hint: Some lines were ellipsized, use -l to show in full.
 ```
-##### Example: systemctl start servicename.service  
+
+
+###### Example: systemctl start servicename.service
+
 
 In this example, the `firewalld.service` is started again and its status
 afterwards is checked, by running `systemctl status firewalld.service`
@@ -233,8 +237,36 @@ root *
 ```
 
 
+##### disable \& enable 
+
+While `systemctl stop servicename.service`  `systemctl start servicename.service`
+stop and start a service after execution respectively, the commands
+`systemctl disable servicename.service` and `systemctl enable servicename.service`
+
+
 ```bash
+systemctl disable servicename.service
 systemctl enable servicename.service
+```
+
+```bash
+root * systemctl disable firewalld.service
+Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed symlink /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+root * systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; disabled; vendor preset: enabled)
+   Active: active (running) since Tue 2022-01-18 05:11:30 CET; 1h 48min ago
+     Docs: man:firewalld(1)
+ Main PID: 23467 (firewalld)
+   CGroup: /system.slice/firewalld.service
+           └─23467 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid
+
+Jan 18 05:11:30 vm8 systemd[1]: Starting firewalld - dynamic firewall daemon...
+Jan 18 05:11:30 vm8 systemd[1]: Started firewalld - dynamic firewall daemon.
+Jan 18 05:11:31 vm8 firewalld[23467]: WARNING: AllowZoneDrifting is enabled. T...w.
+Hint: Some lines were ellipsized, use -l to show in full.
+root * 
 ```
 
 
