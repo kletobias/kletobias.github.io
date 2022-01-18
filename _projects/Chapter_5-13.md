@@ -237,17 +237,35 @@ root *
 ```
 
 
-##### disable \& enable 
+##### disable & enable 
 
-While `systemctl stop servicename.service`  `systemctl start servicename.service`
-stop and start a service after execution respectively, the commands
+While `systemctl stop servicename.service` and  `systemctl start servicename.service`
+stop and start a service immediately after execution, the commands
 `systemctl disable servicename.service` and `systemctl enable servicename.service`
+will do different things compared with `stop` and `start` respectively.
 
+Enable will create hooks for the unit specified in the `systemctl enable...`
+command in relevant directories/files, so that the unit will start on boot
+automatically or when certain hardware is connected. There is a multitude of possible
+triggers one can specify, that will cause the specified unit to start its service.
+The trigger has to be specified in the *unit file* of the unit to be enabled.
+
+Similarly, the `systemctl disable...` command will keep a unit from automatically starting,
+after a specified trigger or triggers has or have occurred. Enable and disable are like toggles,
+a unit can be only enabled or disabled and if currently enabled, it can only be
+disabled and vice versa. 
+
+Examples for these two commands follow below.
 
 ```bash
 systemctl disable servicename.service
 systemctl enable servicename.service
 ```
+
+###### systemctl disable servicename.service
+
+One can see, that the `firewalld` service is still active, after it was
+disabled. It is still loaded, however it is mentioned, that it is disabled!
 
 ```bash
 root * systemctl disable firewalld.service
@@ -268,6 +286,36 @@ Jan 18 05:11:31 vm8 firewalld[23467]: WARNING: AllowZoneDrifting is enabled. T..
 Hint: Some lines were ellipsized, use -l to show in full.
 root * 
 ```
+
+
+###### systemctl enable servicename.service
+
+Vice versa, enabling the `firewalld` service again does not change anything in terms of it being loaded and active. However, in the **Loaded** row, one can see that it is now
+enabled again.
+
+
+```bash
+root * systemctl enable firewalld.service
+Created symlink from /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service to /usr/lib/systemd/system/firewalld.service.
+Created symlink from /etc/systemd/system/multi-user.target.wants/firewalld.service to /usr/lib/systemd/system/firewalld.service.
+root * systemctl enable firewalld.service
+root * systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2022-01-18 05:11:30 CET; 6h ago
+     Docs: man:firewalld(1)
+ Main PID: 23467 (firewalld)
+   CGroup: /system.slice/firewalld.service
+           └─23467 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid
+
+Jan 18 05:11:30 vm8 systemd[1]: Starting firewalld - dynamic firewall daemon...
+Jan 18 05:11:30 vm8 systemd[1]: Started firewalld - dynamic firewall daemon.
+Jan 18 05:11:31 vm8 firewalld[23467]: WARNING: AllowZoneDrifting is enabled. This is cons...ow.
+Hint: Some lines were ellipsized, use -l to show in full.
+root * 
+```
+
+
 
 
 ```bash
