@@ -106,6 +106,54 @@ The output tells one the following about the status of the service `firewalld.se
 - The control groups (**CGroup**), showing higher level unit hierarchy. This is part of resource management, see [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/resource_management_guide/chap-introduction_to_control_groups) for detailed information.
 - The last 3 lines give a brief history of the command. It is a log.
 
+##### Example: systemctl stop servicename.service
+
+In this example, the `firewalld.service` is stopped and its status
+afterwards is checked, by running `systemctl status firewalld.service`
+
+```bash
+~ $ su -
+Password: 
+Last login: Mon Jan 17 13:03:17 CET 2022 on pts/0
+root * systemctl stop firewalld.service
+root * systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Tue 2022-01-18 05:10:26 CET; 21s ago
+     Docs: man:firewalld(1)
+  Process: 23277 ExecStart=/usr/sbin/firewalld --nofork --nopid $FIREWALLD_ARGS (code=exited, status=0/SUCCESS)
+ Main PID: 23277 (code=exited, status=0/SUCCESS)
+
+Jan 18 05:10:02 vm8 systemd[1]: Starting firewalld - dynamic firewall daemon...
+Jan 18 05:10:02 vm8 systemd[1]: Started firewalld - dynamic firewall daemon.
+Jan 18 05:10:02 vm8 firewalld[23277]: WARNING: AllowZoneDrifting is enabled. T...w.
+Jan 18 05:10:25 vm8 systemd[1]: Stopping firewalld - dynamic firewall daemon...
+Jan 18 05:10:26 vm8 systemd[1]: Stopped firewalld - dynamic firewall daemon.
+Hint: Some lines were ellipsized, use -l to show in full.
+```
+##### Example: systemctl start servicename.service  
+
+In this example, the `firewalld.service` is started again and its status
+afterwards is checked, by running `systemctl status firewalld.service`
+```bash
+root * systemctl start firewalld.service
+root * systemctl status firewalld.service
+● firewalld.service - firewalld - dynamic firewall daemon
+   Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled; vendor preset: enabled)
+   Active: active (running) since Tue 2022-01-18 05:11:30 CET; 3s ago
+     Docs: man:firewalld(1)
+ Main PID: 23467 (firewalld)
+   CGroup: /system.slice/firewalld.service
+           └─23467 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid
+
+Jan 18 05:11:30 vm8 systemd[1]: Starting firewalld - dynamic firewall daemon...
+Jan 18 05:11:30 vm8 systemd[1]: Started firewalld - dynamic firewall daemon.
+Jan 18 05:11:31 vm8 firewalld[23467]: WARNING: AllowZoneDrifting is enabled. T...w.
+Hint: Some lines were ellipsized, use -l to show in full.
+root * 
+```
+
+
 ```bash
 systemctl enable servicename.service
 ```
