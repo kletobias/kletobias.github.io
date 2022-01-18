@@ -70,6 +70,12 @@ systemctl stop servicename.service (firewalld)
 systemctl status servicename.service (firewalld)
 ```
 
+
+##### Example: systemctl status servicename.service
+
+The output of the `systemctl status servicename.service`
+is explained in detail. The explanation follows the row-wise structure of the output of the command.
+
 ```bash
 ~ $ su -
 Password: 
