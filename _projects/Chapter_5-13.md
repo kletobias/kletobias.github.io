@@ -47,7 +47,7 @@ this tool manages.
 The output, that the `systemctl` command generates is in column form. Each column shows the values of the variable designated to it. The following
 table lists the columns found in the output and describes the values for each column.
 
-
+<!---
 |     Column      | Description                                                                                                                                                                          |
 |:---------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |    **UNIT**     | The `systemd` unit name.                                                                                                                                                             |
@@ -55,82 +55,84 @@ table lists the columns found in the output and describes the values for each co
 |   **ACTIVE**    | A brief summary of whether the unit is active.                                                                                                                                       |
 |     **SUB**     | This is a lower level state that gives more detailed information about the unit than **ACTIVE** does. This often varies by type, state and the actual method in which the unit runs. |
 | **DESCRIPTION** | A short text description about a unit, mentioning purpose and way of operation of it.                                                                                                |
+-->
 
-
-<div class="table-contents">
-    <table class="lt-4-cols lt-7-rows">
-        <colgroup>
-            <col class="col_1" style="width: 50%; "><!--Empty-->
-            <col class="col_2" style="width: 50%; "><!--Empty--></colgroup>
-        <thead>
-        <tr>
-            <th align="left" id="idm140499344203312" scope="col" valign="top">Field</th>
-            <th align="left" id="idm140499344202224" scope="col" valign="top">Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">Loaded</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                Information whether the service unit has been loaded, the absolute path to the unit file, and a note whether the unit is enabled.
-            </p>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">Active</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                Information whether the service unit is running followed by a time stamp.
-            </p>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">Main PID</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                The PID of the corresponding system service followed by its name.
-            </p>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">Status</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                Additional information about the corresponding system service.
-            </p>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">Process</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                Additional information about related processes.
-            </p>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" headers="idm140499344203312" valign="top"><p>
-                <code class="literal">CGroup</code>
-            </p>
-            </td>
-            <td align="left" headers="idm140499344202224" valign="top"><p>
-                Additional information about related Control Groups (cgroups).
-            </p>
-            <td>
-        </tr>
-        </tbody>
-    </table>
+<div class="table" id="tabl-Managing_Services_with_systemd-Services-Status">
+    <div class="table-contents">
+        <table class="lt-4-cols lt-7-rows">
+            <colgroup>
+                <col class="col_1" style="width: 50%; "><!--Empty-->
+                <col class="col_2" style="width: 50%; "><!--Empty--></colgroup>
+            <thead>
+            <tr>
+                <th align="left" id="idm140499344203312" scope="col" valign="top">Field</th>
+                <th align="left" id="idm140499344202224" scope="col" valign="top">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">Loaded</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    Information whether the service unit has been loaded, the absolute path to the unit file, and a note whether the unit is enabled.
+                </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">Active</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    Information whether the service unit is running followed by a time stamp.
+                </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">Main PID</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    The PID of the corresponding system service followed by its name.
+                </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">Status</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    Additional information about the corresponding system service.
+                </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">Process</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    Additional information about related processes.
+                </p>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" headers="idm140499344203312" valign="top"><p>
+                    <code class="literal">CGroup</code>
+                </p>
+                </td>
+                <td align="left" headers="idm140499344202224" valign="top"><p>
+                    Additional information about related Control Groups (cgroups).
+                </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 FieldDescription
