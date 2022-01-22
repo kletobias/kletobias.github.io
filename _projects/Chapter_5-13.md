@@ -11,6 +11,11 @@ accent_color: '#08877d'
 
 ### The *systemctl* Command
 
+/Users/tobias/all_code/projects/kletobias-github-io_website/images
+
+![bright_color_try1.png](Chapter_5-13-1642816218053.png)
+
+
 
 #### Overview
 
@@ -402,3 +407,5 @@ service. One can reload it like so:
 ```bash
 root * systemctl reload httpd.service
 ```
+
+That is the end for this section.
