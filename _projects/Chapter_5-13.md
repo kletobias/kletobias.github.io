@@ -13,7 +13,7 @@ accent_color: '#08877d'
 
 /Users/tobias/all_code/projects/kletobias-github-io_website/images
 
-![bright_color_try1.png](/images/Chapter_5-13-1642816218053.png)
+<img alt="bright_color_try1.png" height="808" src="/images/Chapter_5-13-1642816218053.png" width="1275"/>
 
 
 
