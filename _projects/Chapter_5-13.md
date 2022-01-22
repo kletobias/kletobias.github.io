@@ -16,7 +16,7 @@ accent_color: '#08877d'
 {% include post-components/gallery.html
 	columns = 1
 	full_width = true
-	images = "/images/Chapter_5-13-1642816218053.png"
+	images = "/images/Chapter_5-13-1642816218053.png,/images/dark_trydocker.png"
 %}
 
 
@@ -28,7 +28,6 @@ BEST UMANGEE
 <img alt="bright_color_try1.png" height="1616" 
 src="/images/Chapter_5-13-1642816218053.png" width="2550"/>
 -->
-
 
 #### Overview
 
