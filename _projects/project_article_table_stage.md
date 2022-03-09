@@ -278,9 +278,9 @@ df.head(n=9) # Includes index values [0:8]
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table>
   <thead>
-    <tr style="text-align: right;width:100%;overflow-x:scroll;">
+    <tr style="text-align: right;width: 100%;overflow-x: scroll;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
