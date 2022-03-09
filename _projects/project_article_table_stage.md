@@ -265,22 +265,10 @@ df.head(n=9) # Includes index values [0:8]
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
-    <tr style="text-align: right;width: 100vw;overflow-x: scroll;">
+    <tr style="text-align: right;width: 100vw;overflow-x: auto;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
@@ -524,6 +512,7 @@ df.head(n=9) # Includes index values [0:8]
     </tr>
   </tbody>
 </table>
+
 <p>9 rows × 47 columns</p>
 
 </div>
@@ -549,19 +538,7 @@ df.tail()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr>
@@ -921,9 +898,6 @@ df.describe().to_markdown()
 
 
 
-```markdown
-|       |   anz_schlafzimmer |   anz_badezimmer |\n|:------|-------------------:|-----------------:|\n| count |        6469        |      7317        |\n| mean  |           1.57938  |         1.09635  |\n| std   |           0.746926 |         0.321261 |\n| min   |           0        |         0        |\n| 25%   |           1        |         1        |\n| 50%   |           1        |         1        |\n| 75%   |           2        |         1        |\n| max   |           8        |        11        |
-```
 
 
 
