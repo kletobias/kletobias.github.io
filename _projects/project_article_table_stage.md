@@ -562,9 +562,9 @@ df.tail()
         text-align: right;
     }
 </style>
-<table border="1" class="dataframe">
+<table>
   <thead>
-    <tr style="text-align: right;width:100%;overflow-x:scroll;">
+    <tr>
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
@@ -933,4 +933,8 @@ To get a first look at the DataFrame, that holds all records, there are multiple
 2. Its counterpart is `df.tail()`
 3. Another one is `df.describe()`
 4.
+
+
+
+
 
