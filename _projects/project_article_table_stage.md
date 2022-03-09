@@ -102,7 +102,7 @@ df.head() # Includes index values [0:4], which is default (n=5)
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right;width:100%;overflow-x:scroll;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
@@ -251,6 +251,7 @@ df.head() # Includes index values [0:4], which is default (n=5)
   </tbody>
 </table>
 <p>5 rows × 47 columns</p>
+
 </div>
 
 
@@ -279,7 +280,7 @@ df.head(n=9) # Includes index values [0:8]
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right;width:100%;overflow-x:scroll;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
@@ -524,6 +525,7 @@ df.head(n=9) # Includes index values [0:8]
   </tbody>
 </table>
 <p>9 rows × 47 columns</p>
+
 </div>
 
 
@@ -562,7 +564,7 @@ df.tail()
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: right;width:100%;overflow-x:scroll;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
@@ -711,6 +713,7 @@ df.tail()
   </tbody>
 </table>
 <p>5 rows × 47 columns</p>
+
 </div>
 
 
@@ -784,7 +787,7 @@ df.dtypes
 
 
 
-```json
+```markdown
 einbau_kue                    object
 lift                          object
 nebenkosten                   object
@@ -857,7 +860,7 @@ df.count()
 
 
 
-```json
+```markdown
 einbau_kue                    8024
 lift                          2975
 nebenkosten                  12324
