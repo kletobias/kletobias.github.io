@@ -280,7 +280,7 @@ df.head(n=9) # Includes index values [0:8]
 </style>
 <table>
   <thead>
-    <tr style="text-align: right;width: 100%;overflow-x: scroll;">
+    <tr style="text-align: right;width: 100vw;overflow-x: scroll;">
       <th></th>
       <th>einbau_kue</th>
       <th>lift</th>
