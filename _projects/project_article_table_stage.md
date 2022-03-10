@@ -732,11 +732,54 @@ df.dtypes
 ```
 
 ```markdown
-einbau_kue object lift object nebenkosten object gesamt_miete object heiz_kosten object lat object lng object str object nutzf object regio object parking object online_since object baujahr object
-objekt_zustand object heizungsart object wesent_energietr object endenergiebedarf object kaltmiete object quadratmeter object anzahl_zimmer object balkon/terasse object keller object typ object etage
-object anz_schlafzimmer float64 anz_badezimmer float64 haustiere object nicht_mehr_verfg_seit object json_heatingType object json_balcony object json_electricityBasePrice object json_picturecount
-object json_telekomDownloadSpeed object json_telekomUploadSpeed object json_totalRent object json_yearConstructed object json_electricityKwhPrice object json_firingTypes object json_hasKitchen object
-json_cellar object json_yearConstructedRange object json_baseRent object json_livingSpace object json_condition object json_interiorQual object json_petsAllowed object json_lift object dtype: object
+einbau_kue                    object
+lift                          object
+nebenkosten                   object
+gesamt_miete                  object
+heiz_kosten                   object
+lat                           object
+lng                           object
+str                           object
+nutzf                         object
+regio                         object
+parking                       object
+online_since                  object
+baujahr                       object
+objekt_zustand                object
+heizungsart                   object
+wesent_energietr              object
+endenergiebedarf              object
+kaltmiete                     object
+quadratmeter                  object
+anzahl_zimmer                 object
+balkon/terasse                object
+keller                        object
+typ                           object
+etage                         object
+anz_schlafzimmer             float64
+anz_badezimmer               float64
+haustiere                     object
+nicht_mehr_verfg_seit         object
+json_heatingType              object
+json_balcony                  object
+json_electricityBasePrice     object
+json_picturecount             object
+json_telekomDownloadSpeed     object
+json_telekomUploadSpeed       object
+json_totalRent                object
+json_yearConstructed          object
+json_electricityKwhPrice      object
+json_firingTypes              object
+json_hasKitchen               object
+json_cellar                   object
+json_yearConstructedRange     object
+json_baseRent                 object
+json_livingSpace              object
+json_condition                object
+json_interiorQual             object
+json_petsAllowed              object
+json_lift                     object
+dtype: object
 ```
 
 ```python
