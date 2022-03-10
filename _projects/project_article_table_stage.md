@@ -87,7 +87,7 @@ of lines printed is changed to *n*=9.
 df.head()  # Includes index values [0:4], which is default (n=5)
 ```
 
-<div>
+<div style="width:656px;overflow-x:scroll;">
 
 <table>
   <thead>
@@ -247,7 +247,7 @@ df.head()  # Includes index values [0:4], which is default (n=5)
 df.head(n=9)  # Includes index values [0:8]
 ```
 
-<div>
+<div style="width:656px;overflow-x:scroll;">
 
 <table>
   <thead>
@@ -517,7 +517,7 @@ df.tail()
 
     The maximum value of the range index of df is 12494
 
-<div>
+<div style="width:656px;overflow-x:scroll;">
 
 <table>
   <thead>
