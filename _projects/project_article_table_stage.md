@@ -792,12 +792,55 @@ df.shape
 df.count()
 ```
 
-```markdown
-einbau_kue 8024 lift 2975 nebenkosten 12324 gesamt_miete 12324 heiz_kosten 12324 lat 12324 lng 12324 str 9482 nutzf 1185 regio 12324 parking 3187 online_since 12324 baujahr 11342 objekt_zustand 7810
-heizungsart 9526 wesent_energietr 9930 endenergiebedarf 3771 kaltmiete 12324 quadratmeter 12324 anzahl_zimmer 12324 balkon/terasse 8526 keller 6337 typ 9703 etage 9737 anz_schlafzimmer 6469
-anz_badezimmer 7317 haustiere 3914 nicht_mehr_verfg_seit 11629 json_heatingType 12324 json_balcony 12324 json_electricityBasePrice 12324 json_picturecount 12324 json_telekomDownloadSpeed 12324
-json_telekomUploadSpeed 12324 json_totalRent 12324 json_yearConstructed 12324 json_electricityKwhPrice 12324 json_firingTypes 12324 json_hasKitchen 12324 json_cellar 12324 json_yearConstructedRange
-12324 json_baseRent 12324 json_livingSpace 12324 json_condition 12324 json_interiorQual 12324 json_petsAllowed 12324 json_lift 12324 dtype: int64
+```md
+einbau_kue                    8024
+lift                          2975
+nebenkosten                  12324
+gesamt_miete                 12324
+heiz_kosten                  12324
+lat                          12324
+lng                          12324
+str                           9482
+nutzf                         1185
+regio                        12324
+parking                       3187
+online_since                 12324
+baujahr                      11342
+objekt_zustand                7810
+heizungsart                   9526
+wesent_energietr              9930
+endenergiebedarf              3771
+kaltmiete                    12324
+quadratmeter                 12324
+anzahl_zimmer                12324
+balkon/terasse                8526
+keller                        6337
+typ                           9703
+etage                         9737
+anz_schlafzimmer              6469
+anz_badezimmer                7317
+haustiere                     3914
+nicht_mehr_verfg_seit        11629
+json_heatingType             12324
+json_balcony                 12324
+json_electricityBasePrice    12324
+json_picturecount            12324
+json_telekomDownloadSpeed    12324
+json_telekomUploadSpeed      12324
+json_totalRent               12324
+json_yearConstructed         12324
+json_electricityKwhPrice     12324
+json_firingTypes             12324
+json_hasKitchen              12324
+json_cellar                  12324
+json_yearConstructedRange    12324
+json_baseRent                12324
+json_livingSpace             12324
+json_condition               12324
+json_interiorQual            12324
+json_petsAllowed             12324
+json_lift                    12324
+dtype: int64
 ```
 
 ```python
