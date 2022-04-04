@@ -2,74 +2,13 @@
 title: 'testing_math'
 subtitle: 'Learning Linux - Section 5.2'
 date: 2022-02-24 00:00:00
-description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
+description: 'described'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
 # Summary of probability for machine learning ebook from jason
-
-
-## What it will teach
-
-
-It will teach the basics of probability needed as a machine learning
-practitioner. In detail, it will teach:
-
-
-- How the field of probability relates to machine learning and how to apply that
-  probabilistic thinking on a machine learning project.
-- How to calculate different types of probability, such as:
-	- *joint probability*
-	- *marginal probability*
-	- *conditional probability*
-- How to consider data in terms of random variables and how to recognize and
-  sample from common discrete and continuous probability distributions
-  functions.
-- How to frame learning as maximum likelihood estimation and how this important
-  probabilistic framework is used for regression, classification and clustering
-  machine learning algorithms.
-- How to use probabilistic methods to evaluate machine learning models directly
-  without evaluating their performance on a test dataset.
-- How to calculate and consider probability from the Bayesian perspective and to
-  calculate *conditional probability* with Bayes Theorem for common scenarios.
-- How to use the statement of the Bayes Theorem about *conditional probability*
-  for classification with Naive Bayes, optimisation with Bayes Optimisation and
-  graphical models with Bayesian Networks.
-- How to quantify uncertainty using measures of information and entropy from the
-  field of information theory and calculate quantities such as cross-entropy and
-  mutual information.
-- How to develop and evaluate naive classifiers using a probabilistic framework.
-- How to evaluate classification models that predict probabilities and calibrate
-  probability predictions.
-
-
-How it will impact the machine learning process:
-
-
-- It will let one confidently calculate and wield both frequentist probability
-  (counts) and Bayesian probability (beliefs) generally and within the context
-  of machine learning datasets.
-- Confidently select and use loss functions and performance measures when
-  training machine learning algorithms, backed by a knowledge of the underlying
-  probabilistic framework
-  (e.g. maximum likelihood estimation) and the relationships between metrics.
-  (e.g. cross-entropy and negative *log-likelihood*).
-- One will have the ability to confidently evaluate classification predictive
-  models, including establishing a robust baseline in performance, probabilistic
-  performance measures, and calibrated predicted probabilities.
-
-we jlol here.
-
-How to best utilize this material:
-
-> This book is not intended to be read passively or be placed in a folder as a
-> reference text. It is a playbook, a workbook, and a guidebook intended for you
-> to learn by doing and then applying your new understanding with working Python
-> examples. To get the most out of the book, I would recommend playing with the
-> examples in each tutorial. Extend them, break them, then fix them. Try some
-> extensions presented at the end of each lesson and let me know how you do.
 
 
 ## Chapter Overview
