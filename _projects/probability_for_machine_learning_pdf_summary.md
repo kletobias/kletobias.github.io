@@ -162,11 +162,14 @@ Complement of the event P(X=x), as 1 - P(X=x).
 > theory to differentiate it from the likelihood of a specific event.
 
 **Definitions:**
-#### Event $A$
+#### Event $A
+\end{align}
 - Event ($A$): = An outcome to which a probability is assigned.
-#### Sample Space $S$
+#### Sample Space $S
+\end{align}
 - Sample Space ($S$): = The set of possible outcomes or events.
-#### Probability Function $P$
+#### Probability Function $P
+\end{align}
 - Probability Function ($P$): = The function used to assign a probability to an event.
 
 ### Discrete Random Variables & Distributions
@@ -187,7 +190,9 @@ The set of all possible outcomes (*worlds*) is called a **sample space**.
 A fully specified **probability model** associates a numerical probability $P(\,\omega )\,$ with each
 possible world.
 
-$$0 \le P(\,\omega)\,\, \mathrm{for every}\, \omega\, \mathrm{and}\, \sum_{\omega \in{\Omega}}P(\,\omega)\,\, = 1$$
+\begin{align}
+0 \le P(\,\omega)\,\, \mathrm{for every}\, \omega\, \mathrm{and}\, \sum_{\omega \in{\Omega}}P(\,\omega)\,\, = 1
+\end{align}
 
 #### Probability associated with a proposition
 
@@ -205,7 +210,8 @@ Equal to the sum of the probability of the $\omega$ values
   - For example, the first die may already be showing a 5 and we are waiting with bated breath for the other one to stop spinning.
   - In that case, we are interested not in the unconditional probability of rolling doubles, but the **conditional probability** or **posterior probability** (or just “*posterior*” for short) of rolling
     doubles given that the first die is a 5. This probability is written using the "$|$"
-		$$P(doubles|Die_{1} = 5)$$
+		$$P(doubles|Die_{1} = 5)
+\end{align}
 
 Where the "$|$" is pronounced “given.”
 
@@ -218,36 +224,47 @@ Where the "$|$" is pronounced “given.”
 
 <br />
 
-$P(\mathrm{cavity}|\mathrm{toothache}) = 0.6$ does not mean:
+\begin{align}
+P(\mathrm{cavity}|\mathrm{toothache}) = 0.6$ does not mean:
 
 - Whenever (*toothache* == True), it follows that *cavity* is true with probability 0.6.
 - It means, that whenever *toothache* is true *and we don't have any further information*, conclude that *cavity* is true with proability 0.6.
 
-The extra condition is important; for example, if we had the further information that the dentist found no cavities, we definitely would not want to conclude that is true with probability 0.6; In this case we would use $P(cavity|toothache\wedge \neg cavity ) = 0$
+The extra condition is important; for example, if we had the further information that the dentist found no cavities, we definitely would not want to conclude that is true with probability 0.6; In this case we would use $P(cavity|toothache\wedge \neg cavity ) = 0
+\end{align}
 
-$$P(a|b) = \frac{P(a\wedge b)}{P(b)} \tag{Def: conditional probability}$$
+\begin{align}
+P(a|b) = \frac{P(a\wedge b)}{P(b)} \tag{Def: conditional probability}
+\end{align}
 
 - which holds for $P(b) > 0$.
 
-- $a\wedge b$ means, that any valid proposition must satisfy both $a$ and $b$
+- $a\wedge b$ means, that any valid proposition must satisfy both $a$ and $b
+\end{align}
 
 An alternative way to write the definition above is with the **product rule**:
 
-$$P(a \wedge b) = P(a|b)P(b) \tag{product rule}$$
+\begin{align}
+P(a \wedge b) = P(a|b)P(b) \tag{product rule}
+\end{align}
 
 The product rule comes from the fact, that for $a$ and $b$ to be true, we need $b$ to be true and $a$ given $b$ as well.
 
 #### Boolean Random Variables
 
-$X$ is a boolean random variable, if it's domain is
+\begin{align}
+X$ is a boolean random variable, if it's domain is
 
-$$X=\{\,true,false\}\,\,\mathrm{or\, in\, the\, case\, of\, a\, bernoulli\, distributed\, random\, variable\,} X = \{0,1\}$$
+\begin{align}
+X=\{\,true,false\}\,\,\mathrm{or\, in\, the\, case\, of\, a\, bernoulli\, distributed\, random\, variable\,} X = \{0,1\}
+\end{align}
 
 By convention, the following is used: $A = true$ is simply $a$ as the realization of $A$ in $a$, while $A = false$ is abbreviated as $\neg a$.
 
 The uses of $doubles$, $cavity$, $toothache$ are of this kind.
 
-$P(a)$ is the probability, that $A$ is true, if $A$ is a boolean random variable, while in the expression $\sum_{a} P(a)$ it refers to the probability of one of the values $a$ of $A$.
+\begin{align}
+P(a)$ is the probability, that $A$ is true, if $A$ is a boolean random variable, while in the expression $\sum_{a} P(a)$ it refers to the probability of one of the values $a$ of $A$.
 
 #### Combining Elemental Propositions
 
@@ -257,19 +274,27 @@ One can combine these sorts of elemental propositions by using the connectives o
 
 "The probability that the patient has a cavity, given that she is a teenager with no toothache, is 0.1", as follows:
 
-$$P(cavity | \neg toothache \wedge teen) = 0.1$$
+\begin{align}
+P(cavity | \neg toothache \wedge teen) = 0.1
+\end{align}
 
 It is also common to use a comma for conjunction ($\wedge$), so the following is equivalent to the above equation:
-$$P(cavity|\neg toothache, teen)$$
+\begin{align}
+P(cavity|\neg toothache, teen)
+\end{align}
 
 Talking about all the probabilities of all possible values of a random variable.
-$$P(Weather\,=\,sun)= 0.6$$ $$P(Weather\,=\,rain)= 0.1$$ $$P(Weather\,=\,cloud)= 0.29$$ $$P(Weather\,=\,snow)= 0.01$$
-The equivalent, used instead: $$\mathbb{P}(Weather)=\langle0.6,0.1,0.29,0.01\rangle$$
+\begin{align}
+P(Weather\,=\,sun)= 0.6$$ $$P(Weather\,=\,rain)= 0.1$$ $$P(Weather\,=\,cloud)= 0.29$$ $$P(Weather\,=\,snow)= 0.01
+\end{align}
+The equivalent, used instead: $$\mathbb{P}(Weather)=\langle0.6,0.1,0.29,0.01\rangle
+\end{align}
 
 
 **The bold $\mathbb{P}$ indicates, that the result is a vector of numbers, and where we assume a predefined ordering** $\langle sun,rain,cloud,snow\rangle$ on the range of $Weather$.
 
-$\mathbb{P}$ defines a probability distribution for the random variable $Weather$. That is assign a probability for every possible value of the random variable $Weather$. In this case it is a categorical distribution.
+\begin{align}
+\mathbb{P}$ defines a probability distribution for the random variable $Weather$. That is assign a probability for every possible value of the random variable $Weather$. In this case it is a categorical distribution.
 
 The $\mathbb{P}$ notation is also used for conditional probability distributions: $\mathbb{P}(X|Y)$ gives all values of $P(X=x_{i}|Y=y_{i})$ for each possible $i,j$ pair.
 
@@ -277,17 +302,22 @@ The $\mathbb{P}$ notation is also used for conditional probability distributions
 
 For continuous distributions it is not possible to write out the entire distribution as a vector, as there are infinitely many values. Instead one can denote the probability, that a random variable $X$ takes on some value $x$ as a parameterized function of $x$, usually called a *probability density function*.
 
-$$P(NoonTemp = x) = Uniform(x;18C,26C)$$
+\begin{align}
+P(NoonTemp = x) = Uniform(x;18C,26C)
+\end{align}
 
 It expresses the belief, that temperature at noon is uniformly distributed between 18 and 26 degrees Celsius.
 
 Probability density functions (*pdfs*) have a different meaning compared to discrete distributions. Saying that the probability density is uniform from 18C to 26C, means that there is a 100% chance, that the temperature at noon will fall somewhere within that interval. That 8C wide interval and a 50% chance, that it will fall into one of the 4C sub-region and so on.
 
-#### Notation of probability density for cont. rv $X$
+#### Notation of probability density for cont. rv $X
+\end{align}
 
 The probability density for $X$ at value $x$ as $P(X=x)$ or just $P(x)$; The intuitive definition of $P(x)$ is the probability, that $X$ falls within an arbitrarily small region beginning at $x$, divided by the width of that region.
 
-$$P(x)\, =\, \mathrm{lim}_{dx\rightarrow 0}\, \frac{P(x \leq X \leq x +dx)}{dx}$$
+\begin{align}
+P(x)\, =\, \mathrm{lim}_{dx\rightarrow 0}\, \frac{P(x \leq X \leq x +dx)}{dx}
+\end{align}
 
 
 For *NoonTemp* we have
@@ -317,7 +347,8 @@ Commas are used for distributions on multiple variables. $\mathbb{P}(Weather,Cav
 | $sum\, rows$      |   0.2				|	0.8						 |
 
 
-The above table can be written much shorter using the following expression to define the joint probability of $Weather$ and $Cavity$ $$\mathbb{P}(Weather,Cavity) = \mathbb{P}(Weather|Cavity) \mathbb{P}(Cavity)$$
+The above table can be written much shorter using the following expression to define the joint probability of $Weather$ and $Cavity$ $$\mathbb{P}(Weather,Cavity) = \mathbb{P}(Weather|Cavity) \mathbb{P}(Cavity)
+\end{align}
 
 
 
@@ -742,9 +773,11 @@ A random variable is a function, that maps each outcome in a probability space t
 
 #### Semi-Formal mathematical definition
 
-Given a probability space $(\,\Omega,F,\mathrm{P})\,$, a random variable $X$ is a function from the sample space $\Omega$
+Given a probability space $(\,\Omega,F,\mathrm{P})\,$, a random variable $X$ is a function from the sample space $\Omega
+\end{align}
 to the real numbers $\mathbb{R}$. Once the *outcome* $\omega \in{\Omega}$ of the experiment is revealed, the corresponding
-$X(\,\omega)\,$ is known as a **realization** of the random variable.
+\begin{align}
+X(\,\omega)\,$ is known as a **realization** of the random variable.
 
 While it is relatively easy to understand in the case of single variable, the
 same can not be said when there are multiple random variables. In machine
@@ -886,7 +919,8 @@ Notations:
 
 | Symbol | Description | |:-:|:-:| | $X$ | Random Variable | | $x_{1}, x_{2}, x_
 {3}$ | Values that $X$ can take | |
-$\sigma-\mathnormal{Algebra}\space\space\mathcal{(F)}$ | It is the domain of the
+\begin{align}
+\sigma-\mathnormal{Algebra}\space\space\mathcal{(F)}$ | It is the domain of the
 random variable $X$. $X$ can take on any of the sets found in $\mathcal{F}$|
 
 
@@ -914,7 +948,8 @@ In general, the following notation is used to refer to the expected value of a
 random variable.
 
 
-- **Extpected value** is often deonted by $\mathrm{E[X]}$ or $\mathrm{E[f(x)]}$
+- **Extpected value** is often deonted by $\mathrm{E[X]}$ or $\mathrm{E[f(x)]}
+\end{align}
   where $\mathrm{f}$ is the function used to sample a value from the domain of
   $X$.
 
@@ -933,7 +968,8 @@ random variable.
   value of less or equal a specified value found on the ordered list of values
   that the discrete random variable can have.
 - The notation for any CDF and a given upper limit $x$ is: $P\left({X \le
-  x}\right)$
+  x}\right)
+\end{align}
 - Values of a discrete random variable may or may not be ordinal, meaning they
   may or may not be ordered. These can be categorical values for example, that
   act as a label for a feature. An example are zip code values, while they are
@@ -954,7 +990,8 @@ random variable.
 We usually say that a random variable is distributed according to a certain pmf.
 
 If the discrete range of $X$ is denoted by $D$, then the triplet ( $D$,
-$2^D$ , $p_X$ ) is a valid probability space (recall that $2^D$ is the
+\begin{align}
+2^D$ , $p_X$ ) is a valid probability space (recall that $2^D$ is the
 power set of $D$). In particular, $p_x$ is a valid probability measure.
 
 
@@ -974,13 +1011,15 @@ well-known discrete probability distributions:
 
 - The probabilities of dice rolls with a fair dice form a discrete uniform
   distribution.
-	- $\Omega = \{ \{1 \}, \{2 \}, \{3 \}, \{4 \}, \{5 \}, \{6 \} \}$
+	- $\Omega = \{ \{1 \}, \{2 \}, \{3 \}, \{4 \}, \{5 \}, \{6 \} \}
+\end{align}
 	- $\sigma - Algebra$ $\mathcal{F}$ is the powerset of $\space\Omega$. See
 	  below for more detail.
 
 
 It gets quite complicated to calculate the powerset by hand, that makes up the
-$\sigma - Algebra$ here. A python function was created to calculate the powerset.
+\begin{align}
+\sigma - Algebra$ here. A python function was created to calculate the powerset.
 The code is found just below.
 
 
@@ -1024,12 +1063,14 @@ Algebra$ can become very large very quickly.
 
 
 This is the entire powerset $\mathcal{F}$, that fulfils the properties of a
-$\sigma - Algebra$.
+\begin{align}
+\sigma - Algebra$.
 
 
 - The probabilities of coin flips form a Bernoulli distribution. There are only
   two outcomes possible in this experiment.
-- The probability space is given by $\Omega=\{\{Heads\}, \{Tails\}\}$
+- The probability space is given by $\Omega=\{\{Heads\}, \{Tails\}\}
+\end{align}
 - The parameters are probability of success $p$ and $n$ the number of trials.
 - $\sigma - Algebra$ $\mathcal{F}$ is:
 - {% raw %} $\mathcal{F}= \{ \{\ emptyset \},\{ Heads \},\{ Tails \},\{ Heads\cup{Tails} \} \}$ {% endraw %}
@@ -1062,7 +1103,8 @@ random variable.
 *Normal PDF*
 
 ![WrappedExponentialPDF](assets/WrappedExponentialPDF.png)
-*Exponential Distribution PDF* for different values of $\lambda$
+*Exponential Distribution PDF* for different values of $\lambda
+\end{align}
 
 
 ##### Examples domains where these are used
@@ -1100,7 +1142,8 @@ random variable.
 - PMF: returns the probability of a value of a given outcome.
 - CDF: is the cumulative distribution function and returns the cumulative
   probability for $X$ being a value less than or equal than $x$. $P\left(
-  X\le{x}\right)$
+  X\le{x}\right)
+\end{align}
 
 The following a important discrete probability distributions and the Binomial
 plus the multinomial generalize each to multiple independent trials. The
@@ -1128,10 +1171,14 @@ following:
 #### Facts
 
 
-1. $x\in \{0,1\}$
-2. $P\left(x=1\right) = p$
-3. $P\left(x=0\right) = 1-p$
-4. In the case of a fair coin, $p=0.5$
+1. $x\in \{0,1\}
+\end{align}
+2. $P\left(x=1\right) = p
+\end{align}
+3. $P\left(x=0\right) = 1-p
+\end{align}
+4. In the case of a fair coin, $p=0.5
+\end{align}
 
 
 ### Binomial Distribution
@@ -1164,7 +1211,8 @@ in each trial.
 
 
 Let a Bernoulli process have $p=0.3$, so that $P\left(x=1\right) = p = 0.3$ and
-$P\left(x=0\right) = 1-p = 0.7$. $k = 100$, meaning that there are 100
+\begin{align}
+P\left(x=0\right) = 1-p = 0.7$. $k = 100$, meaning that there are 100
 individual trials in the process.
 
 The results of the process will be in a list for example and that list will only
@@ -1200,7 +1248,8 @@ value in this case. The mean.
 
 The process will be repeated several times, to show that the values derived form
 the simulation using python are not always the same and one would expected them
-to actually always be $30$ for large numbers of $k$. $k$ will be kept at $100$
+to actually always be $30$ for large numbers of $k$. $k$ will be kept at $100
+\end{align}
 to show the fluctuation in successes.
 
 
@@ -1331,7 +1380,8 @@ success: 100.000 %
 
 
 The Multinoulli distribution is also called the categorical distribution, covers
-the case where an event will have one of $K$ possible outcomes. $x \in \{1,2,3,...,K\}$
+the case where an event will have one of $K$ possible outcomes. $x \in \{1,2,3,...,K\}
+\end{align}
 
 
 It generalizes the Bernoulli distribution from a binary variable to a
@@ -1342,7 +1392,8 @@ A common example that follows the Mutlinoulli distribution is:
 
 
 A single roll of a die, that has a sample space  
-$\Omega = \\{ \\{1\\}, \\{2\\}, \\{3\\}, \\{4\\}, \\{5\\}, \\{6\\}\\}$.$K=6$ in this case.
+\begin{align}
+\Omega = \\{ \\{1\\}, \\{2\\}, \\{3\\}, \\{4\\}, \\{5\\}, \\{6\\}\\}$.$K=6$ in this case.
 
 
 #### Machine Learning Example
@@ -1355,13 +1406,22 @@ summarized with $p$ variables from $p_{1}$ to $p_{k}$, each defining the
 probability of a given categorical outcome from 1 to $K$, and where all probailities sum to $1.0$. 
 {% raw %} 
 
-$$ P\\(\,X=1\\)\, = p_{1}$$
+\begin{align}
+ P\\(\,X=1\\)\, = p_{1}
+\end{align}
 
-$$P(\,X=2)\, = p_{2}$$
-$$P(\,X=3)\, = p_{3}$$
-$$P(\,X=K)\, = p_{K}$$
+\begin{align}
+P(\,X=2)\, = p_{2}
+\end{align}
+\begin{align}
+P(\,X=3)\, = p_{3}
+\end{align}
+\begin{align}
+P(\,X=K)\, = p_{K}
+\end{align}
 {% endraw %}
-For a single roll of the die, the probability would be $1/6$ for each of the $6$
+For a single roll of the die, the probability would be $1/6$ for each of the $6
+\end{align}
 possible outcomes.
 
 
@@ -1375,8 +1435,10 @@ of a multinomial process includes a sequence of independent dice rolls. A common
 example of the multinomial distribution is the occurrence counts of words in a
 text document from the field of natural language processing.
 
-A multinomial distribution is summarized by a discrete random variable with $K$
-outcomes, a probability for each outcome from $p_{1}$ to $p_{K}$, and $n$
+A multinomial distribution is summarized by a discrete random variable with $K
+\end{align}
+outcomes, a probability for each outcome from $p_{1}$ to $p_{K}$, and $n
+\end{align}
 successive trials.
 
 The following example used $K = 3$, and all three categories are equally likely
@@ -1418,7 +1480,9 @@ Category
 
 
 Of interest is the likelihood of the three categories having the outcome
-$[33,33,34]$ With the PMF function this can be simulated for $k=100$
+\begin{align}
+[33,33,34]$ With the PMF function this can be simulated for $k=100
+\end{align}
 
 
 ```py
@@ -1448,7 +1512,8 @@ print(
 
 The Result is 0.813% for the outcome, less than 1% that is. So running 100
 trials only, over and over and over again, should show that the combination
-$[33,33,34]$ is not part of any outcome. That comes from the fact, that 1% would
+\begin{align}
+[33,33,34]$ is not part of any outcome. That comes from the fact, that 1% would
 equal appearing once per 100 trials. Since it is lower than 1, there should be
 trials where it is not observed at all.
 
@@ -1558,8 +1623,10 @@ The distribution can be defined using two parameters:
 - A special case of normal distribution is the standard normal distribution. The
   key characteristics for a normal distribution to be a standard normal
   distribution are:
-	- $\mu = 0$
-	- $\sigma = 1$
+	- $\mu = 0
+\end{align}
+	- $\sigma = 1
+\end{align}
 
 
 #### Example showing a generic normal distribution
@@ -1603,7 +1670,8 @@ One can see that the mean and the standard deviation for the sample are both off
 their theoretical values by quite a bit. This has to do with the small sample
 size $n=10$. Small sample sizes can deviate from the theoretical values quite a
 lot. Running the simulation again with a sample size of $n=10000$ gives results
-for $\mu$ and $\sigma$, that are closer to their theoretical values of $\mu=20$
+for $\mu$ and $\sigma$, that are closer to their theoretical values of $\mu=20
+\end{align}
 and $\sigma=7$ respectively, as seen below.
 
 
@@ -1704,7 +1772,8 @@ The distribution can be defined using one parameter:
 
 
 There is a fixed relationship between $\lambda$ and $\Beta$, such that $\Beta =
-frac{1}{\lambda}$
+frac{1}{\lambda}
+\end{align}
 
 A distribution with $\Beta = 50$ and sample random numbers from this
 distribution. This can be achieved using the `exponential` numpy function. The
@@ -1867,7 +1936,8 @@ fig.savefig(
 
 
 Below are the plotted PDF and CDF of a Pareto distribution, that uses a value of
-1.1 for scale parameter $\alpha$
+1.1 for scale parameter $\alpha
+\end{align}
 
 The PDF shows, that around 80% percent of values lie between 0 and 2, only about
 20% of values lie between 2 and 10. This goes well to show the heuristic that is
@@ -2144,7 +2214,8 @@ their theoretical values.
 Next, the result of the parametric density estimation is tested for its fit to
 the sample data using `scipy`.
 First, the distribution is created and then used to map values in the range of
-$[30,70[$ to their respective probabilities.
+\begin{align}
+[30,70[$ to their respective probabilities.
 
 ```py
 from scipy.stats import norm
@@ -2354,7 +2425,9 @@ The maximum likelihood estimation involves:
 How to estimate a joint probability distribution for a dataset?
 In the following, $\vec{X}_p$ stands for the joint distribution of the population. $\vec{X}_s$ will stand for the joint distribution of the sample found in a dataset, for example. Both distributions are vectors that consist of a vector of all variables, that make up the joint distribution.
 
-$$\vec{X}_{p|s} = \vec{x} = \langle x_1,x_2,..,x_m\rangle$$
+\begin{align}
+\vec{X}_{p|s} = \vec{x} = \langle x_1,x_2,..,x_m\rangle
+\end{align}
 
 ###### Problems
 - If sample $\vec{X}_{s}$ is drawn from a small population.
@@ -2390,20 +2463,24 @@ In the following, the focus is on the MLE method.
   parameters, formally:
 
 
-$$\mathbb{P}\left(\vec{X}|\vec{\theta}\right) \equiv \mathbb{P}\left(\vec{X};\vec{\theta}\right) \equiv \mathbb{P}\left(x_1,x_2,x_3,...,x_m;\vec{\theta}\right)$$
+\begin{align}
+\mathbb{P}\(\vec{X}|\vec{\theta}\) \equiv \mathbb{P}\(\vec{X};\vec{\theta}\) \equiv \mathbb{P}\(x_1,x_2,x_3,...,x_m;\vec{\theta}\)
+\end{align}
 
 
 
 The resulting conditional probability is referred to as the likelihood of observing the data given the model parameters and written using the notation $L\left(\right)$, to denote the likelihood function. For example:
 
 
-$$L\left(\vec{X};\vec{\theta}\right)$$
+\[L\(\\vec\{X\}\;\\vec\{\\theta\}\)\]
 
 
 The objective of Maximum Likelihood Estimation is to find the set of parameters ($\vec{\theta}$), that maximize the likelihood function, e.g. result in the largest likelihood value.
 
 
-$$max L\left(\vec{X};\vec{\theta}\right)$$
+\begin{align}
+max L\left(\vec{X};\vec{\theta}\right)
+\end{align}
 
 
 
@@ -2419,17 +2496,22 @@ $$max L\left(\vec{X};\vec{\theta}\right)$$
 How to estimate a joint probability distribution for a dataset? Let $\vec{\vec{X}}$ be a random
 variable with outcomes $\vec{X}_1,..,\vec{X}_n$ on the domain $x_1,..,x_n$ representing $n$ examples, where each element on
 the domain is drawn independently and all from the same probability distribution, so called
-independent and identically distributed (*i.i.d.*) or close to it. Let $P_{data}\left(\vec{X}\right)$
+independent and identically distributed (*i.i.d.*) or close to it. Let $P_{data}\left(\vec{X}\right)
+\end{align}
 be the true, but unknown data generating distribution, from which is drawn.
 - Let $P_{model}\left(\vec{X};\vec{\theta}\right)$ be a parametric family of distributions over the same
-  space indexed by $\vec{\theta}$
+  space indexed by $\vec{\theta}
+\end{align}
 - $P_{model}\left(\vec{X};\vec{\theta}\right)$ maps any configuration of $\vec{\theta}$ by use of the resulting
   $P$ of $\vec{x}$ to a real number $x \in [0,1] \sub \R$. It tries to estimate
-	$P_{data}\left(\vec{X};\vec{\theta}\right)$, the true probability.
+\begin{align}
+P_{data}\left(\vec{X};\vec{\theta}\right)$, the true probability.
 
 
-$$P_{model}\left(\vec{X}|\vec{\theta}\right) \equiv P_{model}\left(\vec{X};\vec{\theta}\right) \equiv
-P_{model}\left(x_1,x_2,x_3,...,x_n;\vec{\theta}\right)$$
+\begin{align}
+P_{model}\left(\vec{X}|\vec{\theta}\right) \equiv P_{model}\left(\vec{X};\vec{\theta}\right) \equiv
+P_{model}\left(x_1,x_2,x_3,...,x_n;\vec{\theta}\right)
+\end{align}
 
 The resulting conditional probability is referred to as the likelihood of observing the
 data given the model parameters and written using the notation $L\left(\right)$, to denote
@@ -2437,7 +2519,9 @@ the likelihood function. For example:
 
 
 
-$$L_{\vec{\theta}}\left(\vec{X};\vec{\theta}\right)$$
+\begin{align}
+L_{\vec{\theta}}\left(\vec{X};\vec{\theta}\right)
+\end{align}
 
 
 
@@ -2447,7 +2531,9 @@ value.
 
 
 
-$$\vec{\theta}_{ML}\ =\ \mathrm{arg\; max}_{\,\vec{\theta}}\ L\left(\vec{X};\vec{\theta}\right)$$
+\begin{align}
+\vec{\theta}_{ML}\ =\ \mathrm{arg\; max}_{\,\vec{\theta}}\ L\left(\vec{X};\vec{\theta}\right)
+\end{align}
 
 
 
@@ -2456,7 +2542,9 @@ probability for observing each sample, given $\theta$.
 
 
 
-$$\theta_{ML}\ =\ \mathrm{arg\; max}_{\,\theta}\ \prod_{i=1}^n P_{model}\left(x_i;\theta\right)$$
+\begin{align}
+\theta_{ML}\ =\ \mathrm{arg\; max}_{\,\theta}\ \prod_{i=1}^n P_{model}\left(x_i;\theta\right)
+\end{align}
 
 
 
@@ -2465,7 +2553,9 @@ therefore the problem can be restated like so:
 
 
 
-$$\theta_{ML}\ =\ \mathrm{arg\; max}_{\,\theta}\ \sum_{i=1}^n ln\,P_{model}\left(x_i;\theta\right)$$
+\begin{align}
+\theta_{ML}\ =\ \mathrm{arg\; max}_{\,\theta}\ \sum_{i=1}^n ln\,P_{model}\left(x_i;\theta\right)
+\end{align}
 
 
 
@@ -2482,7 +2572,9 @@ maximize it. Therefore, the negative of the *log-likelihood* function is used,
 reffered to generally as a **Negative *Log-Likelihood* (Nloglik)** function.
 
 
-$$\theta_{ML}\ =\ \mathrm{arg\; min}_{\,\theta}\ -\!\! \sum_{i=1}^n ln\,P_{model}\left(x_i;\theta\right)\tag{12.9}$$
+\begin{align}
+\theta_{ML}\ =\ \mathrm{arg\; min}_{\,\theta}\ -\!\! \sum_{i=1}^n ln\,P_{model}\left(x_i;\theta\right)\tag{12.9}
+\end{align}
 
 
 
@@ -2500,20 +2592,25 @@ The KL divergence is closely related to:
 It is a non-symmetric measure of the difference between two probability
 distributions $p_{data}\left(x\right)$ and $q_{model}\left(x\right)$. The KL
 divergence of $q_{model}\left(x\right)$ from $p_{data}\left(x\right)$, denoted
-$D_{KL}\left(p_{data}\left(x\right),q_{model}\left(x\right)\right)$, is a
+\begin{align}
+D_{KL}\left(p_{data}\left(x\right),q_{model}\left(x\right)\right)$, is a
 measure of the information lost, when $q_{model}\left(x\right)$ is used to
 approximate $p_{data}\left(x\right)$.
 
 Let $p_{data}\left(x\right)$, $q_{model}\left(x\right)$ be two probability
 distributions of a discrete random variable $\vec{x}$. That is, both
-$p_{data}\left(x\right)$ and $q_{model}\left(x\right)$ sum up to 1, and
-$p_{data}\left(x\right) > 0$ and $q_{model}\left(x\right) > 0$ $\forall\, x \in
+\begin{align}
+p_{data}\left(x\right)$ and $q_{model}\left(x\right)$ sum up to 1, and
+\begin{align}
+p_{data}\left(x\right) > 0$ and $q_{model}\left(x\right) > 0$ $\forall\, x \in
 X$. Then $D_{KL}\left(p_{data}\left(x\right),q_{model}\left(x\right)\right)$ is
 defined as:
 
 
 
-$$D_{KL}\left(p_{data}\left(x\right)||\:q_{model}\left(x\right)\right) = \sum_{x\in X}\, p_{data}\left(x\right) ln \frac{p_{data}\left(x\right)}{q_{model}\left(x\right)}$$
+\begin{align}
+D_{KL}\left(p_{data}\left(x\right)||\:q_{model}\left(x\right)\right) = \sum_{x\in X}\, p_{data}\left(x\right) ln \frac{p_{data}\left(x\right)}{q_{model}\left(x\right)}
+\end{align}
 
 
 
@@ -2526,7 +2623,9 @@ model, description, or approximation of p(x).
 The continuous version of the KL divergence is:
 
 
-$$D_{KL}\left(p\left(x\right)||\: q\left(x\right)\right) = \int_{-\infty}^{\infty} p\left(x\right)\ln\frac{p\left(x\right)}{q\left(x\right)}dx$$
+\begin{align}
+D_{KL}\left(p\left(x\right)||\: q\left(x\right)\right) = \int_{-\infty}^{\infty} p\left(x\right)\ln\frac{p\left(x\right)}{q\left(x\right)}dx
+\end{align}
 
 
 
@@ -2535,9 +2634,11 @@ not a distance measure! That is, since it is not a metric. It does not fulfil
 the symmetry criterium and the triangular inequality, needed to be a metric.
 Nevertheless, $D_{KL}\left(P||Q\right) \ge 0$ and $D_{KL}\left(P||Q\right) = 0
 \iff P = Q$, so that the identity of indiscernibles is fulfilled.
-$lim_{p\rightarrow0}p\;ln\,p = 0$. If $p\ne 0$, but $q=0$, then $D_{KL}$ is
+\begin{align}
+lim_{p\rightarrow0}p\;ln\,p = 0$. If $p\ne 0$, but $q=0$, then $D_{KL}$ is
 defined as $D_{KL}\left(p\,||\,q\right) := \infty$ So, if the approximation of
-$p$ by $q$ has a sample $e$, where $q\left(e\right)=0$, while $p\left(e\right) >
+\begin{align}
+p$ by $q$ has a sample $e$, where $q\left(e\right)=0$, while $p\left(e\right) >
 0$, then the two distributions are absolutely different. In practice this does
 not occur often, as stated in this block quote:
 
@@ -2553,17 +2654,24 @@ following example.
 Suppose, that there are two sample distributions $P$ and $Q$, as follows:
 
 
-$$P : \left(a :\frac{3}{5},\, b :\frac{1}{5},\, c :\frac{1}{5}\right)\qquad Q : \left(a :\frac{5}{9},\, b :\frac{3}{9},\, d :\frac{1}{9}\right)$$
+\begin{align}
+P : \left(a :\frac{3}{5},\, b :\frac{1}{5},\, c :\frac{1}{5}\right)\qquad Q : \left(a :\frac{5}{9},\, b :\frac{3}{9},\, d :\frac{1}{9}\right)
+\end{align}
 
 
-To compute the KL divergence $D_{KL}\left(P\,||\,Q\right)$, a small constant $\epsilon$ is introduced, e.g. $\epsilon = {10}^{-3}$
+To compute the KL divergence $D_{KL}\left(P\,||\,Q\right)$, a small constant $\epsilon$ is introduced, e.g. $\epsilon = {10}^{-3}
+\end{align}
 and we define a smoothed version of $P$ and $Q$, $P'$, $Q'$, as follows. The sample set observed in $P$,
-$SP = \left\{a,\,b,\,c\right\}$. Similarly, $SQ = \left\{a,\,b,\,d\right\}$. The union set is $SU = \left\{a,\,b,\,c,\,d\right\}$.
+\begin{align}
+SP = \left\{a,\,b,\,c\right\}$. Similarly, $SQ = \left\{a,\,b,\,d\right\}$. The union set is $SU = \left\{a,\,b,\,c,\,d\right\}$.
 By smoothing, the missing symbols can be added to each distribution accordingly, with the
-$\epsilon$. Thus, we have
+\begin{align}
+\epsilon$. Thus, we have
 
 
-$$P : \left(a :\frac{3}{5}-\frac{\epsilon}{3},\, b :\frac{1}{5}-\frac{\epsilon}{3},\, c :\frac{1}{5}-\frac{\epsilon}{3},\,d : \epsilon\right)\quad Q : \left(a :\frac{5}{9}-\frac{\epsilon}{3},\, b :\frac{3}{9}-\frac{\epsilon}{3}, \,c : \epsilon,\, d :\frac{1}{9}-\frac{\epsilon}{3}\right)$$
+\begin{align}
+P : \left(a :\frac{3}{5}-\frac{\epsilon}{3},\, b :\frac{1}{5}-\frac{\epsilon}{3},\, c :\frac{1}{5}-\frac{\epsilon}{3},\,d : \epsilon\right)\quad Q : \left(a :\frac{5}{9}-\frac{\epsilon}{3},\, b :\frac{3}{9}-\frac{\epsilon}{3}, \,c : \epsilon,\, d :\frac{1}{9}-\frac{\epsilon}{3}\right)
+\end{align}
 
 
 See Link for an example of calculating the example in python:   py_plotting_functions_while_studying.ipynb
@@ -2616,7 +2724,9 @@ In this tutorial, you discovered linear regression with maximum likelihood estim
 A common metric to evaluate the quality of the predictions is the *mean squared error (MSE)*. It is defined by:
 
 
-$$\operatorname{MSE}=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{Y_i})^2$$
+\begin{align}
+\operatorname{MSE}=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{Y_i})^2
+\end{align}
 
 
 
@@ -2632,7 +2742,8 @@ $$\operatorname{MSE}=\frac{1}{n}\sum_{i=1}^n(Y_i-\hat{Y_i})^2$$
 
 #### Linear Regression as Maximum Likelihood Problem
 
-$p(\,y|x)\,$ Conditional Probability produced by the model.
+\begin{align}
+p(\,y\|x)\,$ Conditional Probability produced by the model.
 
 Under the given framework of looking at the linear regression as a maximum likelihood
 problem, to derive the same algorithm, as when approaching the model by a least squared
@@ -2640,7 +2751,9 @@ optimization problem, one can state the algorithm like this:
 
 
 
-$$P(\,y|x)\, = N(\,y;\hat{y}(\,x,w)\,,\sigma^{2})\,$$
+\begin{align}
+P(\,y\|x)\, = N(\,y;\hat{y}(\,x,w)\,,\sigma^{2})\,\\
+\end{align}
 
 
 
@@ -2648,19 +2761,23 @@ $$P(\,y|x)\, = N(\,y;\hat{y}(\,x,w)\,,\sigma^{2})\,$$
 - Since samples are i.i.d.
 
 
+\begin{align}  
+\sum_{i=1}^m ln\,p(\,y^{i}| x^{i};\theta)\,\\
+\end{align}  
 
-$$\sum_{i=1}^m ln\,p(\,y^{i}| x^{i};\theta)\,$$
 
 
-
-
-$$= -\, m\:ln\sigma - \frac{m}{2}\,ln(\,2\pi)\, - \sum_{i=1}^m \frac{||\hat{y}^{i} - y^{i}||_2}{2\sigma^{2}},$$
+\begin{align}
+\equiv -\, m\:ln\sigma - \frac{m}{2}\,ln(\,2\pi)\, - \sum_{i=1}^m \frac{||\hat{y}^{i} - y^{i}||_2}{2\sigma^{2}},\\
+\end{align}
 
 
 Thus maximizing the *log-likelihood* is the same as minimizing MSE on the training set.
 
 
-$$ MSE_{train} = \frac{1}{m}\,\sum_{i=1}^m ||\hat{y}^i - y^i ||_2$$
+\begin{align}
+ MSE_{train} = \frac{1}{m}\,\sum_{i=1}^m ||\hat{y}^i - y^i ||_2
+\end{align}
 
 
 
@@ -2670,12 +2787,15 @@ $$ MSE_{train} = \frac{1}{m}\,\sum_{i=1}^m ||\hat{y}^i - y^i ||_2$$
 ###### Main Appeal of the Maximum Likelihood Estimator
 
 - It is the best estimator asymptotically
-  - In terms of its rate of convergence, as $m \rightarrow \infty$
+  - In terms of its rate of convergence, as $m \rightarrow \infty
+\end{align}
 - Under some conditions, it has a consistency property
   - As $m \rightarrow \infty$, it converges to the true parameter value
   - Conditions for consistency
-    - $p_{data}$ must lie within model family $p_{model}(\,.,\theta)\,$
-    - $p_{data}$ must correspond to exactly one value of $\theta$
+    - $p_{data}$ must lie within model family $p_{model}(\,.,\theta)\,
+\end{align}
+    - $p_{data}$ must correspond to exactly one value of $\theta
+\end{align}
 
 ## Chapter 13
 ###### Logistic Regression With Maximum Likelihood Estimation.
@@ -2693,13 +2813,17 @@ nonlinear function to ensure the outputs are a value between 0 and 1. The
 logistic function used is defined as:
 
 
-$$ f(\,x)\, = \frac{1}{1+exp(\,-x)\,}\,\quad \mathrm{and}\,\,\,\,\,\,\, 0 < f(\,x)\, = \frac{1}{1+exp(\,-x)\,} < 1$$
+\begin{align}
+ f(\,x)\, = \frac{1}{1+exp(\,-x)\,}\,\quad \mathrm{and}\,\,\,\,\,\,\, 0 < f(\,x)\, = \frac{1}{1+exp(\,-x)\,} < 1
+\end{align}
 
 
 In the case of Logistic Regression, the term becomes:
 
 
-$$\hat{y} = \frac{1}{1+exp(\,-(\,X\:\beta)\,)\,}$$
+\begin{align}
+\hat{y} = \frac{1}{1+exp(\,-(\,X\:\beta)\,)\,}
+\end{align}
 
 
 
@@ -2724,40 +2848,55 @@ log-odds of a successful event, specifically, the log-odds that a sample belongs
 to class 1, as mentioned above.
 
 
-$$\mathrm{log\!-\!odds} = \sum_{i=0}^m \beta_{i}x_{i}$$
+\begin{align}
+\mathrm{log\!-\!odds} = \sum_{i=0}^m \beta_{i}x_{i}
+\end{align}
 
 
 The model estimates the log-odds for class 1 for the input variables at each
 level (all observed values). What are odds and log-odds? Odds can be stated as
-$1:10$ for example. Given the probability of success $p$, predicted by the
+\begin{align}
+1:10$ for example. Given the probability of success $p$, predicted by the
 logistic regression model, on can convert it to odds of success as the
 probability of success divided by the probability of not success.
 
-$$\mathrm{odds\: of\: success = \frac{p}{1-p}}$$
+\begin{align}
+\mathrm{odds\: of\: success = \frac{p}{1-p}}
+\end{align}
 
 
 The logarithm used is the natrual logarithm. The logs-odds may be referred to as
 the logit (logistic unit), a unit of measure.
 
 
-$$\mathrm{log\!-\!odds\: of\: success = ln(\,\frac{p}{1-p}})\,$$
+\begin{align}
+\mathrm{log\!-\!odds\: of\: success = ln(\,\frac{p}{1-p}})\,
+\end{align}
 
 
 The log-odds can be converted into odds by calculating the exp of the log-odds.
 
 
-$$\mathrm{odds} = exp(\,\mathrm{log\!-\! odds})\,$$
+\begin{align}
+\mathrm{odds} = exp(\,\mathrm{log\!-\! odds})\,
+\end{align}
 
 
 Using the extended equation for the log-odds, this is equivalent to:
 
 
-$$\mathrm{odds} = exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,$$
+\begin{align}
+\mathrm{odds} = exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,
+\end{align}
 
 
-$$p = \frac{exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,}{exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,+ 1}$$
+\begin{align}
+p = \frac{exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,}{exp(\,\sum_{i=0}^m \beta_{i}x_{i})\,+ 1}
+\end{align}
 
-$$p = \frac{1}{1+exp(\,-\,\,\mathrm{log\!-\!odds})\,}$$
+\begin{align}
+p = \frac{1}{1+exp(\,-\,\,\mathrm{log\!-\!odds})\,}
+\end{align}
 
 
 An example showing how conversions can be calculated in python.
@@ -2857,7 +2996,9 @@ probability distribution and its parameters referred to as $\theta$ used in the
 model. $\theta$ is the argument over which to maximize. The problem can be
 stated formally:
 
-$$\mathrm{arg\,\, max}_{\,\theta}\,\, P(\,X_{i};\theta),\,\:\:\;\; i \in{\{1,..,n\}} \tag{13.14}$$
+\begin{math}
+\mathrm{arg\,\, max}_{\,\theta}\,\, P(\,X_{i};\theta),\,\:\:\;\; i \in{\{1,..,n\}}\\
+\end{math}
 
 With $n$ being the number of observations and $X_{i}$ the joint distribution of
 all observations (rows) in the dataset.
@@ -2984,7 +3125,8 @@ See Elements of Statistical Learning Data Mining text book.
 <br />
 
 ![Screen Shot 2022-02-12 at 22.13.01](assets/Screen%20Shot%202022-02-12%20at%2022.13.01.png)
-$Z$ is the training data set $Z= \{z_1,z_2,z_3,...,z_N\}$ with $z_i = (\,x_i,y_i)\,,\: i \in \{1,2,3,...,N\}$. Here, $x_i$ is a one dimensional input and $y_i$ the outcome, either categorical or continuous. (See figure 8.1 in: The elements of Statistical Learning)
+\begin{align}
+Z$ is the training data set $Z= \{z_1,z_2,z_3,...,z_N\}$ with $z_i = (\,x_i,y_i)\,,\: i \in \{1,2,3,...,N\}$. Here, $x_i$ is a one dimensional input and $y_i$ the outcome, either categorical or continuous. (See figure 8.1 in: The elements of Statistical Learning)
 <br />
 
 ![Screen Shot 2022-02-12 at 22.13.12](assets/Screen%20Shot%202022-02-12%20at%2022.13.12.png)
@@ -3001,11 +3143,18 @@ $Z$ is the training data set $Z= \{z_1,z_2,z_3,...,z_N\}$ with $z_i = (\,x_i,y_i
 ### Example of Gaussian Mixture Model
 
 In the example, data comes from one of two gaussian distributions. The points are one-dimensional the means $\mu_{1},\,\mu_{1}$ of the two distributions $Y_1,\, Y_2$ along with their respective variances $\sigma_{1}^2 ,\, \sigma_{2}^2$ are formally defined as:
-$$Y_1 \, \sim N_1(\,\mu_1,\,\sigma_{1}^2)\,$$
-$$Y_2 \, \sim N_2(\,\mu_2,\,\sigma_{2}^2)\,$$
-$$Y = (\,1-\triangle)\,  Y_1\,+ \triangle\, Y_2 \tag{14.Y}$$
+\begin{align}
+Y_1 \, \sim N_1(\,\mu_1,\,\sigma_{1}^2)\,
+\end{align}
+\begin{align}
+Y_2 \, \sim N_2(\,\mu_2,\,\sigma_{2}^2)\,
+\end{align}
+\begin{align}
+Y = (\,1-\triangle)\,  Y_1\,+ \triangle\, Y_2 \tag{14.Y}
+\end{align}
 
-Where $\triangle \in \{0,1\}$, with probability $Pr(\,\triangle = 1)\, = \pi$
+Where $\triangle \in \{0,1\}$, with probability $Pr(\,\triangle = 1)\, = \pi
+\end{align}
 In the example, the means are: $\mu_1 = 20$ and $\mu_2 = 40$ and $\sigma_{1} = 5 = \sigma_{2}$. There will be $N_1 = 3000$ samples drawn from $N_1$ and $N_2 = 7000$ from $N_2$ and then mixed together.
 
 
@@ -3037,9 +3186,12 @@ This class uses a function like the one in $(14.Y)$ where $Y$ is either distribu
 
 In general the value of $\triangle$ is not known, it is a latent variable. That complicates the process of finding the function, that $Y$ defines and that best estimates the bimodal distribution created by $Y_1$ and $Y_2$. If the value of $\triangle_i$ was known, then $\mu_1$ and $\sigma_{1}^2$ would be the sample mean and sample variance for data, where $\triangle_i = 0$ and similarly for data where $\triangle_i = 1$, the sample mean and variance would be $\mu_2$ and $\sigma_{2}^2$.
 Since the values of the $\triangle_i$'s is not known, one has to estimate them by replacing each call of $\triangle_i = \{0,1\}$ with its expected value.
-$$\gamma_{i}(\,\theta)\, = \mathbb{E}(\,\triangle_i| \theta,\,Z)\, = Pr(\,\triangle_i =1|\theta,\,Z)\,\tag{14.gamma}$$
+\begin{align}
+\gamma_{i}(\,\theta)\, = \mathbb{E}(\,\triangle_i| \theta,\,Z)\, = Pr(\,\triangle_i =1|\theta,\,Z)\,\tag{14.gamma}
+\end{align}
 
-$Z$ is the training data set $Z= \{z_1,z_2,z_3,...,z_N\}$ with $z_i = (\,x_i,y_i)\,,\: i \in \{1,2,3,...,N\}$. Here, $x_i$ is a one dimensional input and $y_i$ the outcome, either categorical or continuous. (See figure 8.1 in: The elements of Statistical Learning)
+\begin{align}
+Z$ is the training data set $Z= \{z_1,z_2,z_3,...,z_N\}$ with $z_i = (\,x_i,y_i)\,,\: i \in \{1,2,3,...,N\}$. Here, $x_i$ is a one dimensional input and $y_i$ the outcome, either categorical or continuous. (See figure 8.1 in: The elements of Statistical Learning)
 
 <br />
 
@@ -3052,7 +3204,8 @@ In the *expectation* step, a soft assignment of each observation to each model:
 #### Initial Parameter Values
 
 - For $\mu_1$ and $\mu_2$: Set them randomly to two $y_i$ values for each one respectively.
-- Mixing Proportion $\hat{\pi}$: Set it to $0.5$
+- Mixing Proportion $\hat{\pi}$: Set it to $0.5
+\end{align}
 
 
 ```py
@@ -3210,19 +3363,25 @@ dataset.
 
 TODO: Redo the section about MLE
 In MLE the goal is to maximize the conditional probability of observing the data
-$X_{data}$, given a specific probability distribution and its parameters
-$\theta$. It is maximized over $\theta$, over the probability distribution and
+\begin{align}
+X_{data}$, given a specific probability distribution and its parameters
+\begin{align}
+\theta$. It is maximized over $\theta$, over the probability distribution and
 its respective paramters to find the lowest difference between the actual
 probability for any row in the data $P_{data}(\,X_{data})\,$ and
 the modeled probability of the same observation $P_{model}(\,X;\theta)\,$ gives for all observations in the problem domain.
 The problem can be stated mathematically:
 
-$$ \mathrm{arg}\,\mathrm{max}_{\theta}\, P_{data}(\,X_{data};\theta_{model})\,$$
+\begin{align}
+ \mathrm{arg}\,\mathrm{max}_{\theta}\, P_{data}(\,X_{data};\theta_{model})\,
+\end{align}
 
 With $X_{data}$ being the joint probability distribution of all observations
 from the problem domain from 1 to $n$.
 
-$$P(\,x_{1},x_{2},x_{3},..,x_{n};\theta)\,$$
+\begin{align}
+P(\,x_{1},x_{2},x_{3},..,x_{n};\theta)\,
+\end{align}
 
 TODO Not done explaining MLE!
 
@@ -3237,11 +3396,15 @@ TODO Not done explaining MLE!
 
 The general form of the in-sample estimates is:
 
-$$\hat{Err}_{in} = \overline{err}\, +\, \hat{\omega}$$
+\begin{align}
+\hat{Err}_{in} = \overline{err}\, +\, \hat{\omega}
+\end{align}
 
 where $\hat{\omega}$ is an estimate of the average optimism, see (Hastie et al., 2009) P. 230.
 
-$$\hat{Err}_{in} = \overline{err}\, +\, 2 \cdot \, \frac{d}{N}\hat{\sigma}_{\epsilon}^2$$
+\begin{align}
+\hat{Err}_{in} = \overline{err}\, +\, 2 \cdot \, \frac{d}{N}\hat{\sigma}_{\epsilon}^2
+\end{align}
 The Akaike Information Criterion is a method for scoring and selecting a model.
 
 > This is derived from a frequentist framework, and cannot be interpreted as an approximation to the marginal likelihood
@@ -3256,7 +3419,9 @@ Let
 
 For **logistic regression** the AIC is defined as:
 
-$$\mathrm{AIC}\, =\, -\frac{2}{N} \cdot\, \mathrm{loglik}\, +\, 2\, \cdot \, \frac{k}{N} \tag{Definition AIC log. Reg.}$$
+\begin{align}
+\mathrm{AIC}\, =\, -\frac{2}{N} \cdot\, \mathrm{loglik}\, +\, 2\, \cdot \, \frac{k}{N} \tag{Definition AIC log. Reg.}
+\end{align}
 
 <br />
 
