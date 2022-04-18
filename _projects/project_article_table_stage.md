@@ -710,11 +710,15 @@ df.columns
            'json_petsAllowed', 'json_lift'],
           dtype='object')
 
-`df.`
+`df.index`
 
-**Description -** The command `df.` returns
+**Description -** The command `df.index` returns the type of index, that the DataFrame currently has, along with more
+descriptive statistics. In this instance, a `Int64` range index is what the DataFrame has. It starts at 0 (the first
+row of the DataFrame, excluding the header row with the column names) and increases by 1 for each each row starting at
+the first one and finishing at the last row in the DataFrame. It is a predictable index, that gives easy access to
+specific rows using a bracket notation like so: `df[50:55]`. Note, this does not work with hierarchical indexes.
 
-**Example -** `df.`
+**Example -** `df.index`
 
 ```python
 df.index
