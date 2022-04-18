@@ -23,7 +23,7 @@ plt.style.use('science')  # Use a custom template for styling plots
 
 ## Reading In the Input Data
 
-The input data is split into 3 csv files, that together capture all rental listings that were online and within the boundaries of the city of Hamburg at the time of scraping the data. The source was a
+The input data is split into 3 CSV files, that together capture all rental listings that were online and within the boundaries of the city of Hamburg at the time of scraping the data. The source was a
 large German rental listing site called 'Immoscout24'. [ImmoScout24 - https://www.immobilienscout24.de](https://www.immobilienscout24.de/) is their official brand name and URL.
 
 Various features were extracted from the listings through the use of webscraping and it is the main objective at this stage to clean and construct a tidy DataFrame, that is ready for the following
@@ -34,7 +34,7 @@ stages. A brief overview of the following stages is given below.
 - Machine Learning - Fitting and tuning 2 models, then predicting the value of variable 'base rent'
 - Analyzing & Discussing the results
 
-Back to the task at hand, we begin by reading in the csv files and creating the Pandas (*pd*) DataFrame object. Throughout this article, any Pandas DataFrame object will be assigned to a variable that
+Back to the task at hand, we begin by reading in the CSV files and creating the Pandas (*pd*) DataFrame object. Throughout this article, any Pandas DataFrame object will be assigned to a variable that
 always contains the letters 'df', plus any prefix or suffix, preceding or succeeding the letters 'df' in some cases.
 
 The path to the input data is assigned to variables `scraping_{1..3}`. For each of them a DataFrame object is created afterwards. The DataFrame `df`, which holds the data of all three is created and
@@ -847,9 +847,8 @@ dtype: int64
 df.describe().to_markdown()
 ```
 
-To get a first look at the DataFrame, that holds all records, there are multiple tools in the pandas library one can use. It is assumed, that the Dataframe is named `df` in the following.
+To get a first look at the DataFrame, that holds all records, there are multiple tools in the pandas library one can use. It is assumed, that the DataFrame is named `df` in the following.
 
 1. A popular choice is `df.head()`
 2. Its counterpart is `df.tail()`
 3. Another one is `df.describe()`
-4.
