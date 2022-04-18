@@ -32,7 +32,7 @@ Here are the google **search operators** that can be used in the search field of
 any country specific extension of google search as well. The **search operators** always have to be written in English in order to be invoked. One can specify their value in another language though.
 
 
-**Disclaimer:** In some examples the timeframe for how old results are allowed to be is set to 1 year. This can be seen in the examples with images showing the result list. This is chosen, as oftentimes results older than one year are irrelevant by now. The exception to this are queries that specify something that is not of a timely manner. This can be for example *stack overflow* questions and answers or topics that have relevant matches further back in the past, newspaper articles for example. This is relevant for reproducibility of results.
+**Disclaimer:** In some examples the time frame for how old results are allowed to be is set to 1 year. This can be seen in the examples with images showing the result list. This is chosen, as oftentimes results older than one year are irrelevant by now. The exception to this are queries that specify something that is not of a timely manner. This can be for example *stack overflow* questions and answers or topics that have relevant matches further back in the past, newspaper articles for example. This is relevant for reproducibility of results.
 
 
 
@@ -124,7 +124,7 @@ Excluding phrases or anything that has white space in it, makes using  around wh
 ### Fill *\**
 
 
-The \* acts as a wildcard, that will match any word or phrase.
+The \* acts as a wild card, that will match any word or phrase.
 
 
 #### Example \*
@@ -187,9 +187,9 @@ A guide on how to eat for less than \$5 in Manhattan is the Number one Result.
 
 ### *define*
 
-Syntax is `define:<search term>` or, if \<search term> has whitespace in it, the syntax is `define:"<search term>"`.
+Syntax is `define:<search term>` or, if \<search term> has white space in it, the syntax is `define:"<search term>"`.
 
-**define** will priorities results that contain factual information about whatever was specified in \<search term> over other information about it.
+**define** will prioritize results that contain factual information about whatever was specified in \<search term> over other information about it.
 
 This can be useful, if one wants to learn more about a product and not get mostly results with buying options for that item.
 
