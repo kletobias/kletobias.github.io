@@ -171,7 +171,7 @@ The use of quotation marks around the price term, can help keep results relevant
 Practical uses include, but are not limited to:
 
 ```text
-"$9.99" "haircut" -coupon # This was necessary in this case.
+"$9.99" "haircut" -coupon # The exclusion of "coupon" was necessary in this case.
 $5 lunch manhattan
 ```
 
@@ -231,13 +231,13 @@ This can be useful, if a web page is down for some reason or if there has been r
 cache:https://www.backblaze.com/blog/how-long-do-disk-drives-last/
 ```
 
-Nothing much has changed on the web page in the example, so the cached and the current version of this article will be the same.
+Nothing much has changed on the web page in the example, so the cached and the current version of this article will be the same. Another use case can be when using a VPN connection, that makes one have an IP address, that is banned from accessing the URL one is trying to open. An earlier, cached by google, version of the URL one is trying to visit will be accessible regardless of the ban.
 
 
 ### *filetype*
 
-This operator is very powerful, if one is looking for content, that can be downloaded and searched prior to downloading it by means of the search query written.
-Below is a, as of today, [complete list of supported file types, directly from google.](https://support.google.com/webmasters/answer/35287?hl=en)
+This operator is very powerful, if one is looking for content, that can be downloaded and searched using the direct URL of the actual file.
+Below is a, as of 2022, [complete list of supported file types, directly from google.](https://support.google.com/webmasters/answer/35287?hl=en)
 
 
 
@@ -296,7 +296,7 @@ These are some examples of how the **filetype** operator can be used.
 
 The syntax is `site:'someurl' <search term> ...`
 
-One can basically to an in-site search for 'someurl' using the powerful google web search algorithm and all the operators available.
+One can basically do an in-site search for 'someurl' using the powerful google web search algorithm and all the operators available.
 
 
 ### *related*
