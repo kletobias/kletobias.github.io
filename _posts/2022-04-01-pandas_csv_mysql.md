@@ -1,7 +1,7 @@
 ---
 title: 'How to import CSV files into MySQL using python and pandas.'
 date: 2022-04-01 06:32:00
-description: 'There is no functionality built in MySQL, that lets one import CSV data directly into a database, in the form of a table. pandas can be used to import CSV files from within python, into a table of a database.'
+description: 'There is no functionality built into MySQL, that lets one import CSV data directly into a database, in the form of a table. pandas can be used to import CSV files from within python, into a table of a database.'
 featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
