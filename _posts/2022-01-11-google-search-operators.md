@@ -1,12 +1,12 @@
 ---
-title: 'Google Search Operators - 2022'
+title: 'Google Search Operators 2022<br>Part 1'
 date: 2022-01-11 16:00:00
-description: 'In this blog post, the 2022 Google Search Operators are listed and explained in detail. These are all working in 2022.'
+description: 'In this blog post, the first part of the 2022 Google Search Operators are listed and explained in detail. These are all working in 2022.'
 featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
 
-# Google Search Operators \- 2022
+# Google<br>Search<br>Operators<br><br>2022 Part 1
 
 <br />
 
@@ -354,27 +354,3 @@ allintitle:formula 1 cornering
 ![allintitle formula 1 cornering](/blog/images/allintitle-formula-1-cornering.png)
 
 
-### *inurl*
-
-The **inurl** operator has the syntax:
-
-`inurl:<some URL or fragment of a URL> ...`
-
-This operator will search for matching substrings in indexed URL strings.
-
-It could come in handy, if one is looking for a sub part of a URL, that describes something like a forum or support site.
-
-#### Example *inurl*
-
-
-
-### *allinurl*
-### *intext*
-### *allintext*
-### *AROUND\(X)*
-### *weather*
-### *stocks*
-### *map*
-### *movie*
-### *in*
-### *source*
