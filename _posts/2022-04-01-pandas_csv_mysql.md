@@ -1,7 +1,7 @@
 ---
-title: 'How to import CSV files into MySQL using python and pandas.'
+title: 'How to import CSV files into MySQL using Python and pandas.'
 date: 2022-04-01 06:32:00
-description: 'There is no functionality built into MySQL, that lets one import CSV data directly into a database, in the form of a table. pandas can be used to import CSV files from within python, into a table of a database.'
+description: 'There is no functionality built into MySQL, that lets one import CSV data directly into a database, in the form of a table. pandas can be used to import CSV files from within Python, into a table of a database.'
 featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
@@ -14,13 +14,13 @@ In the following, only **CSV** data will be mentioned, but everything applies to
 
 ## What problem does the solution solve?
 
-There is no functionality built into **MySQL**, that lets one import **CSV** data directly into a database, in the form of a table. pandas can be used to import CSV files from within python, into a table of a database.
+There is no functionality built into **MySQL**, that lets one import **CSV** data directly into a database, in the form of a table. pandas can be used to import CSV files from within Python, into a table of a database.
 
 ## Prerequisites
 
-The following python packages are needed and can be installed using **pip** for the import through the pandas module.  
+The following Python packages are needed and can be installed using **pip** for the import through the pandas module.  
 
-In the case of having a python **virtual environment** ([venv](https://docs.python.org/3/library/venv.html#module-venv) in this case), first activate the virtual environment and then run the following commands, like shown below.
+In the case of having a Python **virtual environment** ([venv](https://docs.python.org/3/library/venv.html#module-venv) in this case), first activate the virtual environment and then run the following commands, like shown below.
 
 ```shell
 # activating the virtual environment 
@@ -28,7 +28,7 @@ source venv/bin/activate
 ```
 
 ```shell
-# installing the python modules needed
+# installing the Python modules needed
 pip install SQLAlchemy
 pip install pandas
 pip install mysql-connector-python
@@ -40,7 +40,7 @@ The following is a step by step walkthrough of how the end-to-end import of any 
 look like. It is assumed, that the database is hosted locally and `localhost` is used as hostname. It can be replaced by
 the URL of the database.
 
-### Import of the python packages
+### Import of the Python packages
 ```python
 # Import the modules needed
 import pandas as pd
@@ -116,14 +116,14 @@ if_exists = "replace",
 print("Done")
 ```
 
-There are several important parameters to specify, which will be highlighted in  
+There are several important parameters to be specified, which will be highlighted in  
 the following.
 
 - `con` is the engine created earlier.
 - `if_exists` can either be `"replace"` or `"append"`. Append will cause the data in the `pandas.DataFrame` to be appended to the already existing data, in case there is already data in the table.
 - `chunksize` must not be larger 1000, otherwise MySQL may throw an error during the import.
-- `dtypes` is a dictionary in which the data types for all the columns of the `pandas.DataFrame` are specified. This must be correct or errors can be thrown in the import process from MySQL.
+- `dtypes` is a dictionary in which the data types for all the columns of the `pandas.DataFrame` are specified. These type assignments must be correct or errors are likely to be thrown during the import process by MySQL.
 
-The process can take anywhere from seconds to minutes, depending on the number of columns and rows to be imported.
+The process of importing the data can take anywhere from seconds to minutes, depending on the number of columns and rows to be imported, among other factors.
 
-I am glad, if the article was able to help you in solving the challenge of how to import CSV data into MySQL.
+I am glad, if the article was able to help you in solving the challenge of how to import CSV data into MySQL. Python is a versatile tool and `sqlalchemy` makes it possible to use all the tools that MySQL has from within the Python universe. With the respective driver, it also works for PostgreSQL, Oracle, Microsoft Server, SQLite among others.
