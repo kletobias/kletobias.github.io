@@ -230,9 +230,6 @@ time {
 code {
   background-color: #c6eae9;
   border: 0.5px none #0c7068;
-}
-
-code {
   font-family: $inline_code_font;
   font-weight: 400;
   font-size: $p-size;
@@ -241,6 +238,84 @@ code {
   white-space: nowrap;
 }
 
+
+/*
+.body  code::before,
+.body  code::after,
+.h1 code::before,
+.h1 code::after,
+.h2 code::before,
+.h2 code::after,
+.h3 code::before,
+.h3 code::after,
+.h4 code::before,
+.h4 code::after {
+  content: "\00a0";
+}
+
+
+.body code {
+  background-color: #c6eae9;
+  border: 0.1px none #0c7068;
+  font-family: $inline_code_font;
+  font-weight: 400;
+  font-size: $p-size;
+  line-height: $p-lineheight;
+  letter-spacing: $p-spacing;
+  white-space: nowrap;
+//  padding: 0;
+//  padding-top: 0.2em;
+//  padding-bottom: 0.2em;
+//  margin: 0;
+//  font-size: 85%;
+//  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.h3 code {
+  background-color: #c6eae9;
+  border: 0.1px none #0c7068;
+  font-family: $inline_code_font;
+  font-weight: $h3-weight;
+  font-size: $h3-size-small;
+  line-height: $p-lineheight;
+  letter-spacing: $p-spacing;
+  white-space: nowrap;
+  //  padding: 0;
+  //  padding-top: 0.2em;
+  //  padding-bottom: 0.2em;
+  //  margin: 0;
+  //  font-size: 85%;
+  //  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+
+.h1 code::before,
+.h1 code::after,
+.h2 code::before,
+.h2 code::after,
+.h3 code::before,
+.h3 code::after,
+.h4 code::before,
+.h4 code::after,
+.body code:before,
+.body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+
+.body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+*/
 ::selection {
   background: $accent-color;
   color: $background-color;

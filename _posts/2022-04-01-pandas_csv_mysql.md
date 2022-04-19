@@ -36,7 +36,7 @@ pip install mysql-connector-python
 
 ## Importing the data
 
-The following is a step by step walkthrough of how the end-to-end import of any CSV file into a MySQL database can
+The following is a step-by-step walk through of how the end-to-end import of any CSV file into a MySQL database can
 look like. It is assumed, that the database is hosted locally and `localhost` is used as hostname. It can be replaced by
 the URL of the database.
 
