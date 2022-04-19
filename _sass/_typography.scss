@@ -229,12 +229,15 @@ time {
 
 code {
   background-color: #c6eae9;
-  border: 0.5px none #0c7068;
+  border: 0.1px none #0c7068;
   font-family: $inline_code_font;
-  font-weight: 400;
-  font-size: $p-size;
-  line-height: $p-lineheight;
-  letter-spacing: $p-spacing;
+  font-weight: lighter;
+//  font-size: $p-size;
+  font-size: 95%;
+//  line-height: $p-lineheight;
+    line-height: normal;
+//  letter-spacing: $p-spacing;
+  letter-spacing: normal;
   white-space: nowrap;
 }
 
@@ -252,8 +255,8 @@ code {
 .h4 code::after {
   content: "\00a0";
 }
-
-
+*/
+/*
 .body code {
   background-color: #c6eae9;
   border: 0.1px none #0c7068;
