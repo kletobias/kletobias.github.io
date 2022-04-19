@@ -7,17 +7,23 @@ gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
+---
+title: 'Learning Linux - Chapter 5: Section 1 & 2'
+description: 'In Chapter 5 Section 1 & 2, we take a look at several Linux text editors and compare the vi text editor to the vim text
+editor. Plus, we give an introduction to how to use the vi/vim text editors.'
+date: 2022-01-01 05:01:02
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
 
 # Linux Text Editors
 
 **Learning Linux - Section 5.1**
 
 
-description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
+A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.
 
 ### 5.1 - Linux Text Editors
 
@@ -32,6 +38,8 @@ accent_color: '#08877d'
 |    emacs    |   Full Screen Editor   |
 |    pico     |   Beginner\'s Editor   |
 |     vim     | Improved Version of vi |
+|    nvim     | neovim                 |
+
 
 #### Introduction to the vi editor
 
@@ -104,7 +112,7 @@ The cursor position is marked by '\|'.
 No CAPS, REALLY: This is good |htuff
 ```
 
-Hitting 'r', followed by 's', replaces 'h' with 's'.
+Pressing 'r', followed by 's', replaces 'h' with 's'.
 
 ```vim
 No CAPS, REALLY: This is good stuff.
@@ -118,7 +126,7 @@ No CAPS, REALLY: This is good stuff.
 
 While there are several ways to search for text inside a file, here are two ways of how it can be done\:
 
-1. Using the `grep` command, like so\:
+- Using the `grep` command, like so\:
    - `grep 'text file' cars_are_best`
 
 ```bash
@@ -127,11 +135,9 @@ Not just any text file.
 ~ $
 ```
 
-2. Inside vi\:
+- Inside vi\:
    - `/` followed by typing right after the `/` like\:
    - `/text file`
-
-![searching-for-text-inside-vi](https://i.imgur.com/cRr5Mpd.png)
 
 
 # Differences between vi and vim Editor
@@ -139,15 +145,12 @@ Not just any text file.
 **Learning Linux - Section 5.2**
 
 
-description: 'A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
+A text editor is a program, that enables one to create and manipulate text data in a Linux file. Popular, standard text editors for Linux are listed in this chapter.
 
 
 ### Differences between vi and vim Editor
 
-> As far as functionality is concerned, both editors work in the same manner. Which editor one chooses is a matter of personal choice. Some people recommend learning the vim editor instead of the vi editor. Due to added features and using vim editor is much easier than the vi editor. *Iafzal*
+As far as functionality is concerned, both editors work in the same manner, as far as basic editing and controls go. There are many plugins available for the vim editor, that add useful features to it. Which editor one chooses is a matter of personal choice. Some people recommend learning the vim editor instead of the vi editor. Due to added features and using vim editor is much easier than the vi editor.
 
 - Some older operating systems have vi support, but not vim support.
 - vim has many more features compared to vi, which means that if one is familiar with vim, having to use vi in certain situations is not a problem.
@@ -177,18 +180,21 @@ accent_color: '#08877d'
   - <http://www.vimgenius.com>
   - <https://www.vim-adventures.com> (games)
 
-<br>
 
-# sed Command
+title: 'Learning Linux - Chapter 5: Section 3'
+description: 'This section covers some of the essential commands and concepts used in any Linux distribution.'
+date: 2022-01-01 05:03:00
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+# `sed` Command
 
 **Learning Linux - Section 5.3**
 
 
-description: 'This article covers some of the essential commands or concepts used in any Linux distribution.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
+This article covers some of the essential commands and concepts used in any Linux distribution.
 
 ### Introduction
 
@@ -197,7 +203,7 @@ The Vim text editor was used and CentOS 7.4 was the distribution installed on th
 <!---Gallery is used, when listing the articles, featured is the image placed at the top of the article.
 -->
 
-### *sed* Command
+`sed` Command
 
 - `sed` replaces a string in a file with a new string.
 - It can be used to find and delete a line of a file. Use cases are:
@@ -316,7 +322,7 @@ It left an empty file after running the above command. There was an occurrence o
 
 ---
 
-#### Deleting empty lines using *sed*
+`sed`
 
 Using a different file 'seinfeld-characters', which has some empy lines, the task is to delete all empty files from the file. The file at the start:
 
@@ -377,9 +383,9 @@ Uncle Leo,
 ~ $
 ```
 
-#### Deleting Lines with *sed* \- 1
+#### Deleting Lines with `sed` \- 1
 
-Removing the first line of a file using *sed*.
+Removing the first line of a file using `sed`.
 
 ```bash
 ~ $ cat seinfeld-characters
@@ -404,7 +410,7 @@ Uncle Leo,
 ```
 
 
-#### Deleting Lines with *sed* \- 2
+#### Deleting Lines with `sed` \- 2
 
 
 - `sed '1d' FILE` delets the first line.
@@ -435,9 +441,9 @@ Uncle Leo,
 ~ $
 ```
 
-#### Removing Certain Lines Using *sed*
+#### Removing Certain Lines Using `sed`
 
-Removing lines 1 and 2 of a file using *sed*.
+Removing lines 1 and 2 of a file using `sed`.
 
 Removing lines '1' and '2' can be done like illustrated above.
 
@@ -511,7 +517,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### More Ways to use *sed*
+#### More Ways to use `sed`
 
 Using `sed` with:
 - `s/` tells it to substitute what comes after theforward slash.
@@ -542,7 +548,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Print Certain Lines to *stdout* 
+#### Print Certain Lines to `stdout` 
 
 Having a range of lines in a file printed to stdout.
 
@@ -626,7 +632,7 @@ Uncle Leo,
 ~ $
 ```
 
-#### Limiting the lines *sed* will process.
+#### Limiting the lines `sed` will process.
 
 One can limit the lines, which are processed by the `sed` command in a file. The excluded line or lines will not be processed by the `sed` command, like so:
 
@@ -666,24 +672,22 @@ Uncle Leo,
 Vim substitute  see screenshots.
 -->
 
+---
+title: 'Learning Linux - Chapter 5: Section 4'
+description: 'In Chapter 5 Section 4, we take a look at some important commands used for the user account management, as often done by system administrators in a corporate environment.'
+date: 2022-01-01 05:04:00
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
+
 # User Account Management
 
 **Learning Linux - Section 5.4**
 
-
-description: 'This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
-
-<!---
-Accent color changed to #08877d after #000080 after it was #1a7868 originally #4ce6b8
--->
-
-### User Account Management
-
-> This article covers some important commands used for the user account management as often done by system administrators in a corporate environment.
+This article covers some important commands used for the user account management, as often done by system administrators in a corporate environment.
 
 #### Commands that will be covered
 
@@ -723,7 +727,7 @@ From left to right of the command written in the above terminal window\:
 
 #### Adding a user in the terminal
 
-- One has to have *root* privileges in order to do any of the following!
+- One has to have `root` privileges in order to do any of the following!
 - The user is added by running `useradd <username>`
 - To verify, that the user was created, the command `id <username>` is used.
 - This command gives additional information, if the username was created correctly (from left to right in the following)\:
@@ -815,9 +819,9 @@ root *
 - Modifying a user account is done with `usermod [options] <login>`
 
 
-##### 'usermod -G  \<group name> \<username>'
+##### `usermod -G  \<group name> \<username>`
 
-- Adding *username* to another group in addition to their default group.
+- Adding `username` to another group in addition to their default group.
 - In the example below, *brianna* is added to group *golfers*.
 - After that it is verified, that the operation was successful.
 
@@ -869,7 +873,7 @@ golfers:x:1005:brianna
 root *
 ```
 
-#### Adding a user to another group in the '/home' directory
+#### Adding a user to another group in the `/home` directory
 
 - Using `usermod -G` to change the group memberships of a user does not change the group that is displayed in the **/home** directory.
 - Example of this behavior can be seen in the following example for the user *veronica*. She was added to group *golfers*, but still her group *veronica* is shown below.
@@ -898,12 +902,12 @@ drwx------.  2 veronica golfers   62 Dec 26 02:44 veronica
 root *
 ```
 
-#### Making sense of the structure of file '/etc/passwd'
+#### Making sense of the structure of file `/etc/passwd`
 
-- The *Password* column only tells, if a password is set for the user. It will display an 'x', if one is stored in the `/etc/shadow` file.
-- *uid* is the user id.
-- *gid* is the group id.
-- *Description* can be added as an option when using the `useradd` command, it is option `useradd ... -c 'description of this user.' ...`
+- The `Password` column only tells, if a password is set for the user. It will display an 'x', if one is stored in the `/etc/shadow` file.
+- `uid` is the user id.
+- `gid` is the group id.
+- `Description` can be added as an option when using the `useradd` command, it is option `useradd ... -c 'description of this user.' ...`
 - *Home Directory* gives the path equivalent to `echo $HOME` for the user.
 - *Shell of User* gives the name of the user\'s shell environment, as well as the path to the executable of that shell.
   - For CentOS 7, available shells are\:
@@ -932,7 +936,7 @@ root *
 |  Column 7  | Shell Environment of User |
 
 
-##### Sample output of '/etc/passwd'
+##### Sample output of `/etc/passwd`
 
 ```bash
 brianna:x:1003:1003::/home/brianna:/bin/bash
@@ -940,7 +944,7 @@ veronica:x:1004:1006::/home/veronica:/bin/bash
 root *
 ```
 
-#### Making sense of the structure of file '/etc/group'
+#### Making sense of the structure of file `/etc/group`
 
 - *Group Password* is the same for every member in the group.
 - *Members of the group* lists all members of the group, separated by ','
@@ -952,10 +956,10 @@ root *
  | Column 4  | Members of the group |
 
 
-#### Making sense of the structure of file '/etc/shadow'
+#### Making sense of the structure of file `/etc/shadow`
 
-1. *Username* is the login name of the user.
-2. *Password* is the user\'s encrypted password.
+1. `Username` is the login name of the user.
+2. `Password` is the user\'s encrypted password.
    - It should contain a minimum of 8-12 characters.
    - Include special characters, like digits, lower and upper case alphabetic characters and other ones as well.
    - Usually the password format is set to `$id$salt$hashed`.
@@ -965,13 +969,13 @@ root *
      3. `$2y$` is Blowfish
      4. `$5$` is SHA-256
      5. `$6$` is SHA-512
-3. *Last password change\:* Days since the date 01/01/1970 that password was last changed.
-4. *Minimum\:* The minimum number of days required between password changes.
+3. `Last password change`\: Days since the date 01/01/1970 that password was last changed.
+4. `Minimum`\: The minimum number of days required between password changes.
 		  - E.g. The number of days left before the user is allowed to change his password.
-5. *Maximum\:* The maximum number of days, that the password is still valid. The user will have to change their password after that period is over.
-6. *Warn\:* Threshold for the number of days in column 5, when a warning is sent to the user that they must change their password soon.
-7. *Inactive\:* The number of days, that an account is still active after the *Maximum* has reached 0. It will become inactive after that period has passed without a password change.
-8. *Expire\:* Days increase from the specific date 01/01/1970, where the account can no longer be used anymore. It depends on the value set for *Expire*.
+5. `Maximum`\: The maximum number of days, that the password is still valid. The user will have to change their password after that period is over.
+6. `Warn`\: Threshold for the number of days in column 5, when a warning is sent to the user that they must change their password soon.
+7. `Inactive`\: The number of days, that an account is still active after the `Maximum` has reached 0. It will become inactive after that period has passed without a password change.
+8. `Expire`\: Days increase from the specific date 01/01/1970, where the account can no longer be used anymore. It depends on the value set for `Expire`.
 
 
 | Column 1 | Username      |
@@ -1027,18 +1031,32 @@ Retype new password:
 passwd: all authentication tokens updated successfully.
 root *
 ```
-title: chage command in depth
-
-**Learning Linux - Section 5.5**
 
 
-description: 'The /etc/login.defs File is described and the use of the variables that are defined inside this file in terms of their role during the usage of useradd command.'
+
+
+
+
+
+
+
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 5'
+description: 'The `/etc/login.defs` file is described and the variables defined inside this file in terms of their definition and usage when running the `useradd` command.'
+date: 2022-01-01 05:05:00
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
+---
 
+# `chage` command in depth
 
-### *chage* command in depth
+**Learning Linux - Section 5.5**
+
+The `/etc/login.defs` file is described and the variables defined inside this file in terms of their definition and usage when running the `useradd` command.
 
 `chage` = 'change age' 
 
@@ -1108,9 +1126,9 @@ root *
 
 - In order for the uid variable to be more safe, one could increase the range for it\'s values by increasing the range of possible values for it.
 - Another option to make it more secure would be to make the values for uid harder to guess, using an algorithm to create pseudo random uid values for uid.
-- The theoretical number of users that can be created is defined by the difference between *UID_MAX* and *UID_MIN*. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the *UID* values and the theoretical number of users that can be created comes from the fact, that every single *uid* has to be uniq. This variable is a *unique key*.
+- The theoretical number of users that can be created is defined by the difference between `UID_MAX` and `UID_MIN`. In the above example a maximum of 59000 users could be created. This relationship between the upper and lower limits for the `UID` values and the theoretical number of users that can be created comes from the fact, that every single `uid` has to be uniq. This variable is a *unique key*.
 
-### Recap - Structure of */etc/shadow*
+### Recap - Structure of `/etc/shadow`
 ```
 will:$6$.n.:17736:0:99999:7:::
 [--] [----] [---] - [---] ----
@@ -1163,7 +1181,7 @@ root *
 
 #### Updating some initial values for 'kate'
 
-##### Reading the default values in '/etc/shadow' for 'kate'
+##### Reading the default values in `/etc/shadow` for 'kate'
 
 Below are the values from **/etc/shadow** for user *kate* after initialisation 
 and changes to the default values using `chage` with various options. The ordered list shows the corresponding column numbers in the **/etc/shadow** file. 
@@ -1173,34 +1191,56 @@ and changes to the default values using `chage` with various options. The ordere
 5. The default value for `chage -M <username>` during account creation is **99999** days. That means that the user never has to change their password.
 6. The warning period `chage -W <username>` defaults to **7** days and is changed to **10**.
 7. Is the option `chage -I <username>` that sets for how long the user account will still be active, after the password has not been updated within the time limit found in the value for **column 5.** and `chage -W <username>` as well.
+
 ```vim
 kate:!!:18987:0:99999:7:::
 ```
 
-##### Altering values for 'kate' in '/etc/shadow'
+##### Altering values for 'kate' in `/etc/shadow`
 
 Values, that are changed for *kate*, are\:
 
 4. The time span the user has to wait, until they can change their password went from **0** days to **5** days.
 5. *Kate* now has to change her password at least every **90** days, prior she did not have to change it ever. The value was **99999** by default.
 6. A warning was sent to kate, **7** days before the time period defined by `chage -M <username>` was over. Now she gets a warning, 10 days before that time period is over. Since `chage -M <username>` was set to **99999** `chage -W 7` would have never been triggered.
+
 ```bash
 root * chage -m 5 -M 90 -W 10 -I 3 kate
 root * grep "kate" /etc/shadow
 kate:!!:18987:5:90:10:3::
 root * 
 ```
-# How to switch users and sudo access
-
-**Learning Linux - Section 5.6**
 
 
-description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
+
+
+
+
+
+
+
+
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 6'
+description: 'The `sudo` command is explored in this section along with how to switch users, using the command line. Only basic commands are used, that are available in any Linux distribution and Unix based system.'
+date: 2022-01-01 05:06:00
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
+---
 
-### How to switch users and *sudo* access
+
+# How to switch users and `sudo` access
+
+**Learning Linux - Section 5.6**
+
+The `sudo` command is explored in this section along with how to switch users, using the command line.
+Only basic commands are used, that are available in any Linux distribution and Unix based system.
+
+### How to switch users and `sudo` access
 
 #### Commands covered
 
@@ -1217,7 +1257,7 @@ accent_color: '#08877d'
 Since a virtual machine is used for all the sections and exercises, 
 one should make sure that the following values are what they should be.
 
-##### *whoami*: Which user am I?
+##### `whoami`: Which user am I?
 
 ```bash
 ~ $ whoami
@@ -1225,7 +1265,7 @@ tklein
 ~ $ 
 ```
 
-##### *pwd*: What is my current absolute *path*?
+##### `pwd`: What is my current absolute `path`?
 
 ```bash
 ~ $ pwd
@@ -1233,7 +1273,7 @@ tklein
 ~ $ 
 ```
 
-##### *hostname*: On which *host* am I currently?
+##### `hostname`: On which `host` am I currently?
 
 ```bash
 ~ $ hostname
@@ -1241,14 +1281,14 @@ localhost.localdomain
 ~ $ 
 ```
 
-#### *su* and *sudo*
+#### `su` and `sudo`
 
 **Command:** `su - username` 
 
 One enters the 'username' of the account one wants to become. If left blank,
-it defaults to 'username' == *root*
+it defaults to 'username' == `root`
 
-Becoming user *root* and staying root until one decides to *exit* the root account,
+Becoming user `root` and staying root until one decides to `exit` the root account,
 is done like demonstrated below. One must have sufficient permissions to become root and know the password for the 
 root user account.
 
@@ -1258,7 +1298,7 @@ Password:
 Last login: Sun Dec 26 23:05:13 CET 2021 on pts/0
 root * 
 ```
-While root, one can change into any other *username*, without being prompted to enter that *username's* password.  
+While root, one can change into any other `username`, without being prompted to enter that *username's* password.  
 
 ```bash
 ~ $ su -
@@ -1280,10 +1320,10 @@ tklein
 
 **Command:** `sudo <command>`
 
-The `sudo` command lets a user, who can not become *root* himself. It allows such a user
-to run commands, that only user *root* can run usually, if they are in group *wheel* for example or in the **sudoers** file.
+The `sudo` command lets a user, who can not become `root` himself. It allows such a user
+to run commands, that only user `root` can run usually, if they are in group `wheel` for example or in the **sudoers** file.
 
-Two commands that can only be run by *root* are `dmidecode` and `fdisk -l`, to run these one has to 
+Two commands that can only be run by `root` are `dmidecode` and `fdisk -l`, to run these one has to 
 
 ```bash
 ~ $ dmidecode
@@ -1299,12 +1339,12 @@ fdisk: cannot open /dev/mapper/centos-swap: Permission denied
 ```
 
 One can add or change the permissions that a user has, to let them become root for example or
-to let them run any command in the shell, if they are a member of group *wheel* by default. This 
+to let them run any command in the shell, if they are a member of group `wheel` by default. This 
 group is by default listed in the file `visudo`.
 
 ##### Example
 
-The example comes from a file that can be accessed by running `visudo` with *root* privileges.
+The example comes from a file that can be accessed by running `visudo` with `root` privileges.
 
 ```bash
 ## Allow root to run any commands anywhere
@@ -1316,9 +1356,9 @@ will    ALL=(ALL)       ALL # Only an example
 # %wheel        ALL=(ALL)       NOPASSWD: ALL
 ```
 
-###### *usermod \-aG* 
+###### `usermod -aG`
 
-Adding account 'tklein' to group *wheel*
+Adding account 'tklein' to group `wheel`
 
 ```bash
 root * usermod -aG wheel tklein
@@ -1343,7 +1383,7 @@ root *
 After it was not able to run either `dmidecode` or `fdisk -l` using my user account *tklein*,
 now it is possible to run `dmidecode` being part of group wheel:
 
-###### *dmidecode*
+###### `dmidecode`
 
 
 ```bash
@@ -1393,7 +1433,7 @@ Handle 0x0008, DMI type 2, 15 bytes
 ...
 ```
 
-###### The *fdisk \-l* command:
+###### The `fdisk -l` command:
 
 ```bash
 ~ $ sudo fdisk -l
@@ -1427,18 +1467,28 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
 ```
 
 
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 7'
+description: 'In this section, we look at how to monitor users, as a system administrator. We will cover `who`, `last`, `w`, `finger` and the `id` command.'
+date: 2022-01-01 05:07:00
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
 # Monitoring Users
 
 **Learning Linux - Section 5.7**
 
 
-description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
-
 ### How to monitor users
+
+
+In this section, we look at how to monitor users, as a system administrator. We will cover `who`, `last`, `w`, `finger` and the `id` command.
 
 #### Commands covered
 
@@ -1463,7 +1513,7 @@ localhost.localdomain
 ~ $ 
 ```
 
-#### *who*
+#### `who`
 
 - Tells one how many people are logged in at the time of running the command.
 
@@ -1488,7 +1538,7 @@ will     pts/3        2021-12-27 18:17 (win11.fritz.box)
 `who` is oftentimes used, if the system is running slow and the system administrator wants to check who is logged in and how many are 
 logged in.
 
-#### *last*
+#### `last`
 
 `last` tells one everything about any user that has logged into the system, ever since the file **/var/log/wtmp** was 
 created, by default.
@@ -1501,7 +1551,7 @@ DESCRIPTION
        Names of ttys can be abbreviated, thus last 0 is the same as last tty0.
 ```
 
-##### Sample output from running *last*
+##### Sample output from running `last`
 
 ```bash
 ~ $ last | more
@@ -1564,16 +1614,16 @@ it aligns with the first column of the output.*
 ~ $ 
 ```
 
-#### The *w*
+#### The `w`
 
 The `w` command gives a similar output to the one `less` generates, but it gives more information, 
 more detail compared to the latter.
 
-##### Syntax for the *w* command
+##### Syntax for the `w` command
 
 `w [OPTIONS] [USER]`  
 
-##### The fields of the *w* table output
+##### The fields of the `w` table output
 
 The fields found in the output of `w` are listed and described. An example for the values one can find in the output is given as well.
 
@@ -1589,7 +1639,7 @@ The fields found in the output of `w` are listed and described. An example for t
 | **WHAT**   | The user's current process and options/arguments                                           | w               |
 
 
-##### *w* with no options or arguments
+##### `w` with no options or arguments
 
 `w`
 
@@ -1604,7 +1654,7 @@ kate     pts/2    imac2017.fritz.b 18:16    4:45m  0.03s  0.03s -bash
 will     pts/3    imac2017.fritz.b 18:17    4:44m  0.03s  0.03s -bash
 ~ $ 
 ```
-###### *w* with the \[USER\] argument
+###### `w` with the \[USER\] argument
 
 `w tklein`
 
@@ -1619,7 +1669,7 @@ tklein   pts/1    imac2017.fritz.b 15:20    8:16m  0.08s  0.02s -bash
 ```
 
 
-#### *finger*
+#### `finger`
 
 `finger` is not part of the packages that come with a default **CentOS 7.9** installation.<br />
 However it is a very powerful tool to have in one's arsenal when it comes to user monitoring. 
@@ -1649,7 +1699,7 @@ will     His wife says           pts/3    6:37  Dec 27 18:17  that his          
 ~ $ 
 ```
 
-#### *id*
+#### `id`
 
 ##### Syntax of the command
 
@@ -1658,9 +1708,9 @@ will     His wife says           pts/3    6:37  Dec 27 18:17  that his          
 The `id` command can be entered without any further arguments. Like that it will print information  
 of the user that runs the command in the shell. See first line of the example for that.  
 It will always display:
--The *uid*, the numerical, unique key that every user has. It is between **UID_MIN** and **UID_MAX**, as covered in 5.5.
-- The *gid* is the numerical, unique representation of the **group**, that a user is a member of. Something like a user group.
-- *groups* lists further groups and group ids of groups that the user is a member of.
+-The `uid`, the numerical, unique key that every user has. It is between **UID_MIN** and **UID_MAX**, as covered in 5.5.
+- The `gid` is the numerical, unique representation of the **group**, that a user is a member of. Something like a user group.
+- `groups` lists further groups and group ids of groups that the user is a member of.
 
 ```bash
 ~ $ id
@@ -1672,18 +1722,34 @@ uid=1006(kate) gid=1007(cyclists) groups=1007(cyclists)
 ~ $ 
 ```
 
+
+
+
+
+
+
+
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 8 & 9'
+description: 'Section 8 explores how a system administrator can communicate with users, by use of native command line tools. The following Section 9 is all about Linux Account Authentication.'
+date: 2022-01-01 05:08:09
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
 # Communicating with Users
 
 **Learning Linux - Section 5.8**
 
 
-description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
-
 ### Communicating with users
+
+Section 8 explores how a system administrator can communicate with users, by use of native command line tools.
 
 #### Commands covered
 
@@ -1691,7 +1757,7 @@ accent_color: '#08877d'
 - `wall`
 - `write`
 
-#### *users*
+#### `users`
 
 The output of the command gives all currently online users. *kate* and *will* are logged in
 and I am logged in as well (*tklein*).
@@ -1704,7 +1770,7 @@ kate tklein tklein tklein will
 ```
 
 
-#### Use Case for *wall*
+#### Use Case for `wall`
 
 *In a situation where the system administrator (**admin**) has to shut down the system for some kind 
 of maintenance, the users need to be notified that the system will be down for that maintenance period.
@@ -1749,15 +1815,21 @@ Hello, upsie, did not activate the bandwith limit.
 EOF
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 # Linux Account Authentication
 
 **Learning Linux - Section 5.9**
-
-
-description: 'This article covers some of the essential commands used in any Linux distribution. Vim text editor was used and CentOS 7 was the OS used in this series. It was setup as command line only virtual machine and accessed through ssh. There are 8 Sections in total.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
 
 
 ### Linux Account Authentication
@@ -1790,15 +1862,35 @@ The authentication works like this for domain and directory accounts:
 3. The *server* checks whether this account is authenticated.
 4. Given that the account is authenticated, the *server* authenticates the user who sent the request.
 5. The user can log in on the client.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 10 & 11'
+description: 'Sections 10 and 11 describe popular directory services and system utility commands.'
+date: 2022-01-01 05:10:11
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
+
 # Overview and Comparison of Popular Directory Services
 
 **Learning Linux - Section 5.10**
 
-
-description: 'In this Section we look at the difference between some of the popular Directory Services out there. E.g. Active Directory, LDAP, IDM, WinBIND, OpenLDAP.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
 
 
 ### Overview and Difference between Popular Directory Services
@@ -1823,22 +1915,25 @@ accent_color: '#08877d'
   - *LDAP* is a protocol and not a service.
   - It is needed to communicate to any *Directory Service* 
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 # System Utility Commands
 
 **Learning Linux - Section 5.11**
 
 
-description: 'In this Section we look at the differences between some of the more popular Directory Services. <br />In detail, these are: Active Directory, LDAP, IDM, WinBIND and OpenLDAP.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
 
 
-
-### System Utility Commands
-
-#### Commands covered
+### Commands covered
 
 - `date`
 - `uptime`
@@ -1848,7 +1943,7 @@ accent_color: '#08877d'
 - `cal`
 - `bc`
 
-#### *date*
+#### `date`
 
 The `date` command returns information about the current date of the system. 
 It returns the following information from left to right:
@@ -1871,7 +1966,7 @@ Tue Dec 28 11:38:47 CET 2021
 ```
 
 
-#### *uptime*
+#### `uptime`
 
 The `uptime` command gives information about the system. Namely about for how long it has been running in total, the number of currently online users and the **CPU** load. The **CPU** load is measured by looking at the average number of jobs in the system's *run queue* for 3 different time periods. The periods are 1, 5 and 15 minutes.
 
@@ -1890,7 +1985,7 @@ The `uptime` command gives information about the system. Namely about for how lo
 ~ $ 
 ```
 
-#### *hostname*
+#### `hostname`
 
 `hostname` tells one about the hostname of the Linux machine one is currently logged in.
 `hostname` is used to verify, that one is *actually* logged into the right machine. This can be important to verify before running critical commands on the machine that one is logged in. 
@@ -1902,7 +1997,7 @@ localhost.localdomain
 ```
 
 
-#### *uname*
+#### `uname`
 
 `uname` gives very brief information about the operating system, that is running on the current machine.
 
@@ -1916,7 +2011,7 @@ Linux
 ```
 
 
-###### *uname -a*
+###### `uname -a`
 
 
 With the option `-a` one gets more information. In addition to the type of operating system (*Linux*), it prints more details 
@@ -1933,7 +2028,7 @@ Linux localhost.localdomain 3.10.0-1160.el7.x86_64 #1 SMP Mon Oct 19 16:18:59 UT
 ```
 
 
-#### *which*
+#### `which`
 
 The structure of the command is `which [options] [--] programname [...]` and it tells one, as stated in the man pages of `which`:
 
@@ -1958,7 +2053,7 @@ alias vi='vim'
 ```
 
 
-#### *cal*
+#### `cal`
 
 From the man pages of `cal`, one learns that the syntax of the command looks like this: `cal [options] [[[day] month] year]`
 
@@ -1983,10 +2078,10 @@ Su Mo Tu We Th Fr Sa
 ```
 
 
-#### *bc*
+#### `bc`
 
 `bc` = Binary calculator
-It is a basic calculator, that lacks builtin functions like *factorial (n!)* or any *root* function. These functions can however be defined in a separate text file and can be imported like that over and over again.
+It is a basic calculator, that lacks builtin functions like *factorial (n!)* or any `root` function. These functions can however be defined in a separate text file and can be imported like that over and over again.
 
 
 ```bash
@@ -2001,20 +2096,42 @@ For details type `warranty'.
 41666
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 12'
+description: 'This section introduces and explains the terms Application, Script, Process, Daemon, Thread and Job. These will be described in more detail in the following sections.'
+date: 2022-01-01 05:12:00
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
 # Processes, Jobs and Scheduling
 
 **Learning Linux - Section 5.12**
 
 
-description: 'This section introduces the terms Application, Script, Process, Daemon, Thread and Job. These will be described in more detail in the following sections.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
-accent_color: '#08877d'
-
-
-
 ### Processes, Jobs and Scheduling 
 
+This section introduces and explains the terms Application, Script, Process, Daemon, Thread and Job. These will be described in more detail in the following sections.
 
 #### Terms covered
 
@@ -2069,7 +2186,7 @@ Which returns the following output on the command line:
 
 tklein
 
-The file 'cars_are_still_best' has that many lines:
+The file 'cars_are_still_best' has that many lines and its absolute path is:
 5 /home/tklein/script-execution/cars_are_still_best
 
 Fancy new Line, just sayin'
@@ -2117,50 +2234,42 @@ Every *process* could have multiple *threads* associated with it. A running *app
 
 A *job* or *workorder* runs a *service* or *process* at a scheduled time.
 
-#### *at.*
+#### `at.`
 
 `at.` is similar to `crontab` as it is used to schedule the execution of  *service*, *process* or *application*, the difference however is that it is only used to do this once. It is not used for reoccurring *jobs*.
 
 
 
-# The systemctl command
+
+
+---
+title: 'Learning Linux - Chapter 5: Section 13'
+description: 'The systemctl command is introduced in this section, as found in CentOS 7 / Red Hat 7. It describes and gives multiple examples of how it can be used.'
+date: 2022-01-01 05:13:00
+featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
+gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
+accent_color: '#08877d'
+---
+
+
+# The `systemctl` command
 
 
 **Learning Linux - Section 5.13**
 
 
-description: 'This section is about the systemctl command, as found in CentOS 7. It describes and gives examples of its usage.'
-featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg' 
-accent_color: '#08877d'
 
 
+### The `systemctl` Command
 
-### The *systemctl* Command
+The `systemctl` command is introduced in this section, as found in CentOS 7 / Red Hat 7. It describes and gives multiple examples of how it can be used.
 
-/Users/tobias/all_code/projects/kletobias-github-io_website/images
-
-{% include post-components/gallery.html
-	columns = 1
-	full_width = true
-	images = "/images/Chapter_5-13-1642816218053.png,/images/dark_trydocker.png"
-%}
-
-
-BEST UMANGEE
-
-<img style="width:100%;" id="bright_color_try1.png" src="/images/Chapter_5-13-1642816218053.png"/>
-
-<!---
-<img alt="bright_color_try1.png" height="1616" 
-src="/images/Chapter_5-13-1642816218053.png" width="2550"/>
--->
 
 #### Overview
 
 
 - The `systemctl` command is a new tool to control system services.
-- It is found in CentOS 7 and later.
+- It is found in CentOS 7 / Red Hat 7 and later.
 - `systemctl` command replaces the `service` command.
 
 
@@ -2185,7 +2294,7 @@ this tool manages.
 ```
 
 
-#### *systemctl* Output
+#### `systemctl` Output
 
 
 The output, that the `systemctl` command generates is in row form.
@@ -2280,7 +2389,7 @@ In this section several of the `systemctl` commands are run inside the shell and
 to the information from the `man systemctl` output from above, is: `systemctl COMMAND [NAME...]`.
 The commands covered, using the `firewalld` service are the following:
 
-##### start, stop and status
+##### `start`, `stop` and `status`
 
 ```bash
 systemctl start servicename.service (firewalld)
@@ -2289,7 +2398,7 @@ systemctl status servicename.service (firewalld)
 ```
 
 
-###### Example: systemctl status servicename.service
+###### Example: `systemctl status servicename.service`
 
 The output of the `systemctl status servicename.service`
 is explained in detail. The explanation follows the row-wise structure of the output of the command.
@@ -2330,7 +2439,7 @@ The output tells one the following about the status of the service `firewalld`:
 - The control groups (**CGroup**), showing higher level unit hierarchy. This is part of resource management, see [here](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/resource_management_guide/chap-introduction_to_control_groups) for detailed information.
 - The last 3 lines give a brief history of the command. It is a log.
 
-###### Example: systemctl stop servicename.service
+###### Example: `systemctl stop servicename.service`
 
 In this example, the `firewalld` unit is stopped and its status
 is checked afterwards, by running `systemctl status firewalld.service`
@@ -2357,7 +2466,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
 
-###### Example: systemctl start servicename.service
+###### Example: `systemctl start servicename.service`
 
 
 In this example, the `firewalld` unit is started again and its status
@@ -2381,7 +2490,7 @@ root *
 ```
 
 
-##### disable & enable 
+##### `disable` & `enable`
 
 While `systemctl stop servicename.service` and  `systemctl start servicename.service`
 stop and start a service immediately after execution, the commands
@@ -2406,7 +2515,7 @@ systemctl disable servicename.service
 systemctl enable servicename.service
 ```
 
-###### systemctl disable servicename.service
+###### `systemctl disable servicename.service`
 
 One can see, that the `firewalld` service is still active, after it has
 been disabled. It is still loaded, however it is mentioned in the output, that it is disabled!
@@ -2432,7 +2541,7 @@ root *
 ```
 
 
-###### systemctl enable servicename.service
+###### `systemctl enable servicename.service`
 
 Vice versa, enabling the `firewalld` service again does not change anything in terms of it being loaded and active. However, in the **Loaded** row, one can see that it is now
 enabled again.
@@ -2459,7 +2568,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 root * 
 ```
 
-##### restart & reload
+##### `restart` & `reload`
 
 `systemctl restart` and `systemctl reload` are two important commands to
 understand.
@@ -2481,7 +2590,7 @@ systemctl restart servicename.service
 systemctl reload servicename.service
 ```
 
-###### systemctl --all
+###### `systemctl --all`
 
 The `systemctl --all` will list all units in the system's registry.
 Here it was used to list all units, so that the one called `mariadb`
@@ -2496,7 +2605,7 @@ root *
 ```
 
 
-###### systemctl restart servicename.service
+###### `systemctl restart servicename.service`
 
 Restarting the `mariadb` unit like so:
 
@@ -2527,7 +2636,7 @@ In the output one can see, that the unit has been running for **18s** only and t
 the restart was successful, since it is up and active again.
 
 
-###### systemctl reload servicename.service
+###### `systemctl reload servicename.service`
 
 As mentioned earlier, not all units support the `systemctl reload servicename.service`
 command and so is the case for the `mariadb` service, as seen in the following
