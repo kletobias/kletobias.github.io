@@ -22,10 +22,12 @@ them are:
 - The presence of Multicollinearity undermines the statistical significance of an independent variable.  
   
 Multiple linear regression models are often used for their easy to explain relationship between the independent
-variables and the dependent variable. The coefficients, that a model assigns to each independent variable $X_{i}$ is
-proportional (in case of a continuous variable $X_{i}$ and dependent variable $Y_{i}$) to the impact that the variable has on the dependent variable.
-Boolean variables can be used to describe other relationships between independent and dependent variable.. That is, if
-the model does not suffer from Multicollinearity among other problems, that can undermine this relationship.
+variables and the dependent variable. One important metric when describing this relationship is, whether the impact of
+an independent variable on the dependent variable is statistically significant. If this is the case, then the
+coefficients, that a model assigns to each independent variable $X_{i}$ is proportional (in case of a continuous
+variable $X_{i}$ and dependent variable $Y_{i}$) to the impact that the variable has on the dependent variable. Boolean
+variables can be used to describe other relationships between independent and dependent variable.. That is, if the model
+does not suffer from Multicollinearity among other problems, that can undermine this relationship.
 
 
 ## Creating Suitable Samples
