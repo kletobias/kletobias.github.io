@@ -26,10 +26,7 @@ from numpy.random import randn, seed
 plt.style.use('science')
 seed(42)
 
-```
 
-
-```python
 S1 = 20 * randn(1000) + 100
 S2 = S1 + (10 * randn(1000) + 50)
 print(f'mean, std of S1: {mean(S1)}, {std(S1)}')
@@ -63,7 +60,7 @@ formula:
 
 $$cov_{XY} := \frac{1}{n} \sum_{i=1}^{n} (\,x_{i} - \bar{x})\, (\,y_{i} - \bar{y})\, \iff\,\, \overline{xy} - \bar{x} \bar{y}$$
 
-Given the scatter plot of all $\left\(x\_{i},y\_{i}\right\)$ tuples with $x_{i} \in \mathrm{S1}$ and $y_{i} \in \mathrm{S2}$, a positive value for $cov(\,x,y)\,$ is expected. The relationship between the two distributions is of linear nature and so the covariance should be a good measure for how they are correlated.
+$n$ is the number of values. Given the scatter plot of all $\left\(x\_{i},y\_{i}\right\)$ tuples with $x_{i} \in \mathrm{S1}$ and $y_{i} \in \mathrm{S2}$, a positive value for $cov(\,x,y)\,$ is expected. The relationship between the two distributions is of linear nature and so the covariance should be a good measure for how they are correlated.
 
 
 
@@ -85,7 +82,10 @@ The covariance matrix values of ~375.65 show, that there is a strong positive co
 
 
 ## Pearson Correlation Coefficient
-Another frequently used measure to determine whether 2 random variables are correlated or not and if, how strong, is the **empirical correlation coefficient**, also known as the Pearson correlation coefficient. It utilizes the covariance value and divides it by the product of the standard deviations of the random variables. It is given by:
+Another frequently used measure to determine whether 2 random variables are correlated or not and if, how strongly, is the
+**empirical correlation coefficient**, also known as the Pearson correlation coefficient. It utilizes the covariance
+value and divides it by the product of the standard deviations of the random variables. It is given by:
+
 $$r_{XY} := \frac{cov_{XY}}{s_{X}s_{Y}}$$
 
 The domain of $r$ is $[-1,1]$, with:
@@ -104,8 +104,9 @@ The plot of the values of two random variables ranges from close to a line with 
 with a positive slope. Values of $r \le -0.5$ and $r \ge 0.5$ tend to signal a strong correlation in the respective
 direction. One of the good characteristics, that $r$ has, is that its value does not change, if the random variables are
 subjected to a linear transformation. That means, that the scale of the random variables or the difference in scale do
-not affect its value. The sign of $r$ is the same as for $cov$, a difference is that it is normed to the domain of
-$\\[-1,1\\]$, unlike the $cov$ which returned a value of ~375.65 for our example.
+not affect its value. The sign of $r$ is the same as for $cov$, a difference is that it is normed to the domain of $[-1,1]$ 
+
+unlike the $cov$ which returned a value of ~375.65 for our example.
 
 
 
