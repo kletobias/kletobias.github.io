@@ -8,8 +8,25 @@ accent_color: '#08877d'
 ---
 
 # Multicollinearity
+<br>
+Covariance and the Pearson Correlation Coefficient: How to Spot Multicollinearity between random variables.<br>
+<br>
+Multicollinearity is a statistical concept, that describes the phenomenon of several independent variables, that are
+part of a multiple regression model, are linearly correlated with each other.  
+In this article we mention two metrics, that can be used to test for collinearity between two random variables. The
+metrics work on a per-pair or independent variables basis and so can be illustrated by using two random variables S1 and
+S2 in the following.  
+  
+There are several reasons, why having Multicollinearity among several independent variables can cause problems. Some of
+them are:  
+- The presence of Multicollinearity undermines the statistical significance of an independent variable.  
+  
+Multiple linear regression models are often used for their easy to explain relationship between the independent
+variables and the dependent variable. The coefficients, that a model assigns to each independent variable $X_{i}$ is
+proportional (in case of a continuous variable $X_{i}$ and dependent variable $Y_{i}$) to the impact that the variable has on the dependent variable.
+Boolean variables can be used to describe other relationships between independent and dependent variable.. That is, if
+the model does not suffer from Multicollinearity among other problems, that can undermine this relationship.
 
-Covariance and the Pearson Correlation Coefficient: How to Spot Multicollinearity between random variables.
 
 ## Creating Suitable Samples
 
@@ -78,7 +95,7 @@ cv
 
 
 
-The covariance matrix values of ~375.65 show, that there is a strong positive correlation between S1 and S2. A strong sign for multicollinearity between the two distributions. This would have to be addressed before training a linear regression model, among others for example. Given the design, there was no problem with satisfying the prerequisites that need to be met, in order for the covariance to be a good measurement for the relationship between two or more distributions found in a dataset (one a per-pair testing basis). Generally, explanatory variables are tested in this regard.
+The covariance matrix values of ~375.65 show, that there is a strong positive correlation between S1 and S2. A strong sign for Multicollinearity between the two distributions. This would have to be addressed before training a linear regression model, among others for example. Given the design, there was no problem with satisfying the prerequisites that need to be met, in order for the covariance to be a good measurement for the relationship between two or more distributions found in a dataset (one a per-pair testing basis). Generally, explanatory variables are tested in this regard.
 
 
 ## Pearson Correlation Coefficient
