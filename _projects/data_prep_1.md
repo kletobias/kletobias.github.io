@@ -7,6 +7,7 @@ featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
+
 # From Webscraping Data to Tidy Pandas DataFrame
 
 ## Reading In the Input Data
