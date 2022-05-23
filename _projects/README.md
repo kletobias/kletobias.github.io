@@ -138,16 +138,16 @@ Tags and links to the blog posts and project posts I have published on this site
 
 #### Projects
 
-[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_4) - **an Overview of available tools in the pandas library**
-**Tags:**
+[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_4) - **an Overview of available tools in the pandas library**  
+**Tags:**  
 
-[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_3) - **an Overview of available tools in the pandas library**
-**Tags:**
+[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_3) - **an Overview of available tools in the pandas library**  
+**Tags:**  
 
-[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_2) - **an Overview of available tools in the pandas library**
-**Tags:**
+[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_2) - **an Overview of available tools in the pandas library**  
+**Tags:**  
 
-[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_1) - **an Overview of available tools in the pandas library**
+[Data Preparation Series: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data_prep_1) - **an Overview of available tools in the pandas library**  
 **Tags:** `df.head`, `df.tail`, `df.index.max`, `df.columns`, `df.index`,
 `df.shape`, `df.count`, `df.describe`, `.to_markdown`, `df.nunique`, `df.filter`,`df.sample`,`df.value_counts`,`df.drop_duplicates`
 
