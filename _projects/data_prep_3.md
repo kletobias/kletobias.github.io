@@ -1,14 +1,16 @@
 ---
-title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 2'
+title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 3'
 subtitle: 'Combining pandas, pyjanitor and Regular Expressions To Get The Job
 Done.'
-date: '2022-05-23 07:00:00'
+date: '2022-05-23 08:00:00'
 description: 'More Efficient Data Cleaning By Using The pyjanitor Module and Method
 Chaining'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
+
+
 
 # Wrangling with that Data!
 
@@ -25,665 +27,1122 @@ This article shows how cleaning a CSV file using `pandas`, `numpy`, `re` and the
 - Validation of the values, after cleaning is performed using regex patterns.
 - New `timedelta64[ns]` `time_listed` and `Point` geometry `gps` columns are created.
 
-
-## Heating Costs
-
-Looking at `df.heating_costs.value_counts()`, we see that the heating costs are often included in the auxiliary costs. For 4047 rows, which is around $\frac{1}{3}$ of all rows, it only states that heating costs are included in the auxiliary without any numerical value. On average, heating costs should be around the same for listings with one of the major heating types and similar isolation and using normalized area inside a listing (given in $m^{2}$). Hamburg is close to the Northern Sea and therefore the winters in Hamburg are generally mild. There certainly is no continental climate, where heating make up a higher percentage of the total rent.
-
-The column is therefore dropped.
+## Preparations for the Batch Operations
+The unique values are calculated for all columns, that are still to be cleaned and give the basis for the regex patterns used in the following steps to clean these remaining columns. The output with all the unique values is truncated for readability.
 
 
 ```python
-df.heating_costs.value_counts().head(10)
+col_stats = {}
+
+for n in df.columns:
+    col_stats[n] = {}
+    try:
+        col_stats[n]["unique"] = df[n].unique()
+    except TypeError:
+        pass
+#    col_stats[n]['unique'] = df[n].unique()
+
+for col in df.columns:
+    try:
+        ut = col_stats[col]["unique"][:5] if len(col_stats[col]["unique"]) > 80 else col_stats[col]["unique"]
+        print(f'{col}:\n{ut}\n\n')
+    except KeyError:
+        pass
 ```
 
-
-
-
-      in Nebenkosten enthalten           4047
-      nicht in Nebenkosten enthalten     1070
-      keine Angabe                        731
-      50 €                                248
-      60 €                                220
-      70 €                                206
-      80 €                                199
-      100 €                               199
-     inkl. 50 €                           150
-      90 €                                144
-    Name: heating_costs, dtype: int64
-
-
-
-
-```python
-df.drop(labels=["heating_costs"], axis=1, inplace=True)
-```
-
-## Latitude
-
-This column is one of the most important ones in the dataset together with the Longitude column. Together they give the exact GPS coordinates for most of the listings. This spacial information will be joined with from the dataset independent external geospatial based information. Together these will lay the foundation for the most influential features used to train the *XGBoost* and *Lasso Regression* models.
-
-
-```python
-df.lat.value_counts().sample(10, random_state=seed)
-```
-
-
-
-
-    ['lat: 53.4859709952484,']      1
-    ['lat: 53.555415063775214,']    1
-    ['lat: 53.59607281949776,']     1
-    ['lat: 53.575903316512345,']    1
-    ['lat: 53.56514913880538,']     1
-    ['lat: 53.56863155760176,']     3
-    ['lat: 53.45789899804567,']     1
-    ['lat: 53.60452600011545,']     1
-    ['lat: 53.619085739824705,']    1
-    ['lat: 53.54586549494192,']     5
-    Name: lat, dtype: int64
-
-
-
-### Cleaning Of Longitude And Latitude Columns
-A look at a sample of the values found in the Latitude column, shows that they most likely all follow the same pattern and thus can be easily converted to floating point numbers. Generally, the `json_` columns are much easier to clean, than the values from the visible features on the URL of the listing. For the following cases, the `pandas.Series.str.extract()` function is the tool of choice.
-No difference in the number of unique values before and after the cleaning for both columns is found.
-
-
-```python
-print(df.lat.nunique(), df.lng.nunique())
-df = (
-        df.process_text(
-                column_name="lat",
-                string_function="extract",
-                pat=r"[^.]+?(\d{1,2}\.{1}\d{4,})",
-                expand=False,
-                )
-            .process_text(
-                column_name="lng",
-                string_function="extract",
-                pat=r"[^.]+?(\d{1,2}\.{1}\d{4,})",
-                expand=False,
-                )
-            .change_type(column_name="lat", dtype="float64", ignore_exception=False)
-            .change_type(column_name="lng", dtype="float64", ignore_exception=False)
-)
-
-print(df.lat.nunique(), df.lng.nunique())
-```
-
-    5729 5729
-    5729 5729
-
-
-### Validation of Longitude and Latitude Columns
-Only missing values in both columns do not match the validation pattern. This was expected, since we did not add `.dropna()` to the list comprehension over the values in the columns.
-
-
-```python
-bb = [x for x in df.lat.unique().tolist() if not re.match(r"\A\d+\.\d{4,}\Z", str(x))]
-ba = [x for x in df.lng.unique().tolist() if not re.match(r"\A\d+\.\d{4,}\Z", str(x))]
-print(ba)
-print('\n')
-print(bb)
-```
-
-    [nan]
+    bfitted_kitchen:
+    [1 0]
     
     
-    [nan]
-
-
-## Creating The GPS Column
-
-To be able to utilize the Latitude and Longitude values, that we have in the dataset, we need to create a tuple consisting of the two variables. The result should look like this for all valid pairs: `(lng,lat)`. In order for a tuple of this form to be recognized as a valid GPS value, we need to be able to apply the `.apply(Point)` method to all values and get no errors during the application.
-
-We start by checking for problematic rows. Rows, that need attention are the following:
-
-- Rows that only have one valid value in the subset `df[['lng','lat']]`
-- Rows with missing values in both columns 'lng' and 'lat'
-
-
-The output shows, that all rows for the two columns are the same, in terms of whether a row has a missing or valid value. With this information, we can save the index values of the rows with missing values for the subset latitude and longitude, so we can drop the rows with missing values in the gps column without much effort in next steps.
-
-
-```python
-df[["lng", "lat"]].isna().value_counts()
-```
-
-
-
-
-    lng    lat  
-    False  False    9423
-    True   True     2901
-    dtype: int64
-
-
-
-The method above is to be preferred over the one below, which creates lists for both columns `lng` and `lat`, with the index values of the rows with *NaN* values. It then compares the index values stored in `lngna` and `latna` elementwise. The `assert` function is used to confirm, that the elements in both lists are all equal.
-
-
-```python
-lngna = list(df[df["lng"].isna()].index)
-latna = list(df[df["lat"].isna()].index)
-assert lngna == lngna
-```
-
-## Creation Of The GPS Column 1/3
-The rows of the `lng` and `lat` columns are added together using the `tuple` function inside a `DataFrame.apply()` statement and the result is assigned to the new column `gps`.
-
-
-```python
-from shapely.geometry import Point
-```
-
-
-```python
-df["gps"] = df[["lng", "lat"]].apply(tuple, axis=1)
-```
-
-We use the row index values from earlier. This makes it easy for us to drop the missing values, regardless of the fact that a tuple of missing values can not be dropped by using `df.dropna(subset=['gps'],inplace=True)` anymore. Such a tuple is not an `np.nan`, it just has values `( np.nan, np.nan )`inside the tuple.
-
-
-```python
-df.drop(lngna, inplace=True, axis=0)
-```
-
-### Drop Rows That Contain *NaN* Values
-We drop rows, that have *NaN* values in the `lng` and `lat` columns. Around 3000 rows where dropped as a result.
-
-
-```python
-len(df)
-```
-
-
-
-
-    9423
-
-
-
-No more *NaN* values in all three columns, as expected.
-
-
-```python
-df[["lng", "lat", "gps"]].isna().value_counts()
-```
-
-
-
-
-    lng    lat    gps  
-    False  False  False    9423
-    dtype: int64
-
-
-
-### Creation Of The GPS Column 2/3
-Just valid values for variable longitude and latitude are left and therefore only valid values make up the data in the gps column.
-We check how the values in the gps column look like, before the `POINT` conversion.
-
-
-```python
-df["gps"].sample(1000, random_state=seed)
-```
-
-
-
-
-    4555      (10.081875491322997, 53.59659576773955)
-    5357      (10.117258625619199, 53.57200940640784)
-    5463      (10.076499662582167, 53.60477899815401)
-    4191       (9.948503601122527, 53.58407791510109)
-    7238        (9.944410649308205, 53.5642271656938)
-                               ...                   
-    10138    (10.024189216380647, 53.588549633689425)
-    3479       (9.859813703847099, 53.53408132036414)
-    5558        (10.03611960198576, 53.6124394982734)
-    11072      (10.009835277290465, 53.5488715679383)
-    4786      (9.944531180915247, 53.577945758643175)
-    Name: gps, Length: 1000, dtype: object
-
-
-
-### Conversion Of The `gps` Column To Geometry Object 3/3
-
-The `gps` column is ready for conversion, by applying the `Point` function to all values in the column. The result needs no further processing.
-
-
-```python
-df["gps"] = df["gps"].apply(Point)
-```
-
-### Getting A Quick Look At The Finished GPS Column
-The `gps` column looks as expected, and we can see, that its dtype is correct as well:
-
-`Name: gps, dtype: object <class 'shapely.geometry.point.Point'>`
-
-
-```python
-print(df["gps"][0:10], type(df["gps"][10]))
-```
-
-    0     POINT (10.152357145948395 53.52943934146104)
-    1      POINT (10.06842724545814 53.58414266878421)
-    2        POINT (9.86423115803761 53.6044918821393)
-    3      POINT (9.956881419437474 53.56394970119381)
-    4     POINT (10.081257248271337 53.60180649336605)
-    5    POINT (10.032298671585043 53.561192834080046)
-    6    POINT (10.204297951920761 53.493636048600344)
-    7      POINT (9.973693895665868 53.56978432240341)
-    8      POINT (9.952844267614122 53.57611822321049)
-    9     POINT (10.036249068267281 53.56479904983683)
-    Name: gps, dtype: object <class 'shapely.geometry.point.Point'>
-
-
-
-```python
-df[['gps']].info()
-```
-
-    <class 'pandas.core.frame.DataFrame'>
-    Int64Index: 9423 entries, 0 to 12323
-    Data columns (total 1 columns):
-     #   Column  Non-Null Count  Dtype 
-    ---  ------  --------------  ----- 
-     0   gps     9423 non-null   object
-    dtypes: object(1)
-    memory usage: 405.3+ KB
-
-
-## Reviewing The Columns In The DataFrame Again
-
-We drop more columns, after the creation of the `gps` column. `street_number` (street and number of a listing) are not needed anymore, since all listings have a valid pair of longitude and latitude coordinates associated with them. `floor space` is a variable, that has 827 non-missing values and around 91.2% of rows have missing values. This ratio between valid and missing values is too large to be imputed in this case. The column is therefore dropped.
-
-
-
-```python
-df.drop(columns=["street_number", "floor_space"], inplace=True)
-```
-
-## Date Listed & Date Unlisted Columns
-For the columns, that give information about when a listing was published and unpublished on the rental platform the needed cleaning steps are identical. Therefore, not all steps are explicitly described for both columns.
-The values need to be converted to dtype datetime, so the entire column can be assigned dtype `datetime64[ns]`.
-
-
-
-```python
-df.date_listed.unique()[
-0:10
-]  # Entire list of unique values was used for the following steps.
-```
-
-
-
-
-    array(['[\'exposeOnlineSince: "03.12.2018"\']',
-           '[\'exposeOnlineSince: "02.12.2018"\']',
-           '[\'exposeOnlineSince: "30.11.2018"\']',
-           '[\'exposeOnlineSince: "29.11.2018"\']',
-           '[\'exposeOnlineSince: "28.11.2018"\']',
-           '[\'exposeOnlineSince: "27.11.2018"\']',
-           '[\'exposeOnlineSince: "26.11.2018"\']',
-           '[\'exposeOnlineSince: "25.11.2018"\']',
-           '[\'exposeOnlineSince: "24.11.2018"\']',
-           '[\'exposeOnlineSince: "23.11.2018"\']'], dtype=object)
-
-
-
-### Extracting DateTime Information
-- For both columns, we extract the valid data. Data in the form of `dd.mm.yyyy`.
-- pandas `datetime64[ns]` goes down to the Nanosecond level. However, the data only goes down to the day level. This leads to us removing anything below the day level in the data.
-- We fill missing data by selecting the next valid data entry, above the row with the missing value. The time a listing was online does not vary much, except for a few outliers, as will be discussed later.
+    belevator:
+    [0 1]
+    
+    
+    auxiliary_costs:
+    [190.84 117.95 249.83  70.   213.33]
+    
+    
+    total_rent:
+    [541.06 559.05 839.01 665.   651.81]
+    
+    
+    lat:
+    [53.52943934 53.58414267 53.60449188 53.5639497  53.60180649]
+    
+    
+    lng:
+    [10.15235715 10.06842725  9.86423116  9.95688142 10.08125725]
+    
+    
+    parking:
+    [nan ' Tiefgaragen-Stellplatz ' ' 3 Tiefgaragen-Stellplätze '
+     ' 1 Duplex-Stellplatz ' ' 1 Tiefgaragen-Stellplatz '
+     ' 1 Außenstellplatz ' ' 1 Garage ' ' 2 Tiefgaragen-Stellplätze '
+     ' 25 Tiefgaragen-Stellplätze ' ' 1 Stellplatz ' ' Carport '
+     ' 2 Stellplätze ' ' 1 Carport ' ' Außenstellplatz '
+     ' Parkhaus-Stellplatz ' ' Duplex-Stellplatz ' ' Garage '
+     ' 2 Parkhaus-Stellplätze ' ' 2 Garagen ' ' 9 Stellplätze '
+     ' 2 Außenstellplätze ' ' 6 Außenstellplätze ' ' 2 Carports '
+     ' 1 Parkhaus-Stellplatz ' ' 20 Stellplätze '
+     ' 12 Tiefgaragen-Stellplätze ' ' 6 Garagen '
+     ' 6 Tiefgaragen-Stellplätze ' ' 5 Außenstellplätze ']
+    
+    
+    date_listed:
+    ['2018-12-03T00:00:00.000000000' '2018-12-02T00:00:00.000000000'
+     '2018-11-30T00:00:00.000000000' '2018-11-29T00:00:00.000000000'
+     '2018-11-28T00:00:00.000000000']
+    
+    
+    yoc:
+    ['1976' '1950' '1997' '1951' '2001']
+    
+    
+    object_condition:
+    [nan ' Gepflegt ' ' Vollständig renoviert ' ' Erstbezug '
+     ' Erstbezug nach Sanierung ' ' Neuwertig ' ' Modernisiert '
+     ' Renovierungsbedürftig ' ' Saniert ' ' Nach Vereinbarung ']
+    
+    
+    heating_type:
+    [nan ' Etagenheizung ' ' Zentralheizung ' ' Fernwärme '
+     ' Elektro-Heizung ' ' Nachtspeicheröfen ' ' Gas-Heizung '
+     ' Blockheizkraftwerke ' ' Fußbodenheizung ' ' Öl-Heizung '
+     ' Holz-Pelletheizung ' ' Ofenheizung ' ' Wärmepumpe ']
+    
+    
+    main_es:
+    [' Fernwärme ' nan ' Öl ' ' Strom ' ' Gas, Strom ' ' Gas ' ' KWK fossil '
+     ' Erdgas schwer ' ' Erdgas leicht ' ' Gas, Fernwärme ' ' Nahwärme '
+     ' Fernwärme, Strom ' ' Erdwärme ' ' Fernwärme-Dampf ' ' Öl, Strom '
+     ' Flüssiggas ' ' Wärmelieferung ' ' KWK regenerativ ' ' Holzpellets '
+     ' Erdwärme, Strom ' ' Solar, Gas ' ' Öl, Fernwärme '
+     ' Fernwärme, Erdgas schwer ' ' Erdwärme, Fernwärme ' ' Solar '
+     ' Gas, Öl ' ' Umweltwärme ' ' Strom, Erdgas leicht ' ' KWK erneuerbar ']
+    
+    
+    total_energy_need:
+    [nan ' 132,9 kWh/(m²*a) ' ' 65,9 kWh/(m²*a) ' ' 49 kWh/(m²*a) '
+     ' 50 kWh/(m²*a) ']
+    
+    
+    base_rent:
+    [' 350,22 € ' ' 441,10 € ' ' 589,18 € ' ' 595 € ' ' 438,48 € ']
+    
+    
+    square_meters:
+    [' 76 m² ' ' 60 m² ' ' 75 m² ' ' 46 m² ' ' 52 m² ']
+    
+    
+    no_rooms:
+    [' 3 ' ' 2,5 ' ' 2 ' ' 1,5 ' ' 3,5 ' ' 1 ' ' 4 ' ' 4,5 ' ' 5 ' ' 6 '
+     ' 5,5 ' ' 6,5 ' ' 7,5 ' ' 8 ' ' 7 ' ' 36 ' ' 140 ']
+    
+    
+    bbalcony:
+    [nan 'Balkon/ Terrasse']
+    
+    
+    cellar:
+    [nan 'Keller']
+    
+    
+    type:
+    [nan ' Sonstige ' ' Dachgeschoss ' ' Etagenwohnung ' ' Hochparterre '
+     ' Erdgeschosswohnung ' ' Maisonette ' ' Souterrain ' ' Terrassenwohnung '
+     ' Penthouse ' ' Loft ']
+    
+    
+    floor:
+    [' 0 ' ' 3 ' ' 2 ' nan ' 1 ']
+    
+    
+    no_bedrooms:
+    [nan  1.  2.  3.  4.  0.  5.  6.]
+    
+    
+    no_bathrooms:
+    [nan  1.  2.  0.  3. 11.]
+    
+    
+    bpets_allowed:
+    [nan ' Ja ' ' Nach Vereinbarung ' ' Nein ']
+    
+    
+    date_unlisted:
+    ['2018-12-03T00:00:00.000000000' '2018-12-02T00:00:00.000000000'
+     '2018-11-30T00:00:00.000000000' '2018-12-01T00:00:00.000000000'
+     '2018-11-29T00:00:00.000000000']
+    
+    
+    json_heating_type:
+    [nan '[\'"obj_heatingType":"self_contained_central_heating"\']'
+     '[\'"obj_heatingType":"central_heating"\']'
+     '[\'"obj_heatingType":"no_information"\']'
+     '[\'"obj_heatingType":"district_heating"\']'
+     '[\'"obj_heatingType":"electric_heating"\']'
+     '[\'"obj_heatingType":"night_storage_heater"\']'
+     '[\'"obj_heatingType":"gas_heating"\']'
+     '[\'"obj_heatingType":"combined_heat_and_power_plant"\']'
+     '[\'"obj_heatingType":"floor_heating"\']'
+     '[\'"obj_heatingType":"oil_heating"\']'
+     '[\'"obj_heatingType":"wood_pellet_heating"\']'
+     '[\'"obj_heatingType":"stove_heating"\']'
+     '[\'"obj_heatingType":"heat_pump"\']']
+    
+    
+    json_balcony:
+    ['[\'"obj_balcony":"n"\']' '[\'"obj_balcony":"y"\']']
+    
+    
+    json_picturecount:
+    ['[\'"obj_picturecount":"6"\']' '[\'"obj_picturecount":"11"\']'
+     '[\'"obj_picturecount":"5"\']' '[\'"obj_picturecount":"0"\']'
+     '[\'"obj_picturecount":"13"\']' '[\'"obj_picturecount":"2"\']'
+     '[\'"obj_picturecount":"4"\']' '[\'"obj_picturecount":"7"\']'
+     '[\'"obj_picturecount":"3"\']' '[\'"obj_picturecount":"10"\']'
+     '[\'"obj_picturecount":"1"\']' '[\'"obj_picturecount":"9"\']'
+     '[\'"obj_picturecount":"8"\']' '[\'"obj_picturecount":"15"\']'
+     '[\'"obj_picturecount":"12"\']' '[\'"obj_picturecount":"24"\']'
+     '[\'"obj_picturecount":"17"\']' '[\'"obj_picturecount":"14"\']'
+     '[\'"obj_picturecount":"21"\']' '[\'"obj_picturecount":"18"\']'
+     '[\'"obj_picturecount":"19"\']' '[\'"obj_picturecount":"25"\']'
+     '[\'"obj_picturecount":"20"\']' '[\'"obj_picturecount":"22"\']'
+     '[\'"obj_picturecount":"40"\']' '[\'"obj_picturecount":"29"\']'
+     '[\'"obj_picturecount":"16"\']' '[\'"obj_picturecount":"28"\']'
+     '[\'"obj_picturecount":"27"\']' '[\'"obj_picturecount":"36"\']'
+     '[\'"obj_picturecount":"35"\']' '[\'"obj_picturecount":"34"\']'
+     '[\'"obj_picturecount":"26"\']' '[\'"obj_picturecount":"23"\']'
+     '[\'"obj_picturecount":"43"\']' '[\'"obj_picturecount":"32"\']'
+     '[\'"obj_picturecount":"31"\']' '[\'"obj_picturecount":"38"\']'
+     '[\'"obj_picturecount":"30"\']' '[\'"obj_picturecount":"49"\']'
+     '[\'"obj_picturecount":"39"\']' '[\'"obj_picturecount":"37"\']'
+     '[\'"obj_picturecount":"42"\']' '[\'"obj_picturecount":"41"\']'
+     '[\'"obj_picturecount":"45"\']' '[\'"obj_picturecount":"64"\']']
+    
+    
+    json_telekomdownloadspeed:
+    ['[\'"obj_telekomDownloadSpeed":"100 MBit/s"\']'
+     '[\'"obj_telekomDownloadSpeed":"50 MBit/s"\']'
+     '[\'"obj_telekomDownloadSpeed":"16 MBit/s"\']' nan
+     '[\'"obj_telekomDownloadSpeed":"25 MBit/s"\']'
+     '[\'"obj_telekomDownloadSpeed":"6 MBit/s"\']'
+     '[\'"obj_telekomDownloadSpeed":"200 MBit/s"\']']
+    
+    
+    json_total_rent:
+    ['[\'"obj_totalRent":"541.06"\']' '[\'"obj_totalRent":"559.05"\']'
+     '[\'"obj_totalRent":"839.01"\']' '[\'"obj_totalRent":"665"\']'
+     '[\'"obj_totalRent":"651.81"\']']
+    
+    
+    json_yoc:
+    ['[\'"obj_yearConstructed":"1976"\']' '[\'"obj_yearConstructed":"1950"\']'
+     '[\'"obj_yearConstructed":"1997"\']' '[\'"obj_yearConstructed":"1951"\']'
+     '[\'"obj_yearConstructed":"2001"\']']
+    
+    
+    json_main_es:
+    ['[\'"obj_firingTypes":"district_heating"\']'
+     '[\'"obj_firingTypes":"no_information"\']'
+     '[\'"obj_firingTypes":"oil"\']' '[\'"obj_firingTypes":"electricity"\']'
+     nan '[\'"obj_firingTypes":"gas"\']'
+     '[\'"obj_firingTypes":"natural_gas_heavy"\']'
+     '[\'"obj_firingTypes":"natural_gas_light"\']'
+     '[\'"obj_firingTypes":"local_heating"\']'
+     '[\'"obj_firingTypes":"geothermal"\']'
+     '[\'"obj_firingTypes":"liquid_gas"\']'
+     '[\'"obj_firingTypes":"heat_supply"\']'
+     '[\'"obj_firingTypes":"pellet_heating"\']'
+     '[\'"obj_firingTypes":"solar_heating"\']']
+    
+    
+    json_bfitted_kitchen:
+    ['[\'"obj_hasKitchen":"y"\']' '[\'"obj_hasKitchen":"n"\']']
+    
+    
+    json_cellar:
+    ['[\'"obj_cellar":"n"\']' '[\'"obj_cellar":"y"\']']
+    
+    
+    json_const_time:
+    ['[\'"obj_yearConstructedRange":"3"\']'
+     '[\'"obj_yearConstructedRange":"1"\']'
+     '[\'"obj_yearConstructedRange":"5"\']'
+     '[\'"obj_yearConstructedRange":"2"\']'
+     '[\'"obj_yearConstructedRange":"6"\']'
+     '[\'"obj_yearConstructedRange":"4"\']' nan
+     '[\'"obj_yearConstructedRange":"8"\']'
+     '[\'"obj_yearConstructedRange":"7"\']'
+     '[\'"obj_yearConstructedRange":"9"\']']
+    
+    
+    json_base_rent:
+    ['[\'"obj_baseRent":"350.22"\']' '[\'"obj_baseRent":"441.1"\']'
+     '[\'"obj_baseRent":"589.18"\']' '[\'"obj_baseRent":"595"\']'
+     '[\'"obj_baseRent":"438.48"\']']
+    
+    
+    json_square_meters:
+    ['[\'"obj_livingSpace":"76"\']' '[\'"obj_livingSpace":"60"\']'
+     '[\'"obj_livingSpace":"75"\']' '[\'"obj_livingSpace":"46"\']'
+     '[\'"obj_livingSpace":"52"\']']
+    
+    
+    json_object_condition:
+    ['[\'"obj_condition":"no_information"\']'
+     '[\'"obj_condition":"well_kept"\']'
+     '[\'"obj_condition":"fully_renovated"\']'
+     '[\'"obj_condition":"first_time_use"\']'
+     '[\'"obj_condition":"first_time_use_after_refurbishment"\']'
+     '[\'"obj_condition":"mint_condition"\']'
+     '[\'"obj_condition":"modernized"\']'
+     '[\'"obj_condition":"need_of_renovation"\']'
+     '[\'"obj_condition":"refurbished"\']'
+     '[\'"obj_condition":"negotiable"\']']
+    
+    
+    json_interiorqual:
+    ['[\'"obj_interiorQual":"no_information"\']'
+     '[\'"obj_interiorQual":"normal"\']'
+     '[\'"obj_interiorQual":"sophisticated"\']'
+     '[\'"obj_interiorQual":"simple"\']' '[\'"obj_interiorQual":"luxury"\']']
+    
+    
+    json_bpets_allowed:
+    ['[\'"obj_petsAllowed":"no_information"\']'
+     '[\'"obj_petsAllowed":"yes"\']' '[\'"obj_petsAllowed":"negotiable"\']'
+     '[\'"obj_petsAllowed":"no"\']']
+    
+    
+    json_belevator:
+    ['[\'"obj_lift":"n"\']' '[\'"obj_lift":"y"\']']
+    
+    
+    time_listed:
+    [              0 259200000000000  86400000000000 172800000000000
+     518400000000000]
+    
+    
+
+
+## Applying The Batch Processing
+
+The steps below are all chosen by the unique values of each included column, so that the result of this batch processing procedure takes care of the problems found in these columns.
 
 
 ```python
 df = (
         df.process_text(
-                column_name="date_listed",
+                column_name="base_rent",
                 string_function="extract",
-                pat=r"(\d{2}\.\d{2}\.\d{4})",
+                pat=r"([\d,.]+)",
                 expand=False,
                 )
             .process_text(
-                column_name="date_unlisted",
+                column_name="square_meters",
                 string_function="extract",
-                pat=r"(\d{2}\.\d{2}\.\d{4})",
+                pat=r"([\d.,]+)",
                 expand=False,
                 )
-            .to_datetime("date_listed", errors="raise", dayfirst=True)
-            .to_datetime("date_unlisted", errors="raise", dayfirst=True)
-            .fill_direction(date_listed="up", date_unlisted="up")
-            .truncate_datetime_dataframe(datepart="day")
-)
-```
-
-### Exploring Data After Cleaning
-
-
-```python
-ppr = df[["date_listed", "date_unlisted"]][0:10]
-print(ppr)
-```
-
-      date_listed date_unlisted
-    0  2018-12-03    2018-12-03
-    1  2018-12-03    2018-12-03
-    2  2018-12-03    2018-12-03
-    3  2018-12-03    2018-12-03
-    4  2018-12-03    2018-12-03
-    5  2018-12-02    2018-12-02
-    6  2018-11-30    2018-12-03
-    7  2018-11-30    2018-12-03
-    8  2018-11-30    2018-12-03
-    9  2018-12-03    2018-12-03
-
-
-The time listed column is created calculating the difference between the `date_unlisted` and `date_listed` columns. The result is the `time_listed` column, which has type `timedelta64[ns]`. We truncate the timedelta values in this column to only show the days, that the listing was online, since our data only includes the day a listing was listed/unlisted.
-
-
-```python
-tg = df["date_unlisted"] - df["date_listed"]
-```
-
-Looking at several metrics for the `timedelta64[ns]` type column, we see that there are negative values for a couple of rows. Looking at the corresponding values of the `date_listed` and `date_unlisted` columns, we see that they most likely are in the wrong order. The negative values are dealt with, after this inspection, by using the absolute value of all `timedelta64[ns]` values. This only corrects the negative deltas, while not altering the positive ones.
-
-
-```python
-print(tg.min())
-print(tg.max())
-print(tg.mean())
-print(tg.median())
-print(tg.quantile())
-print(tg[tg.dt.days < 0].index.tolist())
-indv = tg[tg.dt.days < 0].index.tolist()
-
-df.loc[indv, ["date_listed", "date_unlisted"]]
-```
-
-    -648 days +00:00:00
-    924 days 00:00:00
-    19 days 05:10:04.011461318
-    5 days 00:00:00
-    5 days 00:00:00
-    [41, 578, 919, 1161, 1218, 1581, 2652, 2682, 2869, 2959, 3150, 3629, 3686, 6833, 7543, 7777, 7794, 11283, 11570, 11795, 11829, 11842, 11965, 12023]
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date_listed</th>
-      <th>date_unlisted</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>41</th>
-      <td>2018-11-29</td>
-      <td>2018-11-28</td>
-    </tr>
-    <tr>
-      <th>578</th>
-      <td>2018-10-26</td>
-      <td>2018-10-25</td>
-    </tr>
-    <tr>
-      <th>919</th>
-      <td>2018-10-08</td>
-      <td>2018-10-07</td>
-    </tr>
-    <tr>
-      <th>1161</th>
-      <td>2018-09-24</td>
-      <td>2018-09-23</td>
-    </tr>
-    <tr>
-      <th>1218</th>
-      <td>2018-09-20</td>
-      <td>2018-09-19</td>
-    </tr>
-    <tr>
-      <th>1581</th>
-      <td>2018-11-01</td>
-      <td>2018-09-03</td>
-    </tr>
-    <tr>
-      <th>2652</th>
-      <td>2018-09-21</td>
-      <td>2018-09-20</td>
-    </tr>
-    <tr>
-      <th>2682</th>
-      <td>2018-09-03</td>
-      <td>2018-07-08</td>
-    </tr>
-    <tr>
-      <th>2869</th>
-      <td>2018-08-08</td>
-      <td>2018-06-28</td>
-    </tr>
-    <tr>
-      <th>2959</th>
-      <td>2018-08-08</td>
-      <td>2018-06-22</td>
-    </tr>
-    <tr>
-      <th>3150</th>
-      <td>2018-10-08</td>
-      <td>2018-06-13</td>
-    </tr>
-    <tr>
-      <th>3629</th>
-      <td>2018-06-15</td>
-      <td>2018-05-15</td>
-    </tr>
-    <tr>
-      <th>3686</th>
-      <td>2018-07-12</td>
-      <td>2018-06-04</td>
-    </tr>
-    <tr>
-      <th>6833</th>
-      <td>2018-11-23</td>
-      <td>2017-12-12</td>
-    </tr>
-    <tr>
-      <th>7543</th>
-      <td>2017-08-24</td>
-      <td>2017-08-23</td>
-    </tr>
-    <tr>
-      <th>7777</th>
-      <td>2017-09-21</td>
-      <td>2017-09-08</td>
-    </tr>
-    <tr>
-      <th>7794</th>
-      <td>2018-01-24</td>
-      <td>2017-08-08</td>
-    </tr>
-    <tr>
-      <th>11283</th>
-      <td>2018-08-17</td>
-      <td>2017-01-26</td>
-    </tr>
-    <tr>
-      <th>11570</th>
-      <td>2018-09-21</td>
-      <td>2016-12-12</td>
-    </tr>
-    <tr>
-      <th>11795</th>
-      <td>2018-09-10</td>
-      <td>2017-07-07</td>
-    </tr>
-    <tr>
-      <th>11829</th>
-      <td>2018-09-10</td>
-      <td>2017-09-22</td>
-    </tr>
-    <tr>
-      <th>11842</th>
-      <td>2018-10-01</td>
-      <td>2017-07-28</td>
-    </tr>
-    <tr>
-      <th>11965</th>
-      <td>2018-06-06</td>
-      <td>2017-10-30</td>
-    </tr>
-    <tr>
-      <th>12023</th>
-      <td>2018-06-21</td>
-      <td>2017-03-22</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-## Time_Listed Column
-The `time_listed` column is created and added to the DataFrame.
-
-
-```python
-df = (
-        df.add_column(
-                column_name="time_listed", value=df["date_unlisted"] - df["date_listed"]
+            .process_text(
+                column_name="square_meters", string_function="replace", pat=",", repl="."
                 )
-            #    .change_type(column_name="time_listed", dtype="pd.Timedelta", ignore_exception=False)
-            .transform_column(column_name="time_listed", function=lambda x: np.abs(x))
+            .process_text(
+                column_name="floor",
+                string_function="extract",
+                pat=r"[^\d]+?(-?\d{1,2})",
+                expand=False,
+                )
+            .process_text(
+                column_name="no_rooms",
+                string_function="extract",
+                pat=r"[^\d]+?(-?\d{1},?\d?)",
+                expand=False,
+                )
+            .process_text(column_name="no_rooms", string_function="replace", pat=",", repl=".")
+            .process_text(
+                column_name="total_energy_need",
+                string_function="extract",
+                pat=r"(\d+,?\d+?)",
+                expand=False,
+                )
+            .process_text(
+                column_name="total_energy_need", string_function="replace", pat=",", repl="."
+                )
+            .process_text(
+                column_name="parking", string_function="replace", pat=r"\d+?", repl=""
+                )
+            .process_text(
+                column_name="base_rent",
+                string_function="replace",
+                pat=r"(\d{1,2})\.(\d{3})",
+                repl=r"\1\2",
+                )
+            .process_text(column_name="base_rent", string_function="replace", pat=",", repl=".")
+            .find_replace(
+                match="exact", yoc={
+                        "unbekannt": "no_information"
+                        }, no_rooms={
+                        ",": "."
+                        }
+                )
+            .process_text(
+                column_name="json_heating_type",
+                string_function="extract",
+                pat=r':"([a-z_]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_balcony",
+                string_function="extract",
+                pat=r'"([a-z])"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_picturecount",
+                string_function="extract",
+                pat=r"(\d{1,2})",
+                expand=False,
+                )
+            .process_text(
+                column_name="json_total_rent",
+                string_function="extract",
+                pat=r"([0-9.]+)",
+                expand=False,
+                )
+            .process_text(
+                column_name="json_yoc", string_function="extract", pat=r"(\d{4})", expand=False
+                )
+            .process_text(
+                column_name="json_main_es",
+                string_function="extract",
+                pat=r':"([a-z_]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_bfitted_kitchen",
+                string_function="extract",
+                pat=r'"([a-z])"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_cellar",
+                string_function="extract",
+                pat=r'"([a-z])"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_const_time",
+                string_function="extract",
+                pat=r'"(\d)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_telekomdownloadspeed",
+                string_function="extract",
+                pat=r'(\d{1,3})',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_base_rent",
+                string_function="extract",
+                pat=r'"([\d.]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_square_meters",
+                string_function="extract",
+                pat=r'"([\d.]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_object_condition",
+                string_function="extract",
+                pat=r':"([a-z_]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_interiorqual",
+                string_function="extract",
+                pat=r':"([a-z_]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_bpets_allowed",
+                string_function="extract",
+                pat=r':"([a-z_]+)"',
+                expand=False,
+                )
+            .process_text(
+                column_name="json_belevator",
+                string_function="extract",
+                pat=r'"([a-z])"',
+                expand=False,
+                )
+            .fill_empty(
+                column_names=[
+                        col
+                        for col in df.columns
+                        if df[col].dtype not in ["timedelta64[ns]"] and col != "gps"
+                        ],
+                value=-9999,
+                )
+            .rename_column("json_balcony", "json_bbalcony")
 )
 ```
 
-The minimum is 0 days, as it should be and no missing data was added by the cleaning steps.
+    /Users/tobias/all_code/projects/python_projects/py_workflows/venv/lib/python3.9/site-packages/janitor/functions/process_text.py:85: FutureWarning: The default value of regex will change from True to False in a future version.
+      result = getattr(df[column_name].str, string_function)(**kwargs)
+
+
+The columns with counterparts are specified and the columns without the `json_` prefix are overwritten by the identical values of their `json_` counterparts, after the unique values for each column pair are checked for differing values. The columns with a  `json_` prefix have values, that need less cleaning compared to the ones found in the non-json prefix columns, hence the values found in the `json_` columns are kept.
 
 
 ```python
-print(df["time_listed"].min())
-print(df["time_listed"].isna().value_counts())
+json_check = [
+        "heating_type",
+        "bbalcony",
+        "cellar",
+        "heating_type",
+        "total_rent",
+        "yoc",
+        "main_es",
+        "bfitted_kitchen",
+        "base_rent",
+        "square_meters",
+        "object_condition",
+        "bpets_allowed",
+        "belevator",
+        ]
+json_colnames = []
+for col in json_check:
+    json_colnames.append(f"json_{col}")
+    assert col in df.columns
+    assert f"json_{col}" in df.columns
+
+for cc in zip(json_check, json_colnames):
+    col_stats["json_check"] = {}
+    col_stats["json_check"][cc[0]] = df.loc[:, [cc[0], cc[1]]].value_counts()
+    ut = col_stats["json_check"][cc[0]][0:1] if len(col_stats["json_check"][cc[0]]) > 20 else col_stats["json_check"][cc[0]]
+    print("\n", ut, "\n")
 ```
 
-    0 days 00:00:00
-    False    9423
-    Name: time_listed, dtype: int64
+    
+     heating_type           json_heating_type             
+     Zentralheizung        central_heating                   4763
+    -9999                  -9999                             2074
+     Fernwärme             district_heating                   966
+     Etagenheizung         self_contained_central_heating     449
+     Gas-Heizung           gas_heating                        351
+    -9999                  no_information                     293
+     Fußbodenheizung       floor_heating                      230
+     Blockheizkraftwerke   combined_heat_and_power_plant      105
+     Öl-Heizung            oil_heating                         70
+     Nachtspeicheröfen     night_storage_heater                63
+     Holz-Pelletheizung    wood_pellet_heating                 30
+     Elektro-Heizung       electric_heating                    16
+     Wärmepumpe            heat_pump                            9
+     Ofenheizung           stove_heating                        4
+    dtype: int64 
+    
+    
+     bbalcony          json_bbalcony
+    Balkon/ Terrasse  y                6400
+    -9999             n                3023
+    dtype: int64 
+    
+    
+     cellar  json_cellar
+    Keller  y              4873
+    -9999   n              4550
+    dtype: int64 
+    
+    
+     heating_type           json_heating_type             
+     Zentralheizung        central_heating                   4763
+    -9999                  -9999                             2074
+     Fernwärme             district_heating                   966
+     Etagenheizung         self_contained_central_heating     449
+     Gas-Heizung           gas_heating                        351
+    -9999                  no_information                     293
+     Fußbodenheizung       floor_heating                      230
+     Blockheizkraftwerke   combined_heat_and_power_plant      105
+     Öl-Heizung            oil_heating                         70
+     Nachtspeicheröfen     night_storage_heater                63
+     Holz-Pelletheizung    wood_pellet_heating                 30
+     Elektro-Heizung       electric_heating                    16
+     Wärmepumpe            heat_pump                            9
+     Ofenheizung           stove_heating                        4
+    dtype: int64 
+    
+    
+     total_rent  json_total_rent
+    750.0       750                49
+    dtype: int64 
+    
+    
+     yoc    json_yoc
+    -9999  -9999       599
+    dtype: int64 
+    
+    
+     main_es  json_main_es
+     Gas     gas             3257
+    dtype: int64 
+    
+    
+     bfitted_kitchen  json_bfitted_kitchen
+    1                y                       5755
+    0                n                       3668
+    dtype: int64 
+    
+    
+     base_rent  json_base_rent
+    650        650               112
+    dtype: int64 
+    
+    
+     square_meters  json_square_meters
+    60             60                    157
+    dtype: int64 
+    
+    
+     object_condition            json_object_condition             
+    -9999                       no_information                        3617
+     Gepflegt                   well_kept                             3047
+     Neuwertig                  mint_condition                         639
+     Erstbezug                  first_time_use                         554
+     Modernisiert               modernized                             465
+     Erstbezug nach Sanierung   first_time_use_after_refurbishment     400
+     Vollständig renoviert      fully_renovated                        375
+     Saniert                    refurbished                            279
+     Renovierungsbedürftig      need_of_renovation                      36
+     Nach Vereinbarung          negotiable                              11
+    dtype: int64 
+    
+    
+     bpets_allowed        json_bpets_allowed
+    -9999                no_information        6467
+     Nach Vereinbarung   negotiable            1673
+     Nein                no                    1124
+     Ja                  yes                    159
+    dtype: int64 
+    
+    
+     belevator  json_belevator
+    0          n                 7420
+    1          y                 2003
+    dtype: int64 
+    
 
-
-### Dtype of `time_listed`
-The dtype of the new column `date_listed` is `timedelta64[ns]`, as it should be.
 
 
 ```python
-df[['time_listed']].info()
+df.drop(columns=json_check, inplace=True)
+```
+
+## Removal Of Any Remaining White Space
+
+
+```python
+for col in df.columns:
+    if col not in ["gps", "time_listed"]:
+        try:
+            df[col] = df[col].str.replace(pat=r"\s", repl="")
+        except AttributeError:
+            pass
+```
+
+    /var/folders/fh/ztn5v5n564q9460f5wqbc8z80000gn/T/ipykernel_9310/497218955.py:4: FutureWarning: The default value of regex will change from True to False in a future version.
+      df[col] = df[col].str.replace(pat=r"\s", repl="")
+
+
+
+```python
+df.to_csv("/Volumes/data/bachelor_thesis/df_export_20052022-2studio.csv")
+```
+
+## Final Validation Of Unique Values
+We print once more the unique values for the columns in the DataFrame, to check for any errors. No column shows signs of messy data anymore, that lets us create new encoded columns with factorized categorical values.
+
+
+```python
+for n in df.columns:
+    try:
+        col_stats[n]["unique_after_text_processing"] = df[n].unique()
+    except KeyError:
+        pass
+    except TypeError:
+        pass
+#    col_stats[n]['unique'] = df[n].unique()
+
+for col in df.columns:
+    try:
+        print(f'{col}:\n{col_stats[col]["unique_after_text_processing"]}\n\n')
+    except KeyError:
+        pass
+```
+
+    auxiliary_costs:
+    [190.84 117.95 249.83 ...  89.59 197.96  59.93]
+    
+    
+    lat:
+    [53.52943934 53.58414267 53.60449188 ... 53.58693861 53.55758333
+     53.64864505]
+    
+    
+    lng:
+    [10.15235715 10.06842725  9.86423116 ... 10.01625824 10.03986901
+     10.03996646]
+    
+    
+    parking:
+    [nan 'Tiefgaragen-Stellplatz' 'Tiefgaragen-Stellplätze'
+     'Duplex-Stellplatz' 'Außenstellplatz' 'Garage' 'Stellplatz' 'Carport'
+     'Stellplätze' 'Parkhaus-Stellplatz' 'Parkhaus-Stellplätze' 'Garagen'
+     'Außenstellplätze' 'Carports']
+    
+    
+    date_listed:
+    ['2018-12-03T00:00:00.000000000' '2018-12-02T00:00:00.000000000'
+     '2018-11-30T00:00:00.000000000' '2018-11-29T00:00:00.000000000'
+     '2018-11-28T00:00:00.000000000' '2018-11-27T00:00:00.000000000'
+     '2018-11-26T00:00:00.000000000' '2018-11-25T00:00:00.000000000'
+     '2018-11-24T00:00:00.000000000' '2018-11-23T00:00:00.000000000'
+     '2018-11-22T00:00:00.000000000' '2018-11-21T00:00:00.000000000'
+     '2018-11-20T00:00:00.000000000' '2018-11-19T00:00:00.000000000'
+     '2018-11-18T00:00:00.000000000' '2018-11-17T00:00:00.000000000'
+     '2018-11-16T00:00:00.000000000' '2018-11-15T00:00:00.000000000'
+     '2018-11-14T00:00:00.000000000' '2018-11-13T00:00:00.000000000'
+     '2018-11-12T00:00:00.000000000' '2018-11-11T00:00:00.000000000'
+     '2018-03-03T00:00:00.000000000' '2017-02-12T00:00:00.000000000'
+     '2016-11-27T00:00:00.000000000']
+    
+    
+    total_energy_need:
+    [nan '132.9' '65.9' '49' '50' '140' '158' '242.7' '23' '181.8' '176.6'
+     '231.6' '102' '127' '57.2' '58.3' '148' '145' '126' '106.6' '189.4'
+     '176.8' '138' '82.5' '110.3' '81' '90' '124' '68' '283' '257.8' '167.4'
+     '157.9' '30.8' '66.3' '55' '85' '52.4' '27.5' '77' '169.9' '58.0' '65'
+     '159' '73.4' '65.7' '129' '272.5' '55.2' '38.4' '69.8' '244.6' '148.2'
+     '119.6' '39.7' '189.1' '143' '97' '87.1' '178' '224.6' '86.3' '64' '114'
+     '89' '123' '57.5' '98' '218.3' '142' '48.8' '131' '117' '197' '92' '52'
+     '581' '130' '128' '33' '54.8' '24.4' '211.4' '70.2' '134' '164' '200'
+     '162' '156' '313' '53' '72' '275' '173' '116' '133' '95.4' '193.7'
+     '183.9' '47.6' '204.4' '59.0' '225.3' '137.8' '102.7' '204.9' '34.5'
+     '216.6' '69.6' '147.5' '94' '41.3' '100' '93' '121' '53.6' '70.7' '163'
+    '270.7' '191.4' '189' '96.4' '238.8' '243.3' '289.4' '232.1' '249.8'
+    '259']
+    
+    
+    no_rooms:
+    ['3' '2.5' '2' '1.5' '3.5' '1' '4' '4.5' '5' '6' '5.5' '6.5' '7.5' '8' '7'
+     '36' '14']
+    
+    
+    type:
+    [nan 'Sonstige' 'Dachgeschoss' 'Etagenwohnung' 'Hochparterre'
+     'Erdgeschosswohnung' 'Maisonette' 'Souterrain' 'Terrassenwohnung'
+     'Penthouse' 'Loft']
+    
+    
+    floor:
+    ['0' '3' '2' nan '1' '6' '5' '4' '7' '14' '9' '10' '11' '8' '22' '-1' '19'
+     '12' '13' '24' '15' '23' '99']
+    
+    
+    no_bedrooms:
+    [-9.999e+03  1.000e+00  2.000e+00  3.000e+00  4.000e+00  0.000e+00
+      5.000e+00  6.000e+00]
+    
+    
+    no_bathrooms:
+    [-9.999e+03  1.000e+00  2.000e+00  0.000e+00  3.000e+00  1.100e+01]
+    
+    
+    date_unlisted:
+    ['2018-12-03T00:00:00.000000000' '2018-12-02T00:00:00.000000000'
+     '2018-11-30T00:00:00.000000000' '2018-12-01T00:00:00.000000000'
+     '2018-11-29T00:00:00.000000000' '2018-11-28T00:00:00.000000000'
+     '2018-11-27T00:00:00.000000000' '2018-11-26T00:00:00.000000000'
+     '2018-11-25T00:00:00.000000000' '2018-11-24T00:00:00.000000000'
+     '2018-11-23T00:00:00.000000000' '2018-11-22T00:00:00.000000000'
+     '2018-11-21T00:00:00.000000000' '2018-11-20T00:00:00.000000000'
+     '2018-11-19T00:00:00.000000000' '2018-11-17T00:00:00.000000000'
+     '2018-11-16T00:00:00.000000000' '2018-11-15T00:00:00.000000000'
+     '2018-11-18T00:00:00.000000000' '2018-11-14T00:00:00.000000000'
+     '2018-11-13T00:00:00.000000000' '2018-11-12T00:00:00.000000000'
+     '2017-11-25T00:00:00.000000000' '2018-08-19T00:00:00.000000000'
+     '2016-12-10T00:00:00.000000000']
+    
+    
+    json_heating_type:
+    [nan 'self_contained_central_heating' 'central_heating' 'no_information'
+     'district_heating' 'electric_heating' 'night_storage_heater'
+     'gas_heating' 'combined_heat_and_power_plant' 'floor_heating'
+     'oil_heating' 'wood_pellet_heating' 'stove_heating' 'heat_pump']
+    
+    
+    json_picturecount:
+    ['6' '11' '5' '0' '13' '2' '4' '7' '3' '10' '1' '9' '8' '15' '12' '24'
+     '17' '14' '21' '18' '19' '25' '20' '22' '40' '29' '16' '28' '27' '36'
+     '35' '34' '26' '23' '43' '32' '31' '38' '30' '49' '39' '37' '42' '41'
+     '45' '64']
+    
+    
+    json_telekomdownloadspeed:
+    ['100' '50' '16' nan '25' '6' '200']
+    
+    
+    json_total_rent:
+    ['541.06' '559.05' '839.01' ... '1189.24' '382.73' '499.91']
+    
+    
+    json_yoc:
+    ['1976' '1950' '1997' '1951' '2001' '1870' '1985' '1937' '1912' '1954'
+     '1953' nan '1952' '1961' '2011' '1973' '1968' '1908' '1930' '1939' '1964'
+     '1234' '1981' '1998' '1922' '1959' '1904' '1969' '1928' '2012' '2000'
+     '1932' '2006' '2013' '1957' '1963' '1972' '1956' '1984' '1960' '1971'
+     '1918' '1999' '1967' '1978' '1996' '1874' '1949' '1962' '1977' '1955'
+     '1974' '1931' '1894' '1927' '2018' '1995' '1966' '1900' '1965' '1958'
+     '1994' '2009' '1905' '1979' '1902' '1970' '1878' '2015' '1936' '2016'
+     '1919' '1886' '2019' '1938' '1907' '1980' '1935' '2014' '1892' '1921'
+     '2010' '1906' '1880' '1947' '2017' '1903' '1982' '1914' '1926' '1933'
+     '1975' '1924' '1925' '1986' '2008' '1988' '1993' '1923' '2007' '2002'
+     '1992' '1983' '1948' '1910' '1929' '1987' '1990' '1901' '1889' '1885'
+     '1920' '1917' '1989' '1915' '1888' '1911' '1940' '1890' '1913' '1934'
+     '1946' '2005' '1882' '1899' '1944' '2003' '2004' '1893' '1897' '1942'
+     '1943' '1941' '1799' '1945' '1991' '1896' '1850' '1898' '1869' '1916'
+     '1909' '1875' '1891' '1858' '1895' '1887' '1865' '1667']
+    
+    
+    json_main_es:
+    ['district_heating' 'no_information' 'oil' 'electricity' nan 'gas'
+     'natural_gas_heavy' 'natural_gas_light' 'local_heating' 'geothermal'
+     'liquid_gas' 'heat_supply' 'pellet_heating' 'solar_heating']
+    
+    
+    json_bfitted_kitchen:
+    ['y' 'n']
+    
+    
+    json_cellar:
+    ['n' 'y']
+    
+    
+    json_const_time:
+    ['3' '1' '5' '2' '6' '4' nan '8' '7' '9']
+    
+    
+    json_base_rent:
+    ['350.22' '441.1' '589.18' ... '991.28' '301.18' '398.91']
+    
+    
+    json_square_meters:
+    ['76' '60' '75' ... '63.99' '69.56' '46.93']
+    
+    
+    json_object_condition:
+    ['no_information' 'well_kept' 'fully_renovated' 'first_time_use'
+     'first_time_use_after_refurbishment' 'mint_condition' 'modernized'
+     'need_of_renovation' 'refurbished' 'negotiable']
+    
+    
+    json_interiorqual:
+    ['no_information' 'normal' 'sophisticated' 'simple' 'luxury']
+    
+    
+    json_bpets_allowed:
+    ['no_information' 'yes' 'negotiable' 'no']
+    
+    
+    json_belevator:
+    ['n' 'y']
+    
+    
+    time_listed:
+    [                0   259200000000000    86400000000000   172800000000000
+       518400000000000   432000000000000   777600000000000   864000000000000
+       345600000000000   691200000000000   950400000000000   604800000000000
+      1123200000000000  1209600000000000  1036800000000000  1468800000000000
+      1555200000000000  1296000000000000  1641600000000000  1814400000000000
+      2073600000000000  1728000000000000  1382400000000000  1900800000000000
+      1987200000000000  2246400000000000  2332800000000000  2592000000000000
+      2505600000000000  2764800000000000  2937600000000000  2419200000000000
+      3456000000000000  4060800000000000  2160000000000000  3024000000000000
+      3283200000000000  4147200000000000  3974400000000000  3369600000000000
+      3110400000000000  3888000000000000  3715200000000000  4924800000000000
+    18835200000000000 39398400000000000 17971200000000000 11750400000000000
+     15292800000000000 24019200000000000]
+    
+    
+
+
+
+```python
+df.info()
 ```
 
     <class 'pandas.core.frame.DataFrame'>
     Int64Index: 9423 entries, 0 to 12323
-    Data columns (total 1 columns):
-     #   Column       Non-Null Count  Dtype          
-    ---  ------       --------------  -----          
-     0   time_listed  9423 non-null   timedelta64[ns]
-    dtypes: timedelta64[ns](1)
-    memory usage: 405.3 KB
+    Data columns (total 30 columns):
+     #   Column                     Non-Null Count  Dtype          
+    ---  ------                     --------------  -----          
+     0   auxiliary_costs            9423 non-null   float64        
+     1   lat                        9423 non-null   float64        
+     2   lng                        9423 non-null   float64        
+     3   parking                    2065 non-null   object         
+     4   date_listed                9423 non-null   datetime64[ns] 
+     5   total_energy_need          2796 non-null   object         
+     6   no_rooms                   9423 non-null   object         
+     7   type                       7089 non-null   object         
+     8   floor                      7923 non-null   object         
+     9   no_bedrooms                9423 non-null   float64        
+     10  no_bathrooms               9423 non-null   float64        
+     11  date_unlisted              9423 non-null   datetime64[ns] 
+     12  json_heating_type          7349 non-null   object         
+     13  json_bbalcony              9423 non-null   object         
+     14  json_picturecount          9423 non-null   object         
+     15  json_telekomdownloadspeed  8959 non-null   object         
+     16  json_total_rent            8844 non-null   object         
+     17  json_yoc                   8688 non-null   object         
+     18  json_main_es               8940 non-null   object         
+     19  json_bfitted_kitchen       9423 non-null   object         
+     20  json_cellar                9423 non-null   object         
+     21  json_const_time            8688 non-null   object         
+     22  json_base_rent             9423 non-null   object         
+     23  json_square_meters         9073 non-null   object         
+     24  json_object_condition      9423 non-null   object         
+     25  json_interiorqual          9423 non-null   object         
+     26  json_bpets_allowed         9423 non-null   object         
+     27  json_belevator             9423 non-null   object         
+     28  gps                        9423 non-null   object         
+     29  time_listed                9423 non-null   timedelta64[ns]
+    dtypes: datetime64[ns](2), float64(5), object(22), timedelta64[ns](1)
+    memory usage: 2.5+ MB
 
 
-### Validation Of `time_listed`
-`df.describe()` is used to show the distribution of `time_listed`, to verify that the subtraction of `date_listed` from `date_unlisted` earlier resulted in valid `timedelta64[ns]` values in the `time_listed` column.
-It becomes clear, that there must be outliers in the data of the `time_listed` column, as the mean is 20 days, while the median is 5 days. The mean is much more sensitive to outliers in the way it is calculated compared to the median.
+We drop all non `json_` columns, that have a `json_` counterpart and replace them by their respective `json_` counterparts.
 
 
 ```python
-df[['time_listed']].describe()
+remove_prefix_name = []
+json_name = []
+for col in df.columns:
+    if re.match(r"^json", col):
+        json_name.append(col)
+        pat = re.compile("^json_")
+        #        try:
+        remove_prefix_col = pat.sub("", col)
+        #        except type(remove_prefix_col) == 'NoneType':
+        #            print('no json prefix')
+        #    remove_prefix_col = [m[0] if re.sub(r"^json_","",col)]
+        remove_prefix_name.append(remove_prefix_col)
+        print(remove_prefix_col)
+
+print(remove_prefix_name, len(remove_prefix_name))
+```
+
+    heating_type
+    bbalcony
+    picturecount
+    telekomdownloadspeed
+    total_rent
+    yoc
+    main_es
+    bfitted_kitchen
+    cellar
+    const_time
+    base_rent
+    square_meters
+    object_condition
+    interiorqual
+    bpets_allowed
+    belevator
+    ['heating_type', 'bbalcony', 'picturecount', 'telekomdownloadspeed', 'total_rent', 'yoc', 'main_es', 'bfitted_kitchen', 'cellar', 'const_time', 'base_rent', 'square_meters', 'object_condition', 'interiorqual', 'bpets_allowed', 'belevator'] 16
+
+
+
+```python
+df.columns
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>time_listed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>9423</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>20 days 01:41:28.252148997</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>46 days 13:04:26.285141156</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0 days 00:00:00</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>1 days 00:00:00</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>5 days 00:00:00</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>21 days 00:00:00</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>924 days 00:00:00</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    Index(['auxiliary_costs', 'lat', 'lng', 'parking', 'date_listed',
+           'total_energy_need', 'no_rooms', 'type', 'floor', 'no_bedrooms',
+           'no_bathrooms', 'date_unlisted', 'json_heating_type', 'json_bbalcony',
+           'json_picturecount', 'json_telekomdownloadspeed', 'json_total_rent',
+           'json_yoc', 'json_main_es', 'json_bfitted_kitchen', 'json_cellar',
+           'json_const_time', 'json_base_rent', 'json_square_meters',
+           'json_object_condition', 'json_interiorqual', 'json_bpets_allowed',
+           'json_belevator', 'gps', 'time_listed'],
+          dtype='object')
 
 
-
-Column `pc_city_quarter` is dropped, since the gps column makes it redundant.
 
 
 ```python
-df.drop(columns=["pc_city_quarter"], inplace=True)
+for col in zip(json_name, remove_prefix_name):
+    df = df.rename_column(col[0], col[1])
 ```
 
+
+```python
+for col in zip(json_name, remove_prefix_name):
+    print(col)
+```
+
+    ('json_heating_type', 'heating_type')
+    ('json_bbalcony', 'bbalcony')
+    ('json_picturecount', 'picturecount')
+    ('json_telekomdownloadspeed', 'telekomdownloadspeed')
+    ('json_total_rent', 'total_rent')
+    ('json_yoc', 'yoc')
+    ('json_main_es', 'main_es')
+    ('json_bfitted_kitchen', 'bfitted_kitchen')
+    ('json_cellar', 'cellar')
+    ('json_const_time', 'const_time')
+    ('json_base_rent', 'base_rent')
+    ('json_square_meters', 'square_meters')
+    ('json_object_condition', 'object_condition')
+    ('json_interiorqual', 'interiorqual')
+    ('json_bpets_allowed', 'bpets_allowed')
+    ('json_belevator', 'belevator')
+
+
+
+```python
+df.columns
+```
+
+
+
+
+    Index(['auxiliary_costs', 'lat', 'lng', 'parking', 'date_listed',
+           'total_energy_need', 'no_rooms', 'type', 'floor', 'no_bedrooms',
+           'no_bathrooms', 'date_unlisted', 'heating_type', 'bbalcony',
+           'picturecount', 'telekomdownloadspeed', 'total_rent', 'yoc', 'main_es',
+           'bfitted_kitchen', 'cellar', 'const_time', 'base_rent', 'square_meters',
+           'object_condition', 'interiorqual', 'bpets_allowed', 'belevator', 'gps',
+           'time_listed'],
+          dtype='object')
+
+
+
+## Reordering Of Columns
+We reorder the columns with dtype `categorical` to be at the beginning of the columns in `df.columns`, to make sub-setting of the columns during the *feature selection* and *model evaluation* phases. The *NaN* values in the dtype `categorical` columns are replaced with `no_information`. The reason being, that rows with recognized *NaN* values get excluded from the factorization process and are replaced by `-1`. At this point, we like to keep the option of using the missing values as a categorical group of its own. The group, that contains all listings where no information is given for.
+
+
+```python
+df = df.reorder_columns(
+        column_order=[
+                "bbalcony",
+                "bfitted_kitchen",
+                "cellar",
+                "belevator",
+                "parking",
+                "type",
+                "floor",
+                "no_rooms",
+                "no_bedrooms",
+                "no_bathrooms",
+                "heating_type",
+                "main_es",
+                "const_time",
+                "object_condition",
+                "interiorqual",
+                "bpets_allowed",
+                "gps",
+                "time_listed",
+                "auxiliary_costs",
+                "total_energy_need",
+                "picturecount",
+                "total_rent",
+                "yoc",
+                "base_rent",
+                "square_meters",
+                ]
+        ).fill_empty(
+        column_names=[
+                "parking",
+                "type",
+                "heating_type",
+                "object_condition",
+                "bpets_allowed",
+                "interiorqual",
+                "main_es",
+                ],
+        value="no_information",
+        )
+```
+
+
+```python
+category_cols = [
+        "bbalcony",
+        "bfitted_kitchen",
+        "cellar",
+        "belevator",
+        "parking",
+        "type",
+        "heating_type",
+        "main_es",
+        "object_condition",
+        "interiorqual",
+        "bpets_allowed",
+        ]
+```
+
+
+```python
+df = df.factorize_columns(column_names=category_cols).encode_categorical(
+        column_names=[f"{col}_enc" for col in category_cols]
+        )
+```
+
+## Summary Statistics Of The Categorical Columns
+
+
+```python
+df.filter(regex=r'_enc').info()
+```
+
+    <class 'pandas.core.frame.DataFrame'>
+    Int64Index: 9423 entries, 0 to 12323
+    Data columns (total 11 columns):
+     #   Column                Non-Null Count  Dtype   
+    ---  ------                --------------  -----   
+     0   bbalcony_enc          9423 non-null   category
+     1   bfitted_kitchen_enc   9423 non-null   category
+     2   cellar_enc            9423 non-null   category
+     3   belevator_enc         9423 non-null   category
+     4   parking_enc           9423 non-null   category
+     5   type_enc              9423 non-null   category
+     6   heating_type_enc      9423 non-null   category
+     7   main_es_enc           9423 non-null   category
+     8   object_condition_enc  9423 non-null   category
+     9   interiorqual_enc      9423 non-null   category
+     10  bpets_allowed_enc     9423 non-null   category
+    dtypes: category(11)
+    memory usage: 436.5 KB
+
+
+## The Next Steps
+This marks the end of the initial cleaning of the tabular data from the web scraping part. The next steps are:
+- Create a machine learning pipeline with reproducible steps. A pipeline, that includes removal of missing values or imputation of missing values among other data preprocessing steps that might be needed.
+- Create stratified *k*-fold cross validation splits and a train and test set.
+- Try different scaling algorithms after the split on the independent variables and feature elimination techniques.
+- Decide whether prediction accuracy is the key metric for this project or model interpretability.
+- Evaluate the univariate, bivariate and multivariate distributions of the columns as part of choosing candidate models and evaluating their predictions for the value of the dependent variable `base_rent`.
+- Find the key columns for each candidate model, the ones that are relevant to the model's performance. Remove the others.
+- Perform Feature Creation using independent geo-spacial data and linking it to the listings. Test, which features are not relevant for the model's performance.
+
+We export the DataFrame in its current state for further work.
+```python
+df.to_csv("/Volumes/data/df_first_cleaning.csv")
+
+```

@@ -1,920 +1,649 @@
 ---
-title: 'Cleaning a 47 Column<br>Pandas DataFrame<br>Part 0'
-subtitle: 'Data Preparation Series: Exploring Tabular Data With pandas: An Overview Of Available Tools In The pandas Library'
-date: '2022-05-23 05:00:00'
-description: 'An Overview Of Available Tools In The Pandas Library'
+title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 1'
+subtitle: 'Combining pandas, pyjanitor and Regular Expressions To Get The Job
+Done.'
+date: '2022-05-23 06:00:00'
+description: 'More Efficient Data Cleaning By Using The pyjanitor Module and Method
+Chaining'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
-# From Webscraping Data to Tidy Pandas DataFrame
 
-## Reading In the Input Data
+# Wrangling with that Data!
 
-The input data is split into 3 csv files, that together capture all rental listings that were online and within the boundaries of the city of Hamburg at the time of scraping the data. The source was a large German rental listing site called 'Immoscout24'. [ImmoScout24 - https://www.immobilienscout24.de](https://www.immobilienscout24.de/) is their official brand name and URL.
+This article shows how cleaning a CSV file using `pandas`, `numpy`, `re` and the `pyjanitor` (imported under the name `janitor`) modules can be achieved. Some outputs are shortened for readability.
 
-Various features were extracted from the listings through the use of webscraping and it is the main objective at this stage to clean and construct a tidy DataFrame, that is ready for the following stages. A brief overview of the following stages is given below.
+## Summary
 
-- Feature Engineering - Adding location based features
-- EDA - Exploratory Data Analysis
-- Machine Learning - Fitting and tuning 2 models, then predicting the value of variable 'base rent'
-- Analyzing & Discussing the results
+- A DataFrame is given as input, that contains 47 columns at the beginning.
+- Dimensionality Reduction is performed on the columns, to filter and only keep relevant columns.
+- The `pyjanitor` module is widely used with its *method chaining syntax* to increase the speed of the cleaning procedure.
+- Unique values of each column give the basis for the steps needed to clean the columns.
+- Regular Expressions (**regex**) are mostly used to extract cell contents, that hold the valid data.
+- Regex are also used to replace invalid character patterns with valid ones.
+- Validation of the values, after cleaning is performed using regex patterns.
+- New `timedelta64[ns]` `time_listed` and `Point` geometry `gps` columns are created.
 
-Back to the task at hand, we begin by reading in the csv files and creating the Pandas (*pd*) DataFrame object. Throughout this article, any Pandas DataFrame object will be assigned to a variable that always contains the letters 'df', plus any prefix or suffix, preceding or succeeding the letters 'df' in some cases.
-
-In the first step, we import the necessary modules
 
 
-```python
-import pandas as pd # The library used to manipulate and to create a tidy DataFrame object
-seed = 42 # Create reproducible random output.
-```
-
-The path to the input data is assigned to variables `scraping_{1..3}`. For each of them a DataFrame object is created afterwards. The DataFrame `df`, which holds the data of all three is created and duplicate rows are dropped.
-The command used to drop any possibly duplicate rows is `df.drop_duplicates()` without any specifying further parameters as to the subset of columns to consider when determining, if two rows are identical. Like that, only such rows are dropped, that have identical values for all variables found in the dataset. This was mainly done to get rid of overlapping page ranges from the scraping part and also to get rid of duplicate listings on the website.
+We begin by importing the needed libraries and modules.
 
 
 ```python
-scraping_1 = "../data/20181203-first_scraping_topage187.csv"
-scraping_2 = "../data/20181203-second_scraping_topage340.csv"
-scraping_3 = "../data/20181203-third_scraping_topage340.csv"
+import re  # Python built-in regular expression library.
+import numpy as np
+import pandas as pd
+import janitor
 
-df1 = pd.read_csv(scraping_1, index_col=False, parse_dates=False)
-df2 = pd.read_csv(scraping_2, index_col=False, parse_dates=False)
-df3 = pd.read_csv(scraping_3, index_col=False, parse_dates=False)
-
-df = df1.append([df2, df3], ignore_index=True)
-del df["Unnamed: 0"]
-df = df.drop_duplicates()
+seed = 42  # Random seed, to give repeatable random output.
 ```
 
-## First Look at the DataFrame
+## Reading In The DataFrame<br>From Previous Steps
 
-To get a first look at the newly created DataFrame `df`, one can choose between multiple tools in the pandas library. It is assumed, that the Dataframe is named `df` in the following, as a couple of the tools, the pandas library has to offer, are described and links to the documentation page of each command are added for more detail on how each command works.
+A value we alter, compared to its default value is the following:
 
-- `df.head()` - [pandas.DataFrame.head — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html)
-- The counterpart of `df.head()` is `df.tail()` - [pandas.DataFrame.tail — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html)
-- `df.columns` - [pandas.DataFrame.columns — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html)
-- `df.index` - [pandas.DataFrame.index — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.index.html)
-- `df.describe()` - [pandas.DataFrame.describe — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html)
-- `df.shape` - [pandas.DataFrame.shape — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html)
-- `df.count()` - [pandas.DataFrame.count — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html)
-- `df.nunique()` - [pandas.DataFrame.nunique — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html)
-- `df.value_counts()` - [pandas.DataFrame.value_counts — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.value_counts.html)
-- `df.filter()` - [pandas.DataFrame.filter — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.filter.html)
-- `df.sample()` - [pandas.DataFrame.sample — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sample.html)
+`na_values=['np.nan','[]']`
 
-### Commands
+In addition to the new label (`np.nan`) for missing values, that we applied at the end of the previous step we can see, that '[]' marks missing values in any of the columns, with a 'json\_' prefix. By marking '[]' values as *NaN* values we can skip a lot of column by column reassignments later for missing values, not recognized as such. The '[]', marking missing values, comes from the design of the web scraping algorithm, that appended an empty list, if there was no value for a variable.
 
-`df.head()`
-
-**Description -** The command `df.head()`returns the first 5 rows of the DataFrame by default, if no parameters are specified by the user. Using the parameter *n*, one can specify the number of rows, that get returned. Needless to say, rows returned will always start at the first index value and include the following *n-1* rows.
-
-**Example -** In the first call to `df.head()`, the default value for number of lines printed (*n*=5) is used by not specifying any parameter value in the function call. In the second call, the number of lines printed is changed to *n*=9.
+The names of most of the columns are changed, in order for column names to be English. Names of columns with boolean values are altered to mark these columns with only boolean values. Columns without a `json_` prefix, that have a `json_` counterpart have their names aligned with the one of their counterpart.
 
 
 ```python
-df.head() # Includes index values [0:4], which is default (n=5)
+df = (
+        pd.read_csv(
+                "/Volumes/data/bachelor_thesis/df_concat.csv",
+                na_values=["np.nan", "[]"],
+                index_col=False,
+                )
+            .rename_column("einbau_kue", "bfitted_kitchen")
+            .rename_column("lift", "belevator")
+            .rename_column("nebenkosten", "auxiliary_costs")
+            .rename_column("gesamt_miete", "total_rent")
+            .rename_column("heiz_kosten", "heating_costs")
+            .rename_column("str", "street-number")
+            .rename_column("nutzf", "floor_space")
+            .rename_column("regio", "pc_city_quarter")
+            .rename_column("online_since", "date_listed")
+            .rename_column("baujahr", "yoc")
+            .rename_column("objekt_zustand", "object_condition")
+            .rename_column("heizungsart", "heating_type")
+            .rename_column("wesent_energietr", "main_es")
+            .rename_column("endenergiebedarf", "total_energy_need")
+            .rename_column("kaltmiete", "base_rent")
+            .rename_column("quadratmeter", "square_meters")
+            .rename_column("anzahl_zimmer", "no_rooms")
+            .rename_column("balkon/terasse", "bbalcony")
+            .rename_column("keller", "cellar")
+            .rename_column("typ", "type")
+            .rename_column("etage", "floor")
+            .rename_column("anz_schlafzimmer", "no_bedrooms")
+            .rename_column("anz_badezimmer", "no_bathrooms")
+            .rename_column("haustiere", "bpets_allowed")
+            .rename_column("nicht_mehr_verfg_seit", "date_unlisted")
+            .rename_column("json_heatingType", "json_heating_type")
+            .rename_column("json_totalRent", "json_total_rent")
+            .rename_column("json_yearConstructed", "json_yoc")
+            .rename_column("json_firingTypes", "json_main_es")
+            .rename_column("json_hasKitchen", "json_bfitted_kitchen")
+            .rename_column("json_yearConstructedRange", "json_const_time")
+            .rename_column("json_baseRent", "json_base_rent")
+            .rename_column("json_livingSpace", "json_square_meters")
+            .rename_column("json_condition", "json_object_condition")
+            .rename_column("json_petsAllowed", "json_bpets_allowed")
+            .rename_column("json_lift", "json_belevator")
+            .clean_names()  # make all column names lower-case, replace space with underscore.
+            .remove_empty()  # Drop rows, that only have missing values.
+)
+```
+
+## Checking Data Types<br>Of The Columns
+
+The output shows us, that only 2 columns are of type numeric. After the cleaning process, the columns will all have the correct **data type (dtype)**. The dtype, of the cleaned values in each column. All columns, that have a json prefix and a counterpart amongst the non json columns, are likely to hold the same data as their counterparts. The columns with a json prefix were mainly scraped to validate the data in their counterparts. The goal is to be efficient in comparing `json_`, non `json_` column values.
+
+Some columns will not have their 'correct' dtypes assigned to them in this article. This comes from the fact, that to assign certain dtypes there must not be any missing values present for all rows of the column. We do not impute any missing values here, nor do we drop a large amount of rows, to get a DataFrame without any missing values. Except for the Longitude (`lng`) and Latitude(`lng`) columns, as they are some of the most important columns in the dataset.
+
+The reason being, that we have no knowledge in regard to the 'correct' replacement value for any of the missing values. Which of the techniques is used to impute missing data, is tied to the model choice and the results that a model delivers, given the applied imputation method.
+
+This applies to the decision of dropping a certain amount of rows, in order to remove missing values in the key columns as well. That is, the ones that are most important for the model performance. Therefore, imputation and the decision whether to drop rows and or columns must be evaluated in the greater context of the predictive modeling problem at hand.
+
+We get the number of columns in the dataset.
+
+
+```python
+len(df.columns)
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+    47
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+
+
+Column names are dtypes of columns are checked. Column names should all be lower-case and should not contain any spaces. The names all look fine.
+
+
+```python
+df.data_description
+```
+
+
+
+
+                                  type  count  pct_missing description
+    column_name                                                       
+    bfitted_kitchen             object   8024     0.348913            
+    belevator                   object   2975     0.758601            
+    auxiliary_costs             object  12324     0.000000            
+    total_rent                  object  12324     0.000000            
+    heating_costs               object  12324     0.000000            
+    lat                         object   9423     0.235394            
+    lng                         object   9423     0.235394            
+    street_number               object   9482     0.230607            
+    floor_space                 object   1185     0.903846            
+    pc_city_quarter             object  12324     0.000000            
+    parking                     object   3187     0.741399            
+    date_listed                 object  12324     0.000000            
+    yoc                         object  11342     0.079682            
+    object_condition            object   7810     0.366277            
+    heating_type                object   9526     0.227037            
+    main_es                     object   9930     0.194255            
+    total_energy_need           object   3771     0.694012            
+    base_rent                   object  12324     0.000000            
+    square_meters               object  12324     0.000000            
+    no_rooms                    object  12324     0.000000            
+    bbalcony                    object   8526     0.308179            
+    cellar                      object   6337     0.485800            
+    type                        object   9703     0.212674            
+    floor                       object   9737     0.209916            
+    no_bedrooms                float64   6469     0.475089            
+    no_bathrooms               float64   7317     0.406280            
+    bpets_allowed               object   3914     0.682408            
+    date_unlisted               object  11629     0.056394            
+    json_heating_type           object   9968     0.191172            
+    json_balcony                object  12324     0.000000            
+    json_electricitybaseprice   object  12321     0.000243            
+    json_picturecount           object  12324     0.000000            
+    json_telekomdownloadspeed   object  11626     0.056637            
+    json_telekomuploadspeed     object  11626     0.056637            
+    json_total_rent             object  11220     0.089581            
+    json_yoc                    object  11137     0.096316            
+    json_electricitykwhprice    object  12321     0.000243            
+    json_main_es                object  11504     0.066537            
+    json_bfitted_kitchen        object  12324     0.000000            
+    json_cellar                 object  12324     0.000000            
+    json_const_time             object  11137     0.096316            
+    json_base_rent              object  12324     0.000000            
+    json_square_meters          object  11762     0.045602            
+    json_object_condition       object  12324     0.000000            
+    json_interiorqual           object  12324     0.000000            
+    json_bpets_allowed          object  12324     0.000000            
+    json_belevator              object  12324     0.000000            
+
+
+
+## Columns With<br>Little Information
+
+We get an overview of the number of unique values for each column in the DataFrame.
+
+
+```python
+va = []
+for key, val in np.ndenumerate(df.columns.tolist()):
+    va.append(df[val].nunique())
+va = pd.Series(data=va, index=df.columns)
+```
+
+The 5 columns with the fewest unique values are all boolean dtype columns. This was to be expected, however it does not mean that little information is found in these columns.
+
+
+```python
+print(f"The columns with the 5 smallest nunique values are:\n{va.nsmallest(5)}")
+```
+
+    The columns with the 5 smallest nunique values are:
+    bfitted_kitchen    1
+    belevator          1
+    bbalcony           1
+    cellar             1
+    json_balcony       2
+    dtype: int64
+
+
+Boolean type columns are marked by prepending character `b` to the column name, after any `json_` substring in the column name. The values for boolean type columns are expected to have 2 unique values, once cleaned. It has to be checked, which boolean columns have valid values, 2 unique values. These have certain characteristics, as shown below.
+
+- One value that marks the absence of the variable the column represents, e.g. 0, 'n', 'no'.
+- The second value, that shows, that the variable is present for a given record or row in the dataset. E.g. 1, 'y', 'yes'.
+- Both will be converted to a numerical value, if the dtype differs from numerical (`int64`).
+
+Columns, that are dropped, looking at the output from the following cells, are:  
+   
+- `json_electricitybaseprice` & `json_electricitykwhprice`  
+  
+Both columns only have 3 unique values (not including any missing values) and one value is found in all but 183 of the 12324 listings. That is an electricity base price of 90.76 Eur. for 12138 listing, leaving 183 that have a lower base price of 71.43 Eur.
+  
+- The `json_telekomdownloadspeed` & `json_telekomuploadspeed`  
+  
+Show the available internet speeds from provider Telekom. The download and upload speeds of internet provider Telekom are the same for around $\frac{2}{3}$ of all listings. Upload and download speeds have the same distribution and so likely have a perfect positive correlation with each other, making one redundant. `json_telekomdownloadspeed` is kept for further evaluation.
+
+
+```python
+print(
+        f"Sorted nunique values, in ascending order:\n\n{va.sort_values(axis=0, ascending=True)}"
+        )
+```
+
+    Sorted nunique values, in ascending order:
     
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>einbau_kue</th>
-      <th>lift</th>
-      <th>nebenkosten</th>
-      <th>gesamt_miete</th>
-      <th>heiz_kosten</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>str</th>
-      <th>nutzf</th>
-      <th>regio</th>
-      <th>...</th>
-      <th>json_firingTypes</th>
-      <th>json_hasKitchen</th>
-      <th>json_cellar</th>
-      <th>json_yearConstructedRange</th>
-      <th>json_baseRent</th>
-      <th>json_livingSpace</th>
-      <th>json_condition</th>
-      <th>json_interiorQual</th>
-      <th>json_petsAllowed</th>
-      <th>json_lift</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>190,84</td>
-      <td>541,06</td>
-      <td>inkl. 78 €</td>
-      <td>['lat: 53.52943934146104,']</td>
-      <td>['lng: 10.152357145948395']</td>
-      <td>Strietkoppel 20</td>
-      <td>NaN</td>
-      <td>22115 Hamburg Billstedt</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"3"']</td>
-      <td>['"obj_baseRent":"350.22"']</td>
-      <td>['"obj_livingSpace":"76"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>117,95</td>
-      <td>559,05</td>
-      <td>inkl. 52,07 €</td>
-      <td>['lat: 53.58414266878421,']</td>
-      <td>['lng: 10.06842724545814']</td>
-      <td>Naumannplatz 2</td>
-      <td>NaN</td>
-      <td>22049 Hamburg Dulsberg</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"1"']</td>
-      <td>['"obj_baseRent":"441.1"']</td>
-      <td>['"obj_livingSpace":"60"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>249,83</td>
-      <td>839,01</td>
-      <td>inkl. 110,58 €</td>
-      <td>['lat: 53.6044918821393,']</td>
-      <td>['lng: 9.86423115803761']</td>
-      <td>Warthestr. 52a</td>
-      <td>NaN</td>
-      <td>22547 Hamburg Lurup</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"5"']</td>
-      <td>['"obj_baseRent":"589.18"']</td>
-      <td>['"obj_livingSpace":"75"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>70</td>
-      <td>665  (zzgl. Heizkosten)</td>
-      <td>nicht in Nebenkosten enthalten</td>
-      <td>['lat: 53.56394970119381,']</td>
-      <td>['lng: 9.956881419437474']</td>
-      <td>Oelkersallee 53</td>
-      <td>NaN</td>
-      <td>22769 Hamburg Altona-Nord</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"no_information"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"595"']</td>
-      <td>['"obj_livingSpace":"46"']</td>
-      <td>['"obj_condition":"well_kept"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>213,33</td>
-      <td>651,81</td>
-      <td>inkl. 57,78 €</td>
-      <td>['lat: 53.60180649336605,']</td>
-      <td>['lng: 10.081257248271337']</td>
-      <td>Haldesdorfer Str. 119a</td>
-      <td>NaN</td>
-      <td>22179 Hamburg Bramfeld</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"6"']</td>
-      <td>['"obj_baseRent":"438.48"']</td>
-      <td>['"obj_livingSpace":"52"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 47 columns</p>
-</div>
-
-
-
-
-```python
-df.head(n=3) # Includes index values [0:2]
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>einbau_kue</th>
-      <th>lift</th>
-      <th>nebenkosten</th>
-      <th>gesamt_miete</th>
-      <th>heiz_kosten</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>str</th>
-      <th>nutzf</th>
-      <th>regio</th>
-      <th>...</th>
-      <th>json_firingTypes</th>
-      <th>json_hasKitchen</th>
-      <th>json_cellar</th>
-      <th>json_yearConstructedRange</th>
-      <th>json_baseRent</th>
-      <th>json_livingSpace</th>
-      <th>json_condition</th>
-      <th>json_interiorQual</th>
-      <th>json_petsAllowed</th>
-      <th>json_lift</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>190,84</td>
-      <td>541,06</td>
-      <td>inkl. 78 €</td>
-      <td>['lat: 53.52943934146104,']</td>
-      <td>['lng: 10.152357145948395']</td>
-      <td>Strietkoppel 20</td>
-      <td>NaN</td>
-      <td>22115 Hamburg Billstedt</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"3"']</td>
-      <td>['"obj_baseRent":"350.22"']</td>
-      <td>['"obj_livingSpace":"76"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>117,95</td>
-      <td>559,05</td>
-      <td>inkl. 52,07 €</td>
-      <td>['lat: 53.58414266878421,']</td>
-      <td>['lng: 10.06842724545814']</td>
-      <td>Naumannplatz 2</td>
-      <td>NaN</td>
-      <td>22049 Hamburg Dulsberg</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"1"']</td>
-      <td>['"obj_baseRent":"441.1"']</td>
-      <td>['"obj_livingSpace":"60"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>249,83</td>
-      <td>839,01</td>
-      <td>inkl. 110,58 €</td>
-      <td>['lat: 53.6044918821393,']</td>
-      <td>['lng: 9.86423115803761']</td>
-      <td>Warthestr. 52a</td>
-      <td>NaN</td>
-      <td>22547 Hamburg Lurup</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"5"']</td>
-      <td>['"obj_baseRent":"589.18"']</td>
-      <td>['"obj_livingSpace":"75"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-  </tbody>
-</table>
-<p>3 rows × 47 columns</p>
-</div>
-
-
-
-`df.tail()`
-
-**Description -** The command `df.tail()` is the counterpart to `df.head()`, it returns the last 5 rows of the DataFrame by default, if no parameters are specified by the user. Using the parameter *n*, one can specify the number of rows, that get returned. Needless to say, rows returned will always end with the row at the last index value and include the preceding *n-1* rows.
-
-**Example -** First the maximum of the index of `df` is checked, to show that the last printed row is indeed the last value in the index of the DataFrame, other than that the examples mirror the two from the `df.head()` command, to display their similarities.
-
-
-```python
-print('The maximum value of the range index of df is %s' % df.index.max())
-df.tail()
-```
-
-    The maximum value of the range index of df is 12494
-
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>einbau_kue</th>
-      <th>lift</th>
-      <th>nebenkosten</th>
-      <th>gesamt_miete</th>
-      <th>heiz_kosten</th>
-      <th>lat</th>
-      <th>lng</th>
-      <th>str</th>
-      <th>nutzf</th>
-      <th>regio</th>
-      <th>...</th>
-      <th>json_firingTypes</th>
-      <th>json_hasKitchen</th>
-      <th>json_cellar</th>
-      <th>json_yearConstructedRange</th>
-      <th>json_baseRent</th>
-      <th>json_livingSpace</th>
-      <th>json_condition</th>
-      <th>json_interiorQual</th>
-      <th>json_petsAllowed</th>
-      <th>json_lift</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>12490</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>80</td>
-      <td>1.058</td>
-      <td>47 €</td>
-      <td>['lat: 53.586938610218276,']</td>
-      <td>['lng: 10.016258235901141']</td>
-      <td>Goldbekufer 29</td>
-      <td>8 m²</td>
-      <td>22303 Hamburg Winterhude</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"oil"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"y"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"931"']</td>
-      <td>['"obj_livingSpace":"66.5"']</td>
-      <td>['"obj_condition":"mint_condition"']</td>
-      <td>['"obj_interiorQual":"sophisticated"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>12491</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>61</td>
-      <td>674</td>
-      <td>26 €</td>
-      <td>['lat: 53.55758333359278,']</td>
-      <td>['lng: 10.03986901076397']</td>
-      <td>Burgstraße 34</td>
-      <td>NaN</td>
-      <td>20535 Hamburg Hamm-Nord</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"oil"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"y"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"587"']</td>
-      <td>['"obj_livingSpace":"51"']</td>
-      <td>['"obj_condition":"refurbished"']</td>
-      <td>['"obj_interiorQual":"sophisticated"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>12492</th>
-      <td>Einbauküche</td>
-      <td>NaN</td>
-      <td>76</td>
-      <td>752</td>
-      <td>70 €</td>
-      <td>['lat: 53.6486450531966,']</td>
-      <td>['lng: 10.039966464612842']</td>
-      <td>Bei der Ziegelei 4</td>
-      <td>8 m²</td>
-      <td>22339 Hamburg Hummelsbüttel</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"oil"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"y"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"606"']</td>
-      <td>['"obj_livingSpace":"63.69"']</td>
-      <td>['"obj_condition":"refurbished"']</td>
-      <td>['"obj_interiorQual":"sophisticated"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>12493</th>
-      <td>Einbauküche</td>
-      <td>Personenaufzug</td>
-      <td>59,93</td>
-      <td>382,73</td>
-      <td>21,62 €</td>
-      <td>['lat: 53.54886472789119,']</td>
-      <td>['lng: 10.079737639604678']</td>
-      <td>Culinstraße 58</td>
-      <td>NaN</td>
-      <td>22111 Hamburg Horn</td>
-      <td>...</td>
-      <td>['"obj_firingTypes":"district_heating"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"301.18"']</td>
-      <td>['"obj_livingSpace":"30.89"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"y"']</td>
-    </tr>
-    <tr>
-      <th>12494</th>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>101</td>
-      <td>499,91</td>
-      <td>in Nebenkosten enthalten</td>
-      <td>['lat: 53.46145736469006,']</td>
-      <td>['lng: 9.966232033537533']</td>
-      <td>Denickestraße 42 b</td>
-      <td>NaN</td>
-      <td>21075 Hamburg Harburg</td>
-      <td>...</td>
-      <td>[]</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"398.91"']</td>
-      <td>['"obj_livingSpace":"46.93"']</td>
-      <td>['"obj_condition":"well_kept"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 47 columns</p>
-</div>
-
-
-
-`df.columns`
-
-**Description -** The command `df.columns` does one thing and one thing well, one might say. It returns a list of strings, the list of the columns of the DataFrame. It's output can be iterated through, in order to select subsets of all columns. An iteration can be done in the form of a list comprehension, that makes use of conditional clauses for example. It also helps one find problematic column names, that need to be changed in order to qualify as tidy. The output of it also helps one get an overview of all the columns names and therefore is a starting point for dropping certain columns and renaming the columns, so they follow an easy to remember and precise naming pattern.
-
-**Example -** Below, the set of columns of the DataFrame are printed. One can see, that there are two types of patterns found in the names of the columns.
-
-1. The first set of columns originates from values found in listings, that are visible to the visitor. These ones have no prefix attached to them and they all have German names.
-2. Columns in the second set have the prefix 'json\_' added to them. This comes from the fact, that they were sourced from a *script tag* found in the raw *HTML* code of each listing. The inner *HTML* of these *script tags* consisted of key-value pairs using a *json* like formatting. It was not machine readable though. The names of these columns were in English already and only the 'json\_' prefix was added afterwards.
-
-There are several other differences between the sets, as we will see later.
-
-
-```python
-df.columns
-```
-
-
-
-
-    Index(['einbau_kue', 'lift', 'nebenkosten', 'gesamt_miete', 'heiz_kosten',
-           'lat', 'lng', 'str', 'nutzf', 'regio', 'parking', 'online_since',
-           'baujahr', 'objekt_zustand', 'heizungsart', 'wesent_energietr',
-           'endenergiebedarf', 'kaltmiete', 'quadratmeter', 'anzahl_zimmer',
-           'balkon/terasse', 'keller', 'typ', 'etage', 'anz_schlafzimmer',
-           'anz_badezimmer', 'haustiere', 'nicht_mehr_verfg_seit',
-           'json_heatingType', 'json_balcony', 'json_electricityBasePrice',
-           'json_picturecount', 'json_telekomDownloadSpeed',
-           'json_telekomUploadSpeed', 'json_totalRent', 'json_yearConstructed',
-           'json_electricityKwhPrice', 'json_firingTypes', 'json_hasKitchen',
-           'json_cellar', 'json_yearConstructedRange', 'json_baseRent',
-           'json_livingSpace', 'json_condition', 'json_interiorQual',
-           'json_petsAllowed', 'json_lift'],
-          dtype='object')
-
-
-
-`df.index`
-
-**Description -** The command `df.index` prints the type of the index of the DataFrame, as well as a couple of index values from the beginning and end of the 64bit integer index range in our example. When the final DataFrame `df` was created, using the following line of code:
-
-```python
-df = df1.append([df2, df3], ignore_index=True)
-```
-
-The `ignore_index=True` part was important to make sure, that the range indexes of each of the appended DataFrames `df2` and `df3` would not simply get stacked on top of the index of `df1`. Would that have happened the resulting index would have been unusable, since there would not have been a monotonously increasing range index in the resulting DataFrame.
-
-**Example -** In the example it is shown what the resulting index of the final DataFrame would have been, if parameter *ignore_index* would not have been specified at all (`df_index_1`) and what it would have been, given `ignore_index=False` (`df_index_2`). The resulting index is the same in both cases and it is important, that one knows exactly how the index of any DataFrame looks like, in order to be able to manipulate and clean it. The resulting range index of the DataFrame, given `ignore_index=True` is used in the input statement shows all the qualities a simple range index should have.
-
-
-```python
-df_index_1 = df1.append([df2, df3])
-df_index_2 = df1.append([df2, df3], ignore_index=False)
-print('The resulting index, if no value is specified:\n %s\n ' % df_index_1.index)
-print('The resulting index, if False is used:\n %s\n ' % df_index_2.index)
-```
-
-    The resulting index, if no value is specified:
-     Int64Index([   0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
-                ...
-                5582, 5583, 5584, 5585, 5586, 5587, 5588, 5589, 5590, 5591],
-               dtype='int64', length=12495)
-     
-    The resulting index, if False is used:
-     Int64Index([   0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
-                ...
-                5582, 5583, 5584, 5585, 5586, 5587, 5588, 5589, 5590, 5591],
-               dtype='int64', length=12495)
-
-
-
-
-```python
-print('The resulting index, if True is used:\n %s\n ' % df.index)
-```
-
-    The resulting index, if True is used:
-     Int64Index([    0,     1,     2,     3,     4,     5,     6,     7,     8,
-                    9,
-                ...
-                12485, 12486, 12487, 12488, 12489, 12490, 12491, 12492, 12493,
-                12494],
-               dtype='int64', length=12325)
-
-
-
-`df.describe()`
-
-**Description -** The command `df.describe()` gives summary statistics for all columns, that are of a numerical data type (*dtype*) by default. In the default case, the following statistics are included in the output for each included column. The following notation will be used from this point onwards: $np.nan$ stands for missing values and $\neg np.nan$ stands for non missing values.
-
-- **count:** Count of all $\neg np.nan$ for a given column.
-- **mean:** The Arithmetic Mean of all $\neg np.nan$ in the column.
-- **std:** Standard Deviation for the distribution of all $\neg np.nan$ in the column.
-- **min:** The minimum value found in the column from the set of all $\neg np.nan$, also the 0% quantile.
-- **25%:** Marks the 25% quantile for the distribution of $\neg np.nan$ in the column.
-- **50%:** Like the **25%** statistic, this one sets the upper limit of the 50% quantile. Also known as the **median**.
-- **75%:** The 75% quantile.
-- **max:** The maximum value and the 100% quantile among all $\neg np.nan$ of a column.
-
-**Example -** The *data types* (*dtypes*) in the DataFrame are checked, before `df.describe()` is explored for `df`.
-
-
-```python
-df.dtypes
-```
-
-
-
-
-    einbau_kue                    object
-    lift                          object
-    nebenkosten                   object
-    gesamt_miete                  object
-    heiz_kosten                   object
-    lat                           object
-    lng                           object
-    str                           object
-    nutzf                         object
-    regio                         object
-    parking                       object
-    online_since                  object
-    baujahr                       object
-    objekt_zustand                object
-    heizungsart                   object
-    wesent_energietr              object
-    endenergiebedarf              object
-    kaltmiete                     object
-    quadratmeter                  object
-    anzahl_zimmer                 object
-    balkon/terasse                object
-    keller                        object
-    typ                           object
-    etage                         object
-    anz_schlafzimmer             float64
-    anz_badezimmer               float64
-    haustiere                     object
-    nicht_mehr_verfg_seit         object
-    json_heatingType              object
-    json_balcony                  object
-    json_electricityBasePrice     object
-    json_picturecount             object
-    json_telekomDownloadSpeed     object
-    json_telekomUploadSpeed       object
-    json_totalRent                object
-    json_yearConstructed          object
-    json_electricityKwhPrice      object
-    json_firingTypes              object
-    json_hasKitchen               object
-    json_cellar                   object
-    json_yearConstructedRange     object
-    json_baseRent                 object
-    json_livingSpace              object
-    json_condition                object
-    json_interiorQual             object
-    json_petsAllowed              object
-    json_lift                     object
-    dtype: object
-
-
-
-From the output one can see, that there only 2 columns that exclusively hold numerical data and thus have a numerical *data type* (*dtype*). All other columns have mixed *dtypes*, so pandas labels them as having dtype 'object'. In the following, all columns will be checked and their dtypes might change in the process of cleaning them.
-
-With the information, that only 2 columns have a numerical dtype, calling `df.describe()` with no further parameters specified, will print the summary statistics listed above only for those two columns. See the output below, for more details.
-
-
-```python
-df.describe()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>anz_schlafzimmer</th>
-      <th>anz_badezimmer</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>6469.000000</td>
-      <td>7317.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>1.579379</td>
-      <td>1.096351</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>0.746926</td>
-      <td>0.321261</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>1.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>2.000000</td>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>8.000000</td>
-      <td>11.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-We will use the summary statistics for variable `anz_schlafzimmer` as an example of how one can interpret their values for a given data series. The variable gives the number of bedrooms that a listing has, according to the data found in the listing on the website.
-
-- **count:** Count of all $\neg np.nan$ is 6469
-- **mean:** The Arithmetic Mean of all $\neg np.nan$ in the column is $\bar{x} \approx 1.58$. Since bedroom only has $\neg np.nan$ of type int64, there are no floating type numbers to be found in the column. We gained this information by running `df['anz_schlafzimmer'].value_counts()`, which prints a 2 column table. In the first column, all unique values in the data series are listed. For each of them, the count is given in the same row, second column of the table. $np.nan$ are excluded. This knowledge helps one to understand, that the mean $\bar{x} \approx 1.58$ signals, that there are many listings that have two or less bedrooms.
-- **std:** Standard Deviation for the distribution of all $\neg np.nan$ in the data series is $\approx 0.75$. This gives the the one sigma interval, defined as $\bar{x} \pm \sigma$ with the standard deviation as $\sigma$.
-- **min:** The minimum is 0, which is equivalent to no bedroom, as declared in the listing.
-- **25%:** The 25% quantile reaches 1 bedroom already, so $P(X \le 1) \le 0.25$.
-- **50%:** The value, that splits the data in two equally sized parts is 1 bedroom.
-- **75%:** The 75% quantile is found at 2 bedrooms. Together with the value for the 25% quantile it is possible to calculate the interquartile range (**IQR**), which is given by $Q_3 - Q_1 \equiv 2 - 1 = 1$.
-- **max:** The maximum value for the number of bedrooms found in the data series is 8.
-
-The distributions will be analyzed at a later stage, for now the focus is on getting a 'first look' at the DataFrame.
-
-Below one finds the value counts for variable *anz_schlafzimmer*, which describes the number of bedrooms found in each listing.
-
-
-```python
-df['anz_schlafzimmer'].value_counts()
-```
-
-
-
-
-    1.0    3544
-    2.0    2207
-    3.0     594
-    4.0      97
-    5.0      15
-    0.0      10
-    8.0       1
-    6.0       1
-    Name: anz_schlafzimmer, dtype: int64
-
-
-
-`df.shape`
-
-**Description:** The command returns a tuple object which has two numerical values. Let $(x,y)$ be the output of `df.shape`, a tuple object where $x$ gives the number of rows `df` has, while $y$ gives the number of columns of it.
-
-**Example:** See below for the created `df`.
-
-
-```python
-df.shape
-```
-
-
-
-
-    (12325, 47)
-
-
-
-`df.count()`
-
-**Description:** `df.count()` returns the count of all $\neg np.nan$ for each column or for a subset.
-
-**Example:** In the example, the output was shortened by only including 4 randomly selected columns out of the 47 columns in the `df`.
-
-
-```python
-df.count().sample(4,random_state=seed)
-```
-
-
-
-
-    nicht_mehr_verfg_seit    11629
-    json_cellar              12324
-    haustiere                 3914
-    json_condition           12324
+    bfitted_kitchen                 1
+    belevator                       1
+    cellar                          1
+    bbalcony                        1
+    json_cellar                     2
+    json_bfitted_kitchen            2
+    json_electricitybaseprice       2
+    json_balcony                    2
+    json_belevator                  2
+    json_electricitykwhprice        3
+    bpets_allowed                   3
+    json_bpets_allowed              4
+    json_interiorqual               5
+    no_bathrooms                    5
+    json_telekomuploadspeed         6
+    json_telekomdownloadspeed       6
+    no_bedrooms                     8
+    object_condition                9
+    json_const_time                 9
+    json_object_condition          10
+    type                           10
+    heating_type                   12
+    json_heating_type              13
+    json_main_es                   14
+    no_rooms                       19
+    parking                        32
+    main_es                        37
+    json_picturecount              47
+    floor                         120
+    json_yoc                      155
+    yoc                           156
+    floor_space                   349
+    date_unlisted                 701
+    pc_city_quarter               752
+    date_listed                   801
+    total_energy_need            1019
+    heating_costs                1530
+    auxiliary_costs              2352
+    json_square_meters           2725
+    square_meters                3136
+    base_rent                    4112
+    json_base_rent               4112
+    json_total_rent              4369
+    total_rent                   5191
+    street_number                5724
+    lat                          5729
+    lng                          5729
     dtype: int64
 
 
 
-`df.nunique()`
+```python
+fv = [
+        "json_electricitybaseprice",
+        "json_electricitykwhprice",
+        "json_telekomdownloadspeed",
+        "json_telekomuploadspeed",
+        ]
+for key in fv:
+    print(f"\n{df[key].value_counts()}")
+```
 
-**Description:** Returns an integer value, that gives the number of unique values in the data frame or of a subset of columns in the `df`. It does not return the unique values themselves.
+    
+    ['"obj_electricityBasePrice":"90.76"']    12138
+    ['"obj_electricityBasePrice":"71.43"']      183
+    Name: json_electricitybaseprice, dtype: int64
+    
+    ['"obj_electricityKwhPrice":"0.1985"']    12137
+    ['"obj_electricityKwhPrice":"0.2205"']      183
+    ['"obj_electricityKwhPrice":"0.2195"']        1
+    Name: json_electricitykwhprice, dtype: int64
+    
+    ['"obj_telekomDownloadSpeed":"100 MBit/s"']    8208
+    ['"obj_telekomDownloadSpeed":"50 MBit/s"']     2756
+    ['"obj_telekomDownloadSpeed":"16 MBit/s"']      605
+    ['"obj_telekomDownloadSpeed":"25 MBit/s"']       48
+    ['"obj_telekomDownloadSpeed":"200 MBit/s"']       5
+    ['"obj_telekomDownloadSpeed":"6 MBit/s"']         4
+    Name: json_telekomdownloadspeed, dtype: int64
+    
+    ['"obj_telekomUploadSpeed":"40 MBit/s"']     8208
+    ['"obj_telekomUploadSpeed":"10 MBit/s"']     2756
+    ['"obj_telekomUploadSpeed":"2,4 MBit/s"']     600
+    ['"obj_telekomUploadSpeed":"5 MBit/s"']        48
+    ['"obj_telekomUploadSpeed":"1 MBit/s"']         9
+    ['"obj_telekomUploadSpeed":"100 MBit/s"']       5
+    Name: json_telekomuploadspeed, dtype: int64
 
-**Example:** The example shows how it can be applied to `df` and what the output looks like. A subset of the columns is used again, to keep the output readable.
 
 
 ```python
-df.nunique().sample(4,random_state=seed)
+df.drop(columns=[col for col in fv if col != "json_telekomdownloadspeed"], inplace=True)
+```
+
+## Has Fitted Kitchen - Bool
+
+The value, generated from scraping the visible listing might suggest, that about 4000 missing values are found in this column. However, one can argue, that there is reason to look at it differently. The `json_bfitted_kitchen` values show, how the company the that runs the immoscout24 portal thinks of it. The json data is not visible to the visitor, it summarizes the listings values and holds many more that are not visible to the visitor.
+
+They have assigned the boolean value of 'no' (`n`) to the missing values found in the `bfitted_kitchen` column. If one substitutes the missing values with the values in the `json_bfitted_kitchen` column, that have the same row index, the columns are the same.
+Another reason not to drop the column is that a listing with a fitted kitchen will usually be a value adding feature, that increases the market value of the listing compared to listings without a fitted kitchen. The reason being, that a listing without a fitted kitchen will typically mean, that the tenant will have to buy a kitchen for the apartment. The costs of buying a kitchen are high, plus the fact, that a kitchen is often custom-made to fit the space of the specific kitchen and thus can not be moved to another apartment.
+
+This gives enough reason to fill the rows, that have missing values in `bfitted_kitchen` with '0' - does not have a fitted kitchen.
+
+### Comparing Values of<br>`bfitted_kitchen`<br>and<br>`json_bfitted_kitchen`
+The show the same value count for listing has a fitted kitchen. The number of *NaN* values in column `bfitted_kitchen` is equivalent to the value count of value `['"obj_hasKitchen":"n"']` in the `json_bfitted_kitchen` column. We use the values of `json_bfitted_kitchen` to fill the missing values in column `bfitted_kitchen`. We will see, that all no row in `bfitted_kitchen` has an *NaN* value anymore.
+
+
+```python
+print(
+        f"value_counts for bfitted_kitchen:\n{df['bfitted_kitchen'].value_counts()},\n\n json_bfitted_kitchen:\n{df['json_bfitted_kitchen'].value_counts()}"
+        )
+```
+
+    value_counts for bfitted_kitchen:
+    Einbauküche    8024
+    Name: bfitted_kitchen, dtype: int64,
+    
+     json_bfitted_kitchen:
+    ['"obj_hasKitchen":"y"']    8024
+    ['"obj_hasKitchen":"n"']    4300
+    Name: json_bfitted_kitchen, dtype: int64
+
+
+
+
+## Has Elevator - Bool
+
+With the same reasoning, that led to the decision to not drop the `bfitted_kitchen` column, the missing values in the elevator colum are replaced with 0.
+
+
+```python
+df = (
+    df
+    .fill_empty(
+            column_names=["bfitted_kitchen", "belevator"], value=0
+            )
+    .find_replace(
+        match="exact",
+        bfitted_kitchen={
+                "Einbauküche": 1
+                },
+        belevator={
+                "Personenaufzug": 1
+                },
+        )
+)
+
+print(df.bfitted_kitchen.value_counts(normalize=True))
+print(df.belevator.value_counts(normalize=True))
+```
+
+    1    0.651087
+    0    0.348913
+    Name: bfitted_kitchen, dtype: float64
+    0    0.758601
+    1    0.241399
+    Name: belevator, dtype: float64
+
+
+## Auxiliary Costs & Total Rent
+
+We focus on how to efficiently clean and validate the values in the `auxiliary_costs` column. There are several problems in this column, as the output below shows. The `total_rent` column needs similar cleaning steps as `auxiliary_costs` and so both a processed together in the following.
+
+
+```python
+[s for s in df.auxiliary_costs if re.match("[^\d,.]+", str(s))][0:10]
 ```
 
 
 
 
-    nicht_mehr_verfg_seit    701
-    json_cellar                2
-    haustiere                  3
-    json_condition            10
-    dtype: int64
+    ['  190,84  ',
+     '  117,95  ',
+     '  249,83  ',
+     '  70  ',
+     '  213,33  ',
+     '  150  ',
+     '  145  ',
+     '  250  ',
+     '  100  ',
+     '  50  ']
 
 
 
-`df.filter()`
+There are 2352 rows in the `auxiliary_costs` column, that have character classes other than:
+- digit: [0-9] or [\d]
+- comma: [,] or ','
+- period: [.] or '\\.'
 
-**Description:** `df.filter()` can be used like `df.loc`, if parameter *items* is added. It prints the columns specified as a list of column names. However, where it shines is when there are subsets of columns that have a certain pattern in their names. In this case, one can use parameter *regex*, followed by a regex pattern along with the parameter and value *axis=1*.
-
-**Example:** In the first example `df.filter()` is used like `df.loc` to select a subset of two columns. The second example shows how *regex* can be used to filter certain columns. As mentioned earlier, in the DataFrame constructed there is a subset of columns, whose names all begin with the prefix 'json\_'. Using *regex*, makes it easy to filter out these columns.
-
-Example 1 - Using `df.filter()` to select a subset of columns.
+These 3 characters are the only ones that should be present in the colum for non-missing values.
 
 
 ```python
-df.filter(items=['lift','str']).sample(4,random_state=seed)
+bb = [u for u in df.auxiliary_costs.unique() if re.match(r"[^\d,.]", str(u))]
+print(len(bb))
+```
+
+    2352
+
+
+No recognized *NaN* values in the column. We create a copy of the `auxiliary_costs` column, before cleaning its values. The reason for this, is that *NaN* values showed after the cleaning step.
+
+
+```python
+no_na_auxil_df = df[["auxiliary_costs"]]
+
+```
+
+
+```python
+lov = df["auxiliary_costs"][df.auxiliary_costs.isna()]
+lov
+```
+
+
+
+
+    Series([], Name: auxiliary_costs, dtype: object)
+
+
+
+No string values, that represent missing values, but label 'keine Angabe', which is equivalent to *NaN*. This only became obvious after the cleaning steps, since all alphabetic characters were dropped during the cleaning, leaving rows with 'keine Angabe' entries empty. Pandas in turn assigned *NaN* values to these rows.
+
+
+```python
+lov = df['auxiliary_costs'][df['auxiliary_costs'].str.contains(pat=r"[a-zA-Z\\s]+") == True][0:10]
+lov
+```
+
+
+
+
+    160       keine Angabe 
+    657       keine Angabe 
+    766       keine Angabe 
+    788       keine Angabe 
+    905       keine Angabe 
+    1027      keine Angabe 
+    1188      keine Angabe 
+    1250      keine Angabe 
+    1407      keine Angabe 
+    1414      keine Angabe 
+    Name: auxiliary_costs, dtype: object
+
+
+
+No rows, that don't have at least one numerical value.
+
+
+```python
+ltv = df['total_rent'][df['total_rent'].str.contains(pat=r"\A[^\d]\Z") == True]
+ltv
+```
+
+
+
+
+    Series([], Name: total_rent, dtype: object)
+
+
+
+There are no recognized missing values in column `total_rent` prior to cleaning.
+
+
+```python
+df.total_rent.isna().value_counts()
+```
+
+
+
+
+    False    12324
+    Name: total_rent, dtype: int64
+
+
+
+### Unique Values
+The unique values are the basis upon which any cleaning is done. If all problems found in the unique values of any column are addressed by the regular expressions used to deal with the problems, then all values in that columns are in the format they should be in. This excludes any missing values.
+
+
+```python
+for i in ["auxiliary_costs", "total_rent"]:
+    j = df[i].unique()
+    print(f"\nUnique values in {i}:\n\n{j}")
+```
+
+    
+    Unique values in auxiliary_costs:
+    
+    ['  190,84  ' '  117,95  ' '  249,83  ' ... '  89,59  ' '  197,96  '
+     '  59,93  ']
+    
+    Unique values in total_rent:
+    
+    [' 541,06  ' ' 559,05  ' ' 839,01  ' ... ' 1.189,24  ' ' 382,73  '
+     ' 499,91  ']
+
+
+The cleaning steps turned all non-missing values into floating point numbers with no errors being raised during the conversion. We still want to validate, that the values in both columns only contain digits and optionally a `.` as decimal separator, followed by nothing else than 2 digits at the end of each value.
+
+### Detailed Cleaning Steps<br>For Total Rent<br>And Auxiliary Costs
+
+Next up is the actual cleaning procedure for columns `auxiliary_costs` and `total_rent`. The problem with these variables is, that it is unknown, which of the following optional variables, the ones inside `[]` are factored in at all or to what degree:
+
+$$\mathrm{total\,\, rent} = \mathrm{base \,\,rent} + \mathrm{auxiliary \,\,costs} + [\mathrm{heating \,\,costs} + \mathrm{X}]$$
+
+$\mathrm{X}$ stands for several costs, that might or might not be factored in. These variables will likely not make it to the machine learning stage, since there is a high chance, that they are correlated with the dependent variable `base_rent`. For now, we shall simply be efficient in cleaning them and further structured exploration will tell how to proceed with these two variables.
+
+<br>
+
+#### Cleaning Steps
+The cleaning steps are illustrated by the example of `total_rent`. The steps apply to the `auxiliary_costs` column as well, see the code below.
+We start by looking at its value counts, to get an idea of what regex pattern are needed to transform it into a column, that has dtype `float`. The rows, that need most cleaning are ones, with entries like this: `1.050  (zzgl. Heizkosten)`. Things that need attention are:
+- Drop any spaces, be it `\s` or `\t` in any number, anywhere.
+- Get rid of `.` as a thousand separator, while substituting `,` with `.` as a decimal separator. Worst case for numerical values looks like this  `4.514,49`.
+- Drop any parenthesis and whatever is inside them, if it can not be the total rent value inside the parenthesis.
+- Convert the dtype of the column to `float`, without any errors during the conversion.
+The conversion to float, gave no errors.
+We check for missing values after the conversion and drop 1 row of the DataFrame, where `total_rent` has the missing value.
+
+
+```python
+df = (
+        df
+            .process_text(
+                column_name="auxiliary_costs", string_function="lstrip", to_strip=r"[^\d]+"
+                )
+            .process_text(
+                column_name="auxiliary_costs", string_function="rstrip", to_strip=r"[^\d]+"
+                )
+            .process_text(
+                column_name="total_rent", string_function="lstrip", to_strip=r"[^\d]+"
+                )
+            .process_text(
+                column_name="total_rent", string_function="rstrip", to_strip=r"[^\d]+"
+                )
+            .process_text(
+                column_name="auxiliary_costs",
+                string_function="extract",
+                pat=r"([\d,.]+)",
+                expand=False,
+                )
+            .process_text(
+                column_name="total_rent",
+                string_function="extract",
+                pat=r"([\d,.]+)",
+                expand=False,
+                )
+           .process_text(
+                column_name="auxiliary_costs",
+                string_function="replace",
+                pat=r"(\d{1,2})\.(\d{3})",
+                repl=r"\1\2",
+                )
+            .process_text(
+                column_name="total_rent",
+                string_function="replace",
+                pat=r"(\d{1,2})\.(\d{3})",
+                repl=r"\1\2",
+                )
+            .process_text(
+                column_name="auxiliary_costs", string_function="replace", pat=",", repl="."
+                )
+            .process_text(
+                column_name="total_rent", string_function="replace", pat=",", repl="."
+                )
+            .change_type(
+                column_name="auxiliary_costs", dtype="float64", ignore_exception=False
+                )
+            .change_type(
+                column_name="total_rent", dtype="float64", ignore_exception=False
+                )
+)
+```
+
+    /Users/tobias/all_code/projects/python_projects/py_workflows/venv/lib/python3.9/site-packages/janitor/functions/process_text.py:85: FutureWarning: The default value of regex will change from True to False in a future version.
+      result = getattr(df[column_name].str, string_function)(**kwargs)
+
+
+### Dealing With<br>Newly Created<br>Missing Values
+The cleaning process introduced around 200 missing values in the `auxiliary_costs` column, that were not recognized as such by *pandas*, prior to cleaning.
+
+
+```python
+print(df.auxiliary_costs.isna().value_counts())
+```
+
+    False    12121
+    True       203
+    Name: auxiliary_costs, dtype: int64
+
+
+We test, what value these new *NaN* values had before the cleaning step, by extracting the index given by `df['auxiliary_costs].isna()`. This index contains the numbers in this set: $\{0,1\}$.
+- Value of $0\longrightarrow \,\mathrm{row-index}\,\mathrm{with}\,\mathrm{no}\,\mathrm{missing}\,\mathrm{value.}$
+- Value of $1\longrightarrow \,\mathrm{row-index}\,\mathrm{with}\,\mathrm{missing}\,\mathrm{value.}$
+
+
+```python
+y = df['auxiliary_costs'].isna().tolist()
+```
+
+We get confirmation, that there were missing values in the `auxiliary_costs` column before cleaning. We only found these by going through the list of unique values in that column earlier. After the removal of any alphabetic characters in the column, value 'keine Angabe' was replaced with *NaN* by pandas. As mentioned earlier, we do not drop the rows with missing date for now.
+
+
+```python
+no_na_auxil_df.loc[y]
 ```
 
 
@@ -929,7 +658,7 @@ df.filter(items=['lift','str']).sample(4,random_state=seed)
     .dataframe tbody tr th {
         vertical-align: top;
     }
-    
+
     .dataframe thead th {
         text-align: right;
     }
@@ -938,185 +667,114 @@ df.filter(items=['lift','str']).sample(4,random_state=seed)
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>lift</th>
-      <th>str</th>
+      <th>auxiliary_costs</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>9939</th>
-      <td>NaN</td>
-      <td>NaN</td>
+      <th>160</th>
+      <td>keine Angabe</td>
     </tr>
     <tr>
-      <th>1217</th>
-      <td>NaN</td>
-      <td>Alter Güterbahnhof 10a</td>
+      <th>657</th>
+      <td>keine Angabe</td>
     </tr>
     <tr>
-      <th>6023</th>
-      <td>NaN</td>
-      <td>Jütlandring 48</td>
+      <th>766</th>
+      <td>keine Angabe</td>
     </tr>
     <tr>
-      <th>12239</th>
-      <td>NaN</td>
-      <td>Estebogen 22</td>
+      <th>788</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>905</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>12112</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>12120</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>12164</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>12171</th>
+      <td>keine Angabe</td>
+    </tr>
+    <tr>
+      <th>12174</th>
+      <td>keine Angabe</td>
     </tr>
   </tbody>
 </table>
+<p>203 rows × 1 columns</p>
 </div>
 
 
 
-Example 2 - Using `df.filter()` to select all columns, that have the prefix 'json\_' in their names.
+Still no *NaN* values in column `total_rent` after cleaning.
 
 
 ```python
-df.filter(regex='^json', axis=1).sample(4,random_state=seed)
+print(df.total_rent.isna().value_counts())
 ```
 
+    False    12324
+    Name: total_rent, dtype: int64
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>json_heatingType</th>
-      <th>json_balcony</th>
-      <th>json_electricityBasePrice</th>
-      <th>json_picturecount</th>
-      <th>json_telekomDownloadSpeed</th>
-      <th>json_telekomUploadSpeed</th>
-      <th>json_totalRent</th>
-      <th>json_yearConstructed</th>
-      <th>json_electricityKwhPrice</th>
-      <th>json_firingTypes</th>
-      <th>json_hasKitchen</th>
-      <th>json_cellar</th>
-      <th>json_yearConstructedRange</th>
-      <th>json_baseRent</th>
-      <th>json_livingSpace</th>
-      <th>json_condition</th>
-      <th>json_interiorQual</th>
-      <th>json_petsAllowed</th>
-      <th>json_lift</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>9939</th>
-      <td>[]</td>
-      <td>['"obj_balcony":"y"']</td>
-      <td>['"obj_electricityBasePrice":"90.76"']</td>
-      <td>['"obj_picturecount":"12"']</td>
-      <td>['"obj_telekomDownloadSpeed":"16 MBit/s"']</td>
-      <td>['"obj_telekomUploadSpeed":"2,4 MBit/s"']</td>
-      <td>['"obj_totalRent":"1000"']</td>
-      <td>['"obj_yearConstructed":"1983"']</td>
-      <td>['"obj_electricityKwhPrice":"0.1985"']</td>
-      <td>['"obj_firingTypes":"no_information"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"4"']</td>
-      <td>['"obj_baseRent":"750"']</td>
-      <td>['"obj_livingSpace":"87"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>1217</th>
-      <td>[]</td>
-      <td>['"obj_balcony":"y"']</td>
-      <td>['"obj_electricityBasePrice":"90.76"']</td>
-      <td>['"obj_picturecount":"5"']</td>
-      <td>[]</td>
-      <td>[]</td>
-      <td>['"obj_totalRent":"680.23"']</td>
-      <td>['"obj_yearConstructed":"2015"']</td>
-      <td>['"obj_electricityKwhPrice":"0.1985"']</td>
-      <td>['"obj_firingTypes":"no_information"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"n"']</td>
-      <td>['"obj_yearConstructedRange":"8"']</td>
-      <td>['"obj_baseRent":"441.03"']</td>
-      <td>['"obj_livingSpace":"75"']</td>
-      <td>['"obj_condition":"no_information"']</td>
-      <td>['"obj_interiorQual":"no_information"']</td>
-      <td>['"obj_petsAllowed":"no_information"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>6023</th>
-      <td>['"obj_heatingType":"central_heating"']</td>
-      <td>['"obj_balcony":"n"']</td>
-      <td>['"obj_electricityBasePrice":"90.76"']</td>
-      <td>['"obj_picturecount":"9"']</td>
-      <td>[]</td>
-      <td>[]</td>
-      <td>['"obj_totalRent":"1188"']</td>
-      <td>['"obj_yearConstructed":"1903"']</td>
-      <td>['"obj_electricityKwhPrice":"0.1985"']</td>
-      <td>['"obj_firingTypes":"no_information"']</td>
-      <td>['"obj_hasKitchen":"y"']</td>
-      <td>['"obj_cellar":"y"']</td>
-      <td>['"obj_yearConstructedRange":"1"']</td>
-      <td>['"obj_baseRent":"938"']</td>
-      <td>['"obj_livingSpace":"67"']</td>
-      <td>['"obj_condition":"well_kept"']</td>
-      <td>['"obj_interiorQual":"sophisticated"']</td>
-      <td>['"obj_petsAllowed":"no"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-    <tr>
-      <th>12239</th>
-      <td>['"obj_heatingType":"central_heating"']</td>
-      <td>['"obj_balcony":"n"']</td>
-      <td>['"obj_electricityBasePrice":"90.76"']</td>
-      <td>['"obj_picturecount":"8"']</td>
-      <td>['"obj_telekomDownloadSpeed":"100 MBit/s"']</td>
-      <td>['"obj_telekomUploadSpeed":"40 MBit/s"']</td>
-      <td>['"obj_totalRent":"685"']</td>
-      <td>['"obj_yearConstructed":"1970"']</td>
-      <td>['"obj_electricityKwhPrice":"0.1985"']</td>
-      <td>['"obj_firingTypes":"oil"']</td>
-      <td>['"obj_hasKitchen":"n"']</td>
-      <td>['"obj_cellar":"y"']</td>
-      <td>['"obj_yearConstructedRange":"2"']</td>
-      <td>['"obj_baseRent":"485"']</td>
-      <td>['"obj_livingSpace":"65"']</td>
-      <td>['"obj_condition":"well_kept"']</td>
-      <td>['"obj_interiorQual":"normal"']</td>
-      <td>['"obj_petsAllowed":"negotiable"']</td>
-      <td>['"obj_lift":"n"']</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+### Total Rent<br>Post Cleaning<br>Validation
+The conversion of `total_rent` to float gave no errors. The column is converted into a list and all values pass the validation. That means they only contain digits before a `.` character, followed by exactly 2 digits between the beginning and the end of the string.
 
 
+```python
+bb = [
+        x
+        for x in df.total_rent.unique().tolist()
+        if not re.match(r"\A\d+\.\d{1,2}\Z", str(x))
+        ]
+print(bb)
+```
 
-`df.sample()`
-
-**Description:** Allows one to randomly sample from a DataFrame or `pandas.Series`. It was used several times in the examples so far, in order to give a better glimpse of the data in the `df`. Alternatives would have been, among others, `df.head()` and `df.tail()`. The main reason `df.sample()` was preferred over these alternatives is the reason, that by using `df.sample()` one gets a subset of rows or columns of the data frame, that are not constricted to either being at the very beginning of the index in the case of `df.head()` or at the very end of the index, if `df.tail()` is used. The subset, that `df.sample()` produces might not have anything over the ones produced by `df.head()` or `df.tail()`, since it is a random sample after all. It is advised to specify a value for a *seed*, that is used used whenever any kind of random element is part of command. In the case of `df.sample()`, one can pass a random seed in several different ways. Here, only a integer value was needed (`seed = 42`), as defined along the imports needed for this article. Parameter *random_state* takes the value of the random seed (`random_state=seed`). Specifying a seed has the benefit to make the output consistent and most importantly reproducible when run several times by one self or by anyone else executing the file again.
+    []
 
 
-This marks the end of this article. Steps from how to create a new DataFrame from several smaller DataFrames were covered, before various tools in the pandas library were showcased by describing each one along with using examples to show they can be used in projects.
+We validate the non-missing data in `auxiliary_costs` with a regex pattern.
+
+Validation of values is done by checking the format of all entries in the `df['auxiliary_costs']` column, that are not `np.nan` values.
+All rows with valid data pass the validation.
+
+
+```python
+print(
+        sum(
+                [
+                        cc
+                        for cc in pd.Series(df["auxiliary_costs"].dropna())
+                        if not re.match(r"\A\d+[.]?\d+?\Z", str(cc))
+                        ]
+                )
+        )  # no matches
+ll = [
+        cc
+        for cc in pd.Series(df["auxiliary_costs"].dropna())
+        if not re.match(r"\A\d+[.]?\d*?\Z", str(cc))
+        ]  # no matches
+print(ll)
+```
+
+    0
+    []
+
+
 

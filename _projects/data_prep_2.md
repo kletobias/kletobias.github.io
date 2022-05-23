@@ -1,15 +1,14 @@
 ---
-title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 1'
+title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 2'
 subtitle: 'Combining pandas, pyjanitor and Regular Expressions To Get The Job
 Done.'
-date: '2022-05-23 06:00:00'
+date: '2022-05-23 07:00:00'
 description: 'More Efficient Data Cleaning By Using The pyjanitor Module and Method
 Chaining'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
-
 
 # Wrangling with that Data!
 
@@ -27,623 +26,595 @@ This article shows how cleaning a CSV file using `pandas`, `numpy`, `re` and the
 - New `timedelta64[ns]` `time_listed` and `Point` geometry `gps` columns are created.
 
 
+## Heating Costs
 
-We begin by importing the needed libraries and modules.
+Looking at `df.heating_costs.value_counts()`, we see that the heating costs are often included in the auxiliary costs. For 4047 rows, which is around $\frac{1}{3}$ of all rows, it only states that heating costs are included in the auxiliary without any numerical value. On average, heating costs should be around the same for listings with one of the major heating types and similar isolation and using normalized area inside a listing (given in $m^{2}$). Hamburg is close to the Northern Sea and therefore the winters in Hamburg are generally mild. There certainly is no continental climate, where heating make up a higher percentage of the total rent.
+
+The column is therefore dropped.
 
 
 ```python
-import re  # Python built-in regular expression library.
-import numpy as np
-import pandas as pd
-import janitor
-
-seed = 42  # Random seed, to give repeatable random output.
+df.heating_costs.value_counts().head(10)
 ```
 
-## Reading In The DataFrame<br>From Previous Steps
 
-A value we alter, compared to its default value is the following:
 
-`na_values=['np.nan','[]']`
 
-In addition to the new label (`np.nan`) for missing values, that we applied at the end of the previous step we can see, that '[]' marks missing values in any of the columns, with a 'json\_' prefix. By marking '[]' values as *NaN* values we can skip a lot of column by column reassignments later for missing values, not recognized as such. The '[]', marking missing values, comes from the design of the web scraping algorithm, that appended an empty list, if there was no value for a variable.
+      in Nebenkosten enthalten           4047
+      nicht in Nebenkosten enthalten     1070
+      keine Angabe                        731
+      50 €                                248
+      60 €                                220
+      70 €                                206
+      80 €                                199
+      100 €                               199
+     inkl. 50 €                           150
+      90 €                                144
+    Name: heating_costs, dtype: int64
 
-The names of most of the columns are changed, in order for column names to be English. Names of columns with boolean values are altered to mark these columns with only boolean values. Columns without a `json_` prefix, that have a `json_` counterpart have their names aligned with the one of their counterpart.
+
 
 
 ```python
+df.drop(labels=["heating_costs"], axis=1, inplace=True)
+```
+
+## Latitude
+
+This column is one of the most important ones in the dataset together with the Longitude column. Together they give the exact GPS coordinates for most of the listings. This spacial information will be joined with from the dataset independent external geospatial based information. Together these will lay the foundation for the most influential features used to train the *XGBoost* and *Lasso Regression* models.
+
+
+```python
+df.lat.value_counts().sample(10, random_state=seed)
+```
+
+
+
+
+    ['lat: 53.4859709952484,']      1
+    ['lat: 53.555415063775214,']    1
+    ['lat: 53.59607281949776,']     1
+    ['lat: 53.575903316512345,']    1
+    ['lat: 53.56514913880538,']     1
+    ['lat: 53.56863155760176,']     3
+    ['lat: 53.45789899804567,']     1
+    ['lat: 53.60452600011545,']     1
+    ['lat: 53.619085739824705,']    1
+    ['lat: 53.54586549494192,']     5
+    Name: lat, dtype: int64
+
+
+
+### Cleaning Of Longitude And Latitude Columns
+A look at a sample of the values found in the Latitude column, shows that they most likely all follow the same pattern and thus can be easily converted to floating point numbers. Generally, the `json_` columns are much easier to clean, than the values from the visible features on the URL of the listing. For the following cases, the `pandas.Series.str.extract()` function is the tool of choice.
+No difference in the number of unique values before and after the cleaning for both columns is found.
+
+
+```python
+print(df.lat.nunique(), df.lng.nunique())
 df = (
-        pd.read_csv(
-                "/Volumes/data/bachelor_thesis/df_concat.csv",
-                na_values=["np.nan", "[]"],
-                index_col=False,
+        df.process_text(
+                column_name="lat",
+                string_function="extract",
+                pat=r"[^.]+?(\d{1,2}\.{1}\d{4,})",
+                expand=False,
                 )
-            .rename_column("einbau_kue", "bfitted_kitchen")
-            .rename_column("lift", "belevator")
-            .rename_column("nebenkosten", "auxiliary_costs")
-            .rename_column("gesamt_miete", "total_rent")
-            .rename_column("heiz_kosten", "heating_costs")
-            .rename_column("str", "street-number")
-            .rename_column("nutzf", "floor_space")
-            .rename_column("regio", "pc_city_quarter")
-            .rename_column("online_since", "date_listed")
-            .rename_column("baujahr", "yoc")
-            .rename_column("objekt_zustand", "object_condition")
-            .rename_column("heizungsart", "heating_type")
-            .rename_column("wesent_energietr", "main_es")
-            .rename_column("endenergiebedarf", "total_energy_need")
-            .rename_column("kaltmiete", "base_rent")
-            .rename_column("quadratmeter", "square_meters")
-            .rename_column("anzahl_zimmer", "no_rooms")
-            .rename_column("balkon/terasse", "bbalcony")
-            .rename_column("keller", "cellar")
-            .rename_column("typ", "type")
-            .rename_column("etage", "floor")
-            .rename_column("anz_schlafzimmer", "no_bedrooms")
-            .rename_column("anz_badezimmer", "no_bathrooms")
-            .rename_column("haustiere", "bpets_allowed")
-            .rename_column("nicht_mehr_verfg_seit", "date_unlisted")
-            .rename_column("json_heatingType", "json_heating_type")
-            .rename_column("json_totalRent", "json_total_rent")
-            .rename_column("json_yearConstructed", "json_yoc")
-            .rename_column("json_firingTypes", "json_main_es")
-            .rename_column("json_hasKitchen", "json_bfitted_kitchen")
-            .rename_column("json_yearConstructedRange", "json_const_time")
-            .rename_column("json_baseRent", "json_base_rent")
-            .rename_column("json_livingSpace", "json_square_meters")
-            .rename_column("json_condition", "json_object_condition")
-            .rename_column("json_petsAllowed", "json_bpets_allowed")
-            .rename_column("json_lift", "json_belevator")
-            .clean_names()  # make all column names lower-case, replace space with underscore.
-            .remove_empty()  # Drop rows, that only have missing values.
+            .process_text(
+                column_name="lng",
+                string_function="extract",
+                pat=r"[^.]+?(\d{1,2}\.{1}\d{4,})",
+                expand=False,
+                )
+            .change_type(column_name="lat", dtype="float64", ignore_exception=False)
+            .change_type(column_name="lng", dtype="float64", ignore_exception=False)
 )
+
+print(df.lat.nunique(), df.lng.nunique())
 ```
 
-## Checking Data Types<br>Of The Columns
+    5729 5729
+    5729 5729
 
-The output shows us, that only 2 columns are of type numeric. After the cleaning process, the columns will all have the correct **data type (dtype)**. The dtype, of the cleaned values in each column. All columns, that have a json prefix and a counterpart amongst the non json columns, are likely to hold the same data as their counterparts. The columns with a json prefix were mainly scraped to validate the data in their counterparts. The goal is to be efficient in comparing `json_`, non `json_` column values.
 
-Some columns will not have their 'correct' dtypes assigned to them in this article. This comes from the fact, that to assign certain dtypes there must not be any missing values present for all rows of the column. We do not impute any missing values here, nor do we drop a large amount of rows, to get a DataFrame without any missing values. Except for the Longitude (`lng`) and Latitude(`lng`) columns, as they are some of the most important columns in the dataset.
-
-The reason being, that we have no knowledge in regard to the 'correct' replacement value for any of the missing values. Which of the techniques is used to impute missing data, is tied to the model choice and the results that a model delivers, given the applied imputation method.
-
-This applies to the decision of dropping a certain amount of rows, in order to remove missing values in the key columns as well. That is, the ones that are most important for the model performance. Therefore, imputation and the decision whether to drop rows and or columns must be evaluated in the greater context of the predictive modeling problem at hand.
-
-We get the number of columns in the dataset.
+### Validation of Longitude and Latitude Columns
+Only missing values in both columns do not match the validation pattern. This was expected, since we did not add `.dropna()` to the list comprehension over the values in the columns.
 
 
 ```python
-len(df.columns)
+bb = [x for x in df.lat.unique().tolist() if not re.match(r"\A\d+\.\d{4,}\Z", str(x))]
+ba = [x for x in df.lng.unique().tolist() if not re.match(r"\A\d+\.\d{4,}\Z", str(x))]
+print(ba)
+print('\n')
+print(bb)
 ```
 
-
-
-
-    47
-
-
-
-Column names are dtypes of columns are checked. Column names should all be lower-case and should not contain any spaces. The names all look fine.
-
-
-```python
-df.data_description
-```
-
-
-
-
-                                  type  count  pct_missing description
-    column_name                                                       
-    bfitted_kitchen             object   8024     0.348913            
-    belevator                   object   2975     0.758601            
-    auxiliary_costs             object  12324     0.000000            
-    total_rent                  object  12324     0.000000            
-    heating_costs               object  12324     0.000000            
-    lat                         object   9423     0.235394            
-    lng                         object   9423     0.235394            
-    street_number               object   9482     0.230607            
-    floor_space                 object   1185     0.903846            
-    pc_city_quarter             object  12324     0.000000            
-    parking                     object   3187     0.741399            
-    date_listed                 object  12324     0.000000            
-    yoc                         object  11342     0.079682            
-    object_condition            object   7810     0.366277            
-    heating_type                object   9526     0.227037            
-    main_es                     object   9930     0.194255            
-    total_energy_need           object   3771     0.694012            
-    base_rent                   object  12324     0.000000            
-    square_meters               object  12324     0.000000            
-    no_rooms                    object  12324     0.000000            
-    bbalcony                    object   8526     0.308179            
-    cellar                      object   6337     0.485800            
-    type                        object   9703     0.212674            
-    floor                       object   9737     0.209916            
-    no_bedrooms                float64   6469     0.475089            
-    no_bathrooms               float64   7317     0.406280            
-    bpets_allowed               object   3914     0.682408            
-    date_unlisted               object  11629     0.056394            
-    json_heating_type           object   9968     0.191172            
-    json_balcony                object  12324     0.000000            
-    json_electricitybaseprice   object  12321     0.000243            
-    json_picturecount           object  12324     0.000000            
-    json_telekomdownloadspeed   object  11626     0.056637            
-    json_telekomuploadspeed     object  11626     0.056637            
-    json_total_rent             object  11220     0.089581            
-    json_yoc                    object  11137     0.096316            
-    json_electricitykwhprice    object  12321     0.000243            
-    json_main_es                object  11504     0.066537            
-    json_bfitted_kitchen        object  12324     0.000000            
-    json_cellar                 object  12324     0.000000            
-    json_const_time             object  11137     0.096316            
-    json_base_rent              object  12324     0.000000            
-    json_square_meters          object  11762     0.045602            
-    json_object_condition       object  12324     0.000000            
-    json_interiorqual           object  12324     0.000000            
-    json_bpets_allowed          object  12324     0.000000            
-    json_belevator              object  12324     0.000000            
-
-
-
-## Columns With<br>Little Information
-
-We get an overview of the number of unique values for each column in the DataFrame.
-
-
-```python
-va = []
-for key, val in np.ndenumerate(df.columns.tolist()):
-    va.append(df[val].nunique())
-va = pd.Series(data=va, index=df.columns)
-```
-
-The 5 columns with the fewest unique values are all boolean dtype columns. This was to be expected, however it does not mean that little information is found in these columns.
-
-
-```python
-print(f"The columns with the 5 smallest nunique values are:\n{va.nsmallest(5)}")
-```
-
-    The columns with the 5 smallest nunique values are:
-    bfitted_kitchen    1
-    belevator          1
-    bbalcony           1
-    cellar             1
-    json_balcony       2
-    dtype: int64
-
-
-Boolean type columns are marked by prepending character `b` to the column name, after any `json_` substring in the column name. The values for boolean type columns are expected to have 2 unique values, once cleaned. It has to be checked, which boolean columns have valid values, 2 unique values. These have certain characteristics, as shown below.
-
-- One value that marks the absence of the variable the column represents, e.g. 0, 'n', 'no'.
-- The second value, that shows, that the variable is present for a given record or row in the dataset. E.g. 1, 'y', 'yes'.
-- Both will be converted to a numerical value, if the dtype differs from numerical (`int64`).
-
-Columns, that are dropped, looking at the output from the following cells, are:  
-   
-- `json_electricitybaseprice` & `json_electricitykwhprice`  
-  
-Both columns only have 3 unique values (not including any missing values) and one value is found in all but 183 of the 12324 listings. That is an electricity base price of 90.76 Eur. for 12138 listing, leaving 183 that have a lower base price of 71.43 Eur.
-  
-- The `json_telekomdownloadspeed` & `json_telekomuploadspeed`  
-  
-Show the available internet speeds from provider Telekom. The download and upload speeds of internet provider Telekom are the same for around $\frac{2}{3}$ of all listings. Upload and download speeds have the same distribution and so likely have a perfect positive correlation with each other, making one redundant. `json_telekomdownloadspeed` is kept for further evaluation.
-
-
-```python
-print(
-        f"Sorted nunique values, in ascending order:\n\n{va.sort_values(axis=0, ascending=True)}"
-        )
-```
-
-    Sorted nunique values, in ascending order:
+    [nan]
     
-    bfitted_kitchen                 1
-    belevator                       1
-    cellar                          1
-    bbalcony                        1
-    json_cellar                     2
-    json_bfitted_kitchen            2
-    json_electricitybaseprice       2
-    json_balcony                    2
-    json_belevator                  2
-    json_electricitykwhprice        3
-    bpets_allowed                   3
-    json_bpets_allowed              4
-    json_interiorqual               5
-    no_bathrooms                    5
-    json_telekomuploadspeed         6
-    json_telekomdownloadspeed       6
-    no_bedrooms                     8
-    object_condition                9
-    json_const_time                 9
-    json_object_condition          10
-    type                           10
-    heating_type                   12
-    json_heating_type              13
-    json_main_es                   14
-    no_rooms                       19
-    parking                        32
-    main_es                        37
-    json_picturecount              47
-    floor                         120
-    json_yoc                      155
-    yoc                           156
-    floor_space                   349
-    date_unlisted                 701
-    pc_city_quarter               752
-    date_listed                   801
-    total_energy_need            1019
-    heating_costs                1530
-    auxiliary_costs              2352
-    json_square_meters           2725
-    square_meters                3136
-    base_rent                    4112
-    json_base_rent               4112
-    json_total_rent              4369
-    total_rent                   5191
-    street_number                5724
-    lat                          5729
-    lng                          5729
+    
+    [nan]
+
+
+## Creating The GPS Column
+
+To be able to utilize the Latitude and Longitude values, that we have in the dataset, we need to create a tuple consisting of the two variables. The result should look like this for all valid pairs: `(lng,lat)`. In order for a tuple of this form to be recognized as a valid GPS value, we need to be able to apply the `.apply(Point)` method to all values and get no errors during the application.
+
+We start by checking for problematic rows. Rows, that need attention are the following:
+
+- Rows that only have one valid value in the subset `df[['lng','lat']]`
+- Rows with missing values in both columns 'lng' and 'lat'
+
+
+The output shows, that all rows for the two columns are the same, in terms of whether a row has a missing or valid value. With this information, we can save the index values of the rows with missing values for the subset latitude and longitude, so we can drop the rows with missing values in the gps column without much effort in next steps.
+
+
+```python
+df[["lng", "lat"]].isna().value_counts()
+```
+
+
+
+
+    lng    lat  
+    False  False    9423
+    True   True     2901
     dtype: int64
 
 
 
-```python
-fv = [
-        "json_electricitybaseprice",
-        "json_electricitykwhprice",
-        "json_telekomdownloadspeed",
-        "json_telekomuploadspeed",
-        ]
-for key in fv:
-    print(f"\n{df[key].value_counts()}")
-```
-
-    
-    ['"obj_electricityBasePrice":"90.76"']    12138
-    ['"obj_electricityBasePrice":"71.43"']      183
-    Name: json_electricitybaseprice, dtype: int64
-    
-    ['"obj_electricityKwhPrice":"0.1985"']    12137
-    ['"obj_electricityKwhPrice":"0.2205"']      183
-    ['"obj_electricityKwhPrice":"0.2195"']        1
-    Name: json_electricitykwhprice, dtype: int64
-    
-    ['"obj_telekomDownloadSpeed":"100 MBit/s"']    8208
-    ['"obj_telekomDownloadSpeed":"50 MBit/s"']     2756
-    ['"obj_telekomDownloadSpeed":"16 MBit/s"']      605
-    ['"obj_telekomDownloadSpeed":"25 MBit/s"']       48
-    ['"obj_telekomDownloadSpeed":"200 MBit/s"']       5
-    ['"obj_telekomDownloadSpeed":"6 MBit/s"']         4
-    Name: json_telekomdownloadspeed, dtype: int64
-    
-    ['"obj_telekomUploadSpeed":"40 MBit/s"']     8208
-    ['"obj_telekomUploadSpeed":"10 MBit/s"']     2756
-    ['"obj_telekomUploadSpeed":"2,4 MBit/s"']     600
-    ['"obj_telekomUploadSpeed":"5 MBit/s"']        48
-    ['"obj_telekomUploadSpeed":"1 MBit/s"']         9
-    ['"obj_telekomUploadSpeed":"100 MBit/s"']       5
-    Name: json_telekomuploadspeed, dtype: int64
-
+The method above is to be preferred over the one below, which creates lists for both columns `lng` and `lat`, with the index values of the rows with *NaN* values. It then compares the index values stored in `lngna` and `latna` elementwise. The `assert` function is used to confirm, that the elements in both lists are all equal.
 
 
 ```python
-df.drop(columns=[col for col in fv if col != "json_telekomdownloadspeed"], inplace=True)
+lngna = list(df[df["lng"].isna()].index)
+latna = list(df[df["lat"].isna()].index)
+assert lngna == lngna
 ```
 
-## Has Fitted Kitchen - Bool
-
-The value, generated from scraping the visible listing might suggest, that about 4000 missing values are found in this column. However, one can argue, that there is reason to look at it differently. The `json_bfitted_kitchen` values show, how the company the that runs the immoscout24 portal thinks of it. The json data is not visible to the visitor, it summarizes the listings values and holds many more that are not visible to the visitor.
-
-They have assigned the boolean value of 'no' (`n`) to the missing values found in the `bfitted_kitchen` column. If one substitutes the missing values with the values in the `json_bfitted_kitchen` column, that have the same row index, the columns are the same.
-Another reason not to drop the column is that a listing with a fitted kitchen will usually be a value adding feature, that increases the market value of the listing compared to listings without a fitted kitchen. The reason being, that a listing without a fitted kitchen will typically mean, that the tenant will have to buy a kitchen for the apartment. The costs of buying a kitchen are high, plus the fact, that a kitchen is often custom-made to fit the space of the specific kitchen and thus can not be moved to another apartment.
-
-This gives enough reason to fill the rows, that have missing values in `bfitted_kitchen` with '0' - does not have a fitted kitchen.
-
-### Comparing Values of<br>`bfitted_kitchen`<br>and<br>`json_bfitted_kitchen`
-The show the same value count for listing has a fitted kitchen. The number of *NaN* values in column `bfitted_kitchen` is equivalent to the value count of value `['"obj_hasKitchen":"n"']` in the `json_bfitted_kitchen` column. We use the values of `json_bfitted_kitchen` to fill the missing values in column `bfitted_kitchen`. We will see, that all no row in `bfitted_kitchen` has an *NaN* value anymore.
+## Creation Of The GPS Column 1/3
+The rows of the `lng` and `lat` columns are added together using the `tuple` function inside a `DataFrame.apply()` statement and the result is assigned to the new column `gps`.
 
 
 ```python
-print(
-        f"value_counts for bfitted_kitchen:\n{df['bfitted_kitchen'].value_counts()},\n\n json_bfitted_kitchen:\n{df['json_bfitted_kitchen'].value_counts()}"
-        )
+from shapely.geometry import Point
 ```
 
-    value_counts for bfitted_kitchen:
-    Einbauküche    8024
-    Name: bfitted_kitchen, dtype: int64,
-    
-     json_bfitted_kitchen:
-    ['"obj_hasKitchen":"y"']    8024
-    ['"obj_hasKitchen":"n"']    4300
-    Name: json_bfitted_kitchen, dtype: int64
+
+```python
+df["gps"] = df[["lng", "lat"]].apply(tuple, axis=1)
+```
+
+We use the row index values from earlier. This makes it easy for us to drop the missing values, regardless of the fact that a tuple of missing values can not be dropped by using `df.dropna(subset=['gps'],inplace=True)` anymore. Such a tuple is not an `np.nan`, it just has values `( np.nan, np.nan )`inside the tuple.
+
+
+```python
+df.drop(lngna, inplace=True, axis=0)
+```
+
+### Drop Rows That Contain *NaN* Values
+We drop rows, that have *NaN* values in the `lng` and `lat` columns. Around 3000 rows where dropped as a result.
+
+
+```python
+len(df)
+```
 
 
 
 
-## Has Elevator - Bool
+    9423
 
-With the same reasoning, that led to the decision to not drop the `bfitted_kitchen` column, the missing values in the elevator colum are replaced with 0.
+
+
+No more *NaN* values in all three columns, as expected.
+
+
+```python
+df[["lng", "lat", "gps"]].isna().value_counts()
+```
+
+
+
+
+    lng    lat    gps  
+    False  False  False    9423
+    dtype: int64
+
+
+
+### Creation Of The GPS Column 2/3
+Just valid values for variable longitude and latitude are left and therefore only valid values make up the data in the gps column.
+We check how the values in the gps column look like, before the `POINT` conversion.
+
+
+```python
+df["gps"].sample(1000, random_state=seed)
+```
+
+
+
+
+    4555      (10.081875491322997, 53.59659576773955)
+    5357      (10.117258625619199, 53.57200940640784)
+    5463      (10.076499662582167, 53.60477899815401)
+    4191       (9.948503601122527, 53.58407791510109)
+    7238        (9.944410649308205, 53.5642271656938)
+                               ...                   
+    10138    (10.024189216380647, 53.588549633689425)
+    3479       (9.859813703847099, 53.53408132036414)
+    5558        (10.03611960198576, 53.6124394982734)
+    11072      (10.009835277290465, 53.5488715679383)
+    4786      (9.944531180915247, 53.577945758643175)
+    Name: gps, Length: 1000, dtype: object
+
+
+
+### Conversion Of The `gps` Column To Geometry Object 3/3
+
+The `gps` column is ready for conversion, by applying the `Point` function to all values in the column. The result needs no further processing.
+
+
+```python
+df["gps"] = df["gps"].apply(Point)
+```
+
+### Getting A Quick Look At The Finished GPS Column
+The `gps` column looks as expected, and we can see, that its dtype is correct as well:
+
+`Name: gps, dtype: object <class 'shapely.geometry.point.Point'>`
+
+
+```python
+print(df["gps"][0:10], type(df["gps"][10]))
+```
+
+    0     POINT (10.152357145948395 53.52943934146104)
+    1      POINT (10.06842724545814 53.58414266878421)
+    2        POINT (9.86423115803761 53.6044918821393)
+    3      POINT (9.956881419437474 53.56394970119381)
+    4     POINT (10.081257248271337 53.60180649336605)
+    5    POINT (10.032298671585043 53.561192834080046)
+    6    POINT (10.204297951920761 53.493636048600344)
+    7      POINT (9.973693895665868 53.56978432240341)
+    8      POINT (9.952844267614122 53.57611822321049)
+    9     POINT (10.036249068267281 53.56479904983683)
+    Name: gps, dtype: object <class 'shapely.geometry.point.Point'>
+
+
+
+```python
+df[['gps']].info()
+```
+
+    <class 'pandas.core.frame.DataFrame'>
+    Int64Index: 9423 entries, 0 to 12323
+    Data columns (total 1 columns):
+     #   Column  Non-Null Count  Dtype 
+    ---  ------  --------------  ----- 
+     0   gps     9423 non-null   object
+    dtypes: object(1)
+    memory usage: 405.3+ KB
+
+
+## Reviewing The Columns In The DataFrame Again
+
+We drop more columns, after the creation of the `gps` column. `street_number` (street and number of a listing) are not needed anymore, since all listings have a valid pair of longitude and latitude coordinates associated with them. `floor space` is a variable, that has 827 non-missing values and around 91.2% of rows have missing values. This ratio between valid and missing values is too large to be imputed in this case. The column is therefore dropped.
+
+
+
+```python
+df.drop(columns=["street_number", "floor_space"], inplace=True)
+```
+
+## Date Listed & Date Unlisted Columns
+For the columns, that give information about when a listing was published and unpublished on the rental platform the needed cleaning steps are identical. Therefore, not all steps are explicitly described for both columns.
+The values need to be converted to dtype datetime, so the entire column can be assigned dtype `datetime64[ns]`.
+
+
+
+```python
+df.date_listed.unique()[
+0:10
+]  # Entire list of unique values was used for the following steps.
+```
+
+
+
+
+    array(['[\'exposeOnlineSince: "03.12.2018"\']',
+           '[\'exposeOnlineSince: "02.12.2018"\']',
+           '[\'exposeOnlineSince: "30.11.2018"\']',
+           '[\'exposeOnlineSince: "29.11.2018"\']',
+           '[\'exposeOnlineSince: "28.11.2018"\']',
+           '[\'exposeOnlineSince: "27.11.2018"\']',
+           '[\'exposeOnlineSince: "26.11.2018"\']',
+           '[\'exposeOnlineSince: "25.11.2018"\']',
+           '[\'exposeOnlineSince: "24.11.2018"\']',
+           '[\'exposeOnlineSince: "23.11.2018"\']'], dtype=object)
+
+
+
+### Extracting DateTime Information
+- For both columns, we extract the valid data. Data in the form of `dd.mm.yyyy`.
+- pandas `datetime64[ns]` goes down to the Nanosecond level. However, the data only goes down to the day level. This leads to us removing anything below the day level in the data.
+- We fill missing data by selecting the next valid data entry, above the row with the missing value. The time a listing was online does not vary much, except for a few outliers, as will be discussed later.
 
 
 ```python
 df = (
-    df
-    .fill_empty(
-            column_names=["bfitted_kitchen", "belevator"], value=0
-            )
-    .find_replace(
-        match="exact",
-        bfitted_kitchen={
-                "Einbauküche": 1
-                },
-        belevator={
-                "Personenaufzug": 1
-                },
-        )
+        df.process_text(
+                column_name="date_listed",
+                string_function="extract",
+                pat=r"(\d{2}\.\d{2}\.\d{4})",
+                expand=False,
+                )
+            .process_text(
+                column_name="date_unlisted",
+                string_function="extract",
+                pat=r"(\d{2}\.\d{2}\.\d{4})",
+                expand=False,
+                )
+            .to_datetime("date_listed", errors="raise", dayfirst=True)
+            .to_datetime("date_unlisted", errors="raise", dayfirst=True)
+            .fill_direction(date_listed="up", date_unlisted="up")
+            .truncate_datetime_dataframe(datepart="day")
 )
-
-print(df.bfitted_kitchen.value_counts(normalize=True))
-print(df.belevator.value_counts(normalize=True))
 ```
 
-    1    0.651087
-    0    0.348913
-    Name: bfitted_kitchen, dtype: float64
-    0    0.758601
-    1    0.241399
-    Name: belevator, dtype: float64
-
-
-## Auxiliary Costs & Total Rent
-
-We focus on how to efficiently clean and validate the values in the `auxiliary_costs` column. There are several problems in this column, as the output below shows. The `total_rent` column needs similar cleaning steps as `auxiliary_costs` and so both a processed together in the following.
+### Exploring Data After Cleaning
 
 
 ```python
-[s for s in df.auxiliary_costs if re.match("[^\d,.]+", str(s))][0:10]
+ppr = df[["date_listed", "date_unlisted"]][0:10]
+print(ppr)
 ```
 
+      date_listed date_unlisted
+    0  2018-12-03    2018-12-03
+    1  2018-12-03    2018-12-03
+    2  2018-12-03    2018-12-03
+    3  2018-12-03    2018-12-03
+    4  2018-12-03    2018-12-03
+    5  2018-12-02    2018-12-02
+    6  2018-11-30    2018-12-03
+    7  2018-11-30    2018-12-03
+    8  2018-11-30    2018-12-03
+    9  2018-12-03    2018-12-03
 
 
-
-    ['  190,84  ',
-     '  117,95  ',
-     '  249,83  ',
-     '  70  ',
-     '  213,33  ',
-     '  150  ',
-     '  145  ',
-     '  250  ',
-     '  100  ',
-     '  50  ']
-
-
-
-There are 2352 rows in the `auxiliary_costs` column, that have character classes other than:
-- digit: [0-9] or [\d]
-- comma: [,] or ','
-- period: [.] or '\\.'
-
-These 3 characters are the only ones that should be present in the colum for non-missing values.
+The time listed column is created calculating the difference between the `date_unlisted` and `date_listed` columns. The result is the `time_listed` column, which has type `timedelta64[ns]`. We truncate the timedelta values in this column to only show the days, that the listing was online, since our data only includes the day a listing was listed/unlisted.
 
 
 ```python
-bb = [u for u in df.auxiliary_costs.unique() if re.match(r"[^\d,.]", str(u))]
-print(len(bb))
+tg = df["date_unlisted"] - df["date_listed"]
 ```
 
-    2352
-
-
-No recognized *NaN* values in the column. We create a copy of the `auxiliary_costs` column, before cleaning its values. The reason for this, is that *NaN* values showed after the cleaning step.
+Looking at several metrics for the `timedelta64[ns]` type column, we see that there are negative values for a couple of rows. Looking at the corresponding values of the `date_listed` and `date_unlisted` columns, we see that they most likely are in the wrong order. The negative values are dealt with, after this inspection, by using the absolute value of all `timedelta64[ns]` values. This only corrects the negative deltas, while not altering the positive ones.
 
 
 ```python
-no_na_auxil_df = df[["auxiliary_costs"]]
+print(tg.min())
+print(tg.max())
+print(tg.mean())
+print(tg.median())
+print(tg.quantile())
+print(tg[tg.dt.days < 0].index.tolist())
+indv = tg[tg.dt.days < 0].index.tolist()
 
+df.loc[indv, ["date_listed", "date_unlisted"]]
 ```
 
-
-```python
-lov = df["auxiliary_costs"][df.auxiliary_costs.isna()]
-lov
-```
-
-
-
-
-    Series([], Name: auxiliary_costs, dtype: object)
-
-
-
-No string values, that represent missing values, but label 'keine Angabe', which is equivalent to *NaN*. This only became obvious after the cleaning steps, since all alphabetic characters were dropped during the cleaning, leaving rows with 'keine Angabe' entries empty. Pandas in turn assigned *NaN* values to these rows.
-
-
-```python
-lov = df['auxiliary_costs'][df['auxiliary_costs'].str.contains(pat=r"[a-zA-Z\\s]+") == True][0:10]
-lov
-```
+    -648 days +00:00:00
+    924 days 00:00:00
+    19 days 05:10:04.011461318
+    5 days 00:00:00
+    5 days 00:00:00
+    [41, 578, 919, 1161, 1218, 1581, 2652, 2682, 2869, 2959, 3150, 3629, 3686, 6833, 7543, 7777, 7794, 11283, 11570, 11795, 11829, 11842, 11965, 12023]
 
 
 
 
-    160       keine Angabe 
-    657       keine Angabe 
-    766       keine Angabe 
-    788       keine Angabe 
-    905       keine Angabe 
-    1027      keine Angabe 
-    1188      keine Angabe 
-    1250      keine Angabe 
-    1407      keine Angabe 
-    1414      keine Angabe 
-    Name: auxiliary_costs, dtype: object
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date_listed</th>
+      <th>date_unlisted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>41</th>
+      <td>2018-11-29</td>
+      <td>2018-11-28</td>
+    </tr>
+    <tr>
+      <th>578</th>
+      <td>2018-10-26</td>
+      <td>2018-10-25</td>
+    </tr>
+    <tr>
+      <th>919</th>
+      <td>2018-10-08</td>
+      <td>2018-10-07</td>
+    </tr>
+    <tr>
+      <th>1161</th>
+      <td>2018-09-24</td>
+      <td>2018-09-23</td>
+    </tr>
+    <tr>
+      <th>1218</th>
+      <td>2018-09-20</td>
+      <td>2018-09-19</td>
+    </tr>
+    <tr>
+      <th>1581</th>
+      <td>2018-11-01</td>
+      <td>2018-09-03</td>
+    </tr>
+    <tr>
+      <th>2652</th>
+      <td>2018-09-21</td>
+      <td>2018-09-20</td>
+    </tr>
+    <tr>
+      <th>2682</th>
+      <td>2018-09-03</td>
+      <td>2018-07-08</td>
+    </tr>
+    <tr>
+      <th>2869</th>
+      <td>2018-08-08</td>
+      <td>2018-06-28</td>
+    </tr>
+    <tr>
+      <th>2959</th>
+      <td>2018-08-08</td>
+      <td>2018-06-22</td>
+    </tr>
+    <tr>
+      <th>3150</th>
+      <td>2018-10-08</td>
+      <td>2018-06-13</td>
+    </tr>
+    <tr>
+      <th>3629</th>
+      <td>2018-06-15</td>
+      <td>2018-05-15</td>
+    </tr>
+    <tr>
+      <th>3686</th>
+      <td>2018-07-12</td>
+      <td>2018-06-04</td>
+    </tr>
+    <tr>
+      <th>6833</th>
+      <td>2018-11-23</td>
+      <td>2017-12-12</td>
+    </tr>
+    <tr>
+      <th>7543</th>
+      <td>2017-08-24</td>
+      <td>2017-08-23</td>
+    </tr>
+    <tr>
+      <th>7777</th>
+      <td>2017-09-21</td>
+      <td>2017-09-08</td>
+    </tr>
+    <tr>
+      <th>7794</th>
+      <td>2018-01-24</td>
+      <td>2017-08-08</td>
+    </tr>
+    <tr>
+      <th>11283</th>
+      <td>2018-08-17</td>
+      <td>2017-01-26</td>
+    </tr>
+    <tr>
+      <th>11570</th>
+      <td>2018-09-21</td>
+      <td>2016-12-12</td>
+    </tr>
+    <tr>
+      <th>11795</th>
+      <td>2018-09-10</td>
+      <td>2017-07-07</td>
+    </tr>
+    <tr>
+      <th>11829</th>
+      <td>2018-09-10</td>
+      <td>2017-09-22</td>
+    </tr>
+    <tr>
+      <th>11842</th>
+      <td>2018-10-01</td>
+      <td>2017-07-28</td>
+    </tr>
+    <tr>
+      <th>11965</th>
+      <td>2018-06-06</td>
+      <td>2017-10-30</td>
+    </tr>
+    <tr>
+      <th>12023</th>
+      <td>2018-06-21</td>
+      <td>2017-03-22</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 
 
-No rows, that don't have at least one numerical value.
-
-
-```python
-ltv = df['total_rent'][df['total_rent'].str.contains(pat=r"\A[^\d]\Z") == True]
-ltv
-```
-
-
-
-
-    Series([], Name: total_rent, dtype: object)
-
-
-
-There are no recognized missing values in column `total_rent` prior to cleaning.
-
-
-```python
-df.total_rent.isna().value_counts()
-```
-
-
-
-
-    False    12324
-    Name: total_rent, dtype: int64
-
-
-
-### Unique Values
-The unique values are the basis upon which any cleaning is done. If all problems found in the unique values of any column are addressed by the regular expressions used to deal with the problems, then all values in that columns are in the format they should be in. This excludes any missing values.
-
-
-```python
-for i in ["auxiliary_costs", "total_rent"]:
-    j = df[i].unique()
-    print(f"\nUnique values in {i}:\n\n{j}")
-```
-
-    
-    Unique values in auxiliary_costs:
-    
-    ['  190,84  ' '  117,95  ' '  249,83  ' ... '  89,59  ' '  197,96  '
-     '  59,93  ']
-    
-    Unique values in total_rent:
-    
-    [' 541,06  ' ' 559,05  ' ' 839,01  ' ... ' 1.189,24  ' ' 382,73  '
-     ' 499,91  ']
-
-
-The cleaning steps turned all non-missing values into floating point numbers with no errors being raised during the conversion. We still want to validate, that the values in both columns only contain digits and optionally a `.` as decimal separator, followed by nothing else than 2 digits at the end of each value.
-
-### Detailed Cleaning Steps<br>For Total Rent<br>And Auxiliary Costs
-
-Next up is the actual cleaning procedure for columns `auxiliary_costs` and `total_rent`. The problem with these variables is, that it is unknown, which of the following optional variables, the ones inside `[]` are factored in at all or to what degree:
-
-$$\mathrm{total\,\, rent} = \mathrm{base \,\,rent} + \mathrm{auxiliary \,\,costs} + [\mathrm{heating \,\,costs} + \mathrm{X}]$$
-
-$\mathrm{X}$ stands for several costs, that might or might not be factored in. These variables will likely not make it to the machine learning stage, since there is a high chance, that they are correlated with the dependent variable `base_rent`. For now, we shall simply be efficient in cleaning them and further structured exploration will tell how to proceed with these two variables.
-
-<br>
-
-#### Cleaning Steps
-The cleaning steps are illustrated by the example of `total_rent`. The steps apply to the `auxiliary_costs` column as well, see the code below.
-We start by looking at its value counts, to get an idea of what regex pattern are needed to transform it into a column, that has dtype `float`. The rows, that need most cleaning are ones, with entries like this: `1.050  (zzgl. Heizkosten)`. Things that need attention are:
-- Drop any spaces, be it `\s` or `\t` in any number, anywhere.
-- Get rid of `.` as a thousand separator, while substituting `,` with `.` as a decimal separator. Worst case for numerical values looks like this  `4.514,49`.
-- Drop any parenthesis and whatever is inside them, if it can not be the total rent value inside the parenthesis.
-- Convert the dtype of the column to `float`, without any errors during the conversion.
-The conversion to float, gave no errors.
-We check for missing values after the conversion and drop 1 row of the DataFrame, where `total_rent` has the missing value.
+## Time_Listed Column
+The `time_listed` column is created and added to the DataFrame.
 
 
 ```python
 df = (
-        df
-            .process_text(
-                column_name="auxiliary_costs", string_function="lstrip", to_strip=r"[^\d]+"
+        df.add_column(
+                column_name="time_listed", value=df["date_unlisted"] - df["date_listed"]
                 )
-            .process_text(
-                column_name="auxiliary_costs", string_function="rstrip", to_strip=r"[^\d]+"
-                )
-            .process_text(
-                column_name="total_rent", string_function="lstrip", to_strip=r"[^\d]+"
-                )
-            .process_text(
-                column_name="total_rent", string_function="rstrip", to_strip=r"[^\d]+"
-                )
-            .process_text(
-                column_name="auxiliary_costs",
-                string_function="extract",
-                pat=r"([\d,.]+)",
-                expand=False,
-                )
-            .process_text(
-                column_name="total_rent",
-                string_function="extract",
-                pat=r"([\d,.]+)",
-                expand=False,
-                )
-           .process_text(
-                column_name="auxiliary_costs",
-                string_function="replace",
-                pat=r"(\d{1,2})\.(\d{3})",
-                repl=r"\1\2",
-                )
-            .process_text(
-                column_name="total_rent",
-                string_function="replace",
-                pat=r"(\d{1,2})\.(\d{3})",
-                repl=r"\1\2",
-                )
-            .process_text(
-                column_name="auxiliary_costs", string_function="replace", pat=",", repl="."
-                )
-            .process_text(
-                column_name="total_rent", string_function="replace", pat=",", repl="."
-                )
-            .change_type(
-                column_name="auxiliary_costs", dtype="float64", ignore_exception=False
-                )
-            .change_type(
-                column_name="total_rent", dtype="float64", ignore_exception=False
-                )
+            #    .change_type(column_name="time_listed", dtype="pd.Timedelta", ignore_exception=False)
+            .transform_column(column_name="time_listed", function=lambda x: np.abs(x))
 )
 ```
 
-    /Users/tobias/all_code/projects/python_projects/py_workflows/venv/lib/python3.9/site-packages/janitor/functions/process_text.py:85: FutureWarning: The default value of regex will change from True to False in a future version.
-      result = getattr(df[column_name].str, string_function)(**kwargs)
-
-
-### Dealing With<br>Newly Created<br>Missing Values
-The cleaning process introduced around 200 missing values in the `auxiliary_costs` column, that were not recognized as such by *pandas*, prior to cleaning.
+The minimum is 0 days, as it should be and no missing data was added by the cleaning steps.
 
 
 ```python
-print(df.auxiliary_costs.isna().value_counts())
+print(df["time_listed"].min())
+print(df["time_listed"].isna().value_counts())
 ```
 
-    False    12121
-    True       203
-    Name: auxiliary_costs, dtype: int64
+    0 days 00:00:00
+    False    9423
+    Name: time_listed, dtype: int64
 
 
-We test, what value these new *NaN* values had before the cleaning step, by extracting the index given by `df['auxiliary_costs].isna()`. This index contains the numbers in this set: $\{0,1\}$.
-- Value of $0\longrightarrow \,\mathrm{row-index}\,\mathrm{with}\,\mathrm{no}\,\mathrm{missing}\,\mathrm{value.}$
-- Value of $1\longrightarrow \,\mathrm{row-index}\,\mathrm{with}\,\mathrm{missing}\,\mathrm{value.}$
+### Dtype of `time_listed`
+The dtype of the new column `date_listed` is `timedelta64[ns]`, as it should be.
 
 
 ```python
-y = df['auxiliary_costs'].isna().tolist()
+df[['time_listed']].info()
 ```
 
-We get confirmation, that there were missing values in the `auxiliary_costs` column before cleaning. We only found these by going through the list of unique values in that column earlier. After the removal of any alphabetic characters in the column, value 'keine Angabe' was replaced with *NaN* by pandas. As mentioned earlier, we do not drop the rows with missing date for now.
+    <class 'pandas.core.frame.DataFrame'>
+    Int64Index: 9423 entries, 0 to 12323
+    Data columns (total 1 columns):
+     #   Column       Non-Null Count  Dtype          
+    ---  ------       --------------  -----          
+     0   time_listed  9423 non-null   timedelta64[ns]
+    dtypes: timedelta64[ns](1)
+    memory usage: 405.3 KB
+
+
+### Validation Of `time_listed`
+`df.describe()` is used to show the distribution of `time_listed`, to verify that the subtraction of `date_listed` from `date_unlisted` earlier resulted in valid `timedelta64[ns]` values in the `time_listed` column.
+It becomes clear, that there must be outliers in the data of the `time_listed` column, as the mean is 20 days, while the median is 5 days. The mean is much more sensitive to outliers in the way it is calculated compared to the median.
 
 
 ```python
-no_na_auxil_df.loc[y]
+df[['time_listed']].describe()
 ```
 
 
@@ -667,114 +638,52 @@ no_na_auxil_df.loc[y]
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>auxiliary_costs</th>
+      <th>time_listed</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>160</th>
-      <td>keine Angabe</td>
+      <th>count</th>
+      <td>9423</td>
     </tr>
     <tr>
-      <th>657</th>
-      <td>keine Angabe</td>
+      <th>mean</th>
+      <td>20 days 01:41:28.252148997</td>
     </tr>
     <tr>
-      <th>766</th>
-      <td>keine Angabe</td>
+      <th>std</th>
+      <td>46 days 13:04:26.285141156</td>
     </tr>
     <tr>
-      <th>788</th>
-      <td>keine Angabe</td>
+      <th>min</th>
+      <td>0 days 00:00:00</td>
     </tr>
     <tr>
-      <th>905</th>
-      <td>keine Angabe</td>
+      <th>25%</th>
+      <td>1 days 00:00:00</td>
     </tr>
     <tr>
-      <th>...</th>
-      <td>...</td>
+      <th>50%</th>
+      <td>5 days 00:00:00</td>
     </tr>
     <tr>
-      <th>12112</th>
-      <td>keine Angabe</td>
+      <th>75%</th>
+      <td>21 days 00:00:00</td>
     </tr>
     <tr>
-      <th>12120</th>
-      <td>keine Angabe</td>
-    </tr>
-    <tr>
-      <th>12164</th>
-      <td>keine Angabe</td>
-    </tr>
-    <tr>
-      <th>12171</th>
-      <td>keine Angabe</td>
-    </tr>
-    <tr>
-      <th>12174</th>
-      <td>keine Angabe</td>
+      <th>max</th>
+      <td>924 days 00:00:00</td>
     </tr>
   </tbody>
 </table>
-<p>203 rows × 1 columns</p>
 </div>
 
 
 
-Still no *NaN* values in column `total_rent` after cleaning.
+Column `pc_city_quarter` is dropped, since the gps column makes it redundant.
 
 
 ```python
-print(df.total_rent.isna().value_counts())
+df.drop(columns=["pc_city_quarter"], inplace=True)
 ```
-
-    False    12324
-    Name: total_rent, dtype: int64
-
-
-### Total Rent<br>Post Cleaning<br>Validation
-The conversion of `total_rent` to float gave no errors. The column is converted into a list and all values pass the validation. That means they only contain digits before a `.` character, followed by exactly 2 digits between the beginning and the end of the string.
-
-
-```python
-bb = [
-        x
-        for x in df.total_rent.unique().tolist()
-        if not re.match(r"\A\d+\.\d{1,2}\Z", str(x))
-        ]
-print(bb)
-```
-
-    []
-
-
-We validate the non-missing data in `auxiliary_costs` with a regex pattern.
-
-Validation of values is done by checking the format of all entries in the `df['auxiliary_costs']` column, that are not `np.nan` values.
-All rows with valid data pass the validation.
-
-
-```python
-print(
-        sum(
-                [
-                        cc
-                        for cc in pd.Series(df["auxiliary_costs"].dropna())
-                        if not re.match(r"\A\d+[.]?\d+?\Z", str(cc))
-                        ]
-                )
-        )  # no matches
-ll = [
-        cc
-        for cc in pd.Series(df["auxiliary_costs"].dropna())
-        if not re.match(r"\A\d+[.]?\d*?\Z", str(cc))
-        ]  # no matches
-print(ll)
-```
-
-    0
-    []
-
-
 
