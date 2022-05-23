@@ -1,6 +1,6 @@
 ---
 title: 'Cleaning a 47 Column Pandas DataFrame<br>Part 0'
-subtitle: 'Data Preparation Series: Exploring Tabular Data With Pandas'An Overview of available tools in the pandas library**
+subtitle: 'Data Preparation Series: Exploring Tabular Data With pandas: An Overview Of Available Tools In The pandas Library'
 date: '2022-05-23 05:00:00'
 description: 'An Overview Of Available Tools In The Pandas Library'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
