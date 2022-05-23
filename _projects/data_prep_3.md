@@ -659,7 +659,7 @@ for col in df.columns:
 
 
 ```python
-df.to_csv("/Volumes/data/bachelor_thesis/df_export_20052022-2studio.csv")
+df.to_csv("/Volumes/data/export_ddmmyyyy_white_space.csv")
 ```
 
 ## Final Validation Of Unique Values
@@ -1147,6 +1147,6 @@ df.to_csv("/Volumes/data/df_first_cleaning.csv")
 <br>
 <br>
 <br>
-[Data Preparation Series 2](https://kletobias.github.io/project/data-prep-2)  
-[Data Preparation Series 1](https://kletobias.github.io/project/data-prep-1)  
 [Data Preparation Series 0](https://kletobias.github.io/project/data-prep-0)  
+[Data Preparation Series 1](https://kletobias.github.io/project/data-prep-1)  
+[Data Preparation Series 2](https://kletobias.github.io/project/data-prep-2)  
