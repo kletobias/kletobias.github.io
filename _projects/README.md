@@ -145,7 +145,7 @@ Tags and links to the blog posts and project posts I have published on this site
 **Tags:**  
 
 [Data Preparation Series 1: Unique Values, Reasoning For Decisions Made, Data Validation](https://kletobias.github.io/project/data-prep-1) - **an Overview of available tools in the pandas library**  
-**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset, DataFrame, data validation through regex patterns,  `df.rename_column`, `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`, `df.find_replace`, `df.value_counts`, 
+**Tags:** `pandas`, `pyjanitor`, **method chaining**, cleaning of tabular dataset, DataFrame, data validation through regex patterns,  `df.rename_column`, `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`, `df.find_replace`, `df.value_counts`, 
 `df.process_text`, `df.change_type`, `df.value_counts`, `df.value_counts`,
 string_functions: `extract`, `replace`, `lstrip`, `rstrip`, `regular expressions`
 
