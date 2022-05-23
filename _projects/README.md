@@ -141,14 +141,14 @@ Tags and links to the blog posts and project posts I have published on this site
 [Data Preparation Series 3: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-3) - **an Overview of available tools in the pandas library**  
 **Tags:**  
 
-[Data Preparation Series 2: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-2) - **an Overview of available tools in the pandas library**  
+[Data Preparation Series 2: Creation of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2) - **an Overview of available tools in the pandas library**  
 **Tags:**  
 
-[Data Preparation Series 1: Unique Values, Reasoning For Decisions Made, Data Validation](https://kletobias.github.io/project/data-prep-1) - **an Overview of available tools in the pandas library**  
-**Tags:** `pandas`, `pyjanitor`, **method chaining**, cleaning of tabular dataset, DataFrame, data validation through regex patterns,  `df.rename_column`, `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`, `df.find_replace`, `df.value_counts`, 
-`df.process_text`, `df.change_type`, `df.value_counts`, `df.value_counts`,
-string_functions: `extract`, `replace`, `lstrip`, `rstrip`, `regular expressions`
-
+[Data Preparation Series 1: Unique Values, Reasoning For Decisions Made, Data Validation](https://kletobias.github.io/project/data-prep-1) - **the DataFrame is explored and columns are processed and cleaned to give insight into how many values are missing.**
+**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset, DataFrame, data validation using regex patterns, 
+`df.rename_column`, `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`, `df.find_replace`, `df.value_counts`, `df.process_text`, 
+`df.change_type`, `df.value_counts`, `df.value_counts`, string_functions: `extract`, `replace`, `lstrip`, `rstrip`, `regular expressions`  
+  
 [Data Preparation Series 0: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-0) - **an Overview of available tools in the pandas library**  
 **Tags:** `df.head`, `df.tail`, `df.index.max`, `df.columns`, `df.index`,
 `df.shape`, `df.count`, `df.describe`, `.to_markdown`, `df.nunique`, `df.filter`,`df.sample`,`df.value_counts`,`df.drop_duplicates`  
