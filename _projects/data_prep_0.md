@@ -1,6 +1,7 @@
 ---
 title: 'Cleaning a 47 Column<br>Pandas DataFrame<br>Part 0'
-subtitle: 'Data Preparation Series: Exploring Tabular Data With pandas: An Overview Of Available Tools In The pandas Library'
+subtitle: 'Data Preparation Series: Exploring Tabular Data With pandas: An Overview Of Available Tools In The pandas
+Library'
 date: '2022-05-23 05:00:00'
 description: 'An Overview Of Available Tools In The Pandas Library'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
@@ -12,28 +13,37 @@ accent_color: '#08877d'
 
 ## Reading In the Input Data
 
-The input data is split into 3 csv files, that together capture all rental listings that were online and within the boundaries of the city of Hamburg at the time of scraping the data. The source was a large German rental listing site called 'Immoscout24'. [ImmoScout24 - https://www.immobilienscout24.de](https://www.immobilienscout24.de/) is their official brand name and URL.
+The input data is split into 3 csv files, that together capture all rental listings that were online and within the
+boundaries of the city of Hamburg at the time of scraping the data. The source was a large German rental listing site
+called 'Immoscout24'. [ImmoScout24 - https://www.immobilienscout24.de](https://www.immobilienscout24.de/) is their
+official brand name and URL.
 
-Various features were extracted from the listings through the use of webscraping and it is the main objective at this stage to clean and construct a tidy DataFrame, that is ready for the following stages. A brief overview of the following stages is given below.
+Various features were extracted from the listings through the use of webscraping and it is the main objective at this
+stage to clean and construct a tidy DataFrame, that is ready for the following stages. A brief overview of the following
+stages is given below.
 
 - Feature Engineering - Adding location based features
 - EDA - Exploratory Data Analysis
 - Machine Learning - Fitting and tuning 2 models, then predicting the value of variable 'base rent'
 - Analyzing & Discussing the results
 
-Back to the task at hand, we begin by reading in the csv files and creating the Pandas (*pd*) DataFrame object. Throughout this article, any Pandas DataFrame object will be assigned to a variable that always contains the letters 'df', plus any prefix or suffix, preceding or succeeding the letters 'df' in some cases.
+Back to the task at hand, we begin by reading in the csv files and creating the Pandas (*pd*) DataFrame object.
+Throughout this article, any Pandas DataFrame object will be assigned to a variable that always contains the letters '
+df', plus any prefix or suffix, preceding or succeeding the letters 'df' in some cases.
 
 In the first step, we import the necessary modules
-
 
 ```python
 import pandas as pd # The library used to manipulate and to create a tidy DataFrame object
 seed = 42 # Create reproducible random output.
 ```
 
-The path to the input data is assigned to variables `scraping_{1..3}`. For each of them a DataFrame object is created afterwards. The DataFrame `df`, which holds the data of all three is created and duplicate rows are dropped.
-The command used to drop any possibly duplicate rows is `df.drop_duplicates()` without any specifying further parameters as to the subset of columns to consider when determining, if two rows are identical. Like that, only such rows are dropped, that have identical values for all variables found in the dataset. This was mainly done to get rid of overlapping page ranges from the scraping part and also to get rid of duplicate listings on the website.
-
+The path to the input data is assigned to variables `scraping_{1..3}`. For each of them a DataFrame object is created
+afterwards. The DataFrame `df`, which holds the data of all three is created and duplicate rows are dropped.
+The command used to drop any possibly duplicate rows is `df.drop_duplicates()` without any specifying further parameters
+as to the subset of columns to consider when determining, if two rows are identical. Like that, only such rows are
+dropped, that have identical values for all variables found in the dataset. This was mainly done to get rid of
+overlapping page ranges from the scraping part and also to get rid of duplicate listings on the website.
 
 ```python
 scraping_1 = "../data/20181203-first_scraping_topage187.csv"
@@ -51,35 +61,49 @@ df = df.drop_duplicates()
 
 ## First Look at the DataFrame
 
-To get a first look at the newly created DataFrame `df`, one can choose between multiple tools in the pandas library. It is assumed, that the Dataframe is named `df` in the following, as a couple of the tools, the pandas library has to offer, are described and links to the documentation page of each command are added for more detail on how each command works.
+To get a first look at the newly created DataFrame `df`, one can choose between multiple tools in the pandas library. It
+is assumed, that the Dataframe is named `df` in the following, as a couple of the tools, the pandas library has to
+offer, are described and links to the documentation page of each command are added for more detail on how each command
+works.
 
-- `df.head()` - [pandas.DataFrame.head — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html)
-- The counterpart of `df.head()` is `df.tail()` - [pandas.DataFrame.tail — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html)
-- `df.columns` - [pandas.DataFrame.columns — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html)
-- `df.index` - [pandas.DataFrame.index — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.index.html)
-- `df.describe()` - [pandas.DataFrame.describe — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html)
-- `df.shape` - [pandas.DataFrame.shape — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html)
-- `df.count()` - [pandas.DataFrame.count — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html)
-- `df.nunique()` - [pandas.DataFrame.nunique — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html)
-- `df.value_counts()` - [pandas.DataFrame.value_counts — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.value_counts.html)
-- `df.filter()` - [pandas.DataFrame.filter — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.filter.html)
-- `df.sample()` - [pandas.DataFrame.sample — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sample.html)
+- `df.head()`
+  - [pandas.DataFrame.head — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html)
+- The counterpart of `df.head()` is `df.tail()`
+  - [pandas.DataFrame.tail — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.tail.html)
+- `df.columns`
+  - [pandas.DataFrame.columns — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.columns.html)
+- `df.index`
+  - [pandas.DataFrame.index — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.index.html)
+- `df.describe()`
+  - [pandas.DataFrame.describe — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html)
+- `df.shape`
+  - [pandas.DataFrame.shape — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.shape.html)
+- `df.count()`
+  - [pandas.DataFrame.count — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html)
+- `df.nunique()`
+  - [pandas.DataFrame.nunique — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.nunique.html)
+- `df.value_counts()`
+  - [pandas.DataFrame.value_counts — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.value_counts.html)
+- `df.filter()`
+  - [pandas.DataFrame.filter — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.filter.html)
+- `df.sample()`
+  - [pandas.DataFrame.sample — pandas documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sample.html)
 
 ### Commands
 
 `df.head()`
 
-**Description -** The command `df.head()`returns the first 5 rows of the DataFrame by default, if no parameters are specified by the user. Using the parameter *n*, one can specify the number of rows, that get returned. Needless to say, rows returned will always start at the first index value and include the following *n-1* rows.
+**Description -** The command `df.head()`returns the first 5 rows of the DataFrame by default, if no parameters are
+specified by the user. Using the parameter *n*, one can specify the number of rows, that get returned. Needless to say,
+rows returned will always start at the first index value and include the following *n-1* rows.
 
-**Example -** In the first call to `df.head()`, the default value for number of lines printed (*n*=5) is used by not specifying any parameter value in the function call. In the second call, the number of lines printed is changed to *n*=9.
-
+**Example -** In the first call to `df.head()`, the default value for number of lines printed (*n*=5) is used by not
+specifying any parameter value in the function call. In the second call, the number of lines printed is changed to *n*
+=9.
 
 ```python
 df.head() # Includes index values [0:4], which is default (n=5)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -249,9 +273,6 @@ df.head() # Includes index values [0:4], which is default (n=5)
 <p>5 rows × 47 columns</p>
 </div>
 
-
-
-
 ```python
 df.head(n=3) # Includes index values [0:2]
 ```
@@ -259,21 +280,8 @@ df.head(n=3) # Includes index values [0:2]
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div style="width:656px;overflow-x:scroll;">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -382,10 +390,14 @@ df.head(n=3) # Includes index values [0:2]
 
 `df.tail()`
 
-**Description -** The command `df.tail()` is the counterpart to `df.head()`, it returns the last 5 rows of the DataFrame by default, if no parameters are specified by the user. Using the parameter *n*, one can specify the number of rows, that get returned. Needless to say, rows returned will always end with the row at the last index value and include the preceding *n-1* rows.
+**Description -** The command `df.tail()` is the counterpart to `df.head()`, it returns the last 5 rows of the DataFrame
+by default, if no parameters are specified by the user. Using the parameter *n*, one can specify the number of rows,
+that get returned. Needless to say, rows returned will always end with the row at the last index value and include the
+preceding *n-1* rows.
 
-**Example -** First the maximum of the index of `df` is checked, to show that the last printed row is indeed the last value in the index of the DataFrame, other than that the examples mirror the two from the `df.head()` command, to display their similarities.
-
+**Example -** First the maximum of the index of `df` is checked, to show that the last printed row is indeed the last
+value in the index of the DataFrame, other than that the examples mirror the two from the `df.head()` command, to
+display their similarities.
 
 ```python
 print('The maximum value of the range index of df is %s' % df.index.max())
@@ -394,25 +406,8 @@ df.tail()
 
     The maximum value of the range index of df is 12494
 
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-    
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
+<div style="width:656px;overflow-x:scroll;">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -569,22 +564,28 @@ df.tail()
 
 `df.columns`
 
-**Description -** The command `df.columns` does one thing and one thing well, one might say. It returns a list of strings, the list of the columns of the DataFrame. It's output can be iterated through, in order to select subsets of all columns. An iteration can be done in the form of a list comprehension, that makes use of conditional clauses for example. It also helps one find problematic column names, that need to be changed in order to qualify as tidy. The output of it also helps one get an overview of all the columns names and therefore is a starting point for dropping certain columns and renaming the columns, so they follow an easy to remember and precise naming pattern.
+**Description -** The command `df.columns` does one thing and one thing well, one might say. It returns a list of
+strings, the list of the columns of the DataFrame. It's output can be iterated through, in order to select subsets of
+all columns. An iteration can be done in the form of a list comprehension, that makes use of conditional clauses for
+example. It also helps one find problematic column names, that need to be changed in order to qualify as tidy. The
+output of it also helps one get an overview of all the columns names and therefore is a starting point for dropping
+certain columns and renaming the columns, so they follow an easy to remember and precise naming pattern.
 
-**Example -** Below, the set of columns of the DataFrame are printed. One can see, that there are two types of patterns found in the names of the columns.
+**Example -** Below, the set of columns of the DataFrame are printed. One can see, that there are two types of patterns
+found in the names of the columns.
 
-1. The first set of columns originates from values found in listings, that are visible to the visitor. These ones have no prefix attached to them and they all have German names.
-2. Columns in the second set have the prefix 'json\_' added to them. This comes from the fact, that they were sourced from a *script tag* found in the raw *HTML* code of each listing. The inner *HTML* of these *script tags* consisted of key-value pairs using a *json* like formatting. It was not machine readable though. The names of these columns were in English already and only the 'json\_' prefix was added afterwards.
+1. The first set of columns originates from values found in listings, that are visible to the visitor. These ones have
+   no prefix attached to them and they all have German names.
+2. Columns in the second set have the prefix 'json\_' added to them. This comes from the fact, that they were sourced
+   from a *script tag* found in the raw *HTML* code of each listing. The inner *HTML* of these *script tags* consisted
+   of key-value pairs using a *json* like formatting. It was not machine readable though. The names of these columns
+   were in English already and only the 'json\_' prefix was added afterwards.
 
 There are several other differences between the sets, as we will see later.
-
 
 ```python
 df.columns
 ```
-
-
-
 
     Index(['einbau_kue', 'lift', 'nebenkosten', 'gesamt_miete', 'heiz_kosten',
            'lat', 'lng', 'str', 'nutzf', 'regio', 'parking', 'online_since',
@@ -601,20 +602,26 @@ df.columns
            'json_petsAllowed', 'json_lift'],
           dtype='object')
 
-
-
 `df.index`
 
-**Description -** The command `df.index` prints the type of the index of the DataFrame, as well as a couple of index values from the beginning and end of the 64bit integer index range in our example. When the final DataFrame `df` was created, using the following line of code:
+**Description -** The command `df.index` prints the type of the index of the DataFrame, as well as a couple of index
+values from the beginning and end of the 64bit integer index range in our example. When the final DataFrame `df` was
+created, using the following line of code:
 
 ```python
 df = df1.append([df2, df3], ignore_index=True)
 ```
 
-The `ignore_index=True` part was important to make sure, that the range indexes of each of the appended DataFrames `df2` and `df3` would not simply get stacked on top of the index of `df1`. Would that have happened the resulting index would have been unusable, since there would not have been a monotonously increasing range index in the resulting DataFrame.
+The `ignore_index=True` part was important to make sure, that the range indexes of each of the appended DataFrames `df2`
+and `df3` would not simply get stacked on top of the index of `df1`. Would that have happened the resulting index would
+have been unusable, since there would not have been a monotonously increasing range index in the resulting DataFrame.
 
-**Example -** In the example it is shown what the resulting index of the final DataFrame would have been, if parameter *ignore_index* would not have been specified at all (`df_index_1`) and what it would have been, given `ignore_index=False` (`df_index_2`). The resulting index is the same in both cases and it is important, that one knows exactly how the index of any DataFrame looks like, in order to be able to manipulate and clean it. The resulting range index of the DataFrame, given `ignore_index=True` is used in the input statement shows all the qualities a simple range index should have.
-
+**Example -** In the example it is shown what the resulting index of the final DataFrame would have been, if parameter *
+ignore_index* would not have been specified at all (`df_index_1`) and what it would have been,
+given `ignore_index=False` (`df_index_2`). The resulting index is the same in both cases and it is important, that one
+knows exactly how the index of any DataFrame looks like, in order to be able to manipulate and clean it. The resulting
+range index of the DataFrame, given `ignore_index=True` is used in the input statement shows all the qualities a simple
+range index should have.
 
 ```python
 df_index_1 = df1.append([df2, df3])
@@ -635,9 +642,6 @@ print('The resulting index, if False is used:\n %s\n ' % df_index_2.index)
                 5582, 5583, 5584, 5585, 5586, 5587, 5588, 5589, 5590, 5591],
                dtype='int64', length=12495)
 
-
-
-
 ```python
 print('The resulting index, if True is used:\n %s\n ' % df.index)
 ```
@@ -650,11 +654,12 @@ print('The resulting index, if True is used:\n %s\n ' % df.index)
                 12494],
                dtype='int64', length=12325)
 
-
-
 `df.describe()`
 
-**Description -** The command `df.describe()` gives summary statistics for all columns, that are of a numerical data type (*dtype*) by default. In the default case, the following statistics are included in the output for each included column. The following notation will be used from this point onwards: $np.nan$ stands for missing values and $\neg np.nan$ stands for non missing values.
+**Description -** The command `df.describe()` gives summary statistics for all columns, that are of a numerical data
+type (*dtype*) by default. In the default case, the following statistics are included in the output for each included
+column. The following notation will be used from this point onwards: $np.nan$ stands for missing values and $\neg
+np.nan$ stands for non missing values.
 
 - **count:** Count of all $\neg np.nan$ for a given column.
 - **mean:** The Arithmetic Mean of all $\neg np.nan$ in the column.
@@ -667,13 +672,9 @@ print('The resulting index, if True is used:\n %s\n ' % df.index)
 
 **Example -** The *data types* (*dtypes*) in the DataFrame are checked, before `df.describe()` is explored for `df`.
 
-
 ```python
 df.dtypes
 ```
-
-
-
 
     einbau_kue                    object
     lift                          object
@@ -724,19 +725,17 @@ df.dtypes
     json_lift                     object
     dtype: object
 
+From the output one can see, that there only 2 columns that exclusively hold numerical data and thus have a numerical *
+data type* (*dtype*). All other columns have mixed *dtypes*, so pandas labels them as having dtype 'object'. In the
+following, all columns will be checked and their dtypes might change in the process of cleaning them.
 
-
-From the output one can see, that there only 2 columns that exclusively hold numerical data and thus have a numerical *data type* (*dtype*). All other columns have mixed *dtypes*, so pandas labels them as having dtype 'object'. In the following, all columns will be checked and their dtypes might change in the process of cleaning them.
-
-With the information, that only 2 columns have a numerical dtype, calling `df.describe()` with no further parameters specified, will print the summary statistics listed above only for those two columns. See the output below, for more details.
-
+With the information, that only 2 columns have a numerical dtype, calling `df.describe()` with no further parameters
+specified, will print the summary statistics listed above only for those two columns. See the output below, for more
+details.
 
 ```python
 df.describe()
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -751,6 +750,7 @@ df.describe()
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -807,28 +807,34 @@ df.describe()
 
 
 
-We will use the summary statistics for variable `anz_schlafzimmer` as an example of how one can interpret their values for a given data series. The variable gives the number of bedrooms that a listing has, according to the data found in the listing on the website.
+We will use the summary statistics for variable `anz_schlafzimmer` as an example of how one can interpret their values
+for a given data series. The variable gives the number of bedrooms that a listing has, according to the data found in
+the listing on the website.
 
 - **count:** Count of all $\neg np.nan$ is 6469
-- **mean:** The Arithmetic Mean of all $\neg np.nan$ in the column is $\bar{x} \approx 1.58$. Since bedroom only has $\neg np.nan$ of type int64, there are no floating type numbers to be found in the column. We gained this information by running `df['anz_schlafzimmer'].value_counts()`, which prints a 2 column table. In the first column, all unique values in the data series are listed. For each of them, the count is given in the same row, second column of the table. $np.nan$ are excluded. This knowledge helps one to understand, that the mean $\bar{x} \approx 1.58$ signals, that there are many listings that have two or less bedrooms.
-- **std:** Standard Deviation for the distribution of all $\neg np.nan$ in the data series is $\approx 0.75$. This gives the the one sigma interval, defined as $\bar{x} \pm \sigma$ with the standard deviation as $\sigma$.
+- **mean:** The Arithmetic Mean of all $\neg np.nan$ in the column is $\bar{x} \approx 1.58$. Since bedroom only has
+  $\neg np.nan$ of type int64, there are no floating type numbers to be found in the column. We gained this information
+  by running `df['anz_schlafzimmer'].value_counts()`, which prints a 2 column table. In the first column, all unique
+  values in the data series are listed. For each of them, the count is given in the same row, second column of the
+  table. $np.nan$ are excluded. This knowledge helps one to understand, that the mean $\bar{x} \approx 1.58$ signals,
+  that there are many listings that have two or less bedrooms.
+- **std:** Standard Deviation for the distribution of all $\neg np.nan$ in the data series is $\approx 0.75$. This gives
+  the the one sigma interval, defined as $\bar{x} \pm \sigma$ with the standard deviation as $\sigma$.
 - **min:** The minimum is 0, which is equivalent to no bedroom, as declared in the listing.
 - **25%:** The 25% quantile reaches 1 bedroom already, so $P(X \le 1) \le 0.25$.
 - **50%:** The value, that splits the data in two equally sized parts is 1 bedroom.
-- **75%:** The 75% quantile is found at 2 bedrooms. Together with the value for the 25% quantile it is possible to calculate the interquartile range (**IQR**), which is given by $Q_3 - Q_1 \equiv 2 - 1 = 1$.
+- **75%:** The 75% quantile is found at 2 bedrooms. Together with the value for the 25% quantile it is possible to
+  calculate the interquartile range (**IQR**), which is given by $Q_3 - Q_1 \equiv 2 - 1 = 1$.
 - **max:** The maximum value for the number of bedrooms found in the data series is 8.
 
 The distributions will be analyzed at a later stage, for now the focus is on getting a 'first look' at the DataFrame.
 
-Below one finds the value counts for variable *anz_schlafzimmer*, which describes the number of bedrooms found in each listing.
-
+Below one finds the value counts for variable *anz_schlafzimmer*, which describes the number of bedrooms found in each
+listing.
 
 ```python
 df['anz_schlafzimmer'].value_counts()
 ```
-
-
-
 
     1.0    3544
     2.0    2207
@@ -840,39 +846,29 @@ df['anz_schlafzimmer'].value_counts()
     6.0       1
     Name: anz_schlafzimmer, dtype: int64
 
-
-
 `df.shape`
 
-**Description:** The command returns a tuple object which has two numerical values. Let $(x,y)$ be the output of `df.shape`, a tuple object where $x$ gives the number of rows `df` has, while $y$ gives the number of columns of it.
+**Description:** The command returns a tuple object which has two numerical values. Let $(x,y)$ be the output
+of `df.shape`, a tuple object where $x$ gives the number of rows `df` has, while $y$ gives the number of columns of it.
 
 **Example:** See below for the created `df`.
-
 
 ```python
 df.shape
 ```
 
-
-
-
     (12325, 47)
-
-
 
 `df.count()`
 
 **Description:** `df.count()` returns the count of all $\neg np.nan$ for each column or for a subset.
 
-**Example:** In the example, the output was shortened by only including 4 randomly selected columns out of the 47 columns in the `df`.
-
+**Example:** In the example, the output was shortened by only including 4 randomly selected columns out of the 47
+columns in the `df`.
 
 ```python
 df.count().sample(4,random_state=seed)
 ```
-
-
-
 
     nicht_mehr_verfg_seit    11629
     json_cellar              12324
@@ -880,21 +876,17 @@ df.count().sample(4,random_state=seed)
     json_condition           12324
     dtype: int64
 
-
-
 `df.nunique()`
 
-**Description:** Returns an integer value, that gives the number of unique values in the data frame or of a subset of columns in the `df`. It does not return the unique values themselves.
+**Description:** Returns an integer value, that gives the number of unique values in the data frame or of a subset of
+columns in the `df`. It does not return the unique values themselves.
 
-**Example:** The example shows how it can be applied to `df` and what the output looks like. A subset of the columns is used again, to keep the output readable.
-
+**Example:** The example shows how it can be applied to `df` and what the output looks like. A subset of the columns is
+used again, to keep the output readable.
 
 ```python
 df.nunique().sample(4,random_state=seed)
 ```
-
-
-
 
     nicht_mehr_verfg_seit    701
     json_cellar                2
@@ -902,23 +894,23 @@ df.nunique().sample(4,random_state=seed)
     json_condition            10
     dtype: int64
 
-
-
 `df.filter()`
 
-**Description:** `df.filter()` can be used like `df.loc`, if parameter *items* is added. It prints the columns specified as a list of column names. However, where it shines is when there are subsets of columns that have a certain pattern in their names. In this case, one can use parameter *regex*, followed by a regex pattern along with the parameter and value *axis=1*.
+**Description:** `df.filter()` can be used like `df.loc`, if parameter *items* is added. It prints the columns specified
+as a list of column names. However, where it shines is when there are subsets of columns that have a certain pattern in
+their names. In this case, one can use parameter *regex*, followed by a regex pattern along with the parameter and
+value *axis=1*.
 
-**Example:** In the first example `df.filter()` is used like `df.loc` to select a subset of two columns. The second example shows how *regex* can be used to filter certain columns. As mentioned earlier, in the DataFrame constructed there is a subset of columns, whose names all begin with the prefix 'json\_'. Using *regex*, makes it easy to filter out these columns.
+**Example:** In the first example `df.filter()` is used like `df.loc` to select a subset of two columns. The second
+example shows how *regex* can be used to filter certain columns. As mentioned earlier, in the DataFrame constructed
+there is a subset of columns, whose names all begin with the prefix 'json\_'. Using *regex*, makes it easy to filter out
+these columns.
 
 Example 1 - Using `df.filter()` to select a subset of columns.
-
 
 ```python
 df.filter(items=['lift','str']).sample(4,random_state=seed)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -933,6 +925,7 @@ df.filter(items=['lift','str']).sample(4,random_state=seed)
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -971,13 +964,9 @@ df.filter(items=['lift','str']).sample(4,random_state=seed)
 
 Example 2 - Using `df.filter()` to select all columns, that have the prefix 'json\_' in their names.
 
-
 ```python
 df.filter(regex='^json', axis=1).sample(4,random_state=seed)
 ```
-
-
-
 
 <div>
 <style scoped>
@@ -992,6 +981,7 @@ df.filter(regex='^json', axis=1).sample(4,random_state=seed)
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -1115,8 +1105,20 @@ df.filter(regex='^json', axis=1).sample(4,random_state=seed)
 
 `df.sample()`
 
-**Description:** Allows one to randomly sample from a DataFrame or `pandas.Series`. It was used several times in the examples so far, in order to give a better glimpse of the data in the `df`. Alternatives would have been, among others, `df.head()` and `df.tail()`. The main reason `df.sample()` was preferred over these alternatives is the reason, that by using `df.sample()` one gets a subset of rows or columns of the data frame, that are not constricted to either being at the very beginning of the index in the case of `df.head()` or at the very end of the index, if `df.tail()` is used. The subset, that `df.sample()` produces might not have anything over the ones produced by `df.head()` or `df.tail()`, since it is a random sample after all. It is advised to specify a value for a *seed*, that is used used whenever any kind of random element is part of command. In the case of `df.sample()`, one can pass a random seed in several different ways. Here, only a integer value was needed (`seed = 42`), as defined along the imports needed for this article. Parameter *random_state* takes the value of the random seed (`random_state=seed`). Specifying a seed has the benefit to make the output consistent and most importantly reproducible when run several times by one self or by anyone else executing the file again.
+**Description:** Allows one to randomly sample from a DataFrame or `pandas.Series`. It was used several times in the
+examples so far, in order to give a better glimpse of the data in the `df`. Alternatives would have been, among
+others, `df.head()` and `df.tail()`. The main reason `df.sample()` was preferred over these alternatives is the reason,
+that by using `df.sample()` one gets a subset of rows or columns of the data frame, that are not constricted to either
+being at the very beginning of the index in the case of `df.head()` or at the very end of the index, if `df.tail()` is
+used. The subset, that `df.sample()` produces might not have anything over the ones produced by `df.head()`
+or `df.tail()`, since it is a random sample after all. It is advised to specify a value for a *seed*, that is used used
+whenever any kind of random element is part of command. In the case of `df.sample()`, one can pass a random seed in
+several different ways. Here, only a integer value was needed (`seed = 42`), as defined along the imports needed for
+this article. Parameter *random_state* takes the value of the random seed (`random_state=seed`). Specifying a seed has
+the benefit to make the output consistent and most importantly reproducible when run several times by one self or by
+anyone else executing the file again.
 
-
-This marks the end of this article. Steps from how to create a new DataFrame from several smaller DataFrames were covered, before various tools in the pandas library were showcased by describing each one along with using examples to show they can be used in projects.
+This marks the end of this article. Steps from how to create a new DataFrame from several smaller DataFrames were
+covered, before various tools in the pandas library were showcased by describing each one along with using examples to
+show they can be used in projects.
 
