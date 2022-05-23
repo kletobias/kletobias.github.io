@@ -1,7 +1,7 @@
 ---
 title: 'README.md'
 subtitle: 'The README.md File! Read it.'
-date: 2022-11-21 06:00:00
+date: 2022-05-23 16:00:00
 description: 'The README.md file gives information about posts I wrote and has links to all of them. There are links to projects, which are in pdf format as well. It describes the contents of each post briefly, in order to make it easier for the reader to find what he or she is looking for.'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
 gallery_images: '7WKqUMj6au4ZU3w2493kcE.jpeg'
