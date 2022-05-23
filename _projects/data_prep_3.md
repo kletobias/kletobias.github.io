@@ -40,7 +40,6 @@ for n in df.columns:
         col_stats[n]["unique"] = df[n].unique()
     except TypeError:
         pass
-#    col_stats[n]['unique'] = df[n].unique()
 
 for col in df.columns:
     try:
@@ -675,7 +674,6 @@ for n in df.columns:
         pass
     except TypeError:
         pass
-#    col_stats[n]['unique'] = df[n].unique()
 
 for col in df.columns:
     try:
@@ -934,11 +932,7 @@ for col in df.columns:
     if re.match(r"^json", col):
         json_name.append(col)
         pat = re.compile("^json_")
-        #        try:
         remove_prefix_col = pat.sub("", col)
-        #        except type(remove_prefix_col) == 'NoneType':
-        #            print('no json prefix')
-        #    remove_prefix_col = [m[0] if re.sub(r"^json_","",col)]
         remove_prefix_name.append(remove_prefix_col)
         print(remove_prefix_col)
 
@@ -1146,3 +1140,13 @@ We export the DataFrame in its current state for further work.
 df.to_csv("/Volumes/data/df_first_cleaning.csv")
 
 ```
+
+---
+<br>
+<br>
+<br>
+<br>
+<br>
+[Data Preparation Series 2](https://kletobias.github.io/project/data-prep-2)  
+[Data Preparation Series 1](https://kletobias.github.io/project/data-prep-1)  
+[Data Preparation Series 0](https://kletobias.github.io/project/data-prep-0)  
