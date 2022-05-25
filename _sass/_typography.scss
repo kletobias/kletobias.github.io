@@ -120,6 +120,7 @@ h6,
     font-weight: 500;
     text-decoration: underline;
     text-decoration-color: transparentize($color: $accent-color, $amount: 0.8);
+//     text-decoration-color: transparentize($color: #f97171, $amount: 0.8);
   }
 
   @include mq(tabletp) {
@@ -181,7 +182,9 @@ blockquote {
 
 a {
   text-decoration: underline;
-  color: $text-dark-color;
+//  color: $text-dark-color;
+//  color: #f97171;#f99192
+  color: #f99192;
   font-weight: $bold-weight;
   @include transition(all 120ms ease-in-out);
 

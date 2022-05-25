@@ -10,6 +10,7 @@ accent_color: '#08877d'
 ---
 
 # From Webscraping Data to Tidy Pandas DataFrame
+### Wrangling With That Data! Series: Part 0
 
 ## Reading In the Input Data
 
@@ -1121,4 +1122,3 @@ anyone else executing the file again.
 This marks the end of this article. Steps from how to create a new DataFrame from several smaller DataFrames were
 covered, before various tools in the pandas library were showcased by describing each one along with using examples to
 show they can be used in projects.
-

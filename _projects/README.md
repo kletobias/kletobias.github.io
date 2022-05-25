@@ -1,30 +1,40 @@
 ---
 title: 'README.md'
 subtitle: 'The README.md File! Read it.'
-date: 2022-05-23 16:00:00
-description: 'The README.md file gives information about posts I wrote and has links to all of them. There are links to projects, which are in pdf format as well. It describes the contents of each post briefly, in order to make it easier for the reader to find what he or she is looking for.'
+date: 2022-05-25 06:00:00
+description: 'The README.md file gives information about posts I wrote and has
+links to all of them. There are links to projects, which are in pdf format as
+well. It describes the contents of each post briefly, in order to make it easier
+for the reader to find what he or she is looking for.'
+accent_color: '#08877d'
 featured_image: 'mT68055%25%25--tYF_5__5jhhh5pls$0-G.jpeg'
-gallery_images: '7WKqUMj6au4ZU3w2493kcE.jpeg'
+gallery_images: 
+  - 7WKqUMj6au4ZU3w2493kcE.jpeg
 ---
 
 
 # README.md
 
-The README.md file gives information about posts I wrote and has links to all of them. There are links to projects, which are in pdf format as well. It describes the contents of each post briefly, in order to make it easier for the reader to find what he or she is looking for.
+The README.md file gives information about posts I wrote and has links to all of
+them. There are links to projects, which are in pdf format as well. It describes
+the contents of each post briefly, in order to make it easier for the reader to
+find what he or she is looking for.
 
 
 ## Special Projects
 
-### Bachelor Thesis - Hyperparameter Optimisation for Real Estate Prediction Models
+### Bachelor Thesis<br>Hyperparameter Optimisation<br>For Real Estate Prediction Models
 
 ![](/images/heat_map_base_rent.png)
 
-*Graphic shows the heat map of the base rent per square meter variable across the federal state of Hamburg, Germany.*
+*Graphic shows the heat map of the base rent per square meter variable across
+the federal state of Hamburg, Germany.*
 
 
 <br>
 
-A pdf version of the entire Bachelor Thesis (98 pages) can be accessed and downloaded here: [klein - real estate prediction models](https://filehost2.s3.eu-central-1.amazonaws.com/kletobias-github-io/Klein+-+2019+-+Data+Mining+Hyperparameter+Optimisation+for+Real+.pdf)
+A pdf version of the entire Bachelor Thesis (98 pages) can be accessed and
+downloaded here: [klein - real estate predictionmodels](https://filehost2.s3.eu-central-1.amazonaws.com/kletobias-github-io/Klein+-+2019+-+Data+Mining+Hyperparameter+Optimisation+for+Real+.pdf)
 
 <br>
 
@@ -34,14 +44,54 @@ A pdf version of the entire Bachelor Thesis (98 pages) can be accessed and downl
 
 ##### English Version  
   
-> Combining a highly scalable and customisable process, with very accurate prediction results using machine learning models, is what this work proposes. The customisation is guided by what information the user seeks to gain from the process. This makes the process applicable for a variety of sectors, such as Banking & Finance, Marketing and urban development among others. It evaluates the process of using self-acquired data from an online real estate platform, gained from deploying a custom web scraping algorithm. This data is then combined with several spatial features for predicting the base rent for apartments on a validation dataset. The analysis and predictions are made for rental apartment listings within the Hanseatic City of Hamburg. The spatial features originate from sources other than that of the apartments data and have to be adapted to it first, therefore. Predictions are made using state of the art machine learning models, in the form of a Lasso Regression model and a XGBoost Regressor model. The Hyperparameter Optimisation techniques grid search and random search are compared, during the optimisation process. The focus is on maximising prediction accuracy of the models. The best scores, expressed in RMSE, are 190.68 for the Lasso and 115.39 for the XGBoost Regressor. Differences in complexity and interpretability between the models are discussed and associated with it, the strengths and weaknesses of the respective model are pointed out.  
-
+> Combining a highly scalable and customisable process, with very accurate
+prediction results using machine learning models, is what this work proposes.
+The customisation is guided by what information the user seeks to gain from the
+process. This makes the process applicable for a variety of sectors, such as
+Banking & Finance, Marketing and urban development among others. It evaluates
+the process of using self-acquired data from an online real estate platform,
+gained from deploying a custom web scraping algorithm. This data is then
+combined with several spatial features for predicting the base rent for
+apartments on a validation dataset. The analysis and predictions are made for
+rental apartment listings within the Hanseatic City of Hamburg. The spatial
+features originate from sources other than that of the apartments data and have
+to be adapted to it first, therefore. Predictions are made using state of the
+art machine learning models, in the form of a Lasso Regression model and a
+XGBoost Regressor model. The Hyperparameter Optimisation techniques grid search
+and random search are compared, during the optimisation process. The focus is on
+maximising prediction accuracy of the models. The best scores, expressed in
+RMSE, are 190.68 for the Lasso and 115.39 for the XGBoost Regressor. Differences
+in complexity and interpretability between the models are discussed and
+associated with it, the strengths and weaknesses of the respective model are
+pointed out.  
+  
 <br>
 <br>
 
 ##### German Version  
   
-> Die Kombination eines hoch skalierbaren und anpassbaren Prozesses mit sehr präzisen Vorhersageergebnissen unter Verwendung von Machine Learning Modellen ist der vor- geschlagene Ansatz dieser Arbeit. Die Anpassung richtet sich danach, welche Informa- tionen der Benutzer aus dem Prozess gewinnen möchte. Dadurch ist der Prozess für eine Vielzahl von Sektoren anwendbar, wie zum Beipiel Bankwesen & Finanzen, Mar- keting und Stadtentwicklung. Es bewertet den Prozess der Verwendung von selbst gewonnenen Daten, die durch den Einsatz eines eigenen Web-Scraping-Algorithmus von einer Online-Immobilienplattform gewonnen wurden. Diese Daten werden dann mit mehreren räumlichen Merkmalen kombiniert, um die Kaltmiete für Wohnungen auf einem Validierungsdatensatz vorherzusagen. Die Analysen und Prognosen wer- den für Mietwohnungsangebote in der Hansestadt Hamburg erstellt. Die räumlichen Merkmale stammen aus anderen Quellen als denen der Wohnungsdaten und müssen daher zunächst an diese angepasst werden. Die Vorhersagen werden mit Hilfe mod- ernster Machine Learning Modelle in Form eines Lasso-Regressionsmodells und eines XGBoost Regressor-Modells getroffen. Die Hyperparameter Optimierungstechniken Grid Search und Random Search werden während des Optimierungsprozesses ver- glichen. Der Fokus liegt auf der Maximierung der Vorhersagegenauigkeit der Mod- elle. Die besten Ergebnisse, ausgedrückt in RMSE, sind 190,68 für das Lasso und 115, 39 für den XGBoost Regressor. Unterschiede in der Komplexität und Interpretier- barkeit zwischen den Modellen werden diskutiert und damit verbunden, die Stärken und Schwächen des jeweiligen Modells aufgezeigt.  
+> Die Kombination eines hoch skalierbaren und anpassbaren Prozesses mit sehr
+präzisen Vorhersageergebnissen unter Verwendung von Machine Learning Modellen
+ist der vor- geschlagene Ansatz dieser Arbeit. Die Anpassung richtet sich
+danach, welche Informa- tionen der Benutzer aus dem Prozess gewinnen möchte.
+Dadurch ist der Prozess für eine Vielzahl von Sektoren anwendbar, wie zum
+Beipiel Bankwesen & Finanzen, Mar- keting und Stadtentwicklung. Es bewertet den
+Prozess der Verwendung von selbst gewonnenen Daten, die durch den Einsatz eines
+eigenen Web-Scraping-Algorithmus von einer Online-Immobilienplattform gewonnen
+wurden. Diese Daten werden dann mit mehreren räumlichen Merkmalen kombiniert, um
+die Kaltmiete für Wohnungen auf einem Validierungsdatensatz vorherzusagen. Die
+Analysen und Prognosen wer- den für Mietwohnungsangebote in der Hansestadt
+Hamburg erstellt. Die räumlichen Merkmale stammen aus anderen Quellen als denen
+der Wohnungsdaten und müssen daher zunächst an diese angepasst werden. Die
+Vorhersagen werden mit Hilfe mod- ernster Machine Learning Modelle in Form eines
+Lasso-Regressionsmodells und eines XGBoost Regressor-Modells getroffen. Die
+Hyperparameter Optimierungstechniken Grid Search und Random Search werden
+während des Optimierungsprozesses ver- glichen. Der Fokus liegt auf der
+Maximierung der Vorhersagegenauigkeit der Mod- elle. Die besten Ergebnisse,
+ausgedrückt in RMSE, sind 190,68 für das Lasso und 115, 39 für den XGBoost
+Regressor. Unterschiede in der Komplexität und Interpretier- barkeit zwischen
+den Modellen werden diskutiert und damit verbunden, die Stärken und Schwächen
+des jeweiligen Modells aufgezeigt.  
   
 
 <br>
@@ -133,55 +183,132 @@ A pdf version of the entire Bachelor Thesis (98 pages) can be accessed and downl
 <br>
 
 ## Blog Posts & Projects
+  
+Tags and links to the blog posts and project posts I have published on this
+site.
+  
+###### General Information
+  
+The following table explains certain notations, that are used in the
+descriptions of the articles. They follow the general notation used in
+comparable articles.
+  
+| Notation         | Reference                                |
+|------------------|------------------------------------------|
+| `df`             | `pandas.DataFrame` Object                |
+| `pd`             | Alias for `pandas` Module                |
+| `df.some_method` | Alias for `pandas.DataFrame.some_method` |
+ 
+<br>
+#### Blog Posts
 
-Tags and links to the blog posts and project posts I have published on this site.
 
 #### Projects
 
-[Data Preparation Series 3: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-3) - **an Overview of available tools in the pandas library**  
+[Data Preparation Series Part 3: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-3) 
+**Description:** *An Overview of available tools in the pandas library.*
 **Tags:**  
 
-[Data Preparation Series 2: Creation of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2) - **an Overview of available tools in the pandas library**  
-**Tags:**  
+[Data Preparation Series Part 2: Creation of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2)  
 
-[Data Preparation Series 1: Unique Values, Reasoning For Decisions Made, Data Validation](https://kletobias.github.io/project/data-prep-1) - **the DataFrame is explored and columns are processed and cleaned to give insight into how many values are missing.**  
-**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset, DataFrame, data validation using regex patterns, 
-`df.rename_column`, `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`, `df.find_replace`, `df.value_counts`, `df.process_text`, 
-`df.change_type`, `df.value_counts`, `df.value_counts`, string_functions: `extract`, `replace`, `lstrip`, `rstrip`, `regular expressions`  
+**Description:** Creation of a valid gps column for the records, by joining the
+longitude and latitude columns together using geometry object `Point` from
+library `shapely.geometry`. It lays the foundation for assigning from the
+dataset completely independent geospatial features to the listings. Features
+that prove significant for the prediction of variable 'base_rent' in the later
+stages of the process. Further, a dtype `timedelta64[ns]` column is created
+using `datetime64[ns]` type columns 'date_listed' and 'date_unlisted' to
+calculate how long a listing was listed for on the platform 'immoscout24.de'.
+
+**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset,
+DataFrame, data validation using regex patterns, `df.drop`, `df.process_text`,
+`df.change_type`, `df.dropna`, `df.to_datetime`, `df.fill_direction`,
+`df.truncate_datetime_dataframe`, `df.add_column`, `df.transform_column`,
+`df.describe`, `shapely.geometry.Point`
   
-[Data Preparation Series 0: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-0) - **an Overview of available tools in the pandas library**  
+[Data Preparation Series Part 1: Foundation for Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-1)  
+
+**Description:** The DataFrame is explored and columns are processed and cleaned
+to give insight into how many values are missing among other properties.  
+  
+**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset,
+DataFrame, data validation using regex patterns, `df.rename_column`,
+`df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`,
+`df.find_replace`, `df.value_counts`, `df.process_text`, `df.change_type`,
+`df.value_counts`, `df.value_counts`, string_functions: `extract`, `replace`,
+`lstrip`, `rstrip`, `regular expressions`  
+  
+[Data Preparation Series Part 0: Exploring The 47 Column Wide Tabular Dataset Using Pandas](https://kletobias.github.io/project/data-prep-0)  
+  
+**Description:** An Overview of available tools in the pandas library.  
 **Tags:** `df.head`, `df.tail`, `df.index.max`, `df.columns`, `df.index`,
 `df.shape`, `df.count`, `df.describe`, `.to_markdown`, `df.nunique`, `df.filter`,`df.sample`,`df.value_counts`,`df.drop_duplicates`  
+  
+-
+---
+  
+[chapter 5: section 13](https://kletobias.github.io/project/chapter-5-13)  
 
-[chapter 5: section 13](https://kletobias.github.io/project/chapter-5-13) - **the `systemctl` command**  
-**Tags:** `systemctl`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+**Description:** The `systemctl` command.  
+**Tags:** `systemctl`, shell, bash, centos 7.9, system administration, ssh,
+virtual machine  
 
-[chapter 5: section 12](https://kletobias.github.io/project/chapter-5-12) - **processes, jobs and scheduling**  
-**Tags:** application, script, daemon, threads, job, shell, bash, centos 7.9, system administration, ssh, virtual machine  
-directory services & system utility commands**  
+[chapter 5: section 12](https://kletobias.github.io/project/chapter-5-12)  
 
-[chapter 5: section 10 & 11](https://kletobias.github.io/project/chapter-5-10-11) - **overview and comparison of popular
-**Tags:** directory services, active directory service windows, identity manager red hat, winbind samba linux to windows, openldap red hat, ibm directoryserver, jumpcloud, ldap protocol, `date`, `uptime`, `uname`, `which`, `cal`, `bc`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+**Description:** Processes, jobs and scheduling.  
+**Tags:** application, script, daemon, threads, job, shell, bash, centos 7.9,
+system administration, ssh, virtual machine  directory services & system utility
+commands  
+  
+[chapter 5: section 10 & 11](https://kletobias.github.io/project/chapter-5-10-11)  
+  
+**Description:** Overview and comparison of popular directory services.  
+  
+**Tags:** directory services, active directory service windows, identity manager
+red hat, winbind samba linux to windows, openldap red hat, ibm directoryserver,
+jumpcloud, ldap protocol, `date`, `uptime`, `uname`, `which`, `cal`, `bc`,
+shell, bash, centos 7.9, system administration, ssh, virtual machine  
+  
+[chapter 5: section 8 & 9](https://kletobias.github.io/project/chapter-5-8-9)  
 
-[chapter 5: section 8 & 9](https://kletobias.github.io/project/chapter-5-8-9) - **communicating with users & linux account management**  
-**Tags:** `users`, `wall`, `write`, local account, domain account, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+**Description:** Communicating with users & linux account management.  
+**Tags:** `users`, `wall`, `write`, local account, domain account, shell, bash,
+centos 7.9, system administration, ssh, virtual machine  
 
-[chapter 5: section 7](https://kletobias.github.io/project/chapter-5-7) - **monitoring users**  
-**Tags:** `who`, `last`, `w`, `finger`, `id`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+[chapter 5: section 7](https://kletobias.github.io/project/chapter-5-7)  
 
-[chapter 5: section 6](https://kletobias.github.io/project/chapter-5-6) - **how to switch users and `sudo` access**  
-**Tags:** `sudo`, `visudo`, `su - username`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+**Description:** Monitoring users.  
+**Tags:** `who`, `last`, `w`, `finger`, `id`, shell, bash, centos 7.9, system
+administration, ssh, virtual machine  
 
-[chapter 5: section 5](https://kletobias.github.io/project/chapter-5-5) - **`chage` command in depth**  
-**Tags:** `chage`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+[chapter 5: section 6](https://kletobias.github.io/project/chapter-5-6)  
 
-[chapter 5: section 4](https://kletobias.github.io/project/chapter-5-4) - **user account management**  
-**Tags:** `useradd`, `groupadd`, `userdel`, `groupdel`, `usermod [-G]`, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+**Description:** How to switch users and `sudo` access.  
+**Tags:** `sudo`, `visudo`, `su - username`, shell, bash, centos 7.9, system
+administration, ssh, virtual machine  
 
-[chapter 5: section 3](https://kletobias.github.io/project/chapter-5-3) - **The `sed` command for text manipulation**  
-**Tags:** `sed` command, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+[chapter 5: section 5](https://kletobias.github.io/project/chapter-5-5)  
+
+**Description:** `chage` command in depth.  
+**Tags:** `chage`, shell, bash, centos 7.9, system administration, ssh, virtual
+machine  
+
+[chapter 5: section 4](https://kletobias.github.io/project/chapter-5-4)  
+
+**Description:** User account management.  
+**Tags:** `useradd`, `groupadd`, `userdel`, `groupdel`, `usermod [-G]`, shell,
+bash, centos 7.9, system administration, ssh, virtual machine  
+
+[chapter 5: section 3](https://kletobias.github.io/project/chapter-5-3)  
+
+**Description:** The `sed` command for text manipulation.  
+**Tags:** `sed` command, shell, bash, centos 7.9, system administration, ssh,
+virtual machine  
 <br>
-[chapter 5: section 1 & 2](https://kletobias.github.io/project/chapter-5-1-2) - **linux text editors**  
-**Tags:** vi, vim, nvim, emacs, shell, bash, centos 7.9, system administration, ssh, virtual machine  
+[chapter 5: section 1 & 2](https://kletobias.github.io/project/chapter-5-1-2)  
+
+**Description:** Linux text editors.  
+**Tags:** vi, vim, nvim, emacs, shell, bash, centos 7.9, system administration,
+ssh, virtual machine  
 
 

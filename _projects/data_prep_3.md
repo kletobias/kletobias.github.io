@@ -12,11 +12,11 @@ accent_color: '#08877d'
 
 
 
-# Wrangling with that Data!
+# Wrangling with that Data! 3/3
 
 This article shows how cleaning a CSV file using `pandas`, `numpy`, `re` and the `pyjanitor` (imported under the name `janitor`) modules can be achieved. Some outputs are shortened for readability.
 
-## Summary
+## Summary Of The Series
 
 - A DataFrame is given as input, that contains 47 columns at the beginning.
 - Dimensionality Reduction is performed on the columns, to filter and only keep relevant columns.
