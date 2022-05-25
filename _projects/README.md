@@ -222,7 +222,7 @@ calculate how long a listing was listed for on the platform
 DataFrame, data validation using regex patterns, `df.drop`, `df.process_text`,
 `df.change_type`, `df.dropna`, `df.to_datetime`, `df.fill_direction`,
 `df.truncate_datetime_dataframe`, `df.add_column`, `df.transform_column`,
-`df.describe`, `shapely.geometry.Point`
+`df.describe`, `shapely.geometry.Point`<br>
 <br>
 [Data Preparation Series Part 1: Foundation For Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-1)<br>
 <br>
