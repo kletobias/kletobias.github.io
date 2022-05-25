@@ -42,8 +42,8 @@ downloaded here: [klein - real estate predictionmodels](https://filehost2.s3.eu-
 
 <br>
 
-##### English Version  
-  
+##### English Version<br>
+<br>
 > Combining a highly scalable and customisable process, with very accurate
 prediction results using machine learning models, is what this work proposes.
 The customisation is guided by what information the user seeks to gain from the
@@ -63,13 +63,13 @@ maximising prediction accuracy of the models. The best scores, expressed in
 RMSE, are 190.68 for the Lasso and 115.39 for the XGBoost Regressor. Differences
 in complexity and interpretability between the models are discussed and
 associated with it, the strengths and weaknesses of the respective model are
-pointed out.  
-  
+pointed out.<br>
+<br>
 <br>
 <br>
 
-##### German Version  
-  
+##### German Version<br>
+<br>
 > Die Kombination eines hoch skalierbaren und anpassbaren Prozesses mit sehr
 präzisen Vorhersageergebnissen unter Verwendung von Machine Learning Modellen
 ist der vor- geschlagene Ansatz dieser Arbeit. Die Anpassung richtet sich
@@ -91,8 +91,8 @@ Maximierung der Vorhersagegenauigkeit der Mod- elle. Die besten Ergebnisse,
 ausgedrückt in RMSE, sind 190,68 für das Lasso und 115, 39 für den XGBoost
 Regressor. Unterschiede in der Komplexität und Interpretier- barkeit zwischen
 den Modellen werden diskutiert und damit verbunden, die Stärken und Schwächen
-des jeweiligen Modells aufgezeigt.  
-  
+des jeweiligen Modells aufgezeigt.<br>
+<br>
 
 <br>
 <br>
@@ -183,34 +183,31 @@ des jeweiligen Modells aufgezeigt.
 <br>
 
 ## Blog Posts & Projects
-  
 Tags and links to the blog posts and project posts I have published on this
-site.
-  
+site.<br>
 ###### General Information
-  
 The following table explains certain notations, that are used in the
 descriptions of the articles. They follow the general notation used in
-comparable articles.
-  
+comparable articles.<br>
+
 | Notation         | Reference                                |
 |------------------|------------------------------------------|
 | `df`             | `pandas.DataFrame` Object                |
 | `pd`             | Alias for `pandas` Module                |
 | `df.some_method` | Alias for `pandas.DataFrame.some_method` |
  
-<br>
 #### Blog Posts
-
+<br>
 
 #### Projects
-
+<br>
 [Data Preparation Series Part 3: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-3) 
-**Description:** *An Overview of available tools in the pandas library.*
-**Tags:**  
-
-[Data Preparation Series Part 2: Creation of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2)  
-
+**Description:** *An Overview of available tools in the pandas library.*<br>
+<br>
+**Tags:**<br>
+<br>
+[Data Preparation Series Part 2: Creation Of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2)<br>
+<br>
 **Description:** Creation of a valid gps column for the records, by joining the
 longitude and latitude columns together using geometry object `Point` from
 library `shapely.geometry`. It lays the foundation for assigning from the
@@ -218,97 +215,109 @@ dataset completely independent geospatial features to the listings. Features
 that prove significant for the prediction of variable 'base_rent' in the later
 stages of the process. Further, a dtype `timedelta64[ns]` column is created
 using `datetime64[ns]` type columns 'date_listed' and 'date_unlisted' to
-calculate how long a listing was listed for on the platform 'immoscout24.de'.
-
+calculate how long a listing was listed for on the platform
+'immoscout24.de'.<br>
+<br> 
 **Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset,
 DataFrame, data validation using regex patterns, `df.drop`, `df.process_text`,
 `df.change_type`, `df.dropna`, `df.to_datetime`, `df.fill_direction`,
 `df.truncate_datetime_dataframe`, `df.add_column`, `df.transform_column`,
 `df.describe`, `shapely.geometry.Point`
-  
-[Data Preparation Series Part 1: Foundation for Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-1)  
-
+<br>
+[Data Preparation Series Part 1: Foundation For Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-1)<br>
+<br>
 **Description:** The DataFrame is explored and columns are processed and cleaned
-to give insight into how many values are missing among other properties.  
-  
+to give insight into how many values are missing among other properties.<br>
+<br>
 **Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset,
 DataFrame, data validation using regex patterns, `df.rename_column`,
 `df.clean_names`, `df.remove_empty`, `df.drop`, `df.fill_empty`,
 `df.find_replace`, `df.value_counts`, `df.process_text`, `df.change_type`,
 `df.value_counts`, `df.value_counts`, string_functions: `extract`, `replace`,
-`lstrip`, `rstrip`, `regular expressions`  
-  
-[Data Preparation Series Part 0: Exploring The 47 Column Wide Tabular Dataset Using Pandas](https://kletobias.github.io/project/data-prep-0)  
-  
-**Description:** An Overview of available tools in the pandas library.  
+`lstrip`, `rstrip`, `regular expressions`<br>
+<br>
+[Data Preparation Series Part 0: Exploring The 47 Column Wide Tabular Dataset Using Pandas](https://kletobias.github.io/project/data-prep-0)<br>
+<br>
+**Description:** An Overview of available tools in the pandas library.<br>
+<br> 
 **Tags:** `df.head`, `df.tail`, `df.index.max`, `df.columns`, `df.index`,
-`df.shape`, `df.count`, `df.describe`, `.to_markdown`, `df.nunique`, `df.filter`,`df.sample`,`df.value_counts`,`df.drop_duplicates`  
-  
+`df.shape`, `df.count`, `df.describe`, `.to_markdown`, `df.nunique`, `df.filter`,`df.sample`,`df.value_counts`,`df.drop_duplicates`<br>
+<br>
+
 -
 ---
-  
-[chapter 5: section 13](https://kletobias.github.io/project/chapter-5-13)  
-
-**Description:** The `systemctl` command.  
+<br>
+[Chapter 5: Section 13](https://kletobias.github.io/project/chapter-5-13)<br>
+<br>
+**Description:** The `systemctl` command.<br>
+<br> 
 **Tags:** `systemctl`, shell, bash, centos 7.9, system administration, ssh,
-virtual machine  
-
-[chapter 5: section 12](https://kletobias.github.io/project/chapter-5-12)  
-
-**Description:** Processes, jobs and scheduling.  
+virtual machine<br>
+<br>
+[Chapter 5: Section 12](https://kletobias.github.io/project/chapter-5-12)<br>
+<br>
+**Description:** Processes, jobs and scheduling.<br>
+<br> 
 **Tags:** application, script, daemon, threads, job, shell, bash, centos 7.9,
 system administration, ssh, virtual machine  directory services & system utility
-commands  
-  
-[chapter 5: section 10 & 11](https://kletobias.github.io/project/chapter-5-10-11)  
-  
-**Description:** Overview and comparison of popular directory services.  
-  
+commands<br>
+<br>
+[Chapter 5: Section 10 & 11](https://kletobias.github.io/project/chapter-5-10-11)<br>
+<br>
+**Description:** Overview and comparison of popular directory services.<br>
+<br> 
 **Tags:** directory services, active directory service windows, identity manager
 red hat, winbind samba linux to windows, openldap red hat, ibm directoryserver,
 jumpcloud, ldap protocol, `date`, `uptime`, `uname`, `which`, `cal`, `bc`,
-shell, bash, centos 7.9, system administration, ssh, virtual machine  
-  
-[chapter 5: section 8 & 9](https://kletobias.github.io/project/chapter-5-8-9)  
-
-**Description:** Communicating with users & linux account management.  
-**Tags:** `users`, `wall`, `write`, local account, domain account, shell, bash,
-centos 7.9, system administration, ssh, virtual machine  
-
-[chapter 5: section 7](https://kletobias.github.io/project/chapter-5-7)  
-
-**Description:** Monitoring users.  
-**Tags:** `who`, `last`, `w`, `finger`, `id`, shell, bash, centos 7.9, system
-administration, ssh, virtual machine  
-
-[chapter 5: section 6](https://kletobias.github.io/project/chapter-5-6)  
-
-**Description:** How to switch users and `sudo` access.  
-**Tags:** `sudo`, `visudo`, `su - username`, shell, bash, centos 7.9, system
-administration, ssh, virtual machine  
-
-[chapter 5: section 5](https://kletobias.github.io/project/chapter-5-5)  
-
-**Description:** `chage` command in depth.  
-**Tags:** `chage`, shell, bash, centos 7.9, system administration, ssh, virtual
-machine  
-
-[chapter 5: section 4](https://kletobias.github.io/project/chapter-5-4)  
-
-**Description:** User account management.  
-**Tags:** `useradd`, `groupadd`, `userdel`, `groupdel`, `usermod [-G]`, shell,
-bash, centos 7.9, system administration, ssh, virtual machine  
-
-[chapter 5: section 3](https://kletobias.github.io/project/chapter-5-3)  
-
-**Description:** The `sed` command for text manipulation.  
-**Tags:** `sed` command, shell, bash, centos 7.9, system administration, ssh,
-virtual machine  
+shell, bash, centos 7.9, system administration, ssh, virtual machine<br>
 <br>
-[chapter 5: section 1 & 2](https://kletobias.github.io/project/chapter-5-1-2)  
-
-**Description:** Linux text editors.  
+[Chapter 5: Section 8 & 9](https://kletobias.github.io/project/chapter-5-8-9)<br>
+<br>
+**Description:** Communicating with users & linux account management.<br>
+<br>
+**Tags:** `users`, `wall`, `write`, local account, domain account, shell, bash,
+centos 7.9, system administration, ssh, virtual machine<br>
+<br>
+[Chapter 5: Section 7](https://kletobias.github.io/project/chapter-5-7)<br>
+<br>
+**Description:** Monitoring users.<br>
+<br>
+**Tags:** `who`, `last`, `w`, `finger`, `id`, shell, bash, centos 7.9, system
+administration, ssh, virtual machine<br>
+<br>
+[Chapter 5: Section 6](https://kletobias.github.io/project/chapter-5-6)<br>
+<br>
+**Description:** How to switch users and `sudo` access.<br>
+<br>
+**Tags:** `sudo`, `visudo`, `su - username`, shell, bash, centos 7.9, system
+administration, ssh, virtual machine<br>
+<br>
+[Chapter 5: Section 5](https://kletobias.github.io/project/chapter-5-5)<br>
+<br>
+**Description:** `chage` command in depth.<br>
+<br>
+**Tags:** `chage`, shell, bash, centos 7.9, system administration, ssh, virtual
+machine<br>
+<br>
+[Chapter 5: Section 4](https://kletobias.github.io/project/chapter-5-4)<br>
+<br>
+**Description:** User account management.<br>
+<br>
+**Tags:** `useradd`, `groupadd`, `userdel`, `groupdel`, `usermod [-G]`, shell,
+bash, centos 7.9, system administration, ssh, virtual machine<br>
+<br>
+[Chapter 5: Section 3](https://kletobias.github.io/project/chapter-5-3)<br>
+<br>
+**Description:** The `sed` command for text manipulation.<br>
+<br>
+**Tags:** `sed` command, shell, bash, centos 7.9, system administration, ssh,
+virtual machine<br>
+<br>
+[Chapter 5: Section 1 & 2](https://kletobias.github.io/project/chapter-5-1-2)<br>
+<br>
+**Description:** Linux text editors.<br>
+<br>
 **Tags:** vi, vim, nvim, emacs, shell, bash, centos 7.9, system administration,
-ssh, virtual machine  
+ssh, virtual machine<br>
 
 
