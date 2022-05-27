@@ -6,13 +6,13 @@ featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
 
-# Using pandas to import CSV data into MySQL
+# Using Pandas To Import CSV Data Into MySQL
 
 Using pandas, one can import any data type, that pandas can read and create a DataFrame
 object from. The full list of possible input file types can be found here: [IO tools (text, CSV, HDF5, …) — pandas documentation](https://pandas.pydata.org/docs/user_guide/io.html#io-tools-text-csv-hdf5).  
 In the following, only **CSV** data will be mentioned, but everything applies to all the file types mentioned in the link above, once a `pandas.DataFrame` object has been created.
 
-## What problem does the solution solve?
+## What Problem Does The Solution Solve?
 
 There is no functionality built into **MySQL**, that lets one import **CSV** data directly into a database, in the form of a table. pandas can be used to import CSV files from within Python, into a table of a database.
 
@@ -34,13 +34,13 @@ pip install pandas
 pip install mysql-connector-python
 ```
 
-## Importing the data
+## Importing The Data
 
 The following is a step-by-step walk through of how the end-to-end import of any CSV file into a MySQL database can
 look like. It is assumed, that the database is hosted locally and `localhost` is used as hostname. It can be replaced by
 the URL of the database.
 
-### Import of the Python packages
+### Import Of The Python Packages
 ```python
 # Import the modules needed
 import pandas as pd
@@ -50,7 +50,7 @@ import mysql.connector
 ```
 
 
-### Create the database engine
+### Create The Database Engine
 
 ```python
 engine = create_engine(
@@ -68,19 +68,21 @@ One creates the engine using `create_engine()` from the `sqlalchemy` package and
 
 
 
-### Set the data types of the columns
+### Set The Data Types Of The Columns
 
-For that, the needed types from the `sqlalchemy` package are imported. The entire  
-list of data types supported by `sqlalchemy` can be found [here](https://docs.sqlalchemy.org/en/14/core/type_basics.html#generic-types).
+For that, the needed types from the `sqlalchemy` package are imported. The
+entire  list of data types supported by `sqlalchemy` can be found
+[here](https://docs.sqlalchemy.org/en/14/core/type_basics.html#generic-types).
 
 ```python
 from sqlalchemy.types import Integer, Float, Text, DateTime
 ```
 
-### The actual import
+### The Actual Import
 
-In this instance, parts of the yellow cab dataset from the NYC Taxi dataset were used. There were are total
-of ~44.000.000 rows to be imported by the process below.
+In this instance, parts of the yellow cab dataset from the NYC Taxi dataset were
+used. There were are total of ~44.000.000 rows to be imported by the process
+below.
 
 ```python
 df = pd.read_csv("path to the .csv file")

@@ -198,18 +198,52 @@ comparable articles.<br>
  
 #### Blog Posts
 <br>
-
+[Multicollinearity: What It Is & Measures To Spot It.](https://kletobias.github.io/blog/multicollinearity)<br>
+<br>
+**Description:** Two highly correlated distributions ($S1$, $S2$) are created
+from scratch.  A scatter plot of both distributions distributions is created,
+with values on the x-axis from $S1$ and values on the y-axis from $S2$, to
+display what collinearity looks like. *Covariance* along with the prerequisites
+that need to be met for it to be a suitable metric, is first explored as a
+metric to spot collinearity. The mathematical formula and a shortcut for
+calculating it are presented. The second metric is the *Pearson Correlation
+Coefficient*. It is described much like the *Covariance*, along with an
+description the possible values of the correlation coefficient $r$. The articles
+concludes with an example of how the *Pearson Correlation Coefficient* can be
+used in a hypothesis test to determine, if $S1$ and $S2$ are at all correlated
+with each other.<br>
+<br>
+**Tags:** multicollinearity, covariance, Pearson correlation coefficient,
+creation of two distributions that are tested for correlation, hypothesis test
+to gauge if the two distributions are at all correlated with each other.<br>
+<br>
+[Using Pandas To Import CSV Data Into MySQL](https://kletobias.github.io/blog/pandas-csv-mysql)<br>
+<br>
+**Description:** The problem, along with the solution, that this article offers
+are presented. Following is a step by step guide, including the required python
+libraries, of how to import the CSV data into a pandas DataFrame object and how
+to export the DataFrame to a MySQL database as a MySQL table. The method was
+used several times by the author to create a MySQL table with over $4E7$
+rows.<br>
+<br>
+**Tags:** MySQL, Python3 script, utility, `pandas`, DataFrame, `pd.read_csv`, `sqlalchemy`, `sqlalchemy.create_engine`, `sqlalchemy.types`: `Integer`, `Float`, `Text`, `DateTime`, `pd.df.to_sql`<br>
+<br>
+<br>
 #### Projects
 <br>
 [Data Preparation Series Part 4: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-4)<br>
 <br>
 **Description:** Showcase of how batch processing several columns of tabular
-data using `pandas` and `pyjanitor` can look like. Redundant columns are
+data using `pandas`, `pyjanitor` and the `re` library can look like. Redundant columns are
 dropped, columns are reordered by type. Columns with dtype `categorical` are
 created and their classes converted to numerical values for the following
 evalutation of candidate models.<br>
 <br>
-**Tags:**<br>
+**Tags:** `pandas`, `pyjanitor`, method chaining, cleaning of tabular dataset,
+DataFrame, data validation using regex patterns, `df.process_text`,
+`df.find_replace`, `df.fill_empty`, `df.rename_column`, `df.loc`, `df.drop`,
+`df.to_csv`, `df.info`, `df.reorder_columns`, `df.factorize_columns`,
+`df.filter`<br>
 <br>
 [Data Preparation Series Part 3: Creation Of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-3)<br>
 <br>
