@@ -34,7 +34,7 @@ the federal state of Hamburg, Germany.*
 <br>
 
 A pdf version of the entire Bachelor Thesis (98 pages) can be accessed and
-downloaded here: [klein - real estate predictionmodels](https://filehost2.s3.eu-central-1.amazonaws.com/kletobias-github-io/Klein+-+2019+-+Data+Mining+Hyperparameter+Optimisation+for+Real+.pdf)
+downloaded here: [Klein - Real Estate Prediction Models](https://filehost2.s3.eu-central-1.amazonaws.com/kletobias-github-io/Klein+-+2019+-+Data+Mining+Hyperparameter+Optimisation+for+Real+.pdf)
 
 <br>
 
@@ -201,12 +201,17 @@ comparable articles.<br>
 
 #### Projects
 <br>
-[Data Preparation Series Part 3: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-3) 
-**Description:** *An Overview of available tools in the pandas library.*<br>
+[Data Preparation Series Part 4: Exploring Tabular Data With Pandas](https://kletobias.github.io/project/data-prep-4)<br>
+<br>
+**Description:** Showcase of how batch processing several columns of tabular
+data using `pandas` and `pyjanitor` can look like. Redundant columns are
+dropped, columns are reordered by type. Columns with dtype `categorical` are
+created and their classes converted to numerical values for the following
+evalutation of candidate models.<br>
 <br>
 **Tags:**<br>
 <br>
-[Data Preparation Series Part 2: Creation Of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-2)<br>
+[Data Preparation Series Part 3: Creation Of Point Geometry Column gps + timedelta64ns Column](https://kletobias.github.io/project/data-prep-3)<br>
 <br>
 **Description:** Creation of a valid gps column for the records, by joining the
 longitude and latitude columns together using geometry object `Point` from
@@ -224,7 +229,7 @@ DataFrame, data validation using regex patterns, `df.drop`, `df.process_text`,
 `df.truncate_datetime_dataframe`, `df.add_column`, `df.transform_column`,
 `df.describe`, `shapely.geometry.Point`<br>
 <br>
-[Data Preparation Series Part 1: Foundation For Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-1)<br>
+[Data Preparation Series Part 2: Foundation For Cleaning 47 Column Wide Tabular Data With Janitor & Pandas](https://kletobias.github.io/project/data-prep-2)<br>
 <br>
 **Description:** The DataFrame is explored and columns are processed and cleaned
 to give insight into how many values are missing among other properties.<br>
@@ -236,7 +241,7 @@ DataFrame, data validation using regex patterns, `df.rename_column`,
 `df.value_counts`, `df.value_counts`, string_functions: `extract`, `replace`,
 `lstrip`, `rstrip`, `regular expressions`<br>
 <br>
-[Data Preparation Series Part 0: Exploring The 47 Column Wide Tabular Dataset Using Pandas](https://kletobias.github.io/project/data-prep-0)<br>
+[Data Preparation Series Part 1: Exploring The 47 Column Wide Tabular Dataset Using Pandas](https://kletobias.github.io/project/data-prep-1)<br>
 <br>
 **Description:** An Overview of available tools in the pandas library.<br>
 <br> 
