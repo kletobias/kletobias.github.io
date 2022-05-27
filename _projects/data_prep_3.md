@@ -23,7 +23,7 @@ outputs are shortened for readability.
 [Data Preparation Series 3](https://kletobias.github.io/project/data-prep-3)  
 [Data Preparation Series 4](https://kletobias.github.io/project/data-prep-4)  
 
-## Description Of This Article
+## Summary Of This Article
 
 Creation of a valid gps column for the records, by joining the
 longitude and latitude columns together using geometry object `Point` from
