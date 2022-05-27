@@ -10,7 +10,13 @@ gallery_images: 'YtOk89__87-kbtTGW$DD-L.jpeg'
 accent_color: '#08877d'
 ---
 
-
+### Summary Of This Article
+Showcase of how batch processing several columns of tabular
+data using `pandas`, `pyjanitor` and the `re` library can look like. Redundant
+columns are dropped, columns are reordered by type. Columns with dtype
+`categorical` are created and their classes converted to numerical values for
+the following evalutation of candidate models.<br>
+<br>
 
 # Wrangling with that Data! 4/4
 
