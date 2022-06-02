@@ -11,11 +11,12 @@ accent_color: '#08877d'
 ---
 
 ### Summary Of This Article
-Showcase of how batch processing several columns of tabular
-data using `pandas`, `pyjanitor` and the `re` library can look like. Redundant
-columns are dropped, columns are reordered by type. Columns with dtype
+Showcase of how batch processing several columns in a tabular dataset, using
+`pandas`, `pyjanitor` and the `re` library can look like. Regular expressions
+are used to transform columns with messy data into ones with valid row contents.
+Redundant columns are dropped, columns are reordered by type. Columns with dtype
 `categorical` are created and their classes converted to numerical values for
-the following evalutation of candidate models.<br>
+the following evaluation of candidate models.<br>
 <br>
 
 # Wrangling with that Data! 4/4
@@ -1045,10 +1046,11 @@ df.columns
 
 
 
-## Reordering Of Columns We reorder the columns with dtype `categorical` to be
+## Reordering Of Columns 
 
-at the beginning of the columns in `df.columns`, to make sub-setting of the
-columns during the *feature selection* and *model evaluation* phases. The *NaN*
+We reorder the columns with dtype `categorical` to be at the beginning of the
+columns in `df.columns`, to make sub-setting of the columns during the *feature
+selection* and *model evaluation* phases. The *NaN*
 values in the dtype `categorical` columns are replaced with `no_information`.
 The reason being, that rows with recognized *NaN* values get excluded from the
 factorization process and are replaced by `-1`. At this point, we like to keep
