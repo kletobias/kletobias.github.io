@@ -899,7 +899,7 @@ df.count().sample(4,random_state=seed)
 
 #### `df.nunique()`
 
-##### Description<br>
+##### Description
 Returns an integer value, that gives the number of unique values in the data
 frame or of a subset of columns in the `df`. It does not return the unique
 values themselves.
