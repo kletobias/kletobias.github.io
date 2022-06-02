@@ -604,11 +604,13 @@ For most other problems where more than a reassignment of the dtype of the
 values in the column is needed, regular expressions are used to create patterns
 to surgically remove the problems, while preserving the valid parts of the
 data.<br>
-After using regular expression to extract, substitute, remove or reorder parts
+After using regular expressions to extract, substitute, remove or reorder parts
 of the cell content, and with the correct substitutions where needed, values in
-that specific column are in the format they should be in and the correct dtype
-can be assigned to all rows in the column without any errors during the
-reassignment. The reassignment might not be possible without raising errors, if
+that specific column are in the format they should be in. At this point, the
+correct dtype can be assigned to all rows in the column without raising any
+errors during the
+reassignment.<br>
+The reassignment might not be possible without raising errors, if
 missing values are present. In this case, the missing values need to be
 addressed, prior to reassigning the dtypes.
 
