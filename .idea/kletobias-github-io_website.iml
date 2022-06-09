@@ -4,6 +4,16 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv_kletobias-github-io_website" />
       <excludeFolder url="file://$MODULE_DIR$/venv_portfolio" />
+      <excludeFolder url="file://$MODULE_DIR$/.jekyll-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/.sass-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/_projects/.jekyll-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/_site/venv_portfolio" />
+      <excludeFolder url="file://$MODULE_DIR$/drafts/_projects/.jekyll-cache" />
+      <excludePattern pattern=".ipynb_checkpoints" />
+      <excludePattern pattern=".virtual_documents" />
+      <excludePattern pattern="@Recycle" />
+      <excludePattern pattern="@Recently-Snapshot" />
+      <excludePattern pattern=".*cache*" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
