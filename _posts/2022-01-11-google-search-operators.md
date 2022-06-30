@@ -165,9 +165,16 @@ search query at first glance.
 
 ```mermaid
 flowchart LR
-A[Initial\/Refined Query] --> |Get more relevant Results| B[List of results]
+A[Initial Or Refined Query] ---  |Get more relevant Results| -> B[List of results]
 ```
 
+```mermaid
+flowchart LR
+A[Formulation Of Objective] -->|Think Of| B[Solutions]
+A --> C
+C[Data Available] -->|To meet objective| B
+B -->|Build Model| D[Model to determine\nbest actions to meet objective]
+```
 
 > I like to have a mindset of any search result needs to prove itself in terms
 > of quality and relevance.

@@ -1,13 +1,16 @@
 source "https://rubygems.org"
 
 group :jekyll_plugins do
+  gem 'jekyll','4.2.2'
   gem 'jekyll-paginate','1.1.0'
   gem 'jekyll-sitemap','1.4.0'
+  gem 'jekyll-mermaid', '~> 1.0'
+  gem 'jekyll-sass-converter','2.2.0'
+  gem 'jekyll-watch','2.2.1'
 end
 
 # GEM remote: https://rubygems.org/
 #  specs:
-gem 'jekyll-mermaid', '~> 1.0'
 gem 'colorator', '~>1.1.0'
 gem 'concurrent-ruby','1.1.10'
 gem 'em-websocket','0.5.3'
@@ -15,11 +18,8 @@ gem 'eventmachine','1.2.7'
 gem 'ffi','1.15.5'
 gem 'http_parser.rb','0.8.0'
 gem 'i18n','1.10.0'
-gem 'jekyll','4.2.2'
 gem 'addressable','~>2.4'
-gem 'jekyll-sass-converter','2.2.0'
 gem 'sassc','2.4.0'
-gem 'jekyll-watch','2.2.1'
 gem 'kramdown','2.4.0'
 gem 'kramdown-parser-gfm','1.1.0'
 gem 'liquid','4.0.3'
