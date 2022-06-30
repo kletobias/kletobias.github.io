@@ -1,16 +1,18 @@
 ---
 title: 'Google Search Operators 2022<br>Part 1'
 date: 2022-01-11 16:00:00
-description: 'In this blog post, the first part of the 2022 Google Search Operators are listed and explained in detail. These are all working in 2022.'
+description: 'In this blog post, the first part of the 2022 Google Search
+Operators are listed and explained in detail. These are all working in 2022.'
 featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
 
 # Google<br>Search<br>Operators<br><br>2022 Part 1
 
-<br />
+<br>
 
-As motivation, a reminder of what the goal is with the list of hits returned by any search engine:
+As motivation, a reminder of what the goal is with the list of hits returned by
+any search engine:
 
 
 > The goal with Information retrieval is the efficient
@@ -18,55 +20,201 @@ As motivation, a reminder of what the goal is with the list of hits returned by 
 >	information need.
 
 
-**In other words:** Return hits to the user, that give him the information he was looking for with his query.
+**In other words:** Return hits to the user, that give him the information he
+was looking for with his query.<br>
 
-This is an up to date list of the 'basic' google **search operators**, that are *working* in 2022.
-Since these make up most of the **search operators** or even all, that one *should* know in order to make their
-*google searches* more efficient and more relevant, these operators will be simply be called **search operators**
-in the following.
-There have been quite big changes to the names of a number of operators in this list over the last year.
-That is part of why I decided to write this post.
+<br>
 
+This is an up to date list of the 'basic' google *search operators*, that are
+*working* in 2022. Since these make up most of the search operators or even
+all, that one *should* know in order to make their *google searches* more
+efficient and more relevant, these operators will be simply be called search
+operators in the following. There have been quite big changes to the names of
+a number of operators in this list over the last year. That is part of why I
+decided to write this post.<br>
 
-Here are the google **search operators** that can be used in the search field of [google.com](http://google.com) and
-any country specific extension of google search as well. The **search operators** always have to be written in English in order to be invoked. One can specify their value in another language though.
+<br>
 
+In this post I will introduce and give examples of how each search operator can
+be used in the search field of [google.com](http://google.com) and any country
+specific extension of google search as well. Since the search operators can be
+combined with each other in a query, there are many combinations, that I won't
+be able to include in this post. What I try to do, is show the basic usage for
+each of the search parameters and try to give ideas of how they can be combined
+to return search results that are relevant to the user. There is one very
+important caveat about using any google search operator:<br>
 
-**Disclaimer:** In some examples the time frame for how old results are allowed to be is set to 1 year. This can be seen in the examples with images showing the result list. This is chosen, as oftentimes results older than one year are irrelevant by now. The exception to this are queries that specify something that is not of a timely manner. This can be for example *stack overflow* questions and answers or topics that have relevant matches further back in the past, newspaper articles for example. This is relevant for reproducibility of results.
+> The search operators always have to be written in English in order to be
+> invoked. One can specify their value in another language though.
 
+**Disclaimer:** In some examples the time frame for how old results are allowed
+to be is set to 1 year. This can be seen in the examples with images showing the
+result list. This is chosen, as oftentimes results older than one year are
+irrelevant by now. The exception to this are queries that specify something that
+is not of a timely manner. This can be for example *stack overflow* questions
+and answers or topics that have relevant matches further back in the past,
+newspaper articles for example. This is mainly relevant for the reproducibility
+of the results from the examples I use throughout this post.<br>
 
+<br>
 
 ## Google Search Operators List
 
 
-### Exact Match \" \"
+### Exact Match `""`
 
-**"\<search term>"** Forces google to only return hits, that contain the exact match \<search term>. The syntax is:
+`"<search term>"` Forces google to only return hits, that contain the exact
+match `<search term>`. The syntax is:<br>
+
 
 `"<search_term>"` or equivalent `'<search_term>'`
 
-The quotation marks have to be immediately before and after the end of the search term or immediately before the first word and immediately after the last word in a multi word search term.
-Spaces between words are allowed, as long as they are supposed to be matched exactly as well. The following examples show the effect that various uses of  the quotation marks have on how restrictive the query is for the web search algorithm:
+The quotation marks have to be immediately before and after the end of the
+search term or immediately before the first word and immediately after the last
+word in a multi word search term.<br>
+Spaces between words are allowed, as long as they are supposed to be matched
+exactly as well. The following examples show the effect that various uses of
+the quotation marks have on how restrictive the query is for the web search
+algorithm:<br>
+
 
 ```text
-
+"plan for how to walk 10000 steps a day"
 ```
 
-This is probably the single most powerful operator. Takes some practice to find the line between narrowing down the hits google returns too much and the returned hits not being specific enough.
+This query, even though the word *for* was added in the query to make it a
+phrase a human could say, did not return a single result, as shown in the image
+below.<br>
 
-There is no difference between single and double quotes for anything one writes in the search bar or in an **HTML** environment for that matter, as quoted from *Stack Overflow*:
+<br>
+
+<figure>
+  <img src='/blog/images/all_in_quotations.png' alt='all_quoted'>
+  <figcaption>Putting the entire search query into quotation marks can often
+  lead to no results or very few. Use with caution.</figcaption>
+</figure>
+
+<br>
+<br>
+The option 'without any quotes', might work, if what someone is searching, is a
+topic that generally is well separated from other topics. This is close to what
+is called a partition in Mathematics, a set whose intersections with other sets
+are all empty.<br>
+In reality, especially when using a search engine like google, that is rarely
+the case. In the image below one can see that there are roughly 23 million
+results for the query without any quotations. The top result is a good example
+for what can happen when the google search algorithm is allowed to do what he
+wants. The top result comes from the URL **https//organizingmoms.com**. I have
+never heard of this site offering the state of the art 'How to Get to 10.000
+Steps a Day' plans. I do not intend on taking any credit away from them, nor do
+I say that the hit is not a good top result.<br>
+What I am trying to say, is that when one gives the google search algorithm some
+leeway, the results on the list of results should be critically assessed for
+relevancy and quality. These two things should always be checked for, for any
+returned result, but even more in this scenario.<br>
+<br>
+The actual query, that was sent is shown below and the total of close to 23 million
+results in the following image.<br>
+<br>
+```text
+plan how to walk 10000 steps a day
+```
+
+<br>
+
+<figure>
+  <img src='/blog/images/no_quotations.png' alt='all_quoted'>
+  <figcaption>Not using any quotation marks, not even for sub parts of the multi
+  word query returns nearly 23 million results and no top result, that clearly
+  shows, that it is relevant for non-moms. </figcaption>
+</figure>
+
+<br>
+<br>
+The last scenario is the one where several words with white space in-between
+them are used to give google more flexibility in how it is allowed to combine
+the individual blocks in the query. In this case, 'how to walk 10000 steps a
+day' was tried/used as a common enough phrase, that should not be too specific
+or too narrow to yield a healthy amount of results. It often comes down to a
+loop consisting of:<br>
+<br>
+**1\.** Writing a search query, that summarizes what one is looking for.<br>
+<br>
+That initial search query largely comes from the gut and only avoids common
+pitfalls, creates a better initial query, as the technical knowledge
+increases.<br>
+<br>
+**2\.** Based on results, change query, such that the results are more relevant and
+   have less outliers in them. This step is called **R**, as in *refine*.<br>
+<br>
+**3\.** Execute (**E**) the refined query, that is the result of the refinements
+added during step **R**.<br>
+<br>
+Initial query and each subsequent 'refined' query are basically the same and
+they are both summarized under step **R**.<br>
+<br>
+loop of creating a search query.. In general 'how to ....' is useless if
+not inside quotation marks together with the 'how to for what?' part. The reason
+is, that there 'how to' is too general, when used alone. Plan was wrapped in
+quotation marks alone, as to allow for any combination of 'plan' and 'how to
+walk 10000 steps a day', with or without any other text between the two blocks.
+The top result seems general enough, without being not relevant, given the
+search query at first glance. 
+
+<br>
+
+```mermaid
+flowchart LR
+A[Initial\/Refined Query] --> |Get more relevant Results| B[List of results]
+```
+
+
+> I like to have a mindset of any search result needs to prove itself in terms
+> of quality and relevance.
+
+<br>
+<br>
+
+```text
+"plan" "how to walk 10000 steps a day"
+```
+
+<br>
+
+<figure>
+  <img src='/blog/images/no_quotations.png' alt='all_quoted'>
+  <figcaption>Not using any quotation marks, not even for sub parts of the multi
+  word query returns nearly 23 million results and no top result, that clearly
+  shows, that it is relevant for non-moms. </figcaption>
+</figure>
+
+
+<br>
+
+This is probably the single most powerful operator. Takes some practice to find
+the line between narrowing down the hits google returns too much and the
+returned hits not being specific enough.
+
+There is no difference between single and double quotes for anything one writes
+in the search bar or in an **HTML** environment for that matter, as quoted from
+*Stack Overflow*:
 
 ![Single vs Double Quotes](/blog/images/single-vs-double-quotes.png)
 
-### Logical *OR*
+### Logical `OR`
 
-Acts as a logical OR and therefore will allow google to return all hits, where \<search term 1> or \<search term 2> have a match and as such, where both search terms are matched as well.
+Acts as a logical OR and therefore will allow google to return all hits, where
+`<search term 1>` or `<search term 2>` have a match and as such, where both search
+terms are matched as well.
 
-This operator will force one to quickly having to use parenthesis around the alternative search terms and so can become cumbersome, when used in longer queries.
+This operator will force one to quickly having to use parenthesis around the
+alternative search terms and so can become quite cumbersome, when used in longer
+queries.
 
-#### Example *OR*
+#### Example `OR`
 
- - Information to gain with the search query about different generations of BMW 3 Series.
+ - Information to gain with the search query about different generations of BMW
+ - 3 Series.
  - Precisely for chassis codes *E36*, *E46*, *E90*
    - E36: 3 Series, 1992–1999 (third generation)
    - E46: 3 Series, 1999–2006 (fourth generation)
@@ -79,71 +227,132 @@ We run this query in the [google.com](https://google.com) search field:
 most reliable generation "E36" OR "E46" OR "E90" "3 series"
 ```
 
-We do get [relevant hits with it, that look promising.](https://www.google.com/search?q=most+reliable+generation+%22E36%22+OR+%22E46%22+OR+%22E90%22+%223+series%22&client=firefox-b-d&biw=1413&bih=1080&tbs=qdr%3Ay&ei=ydveYaHlDZHTkgXmx4SgAg&ved=0ahUKEwjh7azprKz1AhWRqaQKHeYjASQQ4dUDCA0&uact=5&oq=most+reliable+generation+%22E36%22+OR+%22E46%22+OR+%22E90%22+%223+series%22&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABOgcIABBHELADOgcIIRAKEKABOgQIIRAVSgQIQRgASgQIRhgAUMUNWNcwYJkzaAFwAngAgAGpAYgByQmSAQMzLjiYAQCgAQHIAQjAAQE&sclient=gws-wiz)
+We do get [relevant hits with it, that look
+promising.](https://www.google.com/search?q=most+reliable+generation+%22E36%22+OR+%22E46%22+OR+%22E90%22+%223+series%22&client=firefox-b-d&biw=1413&bih=1080&tbs=qdr%3Ay&ei=ydveYaHlDZHTkgXmx4SgAg&ved=0ahUKEwjh7azprKz1AhWRqaQKHeYjASQQ4dUDCA0&uact=5&oq=most+reliable+generation+%22E36%22+OR+%22E46%22+OR+%22E90%22+%223+series%22&gs_lcp=Cgdnd3Mtd2l6EAMyBQghEKABOgcIABBHELADOgcIIRAKEKABOgQIIRAVSgQIQRgASgQIRhgAUMUNWNcwYJkzaAFwAngAgAGpAYgByQmSAQMzLjiYAQCgAQHIAQjAAQE&sclient=gws-wiz)
 
-![Article about which 3 Series is/was the most reliable historically](/blog/images/article-about-which-3-series-is-was-the-most-reliable-historically.png)
+![Article about which 3 Series is/was the most reliable
+historically](/blog/images/article-about-which-3-series-is-was-the-most-reliable-historically.png)
 
-[Link to Search Result in image above.](https://www.vehiclehistory.com/articles/which-bmw-3-series-is-the-most-reliable)
+[Link to Search Result in image
+above.](https://www.vehiclehistory.com/articles/which-bmw-3-series-is-the-most-reliable)
 
-### Logical *AND*
+### Logical `AND`
 
-**AND** is the logical *AND*. It forces google to only include results where the search term or what is written inside parenthesis `()` before **AND** and the search term or what is written inside parenthesis after **AND** are both matched.
+**AND** is the logical *AND*. It forces google to only include results where the
+search term or what is written inside parenthesis `()` before **AND** and the
+search term or what is written inside parenthesis after **AND** are both
+matched.
 
-#### Example *AND*
-In the following, the goal is to find information about the Chassis Code of BMW Series 3 cars, produced in 1992. Which tells what generation these cars belong to.
+#### Example `AND`
+In the following, the goal is to find information about the Chassis Code of BMW
+Series 3 cars, produced in 1992. Which tells what generation these cars belong
+to.
 
 ```text
 BMW 3 Series Chassis code AND 1992
 ```
-First [result](https://www.google.com/search?q=BMW+3+Series+Chassis+code+AND+1992&client=firefox-b-d&ei=nureYYaHC5Hg7_UPjNyHIA&ved=0ahUKEwiGzvD7uqz1AhUR8LsIHQzuAQQQ4dUDCA0&uact=5&oq=BMW+3+Series+Chassis+code+AND+1992&gs_lcp=Cgdnd3Mtd2l6EAM6BwgAEEcQsAM6BAghEApKBAhBGABKBAhGGABQmkdYjllg5lpoA3ACeACAAV-IAekGkgECMTCYAQCgAQHIAQjAAQE&sclient=gws-wiz) delivers the information.
 
-![E36 is the Chassis Code for 3 Series produced in 1992.](/blog/images/e36-is-the-chassis-code-for-3-series-produced-in-1992.png)
+First
+[result](https://www.google.com/search?q=BMW+3+Series+Chassis+code+AND+1992&client=firefox-b-d&ei=nureYYaHC5Hg7_UPjNyHIA&ved=0ahUKEwiGzvD7uqz1AhUR8LsIHQzuAQQQ4dUDCA0&uact=5&oq=BMW+3+Series+Chassis+code+AND+1992&gs_lcp=Cgdnd3Mtd2l6EAM6BwgAEEcQsAM6BAghEApKBAhBGABKBAhGGABQmkdYjllg5lpoA3ACeACAAV-IAekGkgECMTCYAQCgAQHIAQjAAQE&sclient=gws-wiz)
+delivers the information.
 
-[E36 is the Chassis Code for 3 Series produced in 1992](https://www.turnermotorsport.com/t-BMW-Chassis-Codes)
+![E36 is the Chassis Code for 3 Series produced in
+1992.](/blog/images/e36-is-the-chassis-code-for-3-series-produced-in-1992.png)
+
+[E36 is the Chassis Code for 3 Series produced in
+1992](https://www.turnermotorsport.com/t-BMW-Chassis-Codes)
 
 
 ### Exclude *\-*
 
 
-The **-** (dash) excludes whatever comes immediately after it. It can be used to exclude a word like so:
+The **-** (dash) excludes whatever comes immediately after it. It can be used to
+exclude a word like so:
 
 ```text
 microsoft 10 backup built in -"cloud"
 ```
 
-`-``"`cloud`"` was added to exclude cloud backup solutions, such as OneDrive which is a Microsoft owned service and so can be a valid return to the `built in` keyword in the query.
+`-``"`cloud`"` was added to exclude cloud backup solutions, such as OneDrive
+which is a Microsoft owned service and so can be a valid return to the `built
+in` keyword in the query.
 
-I would advise against not putting the excluded word or phrase inside quotation marks, as it will let the algorithm exclude other related terms and not the one you wrote for example. It might do other things as well...
-With exclusions, actually telling the algorithm what to exclude (and nothing else) from the search results seems to give reliable and foreseeable results.
+I would advise against not putting the excluded word or phrase inside quotation
+marks, as it will let the algorithm exclude other related terms and not the one
+you wrote for example. It might do other things as well...
+With exclusions, actually telling the algorithm what to exclude (and nothing
+else) from the search results seems to give reliable and foreseeable results.
 
-![Built in local backup solution Windows 10](/blog/images/built-in-local-backup-solution-windows-10.png)
+![Built in local backup solution Windows
+10](/blog/images/built-in-local-backup-solution-windows-10.png)
 
-Excluding phrases or anything that has white space in it, makes using  around what is to be excluded non optional.
+Excluding phrases or anything that has white space in it, makes using quotation
+marks around what is to be excluded non optional. E.g.,
+
+<br>
+
+These work without parenthesis:
+
+Exclude results, that have the word `iMusic` in them, since `iMusic` has a built in equalizer (and apple support pages tell customers, that this is the only equalizer needed on Mac. A caveat is, that it only works while using `iMusic`. Like that, I found a system-wide free alternative on Github.
 
 
-### Fill *\**
+```text
+"apple system wide equalizer" -imusic 
+```
 
 
-The \* acts as a wild card, that will match any word or phrase.
+```text
+"book of happiness" -amazon
+```
+
+<br>
+
+These do not work without parenthesis:<br>
 
 
-#### Example \*
+Search for subway, like the Sandwich Chain and not in the context of public
+transport.<br>
+
+```text
+"subway" "NYC" -"public transport"
+```
+
+Look for a Thunderbolt 3 cable and not for a USB-C cable, both cables fit in the
+same physical interface, but can not be used interchangeably in general. Without
+parenthesis, the dash in `USB-C` would throw the google search algorithm off.<br>
+
+```text
+"thunderbolt 3 cable" -"USB-C"
+```
+
+### Fill `*`
 
 
-Let's say, that one remembers hearing something about U.S. Census, but never really understood what it is. One could send a query like this:
+The `*` acts as a wild card, that will match any word or phrase.
+
+
+#### Example `*`
+
+
+Let's say, that one remembers hearing something about U.S. Census, but never
+really understood what it is. One could send a query like this:
 
 ```text
 Census *
 ```
 
-Which would show this as the top hit. Out of over **4 Billion** results, that top hit gives the right information.
+Which would show this as the top hit. Out of over **4 Billion** results, that
+top hit gives the right information.
 
-![U.S. Census Bureau - Search Results](/blog/images/u-s-census-bureau-search-results.png)
+![U.S. Census Bureau - Search
+Results](/blog/images/u-s-census-bureau-search-results.png)
 
 
-### Price Operator *\$*
+### Price Operator `$`
 
-This operator will look for prices in the results it will show. The user has to supply exact numerical values for the price they are looking for. '.' and ',' are allowed as decimal separators in the price statement. E.g.
+This operator will look for prices in the results it will show. The user has to
+supply exact numerical values for the price they are looking for. `.` and `,`
+are allowed as decimal separators in the price statement. E.g.,
 
 ```text
 $9 # Will match anything that costs $9.
@@ -151,8 +360,13 @@ $99.99 # Will match any price of 99 Dollars and 99 Cents.
 €1,99 # Will match anything that costs 1 Euro and 99 Cent.
 ```
 
-The sign before the actual price value, will be interpreted as the currency the price is in.
-The use of quotation marks around the price term, can help keep results relevant. Quotation marks do not escape the operators special meaning in the search, as I tested. The following all gave the exact same results. I tried it with a few other *price terms* to add some more qualitative evidence to my observation. There were no results found, that suggest that this search operator can be escaped by use of quotation marks either.
+The sign before the actual price value, will be interpreted as the currency the
+price is in. The use of quotation marks around the price term, can help keep
+results relevant. Quotation marks do not escape the operators special meaning in
+the search, as I tested. The following all gave the exact same results. I tried
+it with a few other *price terms* to add some more qualitative evidence to my
+observation. There were no results found, that suggest that this search operator
+can be escaped by use of quotation marks either.
 
 ```text
 "$" "1.99"
@@ -165,18 +379,23 @@ The use of quotation marks around the price term, can help keep results relevant
 "\$ 1.99"
 ```
 
-#### Example Price Operator *\$*
+#### Example Price Operator `$`
 
 
 Practical uses include, but are not limited to:
 
 ```text
-"$9.99" "haircut" -coupon # The exclusion of "coupon" was necessary in this case.
+"$9.99" "haircut" -coupon # The exclusion of "coupon" was necessary in this
+case.
 $5 lunch manhattan
 ```
 
-With the haircuts, there were a lot of unrelated results, that already were missing 'haircut' after a few results down the list. Many coupon matches for haircuts meant I had to exclude coupons like this `-`coupon.
-There were also matches with 9.99 Pounds, which had to be excluded by means of using the **exact match** operator around the price term by adding quotation marks around the price term `"`$9.99`"`.
+With the haircuts, there were a lot of unrelated results, that already were
+missing `haircut` after a few results down the list. Many coupon matches for
+haircuts meant I had to exclude coupons like this `-` coupon.
+There were also matches with 9.99 Pounds, which had to be excluded by means of
+using the **exact match** operator around the price term by adding quotation
+marks around the price term, like so: `"$9.99"`.
 
 
 ![Cheap haircuts](/blog/images/cheap-haircuts.png)
@@ -185,98 +404,145 @@ A guide on how to eat for less than \$5 in Manhattan is the Number one Result.
 
 ![Cheap Eats in Manhattan](/blog/images/cheap-eats-in-manhatten.png)
 
-### *define*
+### `define`
 
-Syntax is `define:<search term>` or, if \<search term> has white space in it, the syntax is `define:"<search term>"`.
+Syntax is `define:<search term>` or, if `<search term>` has white space in it,
+the syntax is `define:"<search term>"`.
 
-**define** will prioritize results that contain factual information about whatever was specified in \<search term> over other information about it.
+**define** will prioritize results that contain factual information about
+whatever was specified in `<search term>` over other information about it.
 
-This can be useful, if one wants to learn more about a product and not get mostly results with buying options for that item.
+This can be useful, if one wants to learn more about a product and not get
+mostly results with buying options for that item.
 
-The **define** operator was used like that in the following example. A NAS from brand QNAP was passed along as \<search term> and the first query made use of the **define** operator, while the second one did not.
+The **define** operator was used like that in the following example. A NAS from
+brand QNAP was passed along as `<search term>` and the first query made use of
+the **define** operator, while the second one did not.
 
 
-#### Example *define*
+#### Example `define`
 
 
 ```text
 define:TVS-872XT
 ```
 
-Which resulted in the very accurate result that takes one directly to the technical specifications section on QNAP's website.
+Which resulted in the very accurate result that takes one directly to the
+technical specifications section on QNAP's website.
 
-![define operator used with TVS872XT](/blog/images/define-operator-used-with-tvs872xt.png)
+![define operator used with
+TVS872XT](/blog/images/define-operator-used-with-tvs872xt.png)
 
 
-Without the **define** operator, the results focus on the prices of various sellers.
+Without the **define** operator, the results focus on the prices of various
+sellers.
 
 ```text
 TVS-872XT
 ```
-![without define operator TVS872XT](/blog/images/without-define-operator-tvs872xt.png)
+![without define operator
+TVS872XT](/blog/images/without-define-operator-tvs872xt.png)
 
 
-One can see the stark difference between the top results for each of the two methods.
+One can see the stark difference between the top results for each of the two
+methods.
 
-### *Cache*
+### `Cache`
 
-**Cache** will return the most recent cached version of a web page, if it is indexed by google.
+**Cache** will return the most recent cached version of a web page, if it is
+indexed by google.
 
-This can be useful, if a web page is down for some reason or if there has been recent changes to the content of that web page, that one wants to be able to ignore when viewing the page. Things like the deletion of media or articles, that one wants to visit again, after they have been deleted from the web page.
+This can be useful, if a web page is down for some reason or if there has been
+recent changes to the content of that web page, that one wants to be able to
+ignore when viewing the page. Things like the deletion of media or articles,
+that one wants to visit again, after they have been deleted from the web page.
 
 
-#### Example *Cache*
+#### Example `Cache`
 
 ```text
 cache:https://www.backblaze.com/blog/how-long-do-disk-drives-last/
 ```
 
-Nothing much has changed on the web page in the example, so the cached and the current version of this article will be the same. Another use case can be when using a VPN connection, that makes one have an IP address, that is banned from accessing the URL one is trying to open. An earlier, cached by google, version of the URL one is trying to visit will be accessible regardless of the ban.
+Nothing much has changed on the web page in the example, so the cached and the
+current version of this article will be the same. Another use case can be when
+using a VPN connection, that makes one have an IP address, that is banned from
+accessing the URL one is trying to open. An earlier, cached by google, version
+of the URL one is trying to visit will be accessible regardless of the ban.
 
 
-### *filetype*
+### `filetype`
 
-This operator is very powerful, if one is looking for content, that can be downloaded and searched using the direct URL of the actual file.
-Below is a, as of 2022, [complete list of supported file types, directly from google.](https://support.google.com/webmasters/answer/35287?hl=en)
+This operator is very powerful, if one is looking for content, that can be
+downloaded and searched using the direct URL of the actual file.
+Below is a, as of 2022, [complete list of supported file types, directly from
+google.](https://support.google.com/webmasters/answer/35287?hl=en)
 
 
 
-|                       File types indexable by Google - Search Console Help                        |
+|                       File types indexable by Google - Search Console Help
+|
 |:-------------------------------------------------------------------------------------------------:|
-|                               Adobe Portable Document Format (.pdf)                               |
-|                                      Adobe PostScript (.ps)                                       |
-|                                 Autodesk Design Web Format (.dwf)                                 |
-|                                     Google Earth (.kml, .kmz)                                     |
-|                                    GPS eXchange Format (.gpx)                                     |
-|                                       Hancom Hanword (.hwp)                                       |
-|                             HTML (.htm, .html, other file extensions)                             |
-|                                   Microsoft Excel (.xls, .xlsx)                                   |
-|                                Microsoft PowerPoint (.ppt, .pptx)                                 |
-|                                   Microsoft Word (.doc, .docx)                                    |
-|                                  OpenOffice presentation (.odp)                                   |
-|                                   OpenOffice spreadsheet (.ods)                                   |
-|                                      OpenOffice text (.odt)                                       |
-|                                      Rich Text Format (.rtf)                                      |
-|                                  Scalable Vector Graphics (.svg)                                  |
-|                                         TeX/LaTeX (.tex)                                          |
-| Text (.txt, .text, other file extensions), including source code in common programming languages: |
-|                                     Basic source code (.bas)                                      |
-|                         C/C++ source code (.c, .cc, .cpp, .cxx, .h, .hpp)                         |
-|                                       C# source code (.cs)                                        |
-|                                     Java source code (.java)                                      |
-|                                      Perl source code (.pl)                                       |
-|                                     Python source code (.py)                                      |
-|                               Wireless Markup Language (.wml, .wap)                               |
-|                                            XML (.xml)                                             |
+|                               Adobe Portable Document Format (.pdf)
+|
+|                                      Adobe PostScript (.ps)
+|
+|                                 Autodesk Design Web Format (.dwf)
+|
+|                                     Google Earth (.kml, .kmz)
+|
+|                                    GPS eXchange Format (.gpx)
+|
+|                                       Hancom Hanword (.hwp)
+|
+|                             HTML (.htm, .html, other file extensions)
+|
+|                                   Microsoft Excel (.xls, .xlsx)
+|
+|                                Microsoft PowerPoint (.ppt, .pptx)
+|
+|                                   Microsoft Word (.doc, .docx)
+|
+|                                  OpenOffice presentation (.odp)
+|
+|                                   OpenOffice spreadsheet (.ods)
+|
+|                                      OpenOffice text (.odt)
+|
+|                                      Rich Text Format (.rtf)
+|
+|                                  Scalable Vector Graphics (.svg)
+|
+|                                         TeX/LaTeX (.tex)
+|
+| Text (.txt, .text, other file extensions), including source code in common
+programming languages: |
+|                                     Basic source code (.bas)
+|
+|                         C/C++ source code (.c, .cc, .cpp, .cxx, .h, .hpp)
+|
+|                                       C# source code (.cs)
+|
+|                                     Java source code (.java)
+|
+|                                      Perl source code (.pl)
+|
+|                                     Python source code (.py)
+|
+|                               Wireless Markup Language (.wml, .wap)
+|
+|                                            XML (.xml)
+|
 
 
 The syntax of **filetype** with pdf as example, is:
 
 `filetype:pdf`.
 
-Whenever one is looking for an actual file and not content on a web page, that can not be downloaded this operator comes in handy.
+Whenever one is looking for an actual file and not content on a web page, that
+can not be downloaded this operator comes in handy.
 
-#### Example *filetype*
+#### Example `filetype`
 
 To give ideas of how this operator can be used, a few examples follow:
 
@@ -292,58 +558,69 @@ To give ideas of how this operator can be used, a few examples follow:
 
 These are some examples of how the **filetype** operator can be used.
 
-### *site*
+### `site`
 
 The syntax is `site:'someurl' <search term> ...`
 
-One can basically do an in-site search for 'someurl' using the powerful google web search algorithm and all the operators available.
+One can basically do an in-site search for 'someurl' using the powerful google
+web search algorithm and all the operators available.
 
 
-### *related*
+### `related`
 
 The **related** operator has the syntax:
 
 `related:<keyword> ...` or `related:"<search term>" ...`
 
-The latter in the case of a \<search term> with spaces in between.
+The latter in the case of a `<search term>` with spaces in between.
 
-It is a proprietary google operator in the sense, that it is unknown what is related in the eyes of the algorithm.
+It is a proprietary google operator in the sense, that it is unknown what is
+related in the eyes of the algorithm.
 Use it, if the results are good is what I would suggest.
 
 
-### *intitle*
+### `intitle`
 
-**intitle** will look for matches in titles of articles, blog posts and basically anything that has a title for that matter.
+**intitle** will look for matches in titles of articles, blog posts and
+basically anything that has a title for that matter.
 
-#### Example *intitle*
+#### Example `intitle`
 
 ```text
 intitle:Häkkinen
 intitle:Häkkinen schumacher
 ```
 
-The first one returns the [*Mikka Häkkinen* Wikipedia article](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi86oPuiq31AhVtkIsKHY3UAIoQFnoECAgQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMika_H%25C3%25A4kkinen&usg=AOvVaw3NAWR8N-4LVieJGGz9YQUT) as the first result.
+The first one returns the [*Mikka Häkkinen* Wikipedia
+article](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi86oPuiq31AhVtkIsKHY3UAIoQFnoECAgQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMika_H%25C3%25A4kkinen&usg=AOvVaw3NAWR8N-4LVieJGGz9YQUT)
+as the first result.
 
 
-![haekkinen wikipedia article first result](/blog/images/haekkinen-wikipedia-article-first-result.png)
+![haekkinen wikipedia article first
+result](/blog/images/haekkinen-wikipedia-article-first-result.png)
 
 
-The second line gives this as the top result, which shows nicely what the operator does:
+The second line gives this as the top result, which shows nicely what the
+operator does:
 
 ![haekkinen schumacher in title](/blog/images/haekkinen-schumacher-in-title.png)
 
 
-### *allintitle*
+### `allintitle`
 
-This operator is simply the **intitle** operator where quotation marks are used on every instance, where it is called. Syntax is:
+This operator is simply the **intitle** operator where quotation marks are used
+on every instance, where it is called. Syntax is:
 
 `allintitle:<search term 1> <search term 2> ...`
 
-One does not need to add quotation marks around any of the search terms following the **allintitle** operator. The algorithm will assume, that they all have to be part of the title.
+One does not need to add quotation marks around any of the search terms
+following the **allintitle** operator. The algorithm will assume, that they all
+have to be part of the title.
 
-#### Example *allintitle*
+#### Example `allintitle`
 
-Running the following query only resulted in one result. This goes to show, that the operator only accepts exact matches.
+Running the following query only resulted in one result. This goes to show, that
+the operator only accepts exact matches.
 
 
 ```text
@@ -351,6 +628,7 @@ allintitle:formula 1 cornering
 ```
 
 
-![allintitle formula 1 cornering](/blog/images/allintitle-formula-1-cornering.png)
+![allintitle formula 1
+cornering](/blog/images/allintitle-formula-1-cornering.png)
 
 
