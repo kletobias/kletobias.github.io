@@ -38,7 +38,7 @@ decided to write this post.<br>
 In this post I will introduce and give examples of how each search operator can
 be used in the search field of [google.com](http://google.com) and any country
 specific extension of google search as well. Since the search operators can be
-combined with each other in a query, there are many combinations, that I won't
+Combined with each other in a query, there are many combinations, that I won't
 be able to include in this post. What I try to do, is show the basic usage for
 each of the search parameters and try to give ideas of how they can be combined
 to return search results that are relevant to the user. There is one very
@@ -161,20 +161,16 @@ walk 10000 steps a day', with or without any other text between the two blocks.
 The top result seems general enough, without being not relevant, given the
 search query at first glance. 
 
-<br>
+{% mermaid %}
 
-```mermaid
-flowchart LR
-A[Initial Or Refined Query] ---  |Get more relevant Results| -> B[List of results]
-```
+graph TD;
+  A[Execute]--->B[Hits]
+  B---->C[Refine]
+  C---->A
 
-```mermaid
-flowchart LR
-A[Formulation Of Objective] -->|Think Of| B[Solutions]
-A --> C
-C[Data Available] -->|To meet objective| B
-B -->|Build Model| D[Model to determine\nbest actions to meet objective]
-```
+{% endmermaid %}
+
+A great result, is a powerful one.<br>
 
 > I like to have a mindset of any search result needs to prove itself in terms
 > of quality and relevance.
