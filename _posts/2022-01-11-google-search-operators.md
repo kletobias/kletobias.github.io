@@ -105,16 +105,13 @@ the case. In the image below one can see that there are roughly 23 million
 results for the query without any quotations. The top result is a good example
 for what can happen when the google search algorithm is allowed to do what he
 wants. The top result comes from the URL **https//organizingmoms.com**. I have
-never heard of this site offering the state of the art 'How to Get to 10.000
+never heard of this site and certainly not in regard to 'How to Get to 10.000
 Steps a Day' plans. I do not intend on taking any credit away from them, nor do
 I say that the hit is not a good top result.<br>
 What I am trying to say, is that when one gives the google search algorithm some
-leeway, the results on the list of results should be critically assessed for
-relevancy and quality. These two things should always be checked for, for any
-returned result, but even more in this scenario.<br>
+leeway, the hits featured on the first page of the list of results should be critically assessed for relevancy and quality. These two things should always be checked for, for any hit, but even more so in this scenario.<br>
 <br>
-The actual query, that was sent is shown below and the total of close to 23 million
-results in the following image.<br>
+The actual query, that was sent is shown below and the total of close to 23 million results in the following image.<br>
 <br>
 ```text
 plan how to walk 10000 steps a day
@@ -124,9 +121,7 @@ plan how to walk 10000 steps a day
 
 <figure>
   <img src='/blog/images/no_quotations.png' alt='all_quoted'>
-  <figcaption>Not using any quotation marks, not even for sub parts of the multi
-  word query returns nearly 23 million results and no top result, that clearly
-  shows, that it is relevant for non-moms. </figcaption>
+  <figcaption>Not using any quotation marks, not even for a sub part of the multi word query returns nearly 23 million hits and no top hit, that clearly shows, that it should be the top hit for a broad variety of people.</figcaption>
 </figure>
 
 <br>
