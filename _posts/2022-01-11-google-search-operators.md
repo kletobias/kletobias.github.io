@@ -145,13 +145,12 @@ That initial search query largely comes from the gut and only avoids common
 pitfalls, creates a better initial query, as the technical knowledge
 increases.<br>
 <br>
-**2\.** Based on whether the results satisfactory, no need to write a more
-refined version of the initial one.<br>
-However, if the retuned hits are not relevant enough, it is best to try again
-with an updated query. One repeats the cycle of **step 1.**, followed by **step
-2.**, until the results are satisfactory or one finds out that google is of
-little help in finding the information one is looking for in the particular
-case.<br>
+**2\.** If the results are satisfactory, no need to write a more refined version
+of the initial query. However, if the retuned hits are not relevant enough, it
+is best to try again with an updated version of the current query. One repeats
+the cycle of **step 1.**, followed by **step 2.**, until the results are
+satisfactory or one finds out that google is of little help in finding the
+information one is looking for in the particular case.<br>
 
 
 > My general mindset, when looking at the returned hits, is that any returned
@@ -256,7 +255,7 @@ delivers the information.
 1992](https://www.turnermotorsport.com/t-BMW-Chassis-Codes)
 
 
-### Exclude *\-*
+### Exclude `-`
 
 
 The **-** (dash) excludes whatever comes immediately after it. It can be used to
