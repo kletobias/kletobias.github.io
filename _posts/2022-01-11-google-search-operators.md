@@ -63,12 +63,24 @@ of the results from the examples I use throughout this post.<br>
 
 ### Exact Match `""`
 
+This is probably the single most powerful operator. It takes some practice to
+find the line between narrowing down the hits google returns too much and the
+returned hits not being specific enough.<br>
+<br>
+There is no difference between single and double quotes for anything one writes
+in the search bar or in an **HTML** environment in general (There are many
+caveats to this statement though), as quoted from this [*Stack Overflow* question](https://stackoverflow.com/questions/2373074/single-vs-double-quotes-vs):<br>
+
+![Single vs Double Quotes](/blog/images/single-vs-double-quotes.png)<br>
+
+<br>
 `"<search term>"` Forces google to only return hits, that contain the exact
 match `<search term>`. The syntax is:<br>
 
 
-`"<search_term>"` or equivalent `'<search_term>'`
+`"<search_term>"` or equivalent `'<search_term>'`<br>
 
+<br>
 The quotation marks have to be immediately before and after the end of the
 search term or immediately before the first word and immediately after the last
 word in a multi word search term.<br>
@@ -183,15 +195,6 @@ on the actual google search operators.<br>
 <br>
 <br>
 <br>
-This is probably the single most powerful operator. Takes some practice to find
-the line between narrowing down the hits google returns too much and the
-returned hits not being specific enough.<br>
-<br>
-There is no difference between single and double quotes for anything one writes
-in the search bar or in an **HTML** environment for that matter, as quoted from
-*Stack Overflow*:
-
-![Single vs Double Quotes](/blog/images/single-vs-double-quotes.png)
 
 ### Logical `OR`
 
