@@ -7,7 +7,7 @@ featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
 
-# Google<br>Search<br>Operators<br>2022 Part 1
+# Google<br>Search<br>Operators 2022<br>Part 1
 
 <br>
 
@@ -96,10 +96,10 @@ below.<br>
 
 <br>
 <br>
-The option 'without any quotes', might work, if what someone is searching, is a
-topic that generally is well separated from other topics. This is close to what
-is called a partition in Mathematics, a set whose intersections with other sets
-are all empty.<br>
+The option 'without any quotation marks', might work, if what someone is
+searching, is a topic that generally is well separated from other topics. This
+is close to what is called a partition in Mathematics, a set whose intersections
+with other sets are all empty.<br>
 In reality, especially when using a search engine like google, that is rarely
 the case. In the image below one can see that there are roughly 23 million
 results for the query without any quotations. The top result, in this instance,
@@ -166,7 +166,7 @@ information one is looking for in the particular case.<br>
 <br>
 
 <figure>
-  <img src='/blog/images/no_quotations.png' alt='all_quoted'>
+  <img src='/blog/images/split_two_quoted_parts.png' alt='two_parts_quoted'>
   <figcaption>The number of hits shows, that only about 10000 matches were
   found.Needless to say, that there is a huge difference in order of magnitude
   between this and the queru without any parenthesis in the number of returned
