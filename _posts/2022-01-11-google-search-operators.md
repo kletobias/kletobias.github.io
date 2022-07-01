@@ -7,7 +7,7 @@ featured_image: '/images/negative-space-aerial-pacific-ocean.jpeg'
 accent_color: '#08877d'
 ---
 
-# Google<br>Search<br>Operators 2022<br>Part 1
+# Google<br>Search Operators 2022<br>Part 1
 
 <br>
 
