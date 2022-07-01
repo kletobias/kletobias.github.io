@@ -163,7 +163,7 @@ search query at first glance.
 
 {% mermaid %}
 
-graph TD;
+graph TD
   A[Execute]--->B[Hits]
   B---->C[Refine]
   C---->A
