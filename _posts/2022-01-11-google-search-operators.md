@@ -102,17 +102,23 @@ is called a partition in Mathematics, a set whose intersections with other sets
 are all empty.<br>
 In reality, especially when using a search engine like google, that is rarely
 the case. In the image below one can see that there are roughly 23 million
-results for the query without any quotations. The top result is a good example
-for what can happen when the google search algorithm is allowed to do what he
-wants. The top result comes from the URL **https//organizingmoms.com**. I have
-never heard of this site and certainly not in regard to 'How to Get to 10.000
-Steps a Day' plans. I do not intend on taking any credit away from them, nor do
+results for the query without any quotations. The top result, in this instance,
+is a good example for what can happen when the google search algorithm is
+allowed to *use a little bit more of its magic*.<br>
+The top result comes from the URL **https//organizingmoms.com**. I have never
+heard of this site and certainly not in regard to 'How to Get to 10.000 Steps a
+Day' fitness plans. I do not intend on taking any credit away from them, nor do
 I say that the hit is not a good top result.<br>
 What I am trying to say, is that when one gives the google search algorithm some
-leeway, the hits featured on the first page of the list of results should be critically assessed for relevancy and quality. These two things should always be checked for, for any hit, but even more so in this scenario.<br>
+leeway, the hits featured on the first page of the list of results should be
+critically assessed for relevancy and quality. These two things should always be
+checked for, for any hit, but even more so in this scenario.<br>
 <br>
-The actual query, that was sent is shown below and the total of close to 23 million results in the following image.<br>
+The actual query, that was sent is shown below and the total of close to 23
+million results are shown in the following image.<br>
 <br>
+
+
 ```text
 plan how to walk 10000 steps a day
 ```
@@ -139,36 +145,17 @@ That initial search query largely comes from the gut and only avoids common
 pitfalls, creates a better initial query, as the technical knowledge
 increases.<br>
 <br>
-**2\.** Based on results, change query, such that the results are more relevant and
-   have less outliers in them. This step is called **R**, as in *refine*.<br>
-<br>
-**3\.** Execute (**E**) the refined query, that is the result of the refinements
-added during step **R**.<br>
-<br>
-Initial query and each subsequent 'refined' query are basically the same and
-they are both summarized under step **R**.<br>
-<br>
-loop of creating a search query.. In general 'how to ....' is useless if
-not inside quotation marks together with the 'how to for what?' part. The reason
-is, that there 'how to' is too general, when used alone. Plan was wrapped in
-quotation marks alone, as to allow for any combination of 'plan' and 'how to
-walk 10000 steps a day', with or without any other text between the two blocks.
-The top result seems general enough, without being not relevant, given the
-search query at first glance. 
+**2\.** Based on whether the results satisfactory, no need to write a more
+refined version of the initial one.<br>
+However, if the retuned hits are not relevant enough, it is best to try again
+with an updated query. One repeats the cycle of **step 1.**, followed by **step
+2.**, until the results are satisfactory or one finds out that google is of
+little help in finding the information one is looking for in the particular
+case.<br>
 
-{% mermaid %}
 
-graph TD
-  A[Execute]--->B[Hits]
-  B---->C[Refine]
-  C---->A
-
-{% endmermaid %}
-
-A great result, is a powerful one.<br>
-
-> I like to have a mindset of any search result needs to prove itself in terms
-> of quality and relevance.
+> My general mindset, when looking at the returned hits, is that any returned
+> hit needs to convince me first, in terms of its quality and relevance.
 
 <br>
 <br>
@@ -181,18 +168,26 @@ A great result, is a powerful one.<br>
 
 <figure>
   <img src='/blog/images/no_quotations.png' alt='all_quoted'>
-  <figcaption>Not using any quotation marks, not even for sub parts of the multi
-  word query returns nearly 23 million results and no top result, that clearly
-  shows, that it is relevant for non-moms. </figcaption>
+  <figcaption>The number of hits shows, that only about 10000 matches were
+  found.Needless to say, that there is a huge difference in order of magnitude
+  between this and the queru without any parenthesis in the number of returned
+  hits.</figcaption>
 </figure>
 
 
 <br>
 
+While it is a relevant subject, optimizing by experimenting with surrounding
+various parts of a query with  parenthesis, the quality of the results from
+using it can often be very volatile. That is why, in the following, the focus is
+on the actual google search operators.<br>
+<br>
+<br>
+<br>
 This is probably the single most powerful operator. Takes some practice to find
 the line between narrowing down the hits google returns too much and the
-returned hits not being specific enough.
-
+returned hits not being specific enough.<br>
+<br>
 There is no difference between single and double quotes for anything one writes
 in the search bar or in an **HTML** environment for that matter, as quoted from
 *Stack Overflow*:
@@ -239,12 +234,12 @@ above.](https://www.vehiclehistory.com/articles/which-bmw-3-series-is-the-most-r
 **AND** is the logical *AND*. It forces google to only include results where the
 search term or what is written inside parenthesis `()` before **AND** and the
 search term or what is written inside parenthesis after **AND** are both
-matched.
+matched.<br>
 
 #### Example `AND`
 In the following, the goal is to find information about the Chassis Code of BMW
 Series 3 cars, produced in 1992. Which tells what generation these cars belong
-to.
+to.<br>
 
 ```text
 BMW 3 Series Chassis code AND 1992
@@ -277,27 +272,33 @@ in` keyword in the query.
 
 I would advise against not putting the excluded word or phrase inside quotation
 marks, as it will let the algorithm exclude other related terms and not the one
-you wrote for example. It might do other things as well...
+specified for example. It might do other things as well in this case...<br>
+<br>
 With exclusions, actually telling the algorithm what to exclude (and nothing
-else) from the search results seems to give reliable and foreseeable results.
+else) from the search results seems to give reliable and foreseeable
+results.<br>
 
 ![Built in local backup solution Windows
 10](/blog/images/built-in-local-backup-solution-windows-10.png)
 
 Excluding phrases or anything that has white space in it, makes using quotation
-marks around what is to be excluded non optional. E.g.,
+marks around what is to be excluded non optional. E.g.,<br>
 
 <br>
 
-These work without parenthesis:
+These work without parenthesis:<br>
 
-Exclude results, that have the word `iMusic` in them, since `iMusic` has a built in equalizer (and apple support pages tell customers, that this is the only equalizer needed on Mac. A caveat is, that it only works while using `iMusic`. Like that, I found a system-wide free alternative on Github.
-
+Exclude results, that have the word `iMusic` in them, since `iMusic` has a built
+in equalizer (and apple support pages tell customers, that this is the only
+equalizer needed on Mac. A caveat is, that it only works while using `iMusic`.
+Like that, I found a system-wide free alternative on Github.<br>
+<br>
 
 ```text
 "apple system wide equalizer" -imusic 
 ```
 
+<br>
 
 ```text
 "book of happiness" -amazon
@@ -325,22 +326,25 @@ parenthesis, the dash in `USB-C` would throw the google search algorithm off.<br
 
 ### Fill `*`
 
-
-The `*` acts as a wild card, that will match any word or phrase.
-
+<br>
+The `*` acts as a wild card, that will match any word or phrase.<br>
+<br>
 
 #### Example `*`
 
-
+<br>
 Let's say, that one remembers hearing something about U.S. Census, but never
-really understood what it is. One could send a query like this:
+really understood what it is. One could send a query like this:<br>
+<br>
 
 ```text
 Census *
 ```
 
+<br>
 Which would show this as the top hit. Out of over **4 Billion** results, that
-top hit gives the right information.
+top hit gives the right information<br>.
+<br>
 
 ![U.S. Census Bureau - Search
 Results](/blog/images/u-s-census-bureau-search-results.png)
@@ -350,7 +354,8 @@ Results](/blog/images/u-s-census-bureau-search-results.png)
 
 This operator will look for prices in the results it will show. The user has to
 supply exact numerical values for the price they are looking for. `.` and `,`
-are allowed as decimal separators in the price statement. E.g.,
+are allowed as decimal separators in the price statement. E.g.,<br>
+<br>
 
 ```text
 $9 # Will match anything that costs $9.
@@ -358,13 +363,14 @@ $99.99 # Will match any price of 99 Dollars and 99 Cents.
 €1,99 # Will match anything that costs 1 Euro and 99 Cent.
 ```
 
+
 The sign before the actual price value, will be interpreted as the currency the
 price is in. The use of quotation marks around the price term, can help keep
 results relevant. Quotation marks do not escape the operators special meaning in
 the search, as I tested. The following all gave the exact same results. I tried
 it with a few other *price terms* to add some more qualitative evidence to my
 observation. There were no results found, that suggest that this search operator
-can be escaped by use of quotation marks either.
+can be escaped by use of quotation marks either.<br>
 
 ```text
 "$" "1.99"
@@ -388,13 +394,14 @@ case.
 $5 lunch manhattan
 ```
 
+<br>
 With the haircuts, there were a lot of unrelated results, that already were
 missing `haircut` after a few results down the list. Many coupon matches for
-haircuts meant I had to exclude coupons like this `-` coupon.
+haircuts meant I had to exclude coupons like this `-` coupon.<br>
 There were also matches with 9.99 Pounds, which had to be excluded by means of
 using the **exact match** operator around the price term by adding quotation
-marks around the price term, like so: `"$9.99"`.
-
+marks around the price term, like so: `"$9.99"`.<br>
+<br>
 
 ![Cheap haircuts](/blog/images/cheap-haircuts.png)
 
@@ -405,18 +412,18 @@ A guide on how to eat for less than \$5 in Manhattan is the Number one Result.
 ### `define`
 
 Syntax is `define:<search term>` or, if `<search term>` has white space in it,
-the syntax is `define:"<search term>"`.
-
+the syntax is `define:"<search term>"`.<br>
+<br>
 **define** will prioritize results that contain factual information about
-whatever was specified in `<search term>` over other information about it.
-
+whatever was specified in `<search term>` over other information about it.<br>
+<br>
 This can be useful, if one wants to learn more about a product and not get
-mostly results with buying options for that item.
-
+mostly results with buying options for that item.<br>
+<br>
 The **define** operator was used like that in the following example. A NAS from
 brand QNAP was passed along as `<search term>` and the first query made use of
-the **define** operator, while the second one did not.
-
+the **define** operator, while the second one did not.<br>
+<br>
 
 #### Example `define`
 
@@ -426,14 +433,14 @@ define:TVS-872XT
 ```
 
 Which resulted in the very accurate result that takes one directly to the
-technical specifications section on QNAP's website.
+technical specifications section on QNAP's website.<br>
 
 ![define operator used with
 TVS872XT](/blog/images/define-operator-used-with-tvs872xt.png)
 
 
 Without the **define** operator, the results focus on the prices of various
-sellers.
+sellers.<br>
 
 ```text
 TVS-872XT
@@ -443,17 +450,18 @@ TVS872XT](/blog/images/without-define-operator-tvs872xt.png)
 
 
 One can see the stark difference between the top results for each of the two
-methods.
+methods.<br>
 
 ### `Cache`
 
 **Cache** will return the most recent cached version of a web page, if it is
-indexed by google.
-
+indexed by google.<br>
+<br>
 This can be useful, if a web page is down for some reason or if there has been
 recent changes to the content of that web page, that one wants to be able to
 ignore when viewing the page. Things like the deletion of media or articles,
-that one wants to visit again, after they have been deleted from the web page.
+that one wants to visit again, after they have been deleted from the web
+page.<br>
 
 
 #### Example `Cache`
@@ -466,7 +474,7 @@ Nothing much has changed on the web page in the example, so the cached and the
 current version of this article will be the same. Another use case can be when
 using a VPN connection, that makes one have an IP address, that is banned from
 accessing the URL one is trying to open. An earlier, cached by google, version
-of the URL one is trying to visit will be accessible regardless of the ban.
+of the URL one is trying to visit will be accessible regardless of the ban.<br>
 
 
 ### `filetype`
@@ -474,7 +482,7 @@ of the URL one is trying to visit will be accessible regardless of the ban.
 This operator is very powerful, if one is looking for content, that can be
 downloaded and searched using the direct URL of the actual file.
 Below is a, as of 2022, [complete list of supported file types, directly from
-google.](https://support.google.com/webmasters/answer/35287?hl=en)
+google.](https://support.google.com/webmasters/answer/35287?hl=en)<br>
 
 
 
@@ -533,17 +541,17 @@ programming languages: |
 |
 
 
-The syntax of **filetype** with pdf as example, is:
-
+The syntax of **filetype** with pdf as example, is:<br>
+<br>
 `filetype:pdf`.
-
+<br>
 Whenever one is looking for an actual file and not content on a web page, that
-can not be downloaded this operator comes in handy.
+can not be downloaded this operator comes in handy.<br>
 
 #### Example `filetype`
 
-To give ideas of how this operator can be used, a few examples follow:
-
+To give ideas of how this operator can be used, a few examples follow:<br>
+<br>
 - One is looking for the manual of a device one owns:
 
 
@@ -554,34 +562,34 @@ To give ideas of how this operator can be used, a few examples follow:
 ```
 
 
-These are some examples of how the **filetype** operator can be used.
+These are some examples of how the **filetype** operator can be used.<br>
 
 ### `site`
 
-The syntax is `site:'someurl' <search term> ...`
+The syntax is `site:'someurl' <search term> ...`<br>
 
 One can basically do an in-site search for 'someurl' using the powerful google
-web search algorithm and all the operators available.
+web search algorithm and all the operators available.<br>
 
 
 ### `related`
 
-The **related** operator has the syntax:
+The **related** operator has the syntax:<br>
 
-`related:<keyword> ...` or `related:"<search term>" ...`
+`related:<keyword> ...` or `related:"<search term>" ...`<br>
 
-The latter in the case of a `<search term>` with spaces in between.
-
+The latter in the case of a `<search term>` with spaces in between.<br>
+<br>
 It is a proprietary google operator in the sense, that it is unknown what is
 related in the eyes of the algorithm.
-Use it, if the results are good is what I would suggest.
+Use it, if the results are good is what I would suggest.<br>
 
 
 ### `intitle`
 
 **intitle** will look for matches in titles of articles, blog posts and
-basically anything that has a title for that matter.
-
+basically anything that has a title for that matter.<br>
+<br>
 #### Example `intitle`
 
 ```text
@@ -591,15 +599,15 @@ intitle:Häkkinen schumacher
 
 The first one returns the [*Mikka Häkkinen* Wikipedia
 article](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi86oPuiq31AhVtkIsKHY3UAIoQFnoECAgQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMika_H%25C3%25A4kkinen&usg=AOvVaw3NAWR8N-4LVieJGGz9YQUT)
-as the first result.
+as the first result.<br>
 
 
 ![haekkinen wikipedia article first
-result](/blog/images/haekkinen-wikipedia-article-first-result.png)
+result](/blog/images/haekkinen-wikipedia-article-first-result.png)<br>
 
 
 The second line gives this as the top result, which shows nicely what the
-operator does:
+operator does:<br>
 
 ![haekkinen schumacher in title](/blog/images/haekkinen-schumacher-in-title.png)
 
@@ -607,18 +615,18 @@ operator does:
 ### `allintitle`
 
 This operator is simply the **intitle** operator where quotation marks are used
-on every instance, where it is called. Syntax is:
-
+on every instance, where it is called. Syntax is:<br>
+<br>
 `allintitle:<search term 1> <search term 2> ...`
-
+<br>
 One does not need to add quotation marks around any of the search terms
 following the **allintitle** operator. The algorithm will assume, that they all
-have to be part of the title.
+have to be part of the title.<br>
 
 #### Example `allintitle`
 
 Running the following query only resulted in one result. This goes to show, that
-the operator only accepts exact matches.
+the operator only accepts exact matches.<br>
 
 
 ```text
