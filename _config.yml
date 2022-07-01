@@ -1,9 +1,6 @@
 site: Portfolio Website Of Tobias Klein
 
-gems: [jekyll-mermaid]
 
-mermaid:
-  src: "/Users/tobias/all_code/projects/kletobias-github-io_website/mermaid.js"
 
 collections:
   pages:
@@ -58,7 +55,6 @@ sass:
 
 plugins:
   - jekyll-sitemap
-  - jekyll-mermaid
 
 paginate: 7
 paginate_path: "/blog/page-:num/"
