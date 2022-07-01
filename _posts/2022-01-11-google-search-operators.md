@@ -179,9 +179,9 @@ information one is looking for in the particular case.<br>
 
 <figure>
   <img src='/blog/images/split_two_quoted_parts.png' alt='two_parts_quoted'>
-  <figcaption>The number of hits shows, that only about 10000 matches were
-  found.Needless to say, that there is a huge difference in order of magnitude
-  between this and the queru without any parenthesis in the number of returned
+  <figcaption>The number of hits shows, that only 11300 matches were found.
+  Needless to say, that there is a huge difference in order of magnitude between
+  this and the queru without any parenthesis in the number of returned
   hits.</figcaption>
 </figure>
 
