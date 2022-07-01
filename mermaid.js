@@ -1,0 +1,1 @@
+/opt/homebrew/Cellar/node_modules/mermaid/dist/mermaid.js

@@ -3,7 +3,7 @@ site: Portfolio Website Of Tobias Klein
 gems: [jekyll-mermaid]
 
 mermaid:
-  src: "/opt/homebrew/Cellar/node_modules/mermaid/dist/mermaid.js"
+  src: "/Users/tobias/all_code/projects/kletobias-github-io_website/mermaid.js"
 
 collections:
   pages:
