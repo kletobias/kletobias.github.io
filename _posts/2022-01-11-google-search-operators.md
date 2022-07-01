@@ -67,6 +67,18 @@ This is probably the single most powerful operator. It takes some practice to
 find the line between narrowing down the hits google returns too much and the
 returned hits not being specific enough.<br>
 <br>
+
+> One important fact to keep in mind when looking to get more relevant hits in
+> return to ones query, is that the order of returned hits is generally the
+> most important metric to use when checking results. If the order is good
+> enough, e.g., the first 3 results on the first page are all highly relevant,
+> then it does not matter if the total of returned hits is 20 or 20.000.000.
+> However, an increase in the number of results in the order of magnitude as in
+> the previous example, can make finding the 'correct ordering' of the returned
+> results much harder.<br>
+<br>
+
+
 There is no difference between single and double quotes for anything one writes
 in the search bar or in an **HTML** environment in general (There are many
 caveats to this statement though), as quoted from this [*Stack Overflow* question](https://stackoverflow.com/questions/2373074/single-vs-double-quotes-vs):<br>
@@ -135,6 +147,7 @@ million results are shown in the following image.<br>
 plan how to walk 10000 steps a day
 ```
 
+The query, where no quotation marks were used.<br>
 <br>
 
 <figure>
@@ -148,8 +161,24 @@ The last scenario is the one where several words with white space in-between
 them are used to give google more flexibility in how it is allowed to combine
 the individual blocks in the query. In this case, 'how to walk 10000 steps a
 day' was tried/used as a common enough phrase, that should not be too specific
-or too narrow to yield a healthy amount of results. It often comes down to a
-loop consisting of:<br>
+or too narrow to yield a healthy amount of results.<br>
+
+```text
+"plan" "how to walk 10000 steps a day"
+```
+
+The query, where two parts were put into seperate pairs of quotation marks.<br>
+<br>
+<figure>
+  <img src='/blog/images/split_two_quoted_parts.png' alt='two_parts_quoted'>
+  <figcaption>The number of hits shows, that only 11300 matches were found.
+  Needless to say, that there is a huge difference in order of magnitude between
+  this and the queru without any parenthesis in the number of returned
+  hits.</figcaption>
+</figure>
+
+<br>
+It often comes down to a loop consisting of:<br>
 <br>
 **1\.** Writing a search query, that summarizes what one is looking for.<br>
 <br>
@@ -165,25 +194,6 @@ satisfactory or one finds out that google is of little help in finding the
 information one is looking for in the particular case.<br>
 
 
-> My general mindset, when looking at the returned hits, is that any returned
-> hit needs to convince me first, in terms of its quality and relevance.
-
-<br>
-<br>
-
-```text
-"plan" "how to walk 10000 steps a day"
-```
-
-<br>
-
-<figure>
-  <img src='/blog/images/split_two_quoted_parts.png' alt='two_parts_quoted'>
-  <figcaption>The number of hits shows, that only 11300 matches were found.
-  Needless to say, that there is a huge difference in order of magnitude between
-  this and the queru without any parenthesis in the number of returned
-  hits.</figcaption>
-</figure>
 
 
 <br>
@@ -194,6 +204,9 @@ using it can often be very volatile. That is why, in the following, the focus is
 on the actual google search operators.<br>
 <br>
 <br>
+
+> My general mindset, when looking at the returned hits, is that any returned
+> hit needs to convince me first, in terms of its quality and relevance.
 <br>
 
 ### Logical `OR`
