@@ -4,8 +4,9 @@ subtitle: 'My Answers To The 37 Questions Long Questionnaire'
 date: '2022-05-28 06:00:00'
 description: 'Extensive Solutions To All Questions - No Shortcuts'
 accent_color: '#08877d'
-featured_image:
- - '/images/838338477938@+-791693336.jpg'
+featured_image: '838338477938@+-791693336.jpg'
+gallery_images:
+  - '838338477938@+-00.jpg'
 ---
 
 # Questionnaire Chapter 04
@@ -295,7 +296,7 @@ sign of target and predicted value does not matter.<br>
 <br>
 The nominator in the equation is squared, which makes the nominator a polynomial
 function of second degree. On the other hand, the denominator is a first degree
-polynomial term. It is obvious, according to l'Hospital's theorem, that the
+polynomial term. It is obvious, according to l Hospital's theorem, that the
 linear term in the numerator, in general, has vanishingly small influence on the
 function values compared to the quadratic term in the numerator. This
 relationship is also reinforced by the fact that the values in the numerator are
@@ -307,13 +308,13 @@ actual target label very harshly. Consistency, low average deviations do not
 have a high value if large deviations occur.<br>
 This is a summary, in individual cases these characteristics may be absent.
 
-The *RMSE* weakens the weighting of the quadratic denominator by taking the root of the whole term at the end. It is a metric that represents a tradeoff between penalizing large deviations and lack of consistency, in the direction of prioritizing consistency.
+The *RMSE* weakens the weighting of the quadratic denominator by taking the root of the whole term at the end. It is a metric that represents a trade-off between penalizing large deviations and lack of consistency, in the direction of prioritizing consistency.
 
 ### L1 norm
 
 The L1 norm is the *L1_Loss* function here. The function is:
 $$\mathrm{L1_{Loss}}(\,ss_{3},label_{target})\, := |ss_{3} - label_{target}|$$
-for $ss_{s3}$ one sample of the independent variable, $label_{target}$ the ground truth. It calculates the absolute value of the distance between predicted label and actual target label. The function will only output values, that are not 0 for instances where the predicted label is different from the target label. The L1_Loss function induces a bias on the model, by prefering a few weights to be different from 0, while most others are set to 0 by the model. It is used in some types of regression, such as *lasso regression*, that uses *L1-regularization*. A side effect of this is regularizaion is that is performs feature selection, which can be desireable.<br>
+for $ss_{s3}$ one sample of the independent variable, $label_{target}$ the ground truth. It calculates the absolute value of the distance between predicted label and actual target label. The function will only output values, that are not 0 for instances where the predicted label is different from the target label. The L1_Loss function induces a bias on the model, by preferring a few weights to be different from 0, while most others are set to 0 by the model. It is used in some types of regression, such as *lasso regression*, that uses *L1-regularization*. A side effect of this is regularization is that is performs feature selection, which can be desirable.<br>
 <br>
 In contrast to the *L1-regularization*, the *L2-regularization* places an outsize penalty on large components of the weight vector. This biases our learning algorithm towards models that distribute weight evenly across a larger number of features. In practice, this might make them more robust to measurement error in a single variable.
 
@@ -324,7 +325,7 @@ In contrast to the *L1-regularization*, the *L2-regularization* places an outsiz
 
 Broadcasting makes it possible to drastically speed up routines, that could be implemented using only python code, but that would be very slow to execute due to the overhead, that python brings with it, among other factors.<br>
 <br>
-Broadcating is using matrix operations whenever possible. There are several high level functions in the `numpy`, `PyTorch` and `fastai` library for example, that make use of broadcasting and using matrices whenever possible. The functions itself make use of a 'fast' compilated language, using highly optimized functions in the low level language and therefore accelerating the deep learning training process. GPUs are widely favored over CPUs in deep learning, that is partly due to the deep learning process consisting of many many matrix multiplications and operations like assigniing numbers to huge matrices.
+Broadcasting is using matrix operations whenever possible. There are several high level functions in the `numpy`, `PyTorch` and `fastai` library for example, that make use of broadcasting and using matrices whenever possible. The functions itself make use of a 'fast' compiled language, using highly optimized functions in the low level language and therefore accelerating the deep learning training process. GPUs are widely favored over CPUs in deep learning, that is partly due to the deep learning process consisting of many many matrix multiplications and operations like assigning numbers to huge matrices.
 
 
 ## 9.
@@ -444,7 +445,7 @@ If neither of the constraints are met, Numpy throws an error:<br>
 
 Are metrics generally calculated using the training set, or the validation set? Why?
 
-They are calculated, by using the validation set. That is, because we really only care about the performance of the model on useen data and the training of the model is a means to reaching this objective.<br>
+They are calculated, by using the validation set. That is, because we really only care about the performance of the model on unseen data and the training of the model is a means to reaching this objective.<br>
 Oftentimes accuracy is chosen as a metric for classification problems. Accuracy is easy to understand, and it tracks closely the performance of the model, that is how well it can predict the label of the target variable.
 
 
@@ -468,7 +469,7 @@ $$\begin{bmatrix} w_1 \\ w_2 \end{bmatrix} :=
 
 The equation shows one step in the stochastic gradient descent. $\eta$ is the learning rate. It can either be a constant or decay over time. Weights are $w_{1}$ and $w_{2}$.<br>
 <br>
-**In Other Words:** The stochastic gradient descent starts with randomly initialized weights. The weights get updated, based on their gradient and the learning rate. After the computation of the gradient, one moves a small amount in the direction of the steepest gradient, that has been calculated during the caluclation of the gradient for the randomly selected minibatch. The goal is to minimize the training loss during the descent. Sometimes one reaches a global minimum, but this is not guaranteed. It is possible, that one only reaches a local minimum. Reaching a local minimum can still result in a good approximation and thus minimize the loss function well.
+**In Other Words:** The stochastic gradient descent starts with randomly initialized weights. The weights get updated, based on their gradient and the learning rate. After the computation of the gradient, one moves a small amount in the direction of the steepest gradient, that has been calculated during the calculation of the gradient for the randomly selected minibatch. The goal is to minimize the training loss during the descent. Sometimes one reaches a global minimum, but this is not guaranteed. It is possible, that one only reaches a local minimum. Reaching a local minimum can still result in a good approximation and thus minimize the loss function well.
 
 
 ## 13.
@@ -476,7 +477,7 @@ The equation shows one step in the stochastic gradient descent. $\eta$ is the le
 Why does Stochastic Gradient Descent use mini-batches?
 
 
-It is the characteristic, that distinguishes SGD from GD. Using minibatches, means that from the total set of training examples $N$, only a much smaller subset $m$ is used to calculate the gradients. The difference between $m$ and $N$ can be large. Given an $N = 10000$ and a an $m = 100$, then the amount of computation needed during each step has been reduced by a factor of $100$. The SGD, thus is much faster than the original GD. Using a minibatch, in practice has shown to be enough, in order for the calculated gradients to minimize the loss function well.<br>
+It is the characteristic, that distinguishes SGD from GD. Using minibatches, means that from the total set of training examples $N$, only a much smaller subset $m$ is used to calculate the gradients. The difference between $m$ and $N$ can be large. Given an $N = 10000$ and a $m = 100$, then the amount of computation needed during each step has been reduced by a factor of $100$. The SGD, thus is much faster than the original GD. Using a minibatch, in practice has shown to be enough, in order for the calculated gradients to minimize the loss function well.<br>
 <br>
 Because the standard error of the estimated mean gradient is proportional to the square root of the number of examples, the standard error increases by only a factor of 10. So even if we have to take 10 times more steps before convergence, minibatch SGD is still 10 times faster than full batch SGD in this case.
 
@@ -555,7 +556,7 @@ show_preds(preds)
 
 
     
-![png](output_35_0.png)
+![png](/images/output_35_0.png)
     
 
 
@@ -652,7 +653,7 @@ def apply_step(params, prn=True):
 
 ### 14.6
 
-- Iterate and improve the predicitons of the model through performing the stochastic gradient descent over a specified number of epochs.
+- Iterate and improve the predictions of the model through performing the stochastic gradient descent over a specified number of epochs.
 
 
 
@@ -719,7 +720,7 @@ param
 
 ## 17.
 
-- Why can't we always use a high learing rate?
+- Why can't we always use a high learning rate?
 
 <br>
 
@@ -733,9 +734,12 @@ param
 <br>
 
 - A gradient, as it is used in deep learning during the SGD, is the value of the first partial derivative at a certain point of the loss function.
-- We calculate the first partial derivative of the loss function ($\frac{d}{dw_{i}}$)for all weights $w_{i}$, $i \in N$, with $N$ the total number of weights.
+- We calculate the first partial derivative of the loss function<br>
+  ($\frac{d}{dw_{i}}$)for all weights $w_{i}$, $i \in N$, with $N$ the total
+  number of weights.
 - The gradient then is, for each $w_{i}$: $\frac{d}{dw_{i}}$.
-- The gradient, with the steepest slope is chosen for the *stepping*, which is equivalent to the one, that fulfils: $min_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$
+- The gradient, with the steepest slope is chosen for the *stepping*, which is
+  equivalent to the one, that fulfils: $min_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$
 
 ## 19.
 
@@ -764,9 +768,9 @@ These are the reasons, why accuracy is not a suitable loss function to drive the
 
 <br>
 
-- The sigmoid function maps any intput to the interval $[0,1]$.
+- The sigmoid function maps any input to the interval $[0,1]$.
 - It is monotonously increasing and it can be specified, over which $x$ range the output goes from 0 to 1.
-- Since it is monotonously incresing, once output reaches 1, its output will remain 1 for all subsequent $x$ values.
+- Since it is monotonously increasing, once output reaches 1, its output will remain 1 for all subsequent $x$ values.
 - Unlike some of the other activation functions, the sigmoid function is differentiable over its entire domain.
 - An example of a popular activation function is the $Logistic$ function.
 - The sigmoid function can look like this, in the case of the $Logistic$ function:
@@ -789,7 +793,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 
 
     
-![png](output_58_0.png)
+![png](/images/output_58_0.png)
     
 
 
@@ -832,10 +836,10 @@ Let $I$ be the set of weights (in fact the set of all parameters in the network)
 
 <br>
 
-- The `DataLoader` class helps us in keeping some of the factors during training continuosly changing, which is beneficial for the training outcome.
+- The `DataLoader` class helps us in keeping some of the factors during training continuously changing, which is beneficial for the training outcome.
 - The `DataLoader` class does the minibatch creation for us.
     - It randomly shuffles and collates random sample for each step in the SGD.
-- It can take anyy Python collection and turn it into an iterator over minibatches, like so:
+- It can take any Python collection and turn it into an iterator over minibatches, like so:
 
 
 ```python
@@ -867,7 +871,7 @@ print(ds)
 dl = DataLoader(ds, batch_size=6, shuffle=True)
 print(
     list(dl), "\n"
-)  # DataLoader nees to be transformed from DataLoader to list() objectF
+)  # DataLoader needs to be transformed from DataLoader to list() object
 print(list(dl)[0])  # testing Black
 ```
 
@@ -881,7 +885,7 @@ print(list(dl)[0])  # testing Black
 
 - Write pseudocode showing the basic steps taken in one epoch for SGD.
 
-```jupyterpython
+```python
 def fp(num):
     params=torch.randn(num)
     return params
@@ -921,9 +925,11 @@ for x,y in dl:
 
 ## 26.
 
-- Create a function, that if passed two arguments `[1,2,3,4]` and `'abcd'`, returns `[(1,'a'), (2,'b'), (3,'c'), (4,'d')]`
+- Create a function, that if passed two arguments `[1,2,3,4]` and `'abcd'`,
+  returns `[(1,'a'), (2,'b'), (3,'c'), (4,'d')]`
 - What is special about that output data structure?
-
+<br>
+<br>
 
 ```python
 # Answer to first part of the question
@@ -949,7 +955,12 @@ tt(a, b)
 
 
 
-What is special about these tuples, is that they can be used to represent a pair of independent variable, dependent varible for each such set in the dataset. Using this tuple structure, one can conveniently access the independent and dependent variable by using standard python indexing. E.g., for a tuple `t=(1,'a')` , one can access the first component like so: `t[0]` and the second one, like this: `t[1]`
+What is special about these tuples, is that they can be used to represent a pair
+of independent variable, dependent variable for each such set in the dataset.
+Using this tuple structure, one can conveniently access the independent and
+dependent variable by using standard python indexing. E.g., for a tuple
+`t=(1,'a')` , one can access the first component like so: `t[0]` and the second
+one, like this: `t[1]`
 
 ## 27.
 
@@ -958,8 +969,11 @@ What is special about these tuples, is that they can be used to represent a pair
 <br>
 
 - `view` lets one reshape a tensor, much like the numpy `reshape` function does.
-- By using `view`, one can alter all dimensions of a tensor, as long as the total number of elements remains the same.
-- E.g., A 2D tensor `t` with dimensions `t.ndim` = `(1,20)`, can be reordered using view, like so: `t.view(2,10` or `t.view(10,2)` or any other shape where the multiplied shape along its two axes remains 20.
+- By using `view`, one can alter all dimensions of a tensor, as long as the
+  total number of elements remains the same.
+- E.g., A 2D tensor `t` with dimensions `t.ndim` = `(1,20)`, can be reordered
+  using view, like so: `t.view(2,10)` or `t.view(10,2)` or any other shape where
+  the multiplied shape along its two axes remains 20.
 
 ## 28.
 
@@ -968,12 +982,14 @@ What is special about these tuples, is that they can be used to represent a pair
 
 <br>
 
-- In neural networks, the intercept ($b$) in an equation of the form $y=wx+b$ is called *bias*, together with the weights ($w$) in the example they make up the *parameters*.
+- In neural networks, the intercept ($b$) in an equation of the form $y=wx+b$ is
+  called *bias*, together with the weights ($w$) in the example they make up the
+  *parameters*.
 - The bias parameters are randomly initiated, like the weights.
-
 <br>
-
-- We need the bias weights, since they are part of the fundamental linear equation $y=wx+b$, which is used in any linear layer.
+<br>
+- We need the bias weights, since they are part of the fundamental linear
+  equation $y=wx+b$, which is used in any linear layer.
 
 ## 29.
 
@@ -982,8 +998,16 @@ What is special about these tuples, is that they can be used to represent a pair
 <br>
 
 - The `@` operator is the matrix multiplication operator in Python.
-- It can be used to multiply two matrices or two vectors or a vector and a matrix.
-- The basic rule is, that two objects, any combination of `matrix@matrix`, `vector@matrix`, `matrix@vector` or `vector@vector` and any chain or permutation of these objects, $M \in \mathbb{R}^{N\mathrm{x}M}$ and $N \in \mathbb{R}^{M\mathrm{x}M}$ must have matching inner dimensions for a matrix multiplication to be possible. Here, the right most dimension of $M$ and left most dimension of $N$ need to match. If this is the case, the product of `M@N = Q` will have dimensions $M\@N=Q \in \mathbb{R}^{N\mathrm{x}M}$, which is equal to the outer dimensions of $M$ and $N$.
+- It can be used to multiply two matrices or two vectors or a vector and a matrix.<br>
+<br>
+The basic rule is, that two objects, any combination of `matrix@matrix`,
+`vector@matrix`, `matrix@vector` or `vector@vector` and any chain or permutation
+of these objects, $M \in \mathbb{R}^{N\mathrm{x}M}$ and $N \in
+\mathbb{R}^{M\mathrm{x}M}$ must have matching inner dimensions for a matrix
+multiplication to be possible. Here, the right most dimension of $M$ and left
+most dimension of $N$ need to match. If this is the case, the product of `M@N =
+Q` will have dimensions $MN=Q \in \mathbb{R}^{N\mathrm{x}M}$, which is equal
+to the outer dimensions of $M$ and $N$.
 
 ## 30.
 
@@ -991,7 +1015,7 @@ What is special about these tuples, is that they can be used to represent a pair
 
 <br>
 
-- the `backward` method refers to *backpropagation*, which is the name to the process of calculating the derivative of each layer.
+- the `backward` method refers to *back propagation*, which is the name to the process of calculating the derivative of each layer.
 
 ```python
 yt=f(xt)
@@ -1009,7 +1033,7 @@ xt.grad
     - weights, by `weights.grad.zero_()`
     - bias, by `bias.grad.zero_()`
 - The reason, the gradients need to be set to zero, is that `loss.backward()` adds the gradients of `loss`, also known as `L(w)` to any gradients that are currently stored.
-- Because `loss.backward()` stores the gradients for all weights $w_{i}$, one needs to empty the stored gradients before each new trainign epoch.
+- Because `loss.backward()` stores the gradients for all weights $w_{i}$, one needs to empty the stored gradients before each new training epoch.
 
 ## 32.
 
@@ -1047,7 +1071,7 @@ Additional parameters and their default values, where applicable are:<br>
 | `wd` | `wd` is the default weight decay used when training the model.                                                                                                                                                                               | | |
 | `moms` | `moms` are the default momentums used in `Learner.fit_one_cycle` | | |
 | `wd_bn_bias` | `wd_bn_bias` controls, if weight decay is applied to `BatchNorm` layers and bias.                                                                                                                                                            | True or False | False |
-| `train_bn` | `train_bn` controls, if `BatchNorm` layers are trained evenwhenthey are<br>supposed to be frozen according to the `splitter`.<br>Our empirical experiments have shown that it's the<br>best behavior for those layers in transfer learning. | | |
+| `train_bn` | `train_bn` controls, if `BatchNorm` layers are trained even when they are<br>supposed to be frozen according to the `splitter`.<br>Our empirical experiments have shown that it's the<br>best behavior for those layers in transfer learning. | | |
 
 ## 33.
 
@@ -1142,7 +1166,6 @@ orig_params = params.clone()
 
 ```python
 def ri():
-
     id = torch.randn(1) % 20
     return id
 ```
@@ -1157,7 +1180,6 @@ preds = f_o(params[0], params[1], params[2], ri())
 
 ```python
 def lmse(preds, ar, i):
-
     ari = ar[i]
     loss = ((preds - ari) ** 2).abs().mean()
     return loss
@@ -1169,7 +1191,7 @@ def lmse(preds, ar, i):
 
 
 ```python
-# lmse.backward()
+lmse.backward()
 params.grad
 lr = 1e-5
 ```
@@ -1180,10 +1202,10 @@ lr = 1e-5
 
 
 ```python
-# params.data -= lr * params.grad.data
-# params.grad = None
-# preds = f_o(s, e, l, ar)
-# lmse(preds, sv_night)
+params.data -= lr * params.grad.data
+params.grad = None
+preds = f_o(s, e, l, ar)
+lmse(preds, sv_night)
 ```
 
 
@@ -1202,8 +1224,8 @@ def apply_step(params, prn=True):
 
 
 ```python
-# for i in range(10):
-#     apply_step(params)
+for i in range(10):
+    apply_step(params)
 ```
 
 ## 34.
@@ -1252,12 +1274,12 @@ plt.show()
 
     [0, 0, 0, 0, 0.2857142857142856, 0.8571428571428568, 1.4285714285714284, 2.0]
 
-
+<br>
 
     
-![png](output_97_1.png)
+![](/images/output_97_1.png)
     
-
+<br>
 
 ## 35.
 
@@ -1266,7 +1288,9 @@ plt.show()
 <br>
 
 - In neural networks, input values are typically continuous, and nodes take continuous inputs and produce continuous outputs.
-- Some of the inputs to noedes are **parameters** of the network; the network learns by adjusting the values of these parameters so that the network as a whole fits the training data.
+- Some of the inputs to nodes are **parameters** of the network; the network
+  learns by adjusting the values of these parameters so that the network as a
+  whole fits the training data.
 - Each node within a network is called a **unit**.
 - Traditionally, following the design proposed by McCulloch and Pitts (Perceptron Mk 1), a unit calculates the weighted sum of the inputs from predecessor nodes and then applies a nonlinear function to produce its output.
 - Let $a_{j}$ denote the output of unit $j$ and let $w_{i,j}$ be the weight attached to the link from unit $i$ to unit $j$; then we have:
@@ -1277,43 +1301,53 @@ where $g_{j}$ is a nonlinear **activation function** associated with unit $j$ an
 
 ### Annex To 35.
 
-> The fact that the activation function is nonlinear is important because if it were not, any composition of units would still represent a linear function. The nonlinearity is what allows sufficiently large networks of units to represent arbitrary functions. The universal approximation theorem states that a network with just two layers of computational units, the first nonlinear and the second linear, can approximate any continuous function to an arbitrary degree of accuracy. The proof works by showing that an exponentially large network can represent exponentially many “bumps” of different heights at different locations in the input space, thereby approximating the desired function. In other words, sufficiently large networks can implement a lookup table for continuous functions, just as sufficiently large decision trees implement a lookup table for Boolean functions. ~p. 1383 ai modern approach.
+> The fact that the activation function is nonlinear is important because if it
+> were not, any composition of units would still represent a linear function.
+> The non-linearity is what allows sufficiently large networks of units to
+> represent arbitrary functions. The universal approximation theorem states that
+> a network with just two layers of computational units, the first nonlinear and
+> the second linear, can approximate any continuous function to an arbitrary
+> degree of accuracy. The proof works by showing that an exponentially large
+> network can represent exponentially many “bumps” of different heights at
+> different locations in the input space, thereby approximating the desired
+> function. In other words, sufficiently large networks can implement a lookup
+> table for continuous functions, just as sufficiently large decision trees
+> implement a lookup table for Boolean functions. ~p. 1383 ai modern approach.
 
 ## 36.
 
 - What is the difference between `F.relu` and `nn.ReLU`?
-
 <br>
-
+<br>
 - `nn.ReLU` is a PyTorch module, that does the same thing as the `F.relu` function.
 - Most functions that can appear in a model also have identical forms that are modules.
-- Generally, it is just a case of replacing `F` with `nn` and changing the capitalization.
+- Generally, it is just a case of replacing `F` with `nn` and changing the
+  capitalization.
 - When using `nn.Sequential`, PyTorch requires us to use the module version.
-- Since modules are classes, we have to instantiate them, which is why you see `nn.ReLU()` in this case.
-- Since `nn.Sequential` is a module, we can get its parameters, which will return a list of all the parameters of all the modules it contains.
-
+- Since modules are classes, we have to instantiate them, which is why you see
+  `nn.ReLU()` in this case.
+- Since `nn.Sequential` is a module, we can get its parameters, which will
+  return a list of all the parameters of all the modules it contains.
 <br>
-
-- What is a heuristic, that describes a relationship between number of layers in a model and the choice of learning rate and epochs?
-
+- What is a heuristic, that describes a relationship between number of layers
+  in a model and the choice of learning rate and epochs?
 <br>
-
 - The more layers a model has, the lower the learning rate and the fewer epochs are used for fitting the model.
 
 ## 37.
 
-- The universal approximation theorem shows that any functiono can be approximated as closely as needed using just one nonlinearity. So why do we normally use more?
-
+- The universal approximation theorem shows that any function can be approximated as closely as needed using just one non-linearity. So why do we normally use more?
 <br>
-
-- The univeral approximation theorem shows, that by using a nonlinear first layer, and a linear second one, can approximate any continuous function to an arbitrary degree of accuracy.
+<br>
+- The universal approximation theorem shows, that by using a nonlinear first layer, and a linear second one, can approximate any continuous function to an arbitrary degree of accuracy.
 - The proof works by showing that an exponentially large network can represent exponentially many 'bumps' of different heights at different locations in the input space, thereby the desired function.
 - In other words, sufficiently large networks can implement a lookup table for continuous functions, just as sufficiently large decision trees implement a lookup table for Boolean functions.
 - The reason most networks have more layers, is that while it is possible to approximate any continuous function in theory, in practice the following problems often occur when following the architecture used in the universal approximation theorem:
     - The result is a model, that uses a huge parameter matrix, that section-wise defines the output function used to approximate the continuous function.
-    - The generalization capabilites of such a model, often are very limited.
-    - Such a parameter matrix (size of the matrix is proportial to the total number of parameters used in the model) requires large amounts of memory and can cause problems, if there is not enough memory to store it in.
-    - Deeper models show higher performance, as they possess the following characteristics:
+    - The generalization capabilities of such a model, often are very limited.
+    - Such a parameter matrix (size of the matrix is proportional to the total number of parameters used in the model) requires large amounts of memory and can cause problems, if there is not enough memory to store it in.
+    - Deeper models show higher performance, as they possess the following
+      characteristics:
         - Adding more layers, means that fewer parameters are needed in the model.
         - That means smaller parameter matrices.
         - That in turns leads to quicker fitting.
