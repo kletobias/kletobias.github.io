@@ -556,7 +556,7 @@ show_preds(preds)
 
 
     
-![png]('/images/output_35_0.png')
+![](/images/output_35_0.png)
     
 
 
@@ -793,7 +793,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 
 
     
-![png]('/images/output_58_0.png')
+![](/images/output_58_0.png)
     
 
 
@@ -1277,7 +1277,7 @@ plt.show()
 <br>
 
     
-![]('/images/output_97_1.png')
+![](/images/output_97_1.png)
     
 <br>
 
