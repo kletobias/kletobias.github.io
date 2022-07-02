@@ -449,7 +449,7 @@ They are calculated, by using the validation set. That is, because we really onl
 Oftentimes accuracy is chosen as a metric for classification problems. Accuracy is easy to understand, and it tracks closely the performance of the model, that is how well it can predict the label of the target variable.
 
 
-12.
+## 12.
 
 - What is *Stochastic Gradient Descent*?
 
