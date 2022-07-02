@@ -4,9 +4,9 @@ subtitle: 'My Answers To The 37 Questions Long Questionnaire'
 date: '2022-05-28 06:00:00'
 description: 'Extensive Solutions To All Questions - No Shortcuts'
 accent_color: '#08877d'
-featured_image: '838338477938@+-791693336.jpg'
+featured_image: '838338477938791693336.jpg'
 gallery_images:
-  - '838338477938@+-00.jpg'
+  - '83833847793800.jpg'
 ---
 
 # Questionnaire Chapter 04
