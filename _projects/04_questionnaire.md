@@ -677,7 +677,7 @@ for i in range(10):
 - Progress can be monitored by plotting the results before and after a `step` has been made.
 
 
-## 14.7
+### 14.7
 
 - Stop
     - Stop after a certain amount of epochs.
