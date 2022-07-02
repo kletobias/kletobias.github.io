@@ -33,21 +33,21 @@ gallery_images:
 1. Why can't we use accuracy as a loss function?
 1. Draw the sigmoid function. What is special about its shape?
 1. What is the difference between a loss function and a metric?
-1. What is the function to calculate new weights using a learning rate? \\done
-1. What does the `DataLoader` class do? \\done
+1. What is the function to calculate new weights using a learning rate?
+1. What does the `DataLoader` class do?
 1. Write pseudocode showing the basic steps taken in each epoch for SGD.
-1. Create a function that, if passed two arguments `[1,2,3,4]` and `'abcd'`, returns `[(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]`. What is special about that output data structure? \\done
-1. What does `view` do in PyTorch? \\done
-1. What are the "bias" parameters in a neural network? Why do we need them? \\done
-1. What does the `@` operator do in Python? \\done
-1. What does the `backward` method do? \\done
-1. Why do we have to zero the gradients? \\done
-1. What information do we have to pass to `Learner`? \\done
+1. Create a function that, if passed two arguments `[1,2,3,4]` and `'abcd'`, returns `[(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd')]`. What is special about that output data structure?
+1. What does `view` do in PyTorch?
+1. What are the "bias" parameters in a neural network? Why do we need them?
+1. What does the `@` operator do in Python?
+1. What does the `backward` method do?
+1. Why do we have to zero the gradients?
+1. What information do we have to pass to `Learner`?
 1. Show Python or pseudocode for the basic steps of a training loop.
-1. What is "ReLU"? Draw a plot of it for values from `-2` to `+2`. \\done
-1. What is an "activation function"? \\done
-1. What's the difference between `F.relu` and `nn.ReLU`? \\done
-1. The universal approximation theorem shows that any function can be approximated as closely as needed using just one nonlinearity. So why do we normally use more? \\done
+1. What is "ReLU"? Draw a plot of it for values from `-2` to `+2`.
+1. What is an "activation function"?
+1. What's the difference between `F.relu` and `nn.ReLU`?
+1. The universal approximation theorem shows that any function can be approximated as closely as needed using just one nonlinearity. So why do we normally use more?
 
 
 
