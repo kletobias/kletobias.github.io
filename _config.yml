@@ -33,7 +33,7 @@ defaults:
       layout: "post"
   -
     scope:
-      path: ""
+      path: "/project/"
       type: "projects"
     values:
       layout: "project"

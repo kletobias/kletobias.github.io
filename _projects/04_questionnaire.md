@@ -1,12 +1,10 @@
 ---
-title: 'Deep Learning:<br>Image Classification<br>On The MNIST Dataset'
-subtitle: 'My Answers To The 37 Questions Long Questionnaire'
-date: '2022-05-28 06:00:00'
-description: 'Extensive Solutions To All Questions - No Shortcuts'
+title: '37 Hard Hitting Questions<br>About Deep Learning'
+subtitle: 'How To Code The Optimization Process'
+date: 2022-05-28 06:00:00
+description: 'Stochastic Gradient Descent:<br>The Training Loop From Scratch'
 accent_color: '#08877d'
-featured_image: '838338477938791693336.jpg'
-gallery_images:
-  - '83833847793800.jpg'
+featured_image: 83833847793838829429482.jpg
 ---
 
 # Questionnaire Chapter 04
@@ -239,15 +237,6 @@ for i in zip(range(1, 4), [rank1, rank2, rank3]):
              [7, 4]]]), dim: 3
     
 
-
-    /Users/tobias/all_code/projects/python_projects/py_workflows/venv/lib/python3.9/site-packages/torch/_tensor.py:549: UserWarning: non-inplace resize is deprecated
-      warnings.warn("non-inplace resize is deprecated")
-
-
-
-```python
-
-```
 
 ## 6.
 - What is the difference between tensor rank and shape?
@@ -556,7 +545,7 @@ show_preds(preds)
 
 
     
-![](/images/output_35_0.png)
+![](output_35_0.png)
     
 
 
@@ -793,7 +782,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 
 
     
-![](/images/output_58_0.png)
+![](output_58_0.png)
     
 
 
@@ -1277,7 +1266,7 @@ plt.show()
 <br>
 
     
-![](/images/output_97_1.png)
+![png](output_97_1.png)
     
 <br>
 
