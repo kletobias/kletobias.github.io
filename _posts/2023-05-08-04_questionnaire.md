@@ -1,11 +1,10 @@
 ---
 title: 'Deep Learning:<br>Image Classification<br>On The MNIST Dataset'
 subtitle: 'My Answers To The 37 Questions Long Questionnaire'
-date: 2022-05-08 06:00:00
+date: 2023-05-08 06:00:00
 description: 'My Extensive Solutions To All Questions - No Shortcuts'
 accent_color: '#08877d'
-featured_image:
- - '/images/838338477938@+-791693336.jpg'
+featured_image: '838338477938791693336.jpg'
 ---
 
 # Questionnaire Chapter 04

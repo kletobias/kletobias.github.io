@@ -5,6 +5,7 @@ date: 2022-05-28 06:00:00
 description: 'Stochastic Gradient Descent:<br>The Training Loop From Scratch'
 accent_color: '#08877d'
 featured_image: 83833847793838829429482.jpg
+gallery_images: 83833847793838829429482.jpg
 ---
 
 # Questionnaire Chapter 04
@@ -544,9 +545,7 @@ show_preds(preds)
 ```
 
 
-    
-![](output_35_0.png)
-    
+![]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_35_0.png')
 
 
 ### 14.3
@@ -781,9 +780,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 ```
 
 
-    
-![](output_58_0.png)
-    
+![]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_58_0.png')
 
 
 ## 22.
@@ -1265,9 +1262,8 @@ plt.show()
 
 <br>
 
-    
-![png](output_97_1.png)
-    
+![png]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_97_1.png')
+
 <br>
 
 ## 35.
