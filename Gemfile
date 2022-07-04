@@ -4,7 +4,6 @@ group :jekyll_plugins do
   gem 'jekyll','4.2.2'
   gem 'jekyll-paginate','1.1.0'
   gem 'jekyll-sitemap','1.4.0'
-  gem 'jekyll-mermaid', '~> 1.0'
   gem 'jekyll-sass-converter','2.2.0'
   gem 'jekyll-watch','2.2.1'
 end

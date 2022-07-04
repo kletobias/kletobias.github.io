@@ -545,7 +545,7 @@ show_preds(preds)
 ```
 
 
-![]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_35_0.png')
+![](output_35_0.png)
 
 
 ### 14.3
@@ -780,7 +780,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 ```
 
 
-![]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_58_0.png')
+![](output_58_0.png)
 
 
 ## 22.
@@ -1262,7 +1262,7 @@ plt.show()
 
 <br>
 
-![png]('/Users/tobias/all_code/projects/kletobias-github-io_website/images/output_97_1.png')
+![png](output_97_1.png)
 
 <br>
 
