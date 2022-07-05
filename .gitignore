@@ -1,3 +1,5 @@
+# Custom exclusions
+ignored/**
 # drafts - posts and projects
 drafts/
 # Jekyll specific
@@ -109,5 +111,5 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-/venv_kletobias-github-io_website/
+venv_kletobias-github-io_website/
 .jekyll-cache/

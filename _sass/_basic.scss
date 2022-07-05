@@ -9,6 +9,7 @@
 
 html, body {
 	height: 100%;
+	max-width: 1191.1px;
 }
 
 body {
@@ -180,7 +181,7 @@ textarea {
 	}
 
 	&:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #FFF inset;
+    -webkit-box-shadow: 0 0 0 1000px #FFF inset;
 	}
 
 	&::placeholder {
