@@ -435,8 +435,12 @@ If neither of the constraints are met, Numpy throws an error:<br>
 
 Are metrics generally calculated using the training set, or the validation set? Why?
 
-They are calculated, by using the validation set. That is, because we really only care about the performance of the model on unseen data and the training of the model is a means to reaching this objective.<br>
-Oftentimes accuracy is chosen as a metric for classification problems. Accuracy is easy to understand, and it tracks closely the performance of the model, that is how well it can predict the label of the target variable.
+They are calculated, by using the validation set. That is, because we really
+only care about the performance of the model on unseen data and the training of
+the model is a means to reaching this objective.<br>
+Oftentimes accuracy is chosen as a metric for classification problems. Accuracy
+is easy to understand, and it tracks closely the performance of the model, that
+is how well it can predict the label of the target variable.
 
 
 ## 12.
@@ -445,9 +449,13 @@ Oftentimes accuracy is chosen as a metric for classification problems. Accuracy 
 
 <br>
 
-SGD stands for *Stochastic Gradient Descent* and it is a popular optimization algorithm in Machine Learning algorithms.<br>
+SGD stands for *Stochastic Gradient Descent* and it is a popular optimization
+algorithm in Machine Learning algorithms.<br>
 <br>
-The SGD uses the same steps, as the *Gradient Descent*. The difference between the two, is that the SGD randomly selects a smaller subset of training examples $m$ out of the total $N$, for each step and updates them according to the following equation:
+The SGD uses the same steps, as the *Gradient Descent*. The difference between
+the two, is that the SGD randomly selects a smaller subset of training examples
+$m$ out of the total $N$, for each step and updates them according to the
+following equation:
 
 $$\begin{bmatrix} w_1 \\ w_2 \end{bmatrix} :=
 \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}
@@ -457,9 +465,19 @@ $$\begin{bmatrix} w_1 \\ w_2 \end{bmatrix} :=
 -  \eta  \begin{bmatrix} 2 (w_1 + w_2 x_i - y_i) \\ 2 x_i(w_1 + w_2 x_i - y_i) \end{bmatrix}$$
 
 
-The equation shows one step in the stochastic gradient descent. $\eta$ is the learning rate. It can either be a constant or decay over time. Weights are $w_{1}$ and $w_{2}$.<br>
+The equation shows one step in the stochastic gradient descent. $\eta$ is the
+learning rate. It can either be a constant or decay over time. Weights are
+$w_{1}$ and $w_{2}$.<br>
 <br>
-**In Other Words:** The stochastic gradient descent starts with randomly initialized weights. The weights get updated, based on their gradient and the learning rate. After the computation of the gradient, one moves a small amount in the direction of the steepest gradient, that has been calculated during the calculation of the gradient for the randomly selected minibatch. The goal is to minimize the training loss during the descent. Sometimes one reaches a global minimum, but this is not guaranteed. It is possible, that one only reaches a local minimum. Reaching a local minimum can still result in a good approximation and thus minimize the loss function well.
+**In Other Words:** The stochastic gradient descent starts with randomly
+initialized weights. The weights get updated, based on their gradient and the
+learning rate. After the computation of the gradient, one moves a small amount
+in the direction of the steepest gradient, that has been calculated during the
+calculation of the gradient for the randomly selected minibatch. The goal is to
+minimize the training loss during the descent. Sometimes one reaches a global
+minimum, but this is not guaranteed. It is possible, that one only reaches a
+local minimum. Reaching a local minimum can still result in a good approximation
+and thus minimize the loss function well.
 
 
 ## 13.
@@ -467,9 +485,20 @@ The equation shows one step in the stochastic gradient descent. $\eta$ is the le
 Why does Stochastic Gradient Descent use mini-batches?
 
 
-It is the characteristic, that distinguishes SGD from GD. Using minibatches, means that from the total set of training examples $N$, only a much smaller subset $m$ is used to calculate the gradients. The difference between $m$ and $N$ can be large. Given an $N = 10000$ and a $m = 100$, then the amount of computation needed during each step has been reduced by a factor of $100$. The SGD, thus is much faster than the original GD. Using a minibatch, in practice has shown to be enough, in order for the calculated gradients to minimize the loss function well.<br>
+It is the characteristic, that distinguishes SGD from GD. Using minibatches,
+means that from the total set of training examples $N$, only a much smaller
+subset $m$ is used to calculate the gradients. The difference between $m$ and
+$N$ can be large. Given an $N = 10000$ and a $m = 100$, then the amount of
+computation needed during each step has been reduced by a factor of $100$. The
+SGD, thus is much faster than the original GD. Using a minibatch, in practice
+has shown to be enough, in order for the calculated gradients to minimize the
+loss function well.<br>
+
 <br>
-Because the standard error of the estimated mean gradient is proportional to the square root of the number of examples, the standard error increases by only a factor of 10. So even if we have to take 10 times more steps before convergence, minibatch SGD is still 10 times faster than full batch SGD in this case.
+Because the standard error of the estimated mean gradient is proportional to the
+square root of the number of examples, the standard error increases by only a
+factor of 10. So even if we have to take 10 times more steps before convergence,
+minibatch SGD is still 10 times faster than full batch SGD in this case.
 
 
 ## 14.
@@ -727,7 +756,10 @@ param
   number of weights.
 - The gradient then is, for each $w_{i}$: $\frac{d}{dw_{i}}$.
 - The gradient, with the steepest slope is chosen for the *stepping*, which is
-  equivalent to the one, that fulfils: $min_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$
+  equivalent to the one, that fulfils: $max_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$.
+  Which can be represented by a vector with $N$ elements, each element is a
+  number that is given by the first partial derivative of the loss function, at
+  the most recent value for each weight in the total of $N$ weights.
 
 ## 19.
 
