@@ -63,14 +63,12 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
-  x86_64-darwin-21
 
 DEPENDENCIES
   addressable
   jekyll
   jekyll-paginate
   jekyll-sitemap
-  kramdown
   webrick (~> 1.7)
 
 BUNDLED WITH
