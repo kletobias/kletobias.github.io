@@ -1,0 +1,392 @@
+    3  git log --pretty
+   60  wget https://github.com/scipy/scipy/blob/v1.8.0/scipy/stats/_continuous_distns.py >> scipy_all_continuous_distributions.py
+   69  git config --global --edit
+  387  git restore --staged books_pdf/statistical_methods_handbook/*
+  388  git restore --staged books_pdf/statistical_methods_handbook*
+  400  git rm applied_examples_py/.ipynb_checkpoints/testing_calculation-checkpoint.ipynb applied_examples_py/testing_calculation.ipynb
+  643  cd all_code/git_clone_installs
+  644  git clone git@github.com:kletobias/Ebook-Publisher.git
+  713  unison . tobiasklein@mbp2018.local/Volumes/sync/git_clone_installs/
+  715  unison . tobiasklein@mbp2018.local:/Volumes/sync/git_clone_installs/
+  716  unison git_clone_installs/ tobiasklein@mbp2018.local:/Volumes/sync/git_clone_installs/
+  738  unison git_clone_installs/ tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/
+  740  unison git_clone_installs/ 'tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/'
+  741  unison git_clone_installs/ 'ssh tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/'
+  742  unison git_clone_installs/ $(ssh tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/)
+  743  unison /Users/tobias/all_code/git_clone_installs/ tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/
+  744  rsync -avhu git_clone_installs/ tobiasklein@mbp2018.local:/Users/tobiasklein/all_code/git_clone_installs/
+  777  git prune
+ 1155  git branch -c test
+ 1156  git checkout test
+ 1157  git branch -c sorted_lists
+ 1159  git checkout sorted_lists 
+ 1160  git merge test into current
+ 1161  git merge test
+ 1288  git clone git@github.com:linnndachen/starbucks_capstone.git
+ 1367  cat git_knowledge
+ 1368  mkdir -p summaries/git
+ 1369  mv git_knowledge summaries/git
+ 1502  git restore --staged
+ 1503  git restore --staged posts_for_portfolio
+ 1513  git brach
+ 1671  source venv_kletobias-github-io_website/bin/activate
+ 1676  ssh-copy-id github.com
+ 1742  find ~/all_code -iname "*git*book*.pdf" -type f
+ 1743  cp -r ~/all_code/git ~/all_code/knowledge/
+ 1744  ls -ltr ~/all_code/knowledge/git/commands
+ 1745  cp ~/all_code/knowledge/git/commands/* ~/all_code/knowledge/git
+ 1746  rm -rf ~/all_code/knowledge/git/commands
+ 1747  ls -ltr ~/all_code/knowledge/git
+ 1748  rm -rf ~/all_code/git
+ 1752  git switch -b overflow_fix
+ 1753  dddgit switch -b overflow_fix
+ 1754  git switch overflow_fix
+ 1755  git checkout -b overflow_fix
+ 1757  git switch master
+ 1758  git checkout -b table_tag_fix
+ 1828  git restore posts_for_portfolio/finished_and_posted/blog_category/python/tools/pandas/scratch2.md
+ 1866  git show origin master
+ 1867  git show remote
+ 1868  git-remote
+ 1869  git-remote()
+ 1870  git-remote(show)
+ 1871  git-ls-remote(1)
+ 1872  git-ls-remote()\n1
+ 1873  git-remote-helpers(1)
+ 1874  bash git-remote-helpers(1)
+ 1875  bash git-remote-helpers()\norigin
+ 1876  git-remote-helpers(\norigin)
+ 1877  git-remote-helpers(origin)
+ 1880  git list
+ 1881  git ls-tree
+ 1882  git ls-tree .
+ 1883  git ls-tree home
+ 1884  git ls-files | xargs -n 1 . | uniq
+ 1885  git ls-files | xargs -n 1 ./ | uniq
+ 1886  git ls-files | sed s,/[^/]*$,, | uniq
+ 1887  git ls-tree -rt HEAD:./ | awk '{if ($2 == "tree") print $4;}'
+ 1888  git ls-tree -rt HEAD:. | awk '{if ($2 == "tree") print $4;}'
+ 1889  git ls-tree -rt HEAD:./. | awk '{if ($2 == "tree") print $4;}'
+ 1890  git ls-files -rt HEAD:./ | awk '{if ($2 == "tree") print $4;}'
+ 1891  git ls-files -t HEAD:./ | awk '{if ($2 == "tree") print $4;}'
+ 1892  git ls-files HEAD:./ | awk '{if ($2 == "tree") print $4;}'
+ 1910  git ls-files .*
+ 1911  git remote rename rr r-imac
+ 1913  git fetch r-mac
+ 1915  git remote -v
+ 1917  git push r-imac r-mac
+ 1918  git push r-imac r-imac
+ 1919  git branch -M imac
+ 1940  git restore --stages logs/*
+ 1941  git restore --staged logs/**/*
+ 1942  git restore --staged logs/**
+ 1943  git restore --staged logs/20220
+ 1944  git restore --staged logs/20220111_*
+ 1946  git restore --staged logs/*
+ 1947  git restore --staged logs/20220*.log
+ 1948  git rm logs
+ 1949  git rm -r logs
+ 1950  git rm -rf logs
+ 1953  git push r-imac imac
+ 1971  git branch -a
+ 2384  find -E . -iregex ".*/([:digit:]_a-zA-Z[:space:]-]+)\.(png|jpg)"
+ 2385  find -E . -iregex ".*/([[:digit:]_a-zA-Z[:space:]-]+)\.(png|jpg)"
+ 2386  find -E . -iregex ".*/([[:digit:]_a-zA-Z[:space:]\-]+)\.(png|jpg)"
+ 2387  find -E . -iregex ".*/[[:digit:]_a-zA-Z[:space:]\-]+\.(png|jpg)"
+ 2431  git push ori
+ 2432  git push origin r-imac
+ 2433  git push r-imac
+ 2443  git checkout -c re_dict
+ 2444  git checkout -b re_dict
+ 2461  git 
+ 2466  git checkout r-imac
+ 2467  git checkout -b r-imac
+ 2469  git checkout imac
+ 2470  git branch -d r-imac
+ 2471  git clean
+ 2473  git clean -f .
+ 2474  git clean -f ./.*
+ 2665  brew search github
+ 2666  brew search --desc github
+ 2667  brew search --desc --formula github | grep "search:\n\n;5u
+ 2668  brew search --desc --formula github | grep "search"\n\n;5u
+ 2669  brew search --desc --formula github | grep "search"
+ 2670  brew search --desc --formula github
+ 2907  git checkout -c export_path_mess_zshrc
+ 2908  git checkout -b export_path_mess_zshrc
+ 2909  git statsu
+ 2943  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\n    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ 2948  ddd    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ 3023  git init portfolio
+ 3024  git branch -m main
+ 3025  git config --global init.defaultBranch main
+ 3043  ls git_ignored_test_files
+ 3044  rm -rf git_ignored_test_files
+ 3059  git push portfolio main
+ 3060  git remote rename
+ 3061  git remote rename portfolio main
+ 3062  git remote rename portolio origin
+ 3063  git rebase origin/main onto current
+ 3064  git rebase origin/main --onto current
+ 3065  git rebase origin/main --onto HEAD
+ 3067  git pull origin main HEAD 
+ 3068  git pull origin main merge
+ 3069  git pull origin main main merge
+ 3070  git pull origin main main
+ 3071  git merge origin/main 
+ 3072  git merge --force origin/main 
+ 3073  git merge --continue origin/main 
+ 3074  git merge --allow-unrelated-histories  origin/main 
+ 3075  git remote update
+ 3080  git push origin tobias
+ 3081  git push origin main
+ 3088  git push --ff origin master
+ 3089  git push -f origin master
+ 3102  cd \[Parabola\]\ EgoS\ to\ S\ \(Girls\ forM\ Vol.15\)\ \[English\]\ \{Hennojin\}\ \[Digital\]
+ 3105  cd \[Yamahata\ Rian\]\ Tensoushugi\ no\ Kuni\ \ A\ Country\ Based\ on\ Point\ System\ \(Girls\ forM\ Vol.\ 20\)\ \[English\]\ \[Digital\]
+ 3138  cd \[Yamahata\ Rian\]\ China\ Auction\ \(Girls\ forM\ Vol.\ 14\)\ \[English\]\ \{Hennojin\}\ \[Digital\]
+ 3142  cd \[Yamahata\ Rian\]\ Shihai\ no\ Gakusha\ \(Girls\ ForM\ Vol.\ 15\)\ \[English\]\ \{Hennojin\}\ \[Digital\]
+ 3352  git push origin master
+ 3369  git branch
+ 3372  git checkout master
+ 3373  git merge cleaning_postal_code_column --ff-only
+ 3381  git push origin master
+ 3435  git push origin master
+ 3436  git branch
+ 3437  git checkout -c enable_mathjax
+ 3438  git checkout -b enable_mathjax
+ 3469  git checkout master
+ 3470  git merge enable_mathjax --ff-only
+ 3471  git push origin master
+ 3476  git push origin master
+ 3490  git push origin maste
+ 3491  git push origin master
+ 3493  git log --pretty=full
+ 3494  git push origin master
+ 3503  git push origin imac
+ 3513  googler 'western digital'
+ 3640  git diff --staged note_files/regex/py_regex_book/theory_chapters/chapter_5_working_with_matched_portions.md
+ 3645  git diff --staged chapter_5_working_with_matched_portions.md
+ 3647  git diff --staged chapter_5_working_with_matched_portions.md
+ 3654  git rm --cached ~/.local/share/nvim/plugged/TTCoach
+ 3655  git rm --cached ~/.local/share/nvim/plugged/TTCoach/
+ 3656  git rm --cached --f ~/.local/share/nvim/plugged/TTCoach/
+ 3657  git rm --cached -f ~/.local/share/nvim/plugged/TTCoach/
+ 3666  git push origin imac
+ 4069  git branches
+ 4070  git branche
+ 4071  git branc
+ 4072  git branch
+ 4075  git history
+ 4076  git log
+ 4077  git branch
+ 4078  rm -rf .git
+ 4124  git restore --staged .local/**
+ 4127  git restore .local/**
+ 4129  git restore .config/klavaro/**
+ 4131  git diff .oh-my-zsh
+ 4148  git branch
+ 4149  git branch --help
+ 4150  git branch -d export_path_mess_zshrc 
+ 4151  git branch
+ 4152  git branch -d re_dict 
+ 4392  wget https://github.com/browsh-org/browsh/releases/download/v1.6.4/browsh_1.6.4_darwin_amd64.tar.gz
+ 4510  git push origin master
+ 4511  git branch
+ 4512  git branch --delete testing
+ 4513  git branch
+ 4514  git branch --delete test
+ 4515  git branch -D test
+ 4516  git branch
+ 4517  git -D postal_code
+ 4518  git branch
+ 4519  git branch | list
+ 4520  cat $(git branch)
+ 4521  $(git branch)
+ 4522  echo $(git branch)
+ 4523  git branch -D cleaning_postal_code_column sorted_lists 
+ 4524  git branch
+ 4525  git checkout -b tex_to_html
+ 4530  git log
+ 4532  git log --pretty=fuller
+ 4533  git log --pretty=full
+ 4534  history | grep "git "
+ 4535  history | grep "git log"
+ 4536  git log --pretty=format:"%h %s" HEAD~3..HEAD
+ 4541  history | grep "git rm"
+ 4542  history | grep "git "
+ 4543  history | grep "git restore"
+ 4544  history | grep "git r"
+ 4561  git checkout master
+ 4577  git push origin master
+ 4689  git branch
+ 4692  open https://git.io/googler-no-results
+ 4766  git diff --staged chapter_6_character_classes.md
+ 4768  git diff --staged chapter_6_character_classes.md
+ 4769  git log
+ 4841  cd $UALLCODE/git_clone_installs/Ebook-Publisher/
+ 5342  wget -P syntax https://github.com/MTDL9/vim-log-highlighting/blob/master/syntax/log.vim
+ 5387  man git | grep "column"
+ 5388  man git | grep -n "column"
+ 5389  man git
+ 5391  git restore .local/share/klavaro/*
+ 5392  git restore .local/share/nvim/shada/main.shada
+ 5393  git restore .config/klavaro/preferences.ini
+ 5398  git log --help
+ 5403  git remote
+ 5404  git branch
+ 5406  git show master
+ 5407  git show HEAD 
+ 5410  git submodule init
+ 5413  git submodule branch
+ 5414  git log
+ 5416  git submodule summary
+ 5417  git submodule update
+ 5418  git submodule summary
+ 5420  git submodule update --init --recursive
+ 5422  git remote show
+ 5425  git submodule update --init --recursive .
+ 5456  git statsus
+ 5459  git restore .local/share/nvim/shada/main.shada
+ 5600  git rm -rf custom
+ 5622  git statu
+ 5690  git clone git@github.com:SacrumDeus/python-stepstone-analysis.git
+ 5766  git show main
+ 5770  find . -iname ".git"
+ 5779  git restore --staged python_projects/*
+ 5780  git restore --staged python_projects/**
+ 5787  git
+ 5791  git init
+ 5794  find . -iname ".git"
+ 5795  find data_science/ -iname ".git"
+ 5796  find data_science/ -iname ".git" -exec rm -rf {} \;
+ 5797  find data_science -iname ".git" -exec rm -rf {} \;
+ 5798  find data_science/ -iname ".git"
+ 5799  find . -iname ".git"
+ 5877  git checkout -b no_mongodb
+ 5951  git clone git@github.com:manjunath5496/MySQL-Books.git
+ 6138  git push origin master
+ 6141  git push origin master
+ 6142  git pull
+ 6143  git pull origin --merge
+ 6149  git push --force
+ 6176  git push origin master
+ 6180  git branch
+ 6181  git checkout -b drafts
+ 6184  git checkout master
+ 6211  git push origin master
+ 6221  git push origin master
+ 6244  git push origin master
+ 6252  git push origin master
+ 6256  ls .git
+ 6257  ls -ltr .git
+ 6267  git starus
+ 6276  git push origin master
+ 6294  git push origin master
+ 6296  git pull
+ 6303  git summary
+ 6307  git push origin master
+ 6492  cd $UALLCODE/git_clone_installs/Ebook-Publisher
+ 6604  ls git_clone_installs
+ 6718  cd $UALLCODE/git_clone_installs
+ 6719  git clone git@github.com:michal-h21/mjcli.git
+ 6739  npm install -g https://github.com/michal-h21/mjcli
+ 6757  git push origin master
+ 6830  git pull
+ 6831  git config pull.rebase false
+ 6832  git pull
+ 6834  git push origin master
+ 7237  git pull
+ 7278  mkdir kletobias_github_io
+ 7281  mv Klein\ -\ 2019\ -\ Data\ Mining\ Hyperparameter\ Optimisation\ for\ Real\ .pdf kletobias_github_io/klein-2019-data_mining_hyperparameter_optimisation_for_real_estate_prediction_models.pdf
+ 7282  cd kletobias_github_io
+ 7411  cd git_clone_installs
+ 7413  git clone git@github.com:DIGITALCRIMINAL/OnlyFans.git
+ 7428  docker build /Users/tobias/all_code/git_clone_installs/OnlyFans/Dockerfile
+ 7441  git
+ 7518  git rm Untitled*
+ 7519  git rm Untitled**
+ 7541  git branch
+ 7542  git remote
+ 7748  git pull
+ 7749  git pull -f
+ 7750  git pull --f origin master
+ 7751  git pull --force origin master
+ 7752  git pull --strategy-option=histogram origin master
+ 7755  git pull --strategy-option=histogram origin master
+ 7757  git pull --strategy-option=histogram origin master
+ 7759  git push origin master
+ 7826  git fetch
+ 7862  git pull
+ 7863  open https;//github.com
+ 7936  git pull
+ 7939  git pull
+ 7950  git pull
+ 7974  git pull
+ 7978  git push origin master
+ 8193  git branch
+ 8194  git pull
+ 8195  git branch
+ 8202  git push origin master
+ 8208  git fetch
+ 8221  git stauts
+ 8222  git starus
+ 8229  git push origin master
+ 8230  git push origin imac
+ 8231  git fetch
+ 8232  git pull
+ 8233  git pull origin/mbp
+ 8235  git pull mbp
+ 8255  git push origin master
+ 8267  git pull
+ 8269  git push origin master
+ 8307  git pull
+ 8343  git pull
+ 8398  git pull
+ 8414  git fetch origin
+ 8415  git pull origin
+ 8416  git pull
+ 8417  git branch
+ 8418  git branch --set-upstream-to=origin/imac imac
+ 8419  git push origin/imac
+ 8420  git push origin imac
+ 8490  git pull
+ 8569  git pull
+ 8570  git push origin master
+ 8576  git pull
+ 9080  git remote
+ 9081  git branch
+ 9082  git show HEAD
+ 9083  git submodule update --init --recursive
+ 9085  git submodule update --init --recursive
+ 9400  git checkout origin/stable -b stable
+ 9417  git submodule
+ 9420  git submodule
+ 9421  git branch
+ 9607  ls $UALLCODE/git_clone_installs/Ebook-Publisher/
+ 9608  mkdir ebook-publisher && fd -uuu '\.(pdf|md|txt|html)' $UALLCODE/git_clone_installs/Ebook-Publisher/ -x cp {} ebook-publisher/ \;
+10004  git pull
+10034  git restore --staged
+10035  git restore --staged applied_examples/*
+10037  git restore --staged applied_examples/**/*
+10039  git restore --staged applied_examples_py/machine_learning_buffalo/*
+10040  git restore --staged applied_examples_py/machine_learning_buffalo/**
+10042  git restore --staged applied_examples_py/machine_learning_buffalo/*.pdf
+10045  git restore --staged applied_examples/.idea/**/*xml
+10047  git restore --staged applied_examples/**/**/**
+10049  git restore --staged -r applied_examples/**/**
+10060  git show -s -uno
+10081  git push
+10082  git fetch
+10083  git statsu
+10085  git pull
+10116  git branch
+10117  git diff cleaning_postal_code_column
+10118  git diff cleaning_postal_code_column | diff-so-fancy
+10119  git diff cleaning_postal_code_column | diff-so-fancy > diff_22052022.log
+10123  git diff cleaning_postal_code_column | diff-so-fancy > diff_22052022.log
+10125  git diff cleaning_postal_code_column | diff-so-fancy
+10128  history | rg 'git restore'
+10129  history | rg 'git.*-b'
+10130  history | rg 'git'
+10131  history | rg 'git' | uniq
