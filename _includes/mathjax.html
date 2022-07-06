@@ -23,7 +23,10 @@ MathJax.Hub.Config({
 <script>
     MathJax = {
         tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']]
+            inlineMath: [text] $$...$$ [text],
+            inlineMath: [text] \(...\) [text],
+            displayMath: [newline] $$...$$ [newline],
+            displayMath: [newline] \[...\] [newline],
         }
     };
 </script>

@@ -50,7 +50,7 @@ use_math: true
 1. The universal approximation theorem shows that any function can be approximated as closely as needed using just one nonlinearity. So why do we normally use more?
 
 
-
+$$g_{j}$$ is a nonlinear **activation function** associated with unit $$j$$ and $${in}_{j}$$
 
 ```python
 import string
@@ -245,7 +245,7 @@ for i in zip(range(1, 4), [rank1, rank2, rank3]):
 - How do you get the rank from the shape?
 
 
-**Tensor rank** is equal to the number of axes $\iff$ dimensions a tensor has. The rank of a tensor can be calculated using the `ndim` method, like so: `tensor.ndim` (no parenthesis). Examples for an axis/dimension of a rank-1, rank-2, rank-3 tensor are:
+**Tensor rank** is equal to the number of axes $$\iff$$ dimensions a tensor has. The rank of a tensor can be calculated using the `ndim` method, like so: `tensor.ndim` (no parenthesis). Examples for an axis/dimension of a rank-1, rank-2, rank-3 tensor are:
 - **rank-1:** The number of elements in a tensor vector.
 - **rank-2:** In a tensor matrix, the rows and columns both are axes/dimensions. The count of axes is 2 for a matrix, hence it is a rank-2 tensor.
 - **rank-3:** A list of tensor matrices has 3 axis. The first two are the ones described in a rank-2 matrix. The third is given by the axis, that goes over all the matrices in the list of matrices. E.g., the set of training images, that are appended to form one list of matrices, each representing one image in the training set.
@@ -262,11 +262,11 @@ $$\mathrm{tensor.ndim} \iff \mathrm{len}(\,\mathrm{tensor.shape})\,$$
 - What is the L1 Norm?
 
 ### RMSE
-With $\overrightarrow{\boldsymbol{x}}$ as the mean over all records in the
+With $$\overrightarrow{\boldsymbol{x}}$$ as the mean over all records in the
 dataset of the independent variable (e.g., a feature vector),
-$\overrightarrow{\boldsymbol{y}}$ the mean over all records of the dependent
+$\overrightarrow{\boldsymbol{y}}$$ the mean over all records of the dependent
 variable in the dataset (e.g., a multi-class label vector) with both having a
-length of $N$. Then, the *root mean squared error* (*RMSE*) is defined by:<br>
+length of $$N$$. Then, the *root mean squared error* (*RMSE*) is defined by:<br>
 
 $$\mathrm{RMSE}=\sqrt{\sum_{i}^{N}\frac{(x_{i}-y_{i})^2}{N}}$$
 
@@ -305,7 +305,7 @@ The *RMSE* weakens the weighting of the quadratic denominator by taking the root
 
 The L1 norm is the *L1_Loss* function here. The function is:
 $$\mathrm{L1_{Loss}}(\,ss_{3},label_{target})\, := |ss_{3} - label_{target}|$$
-for $ss_{s3}$ one sample of the independent variable, $label_{target}$ the ground truth. It calculates the absolute value of the distance between predicted label and actual target label. The function will only output values, that are not 0 for instances where the predicted label is different from the target label. The L1_Loss function induces a bias on the model, by preferring a few weights to be different from 0, while most others are set to 0 by the model. It is used in some types of regression, such as *lasso regression*, that uses *L1-regularization*. A side effect of this is regularization is that is performs feature selection, which can be desirable.<br>
+for $$ss_{s3}$$ one sample of the independent variable, $$label_{target}$$ the ground truth. It calculates the absolute value of the distance between predicted label and actual target label. The function will only output values, that are not 0 for instances where the predicted label is different from the target label. The L1_Loss function induces a bias on the model, by preferring a few weights to be different from 0, while most others are set to 0 by the model. It is used in some types of regression, such as *lasso regression*, that uses *L1-regularization*. A side effect of this is regularization is that is performs feature selection, which can be desirable.<br>
 <br>
 In contrast to the *L1-regularization*, the *L2-regularization* places an outsize penalty on large components of the weight vector. This biases our learning algorithm towards models that distribute weight evenly across a larger number of features. In practice, this might make them more robust to measurement error in a single variable.
 
@@ -455,7 +455,7 @@ algorithm in Machine Learning algorithms.<br>
 <br>
 The SGD uses the same steps, as the *Gradient Descent*. The difference between
 the two, is that the SGD randomly selects a smaller subset of training examples
-$m$ out of the total $N$, for each step and updates them according to the
+$m$$ out of the total $$N$, for each step and updates them according to the
 following equation:
 
 $$\begin{bmatrix} w_1 \\ w_2 \end{bmatrix} :=
@@ -466,9 +466,9 @@ $$\begin{bmatrix} w_1 \\ w_2 \end{bmatrix} :=
 -  \eta  \begin{bmatrix} 2 (w_1 + w_2 x_i - y_i) \\ 2 x_i(w_1 + w_2 x_i - y_i) \end{bmatrix}$$
 
 
-The equation shows one step in the stochastic gradient descent. $\eta$ is the
+The equation shows one step in the stochastic gradient descent. $$\eta$$ is the
 learning rate. It can either be a constant or decay over time. Weights are
-$w_{1}$ and $w_{2}$.<br>
+$w_{1}$$ and $$w_{2}$$.<br>
 <br>
 **In Other Words:** The stochastic gradient descent starts with randomly
 initialized weights. The weights get updated, based on their gradient and the
@@ -487,10 +487,10 @@ Why does Stochastic Gradient Descent use mini-batches?
 
 
 It is the characteristic, that distinguishes SGD from GD. Using minibatches,
-means that from the total set of training examples $N$, only a much smaller
-subset $m$ is used to calculate the gradients. The difference between $m$ and
-$N$ can be large. Given an $N = 10000$ and a $m = 100$, then the amount of
-computation needed during each step has been reduced by a factor of $100$. The
+means that from the total set of training examples $$N$, only a much smaller
+subset $$m$$ is used to calculate the gradients. The difference between $$m$$ and
+$N$$ can be large. Given an $$N = 10000$$ and a $$m = 100$, then the amount of
+computation needed during each step has been reduced by a factor of $$100$$. The
 SGD, thus is much faster than the original GD. Using a minibatch, in practice
 has shown to be enough, in order for the calculated gradients to minimize the
 loss function well.<br>
@@ -628,7 +628,7 @@ params
 
 ### 14.5
 
-- Step the weights $\iff$ Update the parameters
+- Step the weights $$\iff$$ Update the parameters
 
 
 
@@ -753,14 +753,14 @@ param
 
 - A gradient, as it is used in deep learning during the SGD, is the value of the first partial derivative at a certain point of the loss function.
 - We calculate the first partial derivative of the loss function<br>
-  ($\frac{d}{dw_{i}}$)for all weights $w_{i}$, $i \in N$, with $N$ the total
+  ($\frac{d}{dw_{i}}$)for all weights $$w_{i}$, $$i \in N$, with $$N$$ the total
   number of weights.
-- The gradient then is, for each $w_{i}$: $\frac{d}{dw_{i}}$.
+- The gradient then is, for each $$w_{i}$: $$\frac{d}{dw_{i}}$$.
 - The gradient, with the steepest slope is chosen for the *stepping*, which is
-  equivalent to the one, that fulfils: $max_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$.
-  Which can be represented by a vector with $N$ elements, each element is a
+  equivalent to the one, that fulfils: $$max_{i \in N}(\,|\frac{d}{dw_{i}}|)\,$$.
+  Which can be represented by a vector with $$N$$ elements, each element is a
   number that is given by the first partial derivative of the loss function, at
-  the most recent value for each weight in the total of $N$ weights.
+  the most recent value for each weight in the total of $$N$$ weights.
 
 ## 19.
 
@@ -779,7 +779,7 @@ param
 
 <br>
 
-The accuracy function ($f$ in the following) is a binary function, that summarizes all predictions ($preds$), that have been made by the model during a step in the SGD and assigns an integer representation for each prediction in $preds \in \{0,1\}$. If the single prediction $pred$ is correct, it assigns a $1$, $0$ otherwise. It then divides that sum by the total of $pred$ in $preds$. So it returns, the fraction of correct predictions out of all the predictions made. The partial derivative of $f$ is always $0$, which makes it unsuitable for any type of the Gradient Descent, which relies on the gradient of the loss function at every step of the optimization to guide it towards finding at least a local minimum. Finding the global minimum is not guaranteed, when using SGD (it is the same for GD), but a local minimum can still deliver a 'good enough' result. The gradient of the loss function should reflect small changes in the values of the weights.<br>
+The accuracy function ($f$$ in the following) is a binary function, that summarizes all predictions ($preds$), that have been made by the model during a step in the SGD and assigns an integer representation for each prediction in $$preds \in \{0,1\}$$. If the single prediction $$pred$$ is correct, it assigns a $$1$, $$0$$ otherwise. It then divides that sum by the total of $$pred$$ in $$preds$$. So it returns, the fraction of correct predictions out of all the predictions made. The partial derivative of $$f$$ is always $$0$, which makes it unsuitable for any type of the Gradient Descent, which relies on the gradient of the loss function at every step of the optimization to guide it towards finding at least a local minimum. Finding the global minimum is not guaranteed, when using SGD (it is the same for GD), but a local minimum can still deliver a 'good enough' result. The gradient of the loss function should reflect small changes in the values of the weights.<br>
 <br>
 These are the reasons, why accuracy is not a suitable loss function to drive the optimization. It does however make for a good *metric*, that is meant for human understanding of how well or badly the model is doing, calculated at the end of every epoch for the predictions of the model on the validation set.<br>
 
@@ -789,12 +789,12 @@ These are the reasons, why accuracy is not a suitable loss function to drive the
 
 <br>
 
-- The sigmoid function maps any input to the interval $[0,1]$.
-- It is monotonously increasing and it can be specified, over which $x$ range the output goes from 0 to 1.
-- Since it is monotonously increasing, once output reaches 1, its output will remain 1 for all subsequent $x$ values.
+- The sigmoid function maps any input to the interval $$[0,1]$$.
+- It is monotonously increasing and it can be specified, over which $$x$$ range the output goes from 0 to 1.
+- Since it is monotonously increasing, once output reaches 1, its output will remain 1 for all subsequent $$x$$ values.
 - Unlike some of the other activation functions, the sigmoid function is differentiable over its entire domain.
-- An example of a popular activation function is the $Logistic$ function.
-- The sigmoid function can look like this, in the case of the $Logistic$ function:
+- An example of a popular activation function is the $$Logistic$$ function.
+- The sigmoid function can look like this, in the case of the $$Logistic$$ function:
 
 
 
@@ -823,7 +823,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 <br>
 
 - Loss Function
-    - Is used to drive the SGD $\iff$ The automated learning process on the training dataset
+    - Is used to drive the SGD $$\iff$$ The automated learning process on the training dataset
     - Needs to be differentiable
     - Needs to be reasonably smooth
         - Must not have long flat sections
@@ -847,7 +847,7 @@ plot_function(torch.sigmoid, title="$Logistic\,\,Function$", min=-3, max=3)
 
 $$w_{i} = w_{i} - lr \frac{d}{dw_{i}}L(\,w)\,$$
 
-Let $I$ be the set of weights (in fact the set of all parameters in the network) in the network, and $w_{i} \in I$ a single weight. Then the updated weight $w_{i}$, is given by the partial derivative of the loss function $L$ with respect to $w_{i}$, multiplied by the learning rate $lr$, which is then subtracted from the value of weight $w_{i}$, prior to the update.
+Let $$I$$ be the set of weights (in fact the set of all parameters in the network) in the network, and $$w_{i} \in I$$ a single weight. Then the updated weight $$w_{i}$, is given by the partial derivative of the loss function $$L$$ with respect to $$w_{i}$, multiplied by the learning rate $$lr$, which is then subtracted from the value of weight $$w_{i}$, prior to the update.
 
 ## 24.
 
@@ -1001,14 +1001,14 @@ one, like this: `t[1]`
 
 <br>
 
-- In neural networks, the intercept ($b$) in an equation of the form $y=wx+b$ is
+- In neural networks, the intercept ($b$) in an equation of the form $$y=wx+b$$ is
   called *bias*, together with the weights ($w$) in the example they make up the
   *parameters*.
 - The bias parameters are randomly initiated, like the weights.
   <br>
   <br>
 - We need the bias weights, since they are part of the fundamental linear
-  equation $y=wx+b$, which is used in any linear layer.
+  equation $$y=wx+b$, which is used in any linear layer.
 
 ## 29.
 
@@ -1021,12 +1021,12 @@ one, like this: `t[1]`
   <br>
   The basic rule is, that two objects, any combination of `matrix@matrix`,
   `vector@matrix`, `matrix@vector` or `vector@vector` and any chain or permutation
-  of these objects, $M \in \mathbb{R}^{N\mathrm{x}M}$ and $N \in
-  \mathbb{R}^{M\mathrm{x}M}$ must have matching inner dimensions for a matrix
-  multiplication to be possible. Here, the right most dimension of $M$ and left
-  most dimension of $N$ need to match. If this is the case, the product of `M@N =
-  Q` will have dimensions $MN=Q \in \mathbb{R}^{N\mathrm{x}M}$, which is equal
-  to the outer dimensions of $M$ and $N$.
+  of these objects, $$M \in \mathbb{R}^{N\mathrm{x}M}$$ and $$N \in
+  \mathbb{R}^{M\mathrm{x}M}$$ must have matching inner dimensions for a matrix
+  multiplication to be possible. Here, the right most dimension of $$M$$ and left
+  most dimension of $$N$$ need to match. If this is the case, the product of `M@N =
+  Q` will have dimensions $$MN=Q \in \mathbb{R}^{N\mathrm{x}M}$, which is equal
+  to the outer dimensions of $$M$$ and $$N$$.
 
 ## 30.
 
@@ -1052,7 +1052,7 @@ xt.grad
     - weights, by `weights.grad.zero_()`
     - bias, by `bias.grad.zero_()`
 - The reason, the gradients need to be set to zero, is that `loss.backward()` adds the gradients of `loss`, also known as `L(w)` to any gradients that are currently stored.
-- Because `loss.backward()` stores the gradients for all weights $w_{i}$, one needs to empty the stored gradients before each new training epoch.
+- Because `loss.backward()` stores the gradients for all weights $$w_{i}$, one needs to empty the stored gradients before each new training epoch.
 
 ## 32.
 
@@ -1311,11 +1311,11 @@ plt.show()
   whole fits the training data.
 - Each node within a network is called a **unit**.
 - Traditionally, following the design proposed by McCulloch and Pitts (Perceptron Mk 1), a unit calculates the weighted sum of the inputs from predecessor nodes and then applies a nonlinear function to produce its output.
-- Let $a_{j}$ denote the output of unit $j$ and let $w_{i,j}$ be the weight attached to the link from unit $i$ to unit $j$; then we have:
+- Let $$a_{j}$$ denote the output of unit $$j$$ and let $$w_{i,j}$$ be the weight attached to the link from unit $$i$$ to unit $$j$; then we have:
 
 $$a_{j} = g_{j}(\,\sum_{i}w_{i,j}a_{i})\, \iff g_{j}(\,{in}_{j})\,,$$
 
-where $g_{j}$ is a nonlinear **activation function** associated with unit $j$ and ${in}_{j}$ is the weighted sum of the inputs to unit $j$.
+where $$g_{j}$$ is a nonlinear **activation function** associated with unit $$j$$ and $${in}_{j}$$ is the weighted sum of the inputs to unit $$j$$.
 
 ### Annex To 35.
 
