@@ -1,5 +1,5 @@
 ---
-use_math: true
+usemathjax: true
 title: '37 Hard Hitting Questions<br>About Deep Learning'
 subtitle: 'How To Code The Optimization Process'
 date: 2022-05-28 06:00:00
