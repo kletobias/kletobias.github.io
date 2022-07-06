@@ -7,6 +7,7 @@ accent_color: '#08877d'
 featured_image: '838338477938@+-38829429482.jpg' 
 gallery_images:
   - '838338477938@+-38829429482.jpg'
+use_math: true
 ---
 # Questionnaire Chapter 04
 

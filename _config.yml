@@ -40,7 +40,7 @@ defaults:
 
 markdown: kramdown
 highlighter: rouge
-
+math_engine: mathjax
 kramdown:
   input: GFM
   syntax_highlighter_opts:
