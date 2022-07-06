@@ -1,4 +1,5 @@
 ---
+use_math: true
 title: '37 Hard Hitting Questions<br>About Deep Learning'
 subtitle: 'How To Code The Optimization Process'
 date: 2022-05-28 06:00:00
@@ -7,7 +8,6 @@ accent_color: '#08877d'
 featured_image: '838338477938@+-38829429482.jpg' 
 gallery_images:
   - '838338477938@+-38829429482.jpg'
-use_math: true
 ---
 # Questionnaire Chapter 04
 
