@@ -40,6 +40,7 @@ defaults:
 
 markdown: kramdown
 highlighter: rouge
+math_engine: mathjax
 kramdown:
   input: GFM
   syntax_highlighter_opts:
@@ -54,6 +55,7 @@ sass:
 
 plugins:
   - jekyll-sitemap
+  - mathjax
 
 paginate: 7
 paginate_path: "/blog/page-:num/"
