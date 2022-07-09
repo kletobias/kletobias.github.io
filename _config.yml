@@ -1,6 +1,4 @@
-site: Portfolio Website Of Tobias Klein
-
-
+site: Portfolio Website of Tobias Klein
 
 collections:
   pages:
@@ -14,24 +12,24 @@ collections:
     permalink: /project/:slug
 
 defaults:
-
+  -
     scope:
       path: ""
     values:
       layout: "default"
-
+  -
     scope:
       path: ""
       type: "pages"
     values:
       layout: "page"
-
+  -
     scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
-
+  -
     scope:
       path: ""
       type: "projects"
@@ -40,6 +38,7 @@ defaults:
 
 markdown: kramdown
 highlighter: rouge
+
 kramdown:
   input: GFM
   syntax_highlighter_opts:
@@ -48,7 +47,7 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
-
+  
 sass:
   style: compressed
 
