@@ -1,5 +1,6 @@
 # drafts - posts and projects
 drafts/
+_drafts/
 # Jekyll specific
 _site/
 
@@ -109,5 +110,5 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-/venv_kletobias-github-io_website/
+venv_kletobias-github-io_website/
 .jekyll-cache/
