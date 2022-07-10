@@ -29,4 +29,10 @@ featured_image:
 - DataFrame columns have single single quotes around them. No ` ` or " ".
 - In general stick to single quotes where possible.
 
+## Steps To Do Before Every Post Is Pushed
 
+Always check for any `TODO\:` and `ERROR:` tags inside an article.<br>
+<br>
+Always check for any `# fmt: off` and `# fmt: on` lines and delete them before
+pushing!<br>
+<br>
