@@ -49,12 +49,14 @@ fastai?
 22. What is the difference between `resnet50` and `resnet101`?
 23. What does `to_fp16` do?
 
-
+---
 
 ```python
 import matplotlib.pyplot as plt
 plt.style.use("science")
 ```
+
+---
 
 # Personal Solutions To Questionnaire 05
 
@@ -119,8 +121,11 @@ after the second step.
 
 ## 2.
 
+
 Practice using regular expressions.<br>
-<br>
+
+---
+
 The regex practice log was too long to include in this article and can be found
 in the article [TODO:exact name of published article](URL using jekyll smart
 notation)
@@ -210,7 +215,7 @@ An block quote from the *fastcore* docs, describing the design and idea of the
 > <br>
 > [https://fastcore.fast.ai/#L](https://fastcore.fast.ai/#L)
 
-<br>
+---
 
 The single letter name `L`, shows that it is a frequently used class by design,
 as outlined in the block quote.<br>
@@ -267,7 +272,7 @@ test_eq(t.tensored(), [tensor(1, 2), tensor(3, 4)])
 Look up the documentation for the Python `pathlib` module and try using a few
 methods of the `Path` class.<br>
 
-<br>
+---
 
 The `Path` classes are divided between `pure paths`, which provide purely
 computational operations $\iff$ *pure path operations*, without I/O operation, and `concrete paths`, which inherit from
@@ -309,7 +314,7 @@ TODO: add examples for the not PurePath class to answer of question 5.
 Give two examples of ways that image transformations can degrade the quality of
 the data.<br>
 
-<br>
+---
 
 The first way, that image transformations can degrade the quality of the data,
 is by rotating a rectangular image by 45 degrees, using a square crop, as large
@@ -351,7 +356,7 @@ as outlined in the first part of this question.<br>
 
 What method does fastai provide to view the data in a `DataLoaders`?
 
-<br>
+---
 
 The method to view a sample of the data in a `DataLoaders` or short `dls` object
 is `dls.show_batch(nrows, ncols)`. E.g.,<br>
@@ -378,7 +383,7 @@ dls1.show_batch(nrows=1, ncols=3)
 
 What method does fastai provide to help debug a `DataBlock`?<br>
 
-<br>
+---
 
 It provides the `.summary(path / 'images')` method. E.g.,<br>
 TODO:
@@ -562,7 +567,7 @@ well.<br>
 
 Should one hold off training, until the data is thoroughly cleaned?<br>
 
-<br>
+---
 
 It is important to get baseline results, using a simple model and data, that
 only fulfils the minimum requirements needed to train a model with it.<br>
@@ -583,7 +588,7 @@ the data in the dataset.<br>
 
 What are the two pieces that are combined into cross-entropy loss in PyTorch?
 
-<br>
+---
 
 The two pieces, that together make up the cross-entropy loss function are
 `softmax` and `log likelihood`.
@@ -593,7 +598,7 @@ The two pieces, that together make up the cross-entropy loss function are
 - What are the properties of activations that softmax ensures?
 - Why is this important?
 
-<br>
+---
 
 A softmax layer, is one that outputs a vector $\overrightarrow{\boldsymbol{x}} \in \mathbb{R}^{d\times 1}$
 fmt: off
@@ -657,7 +662,7 @@ differentiable.<br>
 
 When might you want your activations to not have these two properties?<br>
 
-<br>
+---
 
 The softmax function is a good choice, if there are no cases in the data
 where no label is applicable. The softmax does not give the model the
@@ -672,7 +677,7 @@ where none of the other labels fit.<br>
 
 Calculate the `exp` and `softmax` columns of 'bear_softmax' yourself.<br>
 
-<br>
+---
 
 The calculations are based on the *output* column in the following table:<br>
 
@@ -742,12 +747,12 @@ The values are the same, as in the original calculation done in the
 notebook of the chapter, after rounding each output to two digits.
 
 
-14.
+## 14.
 
 Why can't `torch.where` be used to create a loss function for datasets
 where the label can have more than two categories?
 
-<br>
+---
 
 The `torch.where` uses one condition and two actions, that depend on the
 boolean output from condition. Let actions 'a' and 'b' be the two actions
@@ -789,7 +794,7 @@ image case.<br>
 - What is the value of `log(-2)`?
 - Why?
 
-<br>
+---
 
 The domain of any log, be it the natural logarithm $ln$ or in many python
 libraries: $log$, the logarithm to the base of 10 ($log$ or $log_{10}$),
@@ -825,7 +830,7 @@ plt.show()
 What are two good rules of thumb for picking a learning rate from the
 learning rate finder?
 
-<br>
+---
 
 The two rules of thumb for picking a learning rate from the learning rate
 finder have to be understood in the greater context of a method for finding
@@ -886,7 +891,7 @@ from fastai.vision.all import *
 
 What two steps does the `fine_tune` method do?
 
-<br>
+---
 
 `fine_tune`, as a method of the `learner` object, will do two things:<br>
 
@@ -922,7 +927,7 @@ from fastai.vision.all import *
 In Jupyter Notebook, how does one get the source code from a method or
 function?
 
-<br>
+---
 
 One can lookup the source code for a method or function, by calling it
 without parenthesis and parameters. It can be done like so:<br>
@@ -939,7 +944,7 @@ when trying to reformat this line.<br>
 
 What are discriminative learning rates?
 
-<br>
+---
 
 Discriminative learning rates are a concept, that looks to apply different
 learning rates, depending on the position of the layer in the model. The
@@ -957,9 +962,9 @@ furniture, clothing, x-rays of the human chest, showing the lung.<br>
 ## 20.
 
 How is a Python `slice` object interpreted when passed as a learning rate
-to fastai?
+to fastai?<br>
 
-<br>
+---
 
 A python slice object can be passed anywhere, that a learning rate is
 expected from fastai. The interpretation of the slice object, that has the
@@ -973,7 +978,7 @@ throughout the range.
 
 Why is early stopping a poor choice when passed as a learning rate to fastai?
 
-<br>
+---
 
 Early stopping refers to a practice, that is not widely used anymore,
 that dates back to a time before 1cycle training was a thing. Using early
@@ -992,7 +997,7 @@ what the model is actually capable of.<br>
 
 What is the difference between `resnet50` and `resnet101`?
 
-<br>
+---
 
 All variants of the `ResNet` architecture are Convolutional Neural
 Networks. From this [URL](https://www.oreilly.com/library/view/practical-convolutional-neural/9781788392303/14bd6835-5316-46c3-bf7a-8bc0d4d8d211.xhtml)
@@ -1020,7 +1025,7 @@ has 101 layers.<br>
 
 What does `to_fp16` do?
 
-<br>
+---
 
 In practice, when using *FP16*, which is what `to_fp16` converts *FP32* to,
 when called, does the following two things:<br>
