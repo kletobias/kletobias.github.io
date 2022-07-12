@@ -53,7 +53,7 @@ plt.style.use("science")
 Why do we first resize to a large size on the CPU, and then to a smaller
 size on the GPU?<br>
 
-<br>
+---
 
 **Prerequisites**<br>
 The first resizing, as well as the second resizing are part of a fastai
@@ -104,21 +104,24 @@ done in step and only one resizing, that is only one interpolation, at the
 very end of the augmentation. All images have identical (smaller) dimensions
 after the second step.
 <br>
+
 ## 2.
 
 Practice using regular expressions.<br>
-
 <br>
-
+The regex practice log was too long to include in this article and can be found
+in the article [TODO:exact name of published article](URL using jekyll smart
+notation)
+<br>
 
 ## 3.
 
 What are the two ways in which data is most commonly provided, for deep
 learning datasets?<br>
 
-<br>
+---
 
-In deep learning data is usually provided in one of these two ways:<br>
+In deep learning data is usually provided in one of these two ways:
 <br>
 - Individual files representing items of data, such as text documents or
 images, possibly organized into folders or with filenames representing
@@ -148,7 +151,9 @@ path.ls()
 ## 4.
 
 Look up the documentation for `L` and try using a few of the new methods it adds.<br>
-<br>
+
+---
+
 Most functions and methods in fastai that return a collection use a class called
 `L`. `L` can be thought of as an enhanced version of the ordinary Python `list`
 type, with added convenience features for common operations.<br>
@@ -157,14 +162,17 @@ in the format shown there. The first thing that is shown is the number of items
 in the collection, prefixed with a `#`. In the preceding output one can see that
 the list is suffixed with an ellipsis. This means that only the first few items
 are displayed - which is a good thing, since the entire file list would show 7000
-filenames on the screen. Documentation can be found here: [https://fastcore.fast.ai/foundation#L]
+filenames on the screen. Documentation can be found here: [https://fastcore.fast.ai/foundation#L](https://fastcore.fast.ai/foundation#L)
+
 <br>
+
 - `L` is inspired by Numpy.
 - Supports advanced indexing and has additional methods, that provide additional
     functionality and encourages simple expressive code.<br>
-    - The example below takes a list of pairs as input, selects the second item of each
+- The example below takes a list of pairs as input, selects the second item of each
         pair, takes its absolute value, filters items greater 4, and adds them
         up:<br>
+
 
 
 ```python
@@ -175,12 +183,22 @@ d = dict(a=1, b=-5, d=6, e=9).items()
 test_eq(L(d).itemgot(1).map(abs).filter(gt(4)).sum(), 20)
 ```
 
-[Welcome to fastcore | fastcore](https://fastcore.fast.ai/#L)
+There is no output in this case, since the `test_eq` command works like the
+python command `assert`. It will give no output, if the test was successful and
+throw an error if not.<br>
+
+An block quote from the *fastcore* docs, describing the design and idea of the
+`L` class.
+
 
 > In metaphorical honor of Huffman’s compression code that assigns smaller
 > numbers of bits to more common bytes. In terms of syntax, it simply means that
-> commonly used things should be shorter, but you shouldn’t waste short
-> sequences on less common constructs.
+> commonly used things should be shorter, but you should not waste short
+> sequences on less common constructs.<br>
+> <br>
+> [https://fastcore.fast.ai/#L](https://fastcore.fast.ai/#L)
+
+<br>
 
 The single letter name `L`, shows that it is a frequently used class by design,
 as outlined in the block quote.<br>
@@ -202,12 +220,15 @@ L(1, 2, 3)
 
 
 
-Output gives #number_of_items, followed by list representation.
+The output gives the number of items in enclosed in parenthesis, followed by 
+the list representation of `L`.
 
+
+
+Create a list with numbers from 0 to 19 as elements and shuffle all elements
+randomly inside `L`.
 
 ```python
-# Create a list with numbers from 0 to 19 as elements and shuffle all elements
-# randomly inside `L`.
 p = L.range(20).shuffle()
 p
 ```
