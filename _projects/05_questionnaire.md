@@ -1,6 +1,6 @@
 ---
 title: '05 Questionnaire - Going Deeper'
-subtitle: 'Main Topics:<br>Cross-Entropy Loss,<br>Learning Rate'
+subtitle: 'Main Topics:<br>Cross-Entropy Loss, And The Learning Rate'
 date: 2022-05-29 06:00:00
 description: 'Understanding the components of Cross-Entropy loss<br>and choosing
 a learning rate.'
@@ -602,7 +602,7 @@ fmt: on
 The *k*th element of the total of $d$ output nodes (elements) in the output
 vector is given by:<br>
 
-$$\mathrm{softmax}(\,\mathbb{in})_{k}\,\frac{e^{in_{k}}}{\sum_{k'=1}^{d} e^{{in}_{k'}}}$$
+$$\mathrm{softmax}(\,\mathbb{in})_{k}\,\frac{e^{in_{k}}}{\sum_{k'=1}^{d} e^{in}_{k'}}$$
 
 All output values are larger zero, since the exponential function is always
 larger 0, with its limes towards minus infinity being 0.<br>
