@@ -51,16 +51,14 @@ fastai?
 
 ---
 
-```python
-import matplotlib.pyplot as plt
-plt.style.use("science")
-```
-
----
+<br>
 
 # Personal Solutions To Questionnaire 05
 
 <br>
+
+<br>
+
 
 ## 1.
 
@@ -153,6 +151,7 @@ One can explore a given dataset by using the `.ls` method, like so:<br>
 ```python
 from fastai.vision.all import *
 
+
 path = untar_data(URLs.PETS)
 Path.BASE_PATH = path
 path.ls()
@@ -194,6 +193,7 @@ filenames on the screen. Documentation can be found here: [https://fastcore.fast
 
 ```python
 from fastcore.utils import gt
+
 
 d = dict(a=1, b=-5, d=6, e=9).items()
 # d['a'] = 1 < 4 was filtered out.
@@ -284,6 +284,7 @@ Examples:<br>
 ```python
 from pathlib import Path
 
+
 p = Path("./images/confusion_matrix.png")
 
 # return all parent directories
@@ -366,6 +367,7 @@ TODO: Create a working example from the course notebook using pets.
 ```python
 from fastai.vision.all import *
 
+
 dblock1 = DataBlock(
     blocks=(ImageBlock(), CategoryBlock()), get_y=parent_label, item_tfms=Resize(460)
 )
@@ -393,6 +395,7 @@ TODO:
 
 ```python
 from fastai.vision.all import *
+
 
 pets1 = DataBlock(
     blocks=(ImageBlock, CategoryBlock),
@@ -625,6 +628,8 @@ $\mathbb{in} = \left\langle 4,2,0,-4\right\rangle$, then the outputs are
 ```python
 from numpy import exp
 import matplotlib.pyplot as plt
+plt.style.use("science")
+
 
 ii = [4, 2, 0, -4]
 
@@ -695,6 +700,8 @@ exp values separately from the `softmax` outputs
 ```python
 from numpy import exp, round
 import matplotlib.pyplot as plt
+plt.style.use("science")
+
 
 # Using bear outputs
 ii = [0.02, -2.49, 1.25]
@@ -764,6 +771,7 @@ true or '1' - true. `torch.where` then looks like this for the two cases:<br>
 import torch
 import numpy as np
 
+
 condition = torch.tensor(0)
 action0 = torch.tensor(0)
 action1 = torch.tensor(1)
@@ -805,6 +813,8 @@ numbers and excludes 0 plus any number left of zero, therefore. The `log(-2)` is
 
 ```python
 from numpy import log, log2, log10
+import matplotlib.pyplot as plt
+plt.style.use("science")
 
 
 x = np.linspace(0.0000001, 2, num=10000)
