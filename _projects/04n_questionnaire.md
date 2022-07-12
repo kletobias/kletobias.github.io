@@ -8,6 +8,7 @@ featured_image: '838338477938@+-38829429482.jpg'
 gallery_images:
   - '838338477938@+-38829429482.jpg'
 ---
+
 # Questionnaire Chapter 04
 
 1. How is a grayscale image represented on a computer? How about a color image?
