@@ -10,7 +10,7 @@ gallery_images:
   - '838338477938@+-38829429482.jpg'
 ---
 
-### 05 Questionnaire Questions
+### 05 Questionnaire: The 23 Questions
 
 1. Why do we first resize to a large size on the CPU, and then to a smaller size
     on the GPU?<br>
@@ -204,8 +204,8 @@ There is no output in this case, since the `test_eq` command works like the
 python command `assert`. It will give no output, if the test was successful and
 throw an error if not.<br>
 
-An block quote from the *fastcore* docs, describing the design and idea of the
-`L` class.
+An quote from the *fastcore* docs, that describes the design and idea behind
+the `L` class is printed below:
 
 
 > In metaphorical honor of Huffman’s compression code that assigns smaller
@@ -215,7 +215,7 @@ An block quote from the *fastcore* docs, describing the design and idea of the
 > <br>
 > [https://fastcore.fast.ai/#L](https://fastcore.fast.ai/#L)
 
----
+
 
 The single letter name `L`, shows that it is a frequently used class by design,
 as outlined in the block quote.<br>
