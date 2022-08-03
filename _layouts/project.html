@@ -2,7 +2,6 @@
 layout: default
 ---
 
-{% include mathjax.html %}
 
 {% if page.accent_color %}{% capture accent_color %}{{ page.accent_color }}{% endcapture %}{% endif %}
 
@@ -17,17 +16,19 @@ layout: default
 
 		<img src="/images/projects/{{ page.featured_image }}" class="post__featured-image">
 
+		{% include mathjax.html %}
 	</header>
 
 
 	<section class="post-full">
 
+		{% include mathjax.html %}
 		<div class="wrap">
 
 			<article class="post__content {% if page.highlight_first %}highlight-first{% endif %}">
 				{{ page.content }}
 			</article>
-			
+
 		</div>
 
 	</section>
